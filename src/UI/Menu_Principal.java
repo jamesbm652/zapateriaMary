@@ -5,6 +5,9 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+import BL.BLLogueo;
+
 /**
  *
  * @author oscal
@@ -16,6 +19,8 @@ public class Menu_Principal extends javax.swing.JFrame {
      */
     public Menu_Principal() {
         initComponents();
+        BLLogueo lg = new BLLogueo();
+        JOptionPane.showMessageDialog(this, lg.getIdUsuario());
     }
 
     /**

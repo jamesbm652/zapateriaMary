@@ -6,6 +6,9 @@
 package UI;
 
 import java.awt.Color;
+import BL.BL_Usuario;
+import BL.BLLogueo;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -147,13 +150,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
-        this.dispose();
-        
-        Menu_Principal mp = new Menu_Principal();
-        mp.setVisible(true);
-        
-        
+        if (txtNombreUsuario.getText() != "" || txtContrasena.getText() != "") {
+            BL_Usuario blUsuario = new BL_Usuario();
+            BLLogueo lg = new BLLogueo();
+            if (blUsuario.login(txtNombreUsuario.getText(), txtContrasena.getText())) {
+                lg.setIdUsuario(blUsuario.getIdUsuario());
+                lg.setAdmin(blUsuario.isAdministrador());
+                this.dispose();
+                Menu_Principal mp = new Menu_Principal();
+                mp.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Credenciales incorrectas, intente de nuevo.");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe de ingresar los datos solicitados.");
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtNombreUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreUsuarioFocusGained
