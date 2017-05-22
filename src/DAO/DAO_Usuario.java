@@ -60,6 +60,8 @@ public class DAO_Usuario {
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        cerrarConexion();
         return logueo;
     }
 }
