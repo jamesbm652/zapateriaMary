@@ -123,7 +123,7 @@ public class Inventario extends javax.swing.JFrame {
         txtBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
 
         btnBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar3.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
         btnBuscar.setBorderPainted(false);
         btnBuscar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
