@@ -9,11 +9,11 @@ package BL;
  *
  * @author Joseph
  */
-public class BLLogueo {
+public class BL_Logueo {
     private static int idUsuario;
     private static boolean admin;
 
-    public BLLogueo() {
+    public BL_Logueo() {
     }
 
     public static int getIdUsuario() {
@@ -21,7 +21,7 @@ public class BLLogueo {
     }
 
     public static void setIdUsuario(int idUsuario) {
-        BLLogueo.idUsuario = idUsuario;
+        BL_Logueo.idUsuario = idUsuario;
     }
 
     public static boolean isAdmin() {
@@ -29,6 +29,6 @@ public class BLLogueo {
     }
 
     public static void setAdmin(boolean admin) {
-        BLLogueo.admin = admin;
+        BL_Logueo.admin = admin;
     }
 }

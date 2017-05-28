@@ -6,7 +6,7 @@
 package UI;
 
 import javax.swing.JOptionPane;
-import BL.BLLogueo;
+import BL.BL_Logueo;
 
 /**
  *
@@ -19,8 +19,7 @@ public class Menu_Principal extends javax.swing.JFrame {
      */
     public Menu_Principal() {
         initComponents();
-        BLLogueo lg = new BLLogueo();
-        JOptionPane.showMessageDialog(this, lg.getIdUsuario());
+        BL_Logueo lg = new BL_Logueo();
     }
 
     /**
@@ -149,7 +148,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         RevisarFacturas revisar = new RevisarFacturas();
         revisar.setVisible(true);
     }//GEN-LAST:event_btn_RevisarFacturasActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Facturar;

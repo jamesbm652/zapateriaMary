@@ -7,7 +7,7 @@ package UI;
 
 import java.awt.Color;
 import BL.BL_Usuario;
-import BL.BLLogueo;
+import BL.BL_Logueo;
 import javax.swing.JOptionPane;
 
 /**
@@ -152,7 +152,7 @@ public class Login extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         if (txtNombreUsuario.getText() != "" || txtContrasena.getText() != "") {
             BL_Usuario blUsuario = new BL_Usuario();
-            BLLogueo lg = new BLLogueo();
+            BL_Logueo lg = new BL_Logueo();
             if (blUsuario.login(txtNombreUsuario.getText(), txtContrasena.getText())) {
                 lg.setIdUsuario(blUsuario.getIdUsuario());
                 lg.setAdmin(blUsuario.isAdministrador());
