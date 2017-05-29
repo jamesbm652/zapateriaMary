@@ -16,12 +16,12 @@ import java.awt.event.ActionListener;
 public class Inventario extends javax.swing.JFrame {
 
     /**
-     * Creates new form 
+     * Creates new form
      */
     public Inventario() {
         initComponents();
         jpanBusquedaAvanzada.setVisible(false);
-        
+
         cbx_TipoProducto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,7 +32,7 @@ public class Inventario extends javax.swing.JFrame {
                     txt_Talla.setVisible(false);
                     cbx_Categoria.setVisible(false);
                     cbx_Genero.setVisible(false);
-                }else{
+                } else {
                     lbl_Categoria.setVisible(true);
                     lbl_Genero.setVisible(true);
                     lbl_Talla.setVisible(true);
@@ -43,7 +43,7 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,11 +201,11 @@ public class Inventario extends javax.swing.JFrame {
         lbl_Talla.setText("Talla:");
 
         cbx_Genero.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        cbx_Genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hombre", "Mujer", " " }));
+        cbx_Genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hombre", "Mujer" }));
 
         lbl_Categoria.setText("Categoria:");
 
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninos", "Jovenes", "Adulto" }));
 
         jLabel9.setText("Tipo Producto:");
 
@@ -308,7 +308,7 @@ public class Inventario extends javax.swing.JFrame {
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                                 .addComponent(btnBusquedaAvanzada, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
@@ -378,7 +378,7 @@ public class Inventario extends javax.swing.JFrame {
         }
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
         listaProductos.BuscarPorFiltro(cbx_Genero.getSelectedItem().toString(), txt_color.getText(), Double.parseDouble(txt_Talla.getText()), txt_Marca.getText(), txt_Empresa.getText(), Double.parseDouble(txt_Precio.getText()), txt_Fecha.getDate(), cbx_Categoria.getSelectedItem().toString(), tipoProducto);
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBusquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaActionPerformed
@@ -386,9 +386,9 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBusquedaAvanzadaActionPerformed
 
     private void btnBusquedaAvanzadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaMouseClicked
-        if(jpanBusquedaAvanzada.isVisible()){
+        if (jpanBusquedaAvanzada.isVisible()) {
             jpanBusquedaAvanzada.setVisible(false);
-        }else{
+        } else {
             jpanBusquedaAvanzada.setVisible(true);
         }
     }//GEN-LAST:event_btnBusquedaAvanzadaMouseClicked
@@ -408,8 +408,6 @@ public class Inventario extends javax.swing.JFrame {
         detalle.setTitle("Mostrar Producto");
         detalle.setVisible(true);
     }//GEN-LAST:event_btnVerDetalleActionPerformed
-
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

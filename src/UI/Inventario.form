@@ -40,7 +40,7 @@
                               <Component id="txtBuscar" min="-2" pref="312" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnBuscar" min="-2" pref="44" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="63" max="32767" attributes="0"/>
                               <Component id="btnBusquedaAvanzada" min="-2" pref="175" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" alignment="0" pref="639" max="32767" attributes="0"/>
@@ -132,7 +132,7 @@
               </Table>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -404,10 +404,9 @@
               <Font name="Yu Gothic UI" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="Hombre"/>
                 <StringItem index="1" value="Mujer"/>
-                <StringItem index="2" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -430,11 +429,10 @@
         <Component class="javax.swing.JComboBox" name="cbx_Categoria">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Ninos"/>
+                <StringItem index="1" value="Jovenes"/>
+                <StringItem index="2" value="Adulto"/>
               </StringArray>
             </Property>
           </Properties>
