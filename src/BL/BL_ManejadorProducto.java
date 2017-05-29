@@ -6,6 +6,7 @@
 package BL;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -32,8 +33,8 @@ public class BL_ManejadorProducto {
         
     }
     
-    public void BuscarPorFiltro(){
-        
+    public void BuscarPorFiltro(String genero, String color, double talla, String marca, String empresa, double precio, Date fecha, String categoria, boolean tipoProd){
+        listaProducto = new DAO.DAO_Producto().cargarProductosPorFiltro(genero, color, talla, marca, empresa, precio, fecha, categoria, tipoProd);
     }
     
     public void metodoPrueba(){}
