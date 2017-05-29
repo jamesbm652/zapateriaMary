@@ -55,7 +55,7 @@ public class DAO_Producto {
         if (!producto.isEsZapato()) {
 
             try {
-                ps = con.prepareStatement("Insert Into Producto Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert Into Producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, producto.getFechaIngreso().toString());
@@ -78,7 +78,7 @@ public class DAO_Producto {
             try {
                 int idProductoInsertado = 0;
 
-                ps = con.prepareStatement("Insert Into Producto Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert Into Producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",ps.RETURN_GENERATED_KEYS);
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, producto.getFechaIngreso().toString());
                 ps.setString(3, producto.getColor());
@@ -98,13 +98,19 @@ public class DAO_Producto {
                     idProductoInsertado = rs.getInt(1);
                 }
 
-                ps = con.prepareStatement("Insert Into zapatotallacategoria Values "
-                        + "(?, (Select IdCategoria From categoriatalla Where Descripcion = " + producto.getTallaZapato().getCategoriaZapato() + "), ?, ?)");
+                ps = con.prepareStatement("Insert Into zapateriamary.zapatotallacategoria (IdProducto,IdCategoria,Talla,Genero) Values "
+                        + "(?, (Select IdCategoria From zapateriamary.categoriatalla Where Descripcion = '" + producto.getTallaZapato().getCategoriaZapato() + "'), ?, ?)");
                 ps.setInt(1, idProductoInsertado);
                 ps.setDouble(2, producto.getTallaZapato().getTalla());
-                ps.setString(3, producto.getTallaZapato().getGeneroZapato());
+                if(producto.getTallaZapato().getGeneroZapato().equals("M")){
+                    ps.setInt(3, 1);
+                }else{
+                    ps.setInt(3, 0);
+                }
+                
 
-                insertado = ps.executeUpdate();
+                //insertado = 
+                        ps.executeUpdate();
 
             } catch (SQLException ex) {
                 Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);

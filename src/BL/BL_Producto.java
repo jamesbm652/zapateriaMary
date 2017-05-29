@@ -5,6 +5,7 @@
  */
 package BL;
 
+import DAO.DAO_Producto;
 import java.sql.Date;
 
 /**
@@ -149,8 +150,8 @@ public class BL_Producto {
         this.tallaZapato = tallaZapato;
     }
 
-    public void insertarZapato() {
-
+    public Boolean insertarZapato() {
+        return new DAO_Producto().insertarProducto(this);
     }
 
 }
