@@ -38,7 +38,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnIngresar = new javax.swing.JButton();
         txtNombreUsuario = new javax.swing.JTextField();
-        txtContrasena = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pantalla Inicial");
@@ -86,24 +86,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txtContrasena.setForeground(java.awt.Color.decode("#818181")
-        );
-        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContrasena.setText("Contraseña");
-        txtContrasena.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtContrasenaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtContrasenaFocusLost(evt);
-            }
-        });
-        txtContrasena.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtContrasenaMouseClicked(evt);
-            }
-        });
+        jPasswordField1.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +101,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(108, 108, 108)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                            .addComponent(txtContrasena))))
+                            .addComponent(jPasswordField1))))
                 .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 48, Short.MAX_VALUE)
@@ -139,8 +122,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(btnIngresar)
                 .addContainerGap())
         );
@@ -190,27 +173,6 @@ public class Login extends javax.swing.JFrame {
         entrar = true;
     }//GEN-LAST:event_txtNombreUsuarioMouseClicked
 
-    private void txtContrasenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContrasenaMouseClicked
-        if(txtContrasena.getText().equals("Nombre de Usuario")){
-            txtContrasena.setText("");
-            txtContrasena.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtContrasenaMouseClicked
-
-    private void txtContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrasenaFocusGained
-        if(txtContrasena.getText().equals("Contraseña")){
-            txtContrasena.setText("");
-            txtContrasena.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtContrasenaFocusGained
-
-    private void txtContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrasenaFocusLost
-        if(txtContrasena.getText().equals("")){
-            txtContrasena.setText("Contraseña");
-            txtContrasena.setForeground(java.awt.Color.decode("#818181"));
-        }
-    }//GEN-LAST:event_txtContrasenaFocusLost
-
     /**
      * @param args the command line arguments
      */
@@ -250,7 +212,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
