@@ -15,6 +15,14 @@ public class BL_TallaZapato {
     private String categoriaZapato;
     private double talla;
 
+    public BL_TallaZapato(String generoZapato, String categoriaZapato, double talla) {
+        this.generoZapato = generoZapato;
+        this.categoriaZapato = categoriaZapato;
+        this.talla = talla;
+    }
+
+    
+    
     public BL_TallaZapato() {
     }
 
