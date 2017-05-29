@@ -140,6 +140,9 @@ public class DAO_Producto {
     public void cargarTodosProductos() {
         conexion();
 
+        Statement st = null;
+        ResultSet rs = null;
+
         cerrarConexion();
     }
 }
