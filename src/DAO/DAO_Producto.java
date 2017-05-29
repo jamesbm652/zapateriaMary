@@ -136,4 +136,8 @@ public class DAO_Producto {
 
         return siguienteCodigo;
     }
+
+    public void cargarListas() {
+
+    }
 }
