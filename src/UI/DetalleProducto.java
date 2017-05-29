@@ -5,6 +5,8 @@
  */
 package UI;
 
+import BL.BL_Producto;
+import BL.BL_TallaZapato;
 import javax.swing.JOptionPane;
 
 /**
@@ -75,16 +77,16 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtEmpresa = new javax.swing.JTextField();
         btnAtras = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        txtFechaIngreso = new com.toedter.calendar.JDateChooser();
+        rdbBolso = new javax.swing.JRadioButton();
+        rdbZapato = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         cmbGenero = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         cmbCategoria = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         txtTalla = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
+        txtCantidad = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -173,11 +175,11 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
 
-        grup1.add(jRadioButton1);
-        jRadioButton1.setText("Bolso");
+        grup1.add(rdbBolso);
+        rdbBolso.setText("Bolso");
 
-        grup1.add(jRadioButton2);
-        jRadioButton2.setText("Zapato");
+        grup1.add(rdbZapato);
+        rdbZapato.setText("Zapato");
 
         jLabel1.setText("Género:");
 
@@ -211,7 +213,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtFechaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,16 +233,16 @@ public class DetalleProducto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labInstruccion)
                         .addGap(156, 156, 156)
-                        .addComponent(jRadioButton2)
+                        .addComponent(rdbZapato)
                         .addGap(1, 1, 1)
-                        .addComponent(jRadioButton1)
+                        .addComponent(rdbBolso)
                         .addGap(0, 35, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addGap(4, 4, 4)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,12 +281,12 @@ public class DetalleProducto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(labInstruccion))
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(rdbZapato)
+                    .addComponent(rdbBolso))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +320,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                                 .addComponent(jLabel13))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6))))
@@ -380,8 +382,38 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if(txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("") ||
-            txtDescripcion.getText().trim().equals("")){
+            txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("") ||
+                txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")){
             
+            JOptionPane.showMessageDialog(null, "Debe completar los datos","ERROR",JOptionPane.ERROR_MESSAGE);
+        }else{
+            if(!rdbZapato.isSelected() && !rdbBolso.isSelected()){
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto","ERROR",JOptionPane.ERROR_MESSAGE);
+            }else{
+                BL_Producto producto = new BL_Producto();
+                producto.setCodigoUnico(txtCodigo.getText());
+                producto.setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getYear(), txtFechaIngreso.getDate().getMonth(), txtFechaIngreso.getDate().getDay()));
+                producto.setColor(txtColor.getText().trim());
+                producto.setMarca(txtMarca.getText().trim());
+                producto.setEmpresa(txtEmpresa.getText().trim());
+                producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
+                producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
+                producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
+                producto.setDescripcion(txtDescripcion.getText().trim());
+                producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
+                if(rdbZapato.isSelected()){
+                    producto.setEsZapato(true);
+                }else{
+                    producto.setEsZapato(false);
+                }
+                producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(),cmbCategoria.getSelectedItem().toString(),Double.parseDouble(txtTalla.getText().toString())));
+            
+                if(true){
+                    JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al insertar el producto","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -401,7 +433,6 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbCategoria;
     private javax.swing.JComboBox cmbGenero;
     private javax.swing.ButtonGroup grup1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -415,14 +446,15 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel labInstruccion;
+    private javax.swing.JRadioButton rdbBolso;
+    private javax.swing.JRadioButton rdbZapato;
+    private javax.swing.JSpinner txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtEmpresa;
+    private com.toedter.calendar.JDateChooser txtFechaIngreso;
     private javax.swing.JTextField txtImpuesto;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtPrecioCosto;
