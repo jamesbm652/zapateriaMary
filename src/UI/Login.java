@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
  * @author oscal
  */
 public class Login extends javax.swing.JFrame {
-    boolean entrar = false;
+    
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        
+        jPanel1.setFocusable(true);
         
     }
 
@@ -86,7 +86,16 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txtContrasena.setText("jPasswordField1");
+        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtContrasena.setText("********");
+        txtContrasena.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContrasenaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtContrasenaFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,11 +160,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtNombreUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreUsuarioFocusGained
-        if(txtNombreUsuario.getText().equals("Nombre de Usuario") && entrar){
+        if(txtNombreUsuario.getText().equals("Nombre de Usuario")){
             txtNombreUsuario.setText("");
             txtNombreUsuario.setForeground(Color.BLACK);
         }
-        entrar = true;
     }//GEN-LAST:event_txtNombreUsuarioFocusGained
 
     private void txtNombreUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreUsuarioFocusLost
@@ -166,12 +174,22 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreUsuarioFocusLost
 
     private void txtNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreUsuarioMouseClicked
-        if(txtNombreUsuario.getText().equals("Nombre de Usuario")){
-            txtNombreUsuario.setText("");
-            txtNombreUsuario.setForeground(Color.BLACK);
-        }
-        entrar = true;
+       
     }//GEN-LAST:event_txtNombreUsuarioMouseClicked
+
+    private void txtContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrasenaFocusGained
+        if(txtContrasena.getText().equals("********")){
+            txtContrasena.setText("");
+            txtContrasena.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtContrasenaFocusGained
+
+    private void txtContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrasenaFocusLost
+        if(txtContrasena.getText().equals("")){
+            txtContrasena.setText("********");
+            txtContrasena.setForeground(java.awt.Color.decode("#818181"));
+        }
+    }//GEN-LAST:event_txtContrasenaFocusLost
 
     /**
      * @param args the command line arguments
