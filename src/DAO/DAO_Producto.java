@@ -159,7 +159,7 @@ public class DAO_Producto {
 
         try {
             st = this.con.createStatement();
-            rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioImpuesto, P.Descripcion, "
+            rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
                     + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
                     + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1;");
@@ -190,7 +190,7 @@ public class DAO_Producto {
                 manejador.Agregar(prod);
             }
 
-            rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioImpuesto, P.Descripcion, "
+            rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto Where P.EsZapato = 0");
 
             while (rs.next()) {
@@ -218,20 +218,102 @@ public class DAO_Producto {
         return manejador.ObtenerListaProductos();
     }
 
-    public ArrayList<BL_Producto> cargarProductosPorFiltro(String genero, String color, double talla, String marca, String empresa,
-            double Precio, Date fecha, String categoria, boolean tipoProducto) {
+    public ArrayList<BL_Producto> cargarProductosPorFiltro(String genero, String color, double tallaZapato, String marca, String empresa,
+            double precio, Date fecha, String categoria, boolean tipoProducto) {
 
         BL_ManejadorProducto manejador = new BL_ManejadorProducto();
+
         conexion();
+
         Statement st = null;
         ResultSet rs = null;
 
-        String queryBase = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioImpuesto, P.Descripcion, "
-                + "P.Cantidad, P.EsZapato ";
+        String query = "";
 
-        String queryWhere = "Where ";
+        if (!tipoProducto) {
+            query = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto Where P.EsZapato = 0";
+        } else {
+            query = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on"
+                    + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
+                    + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1";
+        }
+        if (genero != "") {
+            query += " And ZC.Genero = " + genero + "";
+        }
+        if (color != "") {
+            query += " And P.Color = " + color + "";
+        }
+        if (tallaZapato > 0) {
+            query += " And ZC.Talla = " + tallaZapato + "";
+        }
+        if (marca != "") {
+            query += " And P.Marca = " + marca + "";
+        }
+        if (empresa != "") {
+            query += " And P.Empresa = " + empresa + "";
+        }
+        if (precio > 0) {
+            query += " And P.PrecioGanancia = " + precio + "";
+        }
+        if (fecha != null) {
+            query += " And P.FechaIngreso = " + fecha.toString() + "";
+        }
+        if (categoria != "") {
+            query += " And CT.Categoria = " + categoria + "";
+        }
 
-        String queryFromJoins = "From producto as P";
+        try {
+            st = this.con.createStatement();
+            rs = st.executeQuery(query);
+
+            if (tipoProducto) {
+                while (rs.next()) {
+                    BL_Producto prod = new BL_Producto();
+                    BL_TallaZapato talla = new BL_TallaZapato();
+
+                    prod.setIdProducto(rs.getInt("IdProducto"));
+                    prod.setCodigoUnico(rs.getString("CodigoUnico"));
+                    prod.setFechaIngreso(rs.getDate("FechaIngreso"));
+                    prod.setColor(rs.getString("Color"));
+                    prod.setMarca("Marca");
+                    prod.setEmpresa("Empresa");
+                    prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
+                    prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
+                    prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                    prod.setDescripcion(rs.getString("Descripcion"));
+                    prod.setCantidad(rs.getInt("Cantidad"));
+                    prod.setEsZapato(true);
+
+                    talla.setTalla(rs.getDouble("Talla"));
+                    talla.setGeneroZapato(rs.getString("Genero"));
+                    talla.setCategoriaZapato("Categoria");
+
+                    prod.setTallaZapato(talla);
+
+                    manejador.Agregar(prod);
+                }
+            } else {
+                BL_Producto prod = new BL_Producto();
+
+                prod.setIdProducto(rs.getInt("IdProducto"));
+                prod.setCodigoUnico(rs.getString("CodigoUnico"));
+                prod.setFechaIngreso(rs.getDate("FechaIngreso"));
+                prod.setColor(rs.getString("Color"));
+                prod.setMarca("Marca");
+                prod.setEmpresa("Empresa");
+                prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
+                prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
+                prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                prod.setDescripcion(rs.getString("Descripcion"));
+                prod.setCantidad(rs.getInt("Cantidad"));
+                prod.setEsZapato(false);
+                manejador.Agregar(prod);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         cerrarConexion();
         return manejador.ObtenerListaProductos();
