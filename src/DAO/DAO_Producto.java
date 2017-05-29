@@ -17,6 +17,7 @@ import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
 import BL.BL_TallaZapato;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -217,7 +218,9 @@ public class DAO_Producto {
         return manejador.ObtenerListaProductos();
     }
 
-    public ArrayList<BL_Producto> cargarProductosPorFiltro() {
+    public ArrayList<BL_Producto> cargarProductosPorFiltro(String genero, String color, double talla, String marca, String empresa,
+            double Precio, Date fecha, String categoria, boolean tipoProducto) {
+
         BL_ManejadorProducto manejador = new BL_ManejadorProducto();
         conexion();
         Statement st = null;
