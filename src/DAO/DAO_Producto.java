@@ -32,7 +32,7 @@ public class DAO_Producto {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -325,6 +325,55 @@ public class DAO_Producto {
 
         cerrarConexion();
         return manejador.ObtenerListaProductos();
+    }
+
+    public boolean eliminarProducto(int id) {
+
+        if (validarEliminacion(id)) {
+            conexion();
+
+            PreparedStatement ps = null;
+
+            try {
+                ps = con.prepareStatement("Delete From zapatotallacategoria Where IdProducto = ?");
+                ps.setInt(1, id);
+                ps.execute();
+
+                ps = con.prepareStatement("Delete From producto Where IdProducto = ?");
+                ps.setInt(1, id);
+                ps.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            cerrarConexion();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validarEliminacion(int id) {
+        boolean eliminar = true;
+        conexion();
+        int existencia = 0;
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement("Select * From productofactura Where IdProducto = ?");
+            ps.setInt(1, id);
+            existencia = ps.executeUpdate();
+
+            if (existencia > 0) {
+                eliminar = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        cerrarConexion();
+
+        return eliminar;
     }
 
 }
