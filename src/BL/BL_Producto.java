@@ -150,6 +150,10 @@ public class BL_Producto {
         this.tallaZapato = tallaZapato;
     }
 
+    public int obtenerSiguienteCodigo(){
+        return new DAO_Producto().obtenerSiguienteCodigo();
+    }
+    
     public Boolean insertarZapato() {
         return new DAO_Producto().insertarProducto(this);
     }
