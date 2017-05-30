@@ -372,13 +372,24 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        boolean tipoProducto = false;
-        if (cbx_TipoProducto.getSelectedIndex() == 0) {
-            tipoProducto = true;
+        boolean tipoProducto = true;
+        double talla = 0;
+        double precio = 0;
+        String genero = cbx_Genero.getSelectedItem().toString();
+        String categoria = cbx_Categoria.getSelectedItem().toString();
+        
+        if (!txt_Talla.getText().equals("")) talla = Double.parseDouble(txt_Talla.getText());
+        if (!txt_Precio.getText().equals("")) precio = Double.parseDouble(txt_Precio.getText());
+        
+        if (cbx_TipoProducto.getSelectedIndex() == 1){
+            tipoProducto = false;
+            genero = "";
+            categoria = "";
         }
+            
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
-        listaProductos.BuscarPorFiltro(cbx_Genero.getSelectedItem().toString(), txt_color.getText(), Double.parseDouble(txt_Talla.getText()), txt_Marca.getText(), txt_Empresa.getText(), Double.parseDouble(txt_Precio.getText()), txt_Fecha.getDate(), cbx_Categoria.getSelectedItem().toString(), tipoProducto);
-
+        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, txt_Fecha.getDate(), categoria, tipoProducto);
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBusquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaActionPerformed

@@ -32,7 +32,7 @@ public class DAO_Producto {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,7 +55,7 @@ public class DAO_Producto {
         if (!producto.isEsZapato()) {
 
             try {
-                ps = con.prepareStatement("Insert Into Producto Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert Into Producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, producto.getFechaIngreso().toString());
@@ -78,7 +78,7 @@ public class DAO_Producto {
             try {
                 int idProductoInsertado = 0;
 
-                ps = con.prepareStatement("Insert Into Producto Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert Into Producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ps.RETURN_GENERATED_KEYS);
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, producto.getFechaIngreso().toString());
                 ps.setString(3, producto.getColor());
@@ -98,13 +98,18 @@ public class DAO_Producto {
                     idProductoInsertado = rs.getInt(1);
                 }
 
-                ps = con.prepareStatement("Insert Into zapatotallacategoria Values "
-                        + "(?, (Select IdCategoria From categoriatalla Where Descripcion = " + producto.getTallaZapato().getCategoriaZapato() + "), ?, ?)");
+                ps = con.prepareStatement("Insert Into zapateriamary.zapatotallacategoria (IdProducto,IdCategoria,Talla,Genero) Values "
+                        + "(?, (Select IdCategoria From zapateriamary.categoriatalla Where Descripcion = '" + producto.getTallaZapato().getCategoriaZapato() + "'), ?, ?)");
                 ps.setInt(1, idProductoInsertado);
                 ps.setDouble(2, producto.getTallaZapato().getTalla());
-                ps.setString(3, producto.getTallaZapato().getGeneroZapato());
+                if (producto.getTallaZapato().getGeneroZapato().equals("M")) {
+                    ps.setInt(3, 1);
+                } else {
+                    ps.setInt(3, 0);
+                }
 
-                insertado = ps.executeUpdate();
+                //insertado =
+                ps.executeUpdate();
 
             } catch (SQLException ex) {
                 Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
@@ -232,36 +237,40 @@ public class DAO_Producto {
 
         if (!tipoProducto) {
             query = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
-                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto Where P.EsZapato = 0";
+                    + "P.Cantidad, P.EsZapato FROM zapateriamary.producto as P Where P.EsZapato = 0";
         } else {
             query = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
-                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on"
+                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
                     + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
                     + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1";
         }
         if (genero != "") {
-            query += " And ZC.Genero = " + genero + "";
+            if (genero.equals("Hombre")) {
+                query += " And ZC.Genero = " + 1 + "";
+            } else {
+                query += " And ZC.Genero = " + 0 + "";
+            }
         }
-        if (color != "") {
-            query += " And P.Color = " + color + "";
+        if (!color.equals("")) {
+            query += " And P.Color = '" + color + "'";
         }
         if (tallaZapato > 0) {
             query += " And ZC.Talla = " + tallaZapato + "";
         }
-        if (marca != "") {
-            query += " And P.Marca = " + marca + "";
+        if (!marca.equals("")) {
+            query += " And P.Marca = '" + marca + "'";
         }
-        if (empresa != "") {
-            query += " And P.Empresa = " + empresa + "";
+        if (!empresa.equals("")) {
+            query += " And P.Empresa = '" + empresa + "'";
         }
         if (precio > 0) {
             query += " And P.PrecioGanancia = " + precio + "";
         }
         if (fecha != null) {
-            query += " And P.FechaIngreso = " + fecha.toString() + "";
+            query += " And P.FechaIngreso = '" + fecha.toString() + "'";
         }
-        if (categoria != "") {
-            query += " And CT.Categoria = " + categoria + "";
+        if (!categoria.equals("")) {
+            query += " And CT.Descripcion = '" + categoria + "'";
         }
 
         try {
