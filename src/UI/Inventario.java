@@ -8,6 +8,8 @@ package UI;
 import BL.BL_ManejadorProducto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,19 +28,13 @@ public class Inventario extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (cbx_TipoProducto.getSelectedIndex() == 1) {
-                    lbl_Categoria.setVisible(false);
-                    lbl_Genero.setVisible(false);
-                    lbl_Talla.setVisible(false);
-                    txt_Talla.setVisible(false);
-                    cbx_Categoria.setVisible(false);
-                    cbx_Genero.setVisible(false);
+                    txt_Talla.setEnabled(false);
+                    cbx_Categoria.setEnabled(false);
+                    cbx_Genero.setEnabled(false);
                 } else {
-                    lbl_Categoria.setVisible(true);
-                    lbl_Genero.setVisible(true);
-                    lbl_Talla.setVisible(true);
-                    txt_Talla.setVisible(true);
-                    cbx_Categoria.setVisible(true);
-                    cbx_Genero.setVisible(true);
+                    txt_Talla.setEnabled(true);
+                    cbx_Categoria.setEnabled(true);
+                    cbx_Genero.setEnabled(true);
                 }
             }
         });
@@ -103,17 +99,32 @@ public class Inventario extends javax.swing.JFrame {
         tablaInventario.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tablaInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tablaInventario);
+        if (tablaInventario.getColumnModel().getColumnCount() > 0) {
+            tablaInventario.getColumnModel().getColumn(0).setResizable(false);
+            tablaInventario.getColumnModel().getColumn(1).setResizable(false);
+            tablaInventario.getColumnModel().getColumn(2).setResizable(false);
+            tablaInventario.getColumnModel().getColumn(3).setResizable(false);
+            tablaInventario.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         btnAgregar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         btnAgregar.setText("Agregar producto");
@@ -310,7 +321,7 @@ public class Inventario extends javax.swing.JFrame {
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                                 .addComponent(btnBusquedaAvanzada, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -390,6 +401,19 @@ public class Inventario extends javax.swing.JFrame {
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
         listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, txt_Fecha.getDate(), categoria, tipoProducto);
         
+        DefaultTableModel modelo = (DefaultTableModel) tablaInventario.getModel();
+        ArrayList<BL.BL_Producto> lista = listaProductos.ObtenerListaProductos();
+        Object[] fila = new Object[modelo.getColumnCount()];
+        
+        for (int i = 0; i < lista.size(); i++) {
+            fila[0] = lista.get(i).getIdProducto();
+            fila[1] = lista.get(i).getDescripcion();
+            fila[2] = lista.get(i).getCantidad();
+            fila[3] = lista.get(i).getFechaIngreso().toString();
+            fila[4] = lista.get(i).getPrecioGanancia();
+            
+            modelo.addRow(fila);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBusquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaActionPerformed
