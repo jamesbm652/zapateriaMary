@@ -32,7 +32,7 @@ public class DAO_Producto {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -67,7 +67,7 @@ public class DAO_Producto {
                 ps.setDouble(8, producto.getPrecioGanancia());
                 ps.setString(9, producto.getDescripcion());
                 ps.setInt(10, producto.getCantidad());
-                ps.setInt(11, 1);
+                ps.setInt(11, 0);
 
                 insertado = ps.executeUpdate();
 
@@ -89,7 +89,7 @@ public class DAO_Producto {
                 ps.setDouble(8, producto.getPrecioGanancia());
                 ps.setString(9, producto.getDescripcion());
                 ps.setInt(10, producto.getCantidad());
-                ps.setInt(11, 0);
+                ps.setInt(11, 1);
 
                 ps.executeUpdate();
                 rs = ps.getGeneratedKeys();
