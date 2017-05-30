@@ -99,10 +99,7 @@ public class Inventario extends javax.swing.JFrame {
         tablaInventario.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta"
@@ -366,6 +363,13 @@ public class Inventario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void limpiarLista(DefaultTableModel modelo){
+        int filas = tablaInventario.getRowCount();
+        for (int i = 0;filas>i; i++) {
+            modelo.removeRow(0);
+        }
+    }
+    
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
         Menu_Principal mp = new Menu_Principal();
@@ -402,11 +406,12 @@ public class Inventario extends javax.swing.JFrame {
         listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, txt_Fecha.getDate(), categoria, tipoProducto);
         
         DefaultTableModel modelo = (DefaultTableModel) tablaInventario.getModel();
+        limpiarLista(modelo);
         ArrayList<BL.BL_Producto> lista = listaProductos.ObtenerListaProductos();
         Object[] fila = new Object[modelo.getColumnCount()];
         
         for (int i = 0; i < lista.size(); i++) {
-            fila[0] = lista.get(i).getIdProducto();
+            fila[0] = lista.get(i).getCodigoUnico();
             fila[1] = lista.get(i).getDescripcion();
             fila[2] = lista.get(i).getCantidad();
             fila[3] = lista.get(i).getFechaIngreso().toString();

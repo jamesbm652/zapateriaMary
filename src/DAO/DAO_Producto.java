@@ -67,7 +67,7 @@ public class DAO_Producto {
                 ps.setDouble(8, producto.getPrecioGanancia());
                 ps.setString(9, producto.getDescripcion());
                 ps.setInt(10, producto.getCantidad());
-                ps.setInt(11, 1);
+                ps.setInt(11, 0);
 
                 insertado = ps.executeUpdate();
 
@@ -89,7 +89,7 @@ public class DAO_Producto {
                 ps.setDouble(8, producto.getPrecioGanancia());
                 ps.setString(9, producto.getDescripcion());
                 ps.setInt(10, producto.getCantidad());
-                ps.setInt(11, 0);
+                ps.setInt(11, 1);
 
                 ps.executeUpdate();
                 rs = ps.getGeneratedKeys();
