@@ -109,8 +109,7 @@ public class DAO_Producto {
                 }
                 
 
-                //insertado = 
-                        ps.executeUpdate();
+                insertado = ps.executeUpdate();
 
             } catch (SQLException ex) {
                 Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
