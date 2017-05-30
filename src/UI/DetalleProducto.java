@@ -433,7 +433,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
                 producto.setDescripcion(txtDescripcion.getText().trim());
                 producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
-                producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "" + new BL_Producto().obtenerSiguienteCodigo());
+                producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
                 if(rdbZapato.isSelected()){
                     producto.setEsZapato(true);
                 }else{
