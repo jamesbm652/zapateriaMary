@@ -47,6 +47,11 @@ public class Menu_Principal extends javax.swing.JFrame {
                 btn_InventarioActionPerformed(evt);
             }
         });
+        btn_Inventario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btn_InventarioKeyTyped(evt);
+            }
+        });
 
         btn_Facturar.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         btn_Facturar.setText("Facturar");
@@ -55,12 +60,22 @@ public class Menu_Principal extends javax.swing.JFrame {
                 btn_FacturarActionPerformed(evt);
             }
         });
+        btn_Facturar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btn_FacturarKeyTyped(evt);
+            }
+        });
 
         btn_ReporteVentas.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         btn_ReporteVentas.setText("Reporte de Ventas");
         btn_ReporteVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ReporteVentasActionPerformed(evt);
+            }
+        });
+        btn_ReporteVentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btn_ReporteVentasKeyTyped(evt);
             }
         });
 
@@ -74,6 +89,11 @@ public class Menu_Principal extends javax.swing.JFrame {
                 btn_RevisarFacturasActionPerformed(evt);
             }
         });
+        btn_RevisarFacturas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btn_RevisarFacturasKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel1.setText("Seleccione una opción:");
@@ -85,38 +105,37 @@ public class Menu_Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(lab_TituloMenu))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_Inventario, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_ReporteVentas))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel1)))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_Facturar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                    .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(lab_TituloMenu)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lab_TituloMenu)
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Inventario)
-                    .addComponent(btn_Facturar))
+                    .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_RevisarFacturas)
-                    .addComponent(btn_ReporteVentas))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -148,6 +167,30 @@ public class Menu_Principal extends javax.swing.JFrame {
         RevisarFacturas revisar = new RevisarFacturas();
         revisar.setVisible(true);
     }//GEN-LAST:event_btn_RevisarFacturasActionPerformed
+
+    private void btn_InventarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_InventarioKeyTyped
+        if(evt.getKeyChar() == evt.VK_ENTER){
+            btn_Inventario.doClick();
+        }
+    }//GEN-LAST:event_btn_InventarioKeyTyped
+
+    private void btn_FacturarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_FacturarKeyTyped
+        if(evt.getKeyChar() == evt.VK_ENTER){
+            btn_Facturar.doClick();
+        }
+    }//GEN-LAST:event_btn_FacturarKeyTyped
+
+    private void btn_RevisarFacturasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_RevisarFacturasKeyTyped
+        if(evt.getKeyChar() == evt.VK_ENTER){
+            btn_RevisarFacturas.doClick();
+        }
+    }//GEN-LAST:event_btn_RevisarFacturasKeyTyped
+
+    private void btn_ReporteVentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_ReporteVentasKeyTyped
+        if(evt.getKeyChar() == evt.VK_ENTER){
+            btn_ReporteVentas.doClick();
+        }
+    }//GEN-LAST:event_btn_ReporteVentasKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Facturar;

@@ -99,69 +99,69 @@ public class DetalleProducto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
 
-        labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         labInstruccion.setText("Ingrese los datos del nuevo producto:");
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel3.setText("Descripción:");
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel4.setText("Fecha de Ingreso:");
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel5.setText("Color:");
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setText("Marca:");
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel7.setText("Precio a costo:");
 
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel8.setText("Precio de venta:");
 
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel9.setText("Empresa:");
 
-        jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel10.setText("Impuesto:");
 
-        txtDescripcion.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtDescripcion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
 
-        txtColor.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtColor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtColorActionPerformed(evt);
             }
         });
 
-        txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioCostoKeyTyped(evt);
             }
         });
 
-        txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtCodigo.setEnabled(false);
 
-        txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
 
-        txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioVentaKeyTyped(evt);
             }
         });
 
-        txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtImpuesto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImpuestoKeyTyped(evt);
             }
         });
 
-        txtEmpresa.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtEmpresa.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
 
         btnAtras.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         btnAtras.setText("Atrás");
@@ -180,6 +180,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
 
         grup1.add(rdbBolso);
+        rdbBolso.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbBolso.setText("Bolso");
         rdbBolso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +189,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
 
         grup1.add(rdbZapato);
+        rdbZapato.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbZapato.setText("Zapato");
         rdbZapato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,16 +197,20 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel1.setText("Género:");
 
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
 
+        jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel11.setText("Categoría:");
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninos", "Jovenes", "Adulto" }));
 
+        jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel12.setText("Talla:");
 
+        txtTalla.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtTalla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTallaKeyTyped(evt);
@@ -213,8 +219,10 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
+        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel13.setText("Cantidad:");
 
+        jButton1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jButton1.setText("Generear código");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +230,7 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel2.setText("Código:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -285,7 +294,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                         .addComponent(btnAgregar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescripcion))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
