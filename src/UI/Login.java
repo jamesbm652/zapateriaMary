@@ -66,6 +66,11 @@ public class Login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
+        btnIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnIngresarKeyTyped(evt);
+            }
+        });
 
         txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtNombreUsuario.setForeground(java.awt.Color.decode("#818181")
@@ -191,6 +196,13 @@ public class Login extends javax.swing.JFrame {
             txtContrasena.setForeground(java.awt.Color.decode("#818181"));
         }
     }//GEN-LAST:event_txtContrasenaFocusLost
+
+    private void btnIngresarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIngresarKeyTyped
+        
+        if(evt.getKeyChar() == evt.VK_ENTER){
+            JOptionPane.showMessageDialog(null, "Esta funcionando");
+        }
+    }//GEN-LAST:event_btnIngresarKeyTyped
 
     /**
      * @param args the command line arguments
