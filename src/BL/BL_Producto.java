@@ -151,20 +151,25 @@ public class BL_Producto {
         this.tallaZapato = tallaZapato;
     }
 
-    public int obtenerSiguienteCodigo(){
+    public int obtenerSiguienteCodigo() {
         return new DAO_Producto().obtenerSiguienteCodigo();
     }
-    
+
     public Boolean insertarProducto() {
         return new DAO_Producto().insertarProducto(this);
     }
 
-    public Boolean modificarProducto(int posicion, ArrayList<BL_Producto> lista){
-        return true;
+    public boolean modificarProducto(int posicion, ArrayList<BL_Producto> lista) {
+        if (new DAO_Producto().modificarProducto(this)) {
+            lista.set(posicion, this);
+            return true;
+        } else {
+            return false;
+        }
     }
-    
-    public Boolean eliminarProducto(int id){
+
+    public Boolean eliminarProducto(int id) {
         return new DAO_Producto().eliminarProducto(id);
     }
-    
+
 }
