@@ -100,7 +100,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="210" y="190" width="-1" height="-1"/>
+          <AbsoluteConstraints x="210" y="180" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -200,13 +200,15 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtCodigo">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Yu Gothic UI" size="11" style="0"/>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="55" y="44" width="220" height="31"/>
+          <AbsoluteConstraints x="55" y="45" width="220" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -299,7 +301,7 @@
     <Component class="com.toedter.calendar.JDateChooser" name="txtFechaIngreso">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="386" y="44" width="170" height="31"/>
+          <AbsoluteConstraints x="386" y="45" width="170" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
