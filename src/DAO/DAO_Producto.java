@@ -362,7 +362,7 @@ public class DAO_Producto {
         try {
             ps = con.prepareStatement("Select * From productofactura Where IdProducto = ?");
             ps.setInt(1, id);
-            if(ps.executeQuery().next()){
+            if (ps.executeQuery().next()) {
                 eliminar = false;
             }
             //existencia = ps.executeUpdate();
