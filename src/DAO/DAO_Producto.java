@@ -285,8 +285,8 @@ public class DAO_Producto {
                     prod.setCodigoUnico(rs.getString("CodigoUnico"));
                     prod.setFechaIngreso(rs.getDate("FechaIngreso"));
                     prod.setColor(rs.getString("Color"));
-                    prod.setMarca("Marca");
-                    prod.setEmpresa("Empresa");
+                    prod.setMarca(rs.getString("Marca"));
+                    prod.setEmpresa(rs.getString("Empresa"));
                     prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                     prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                     prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
@@ -296,7 +296,7 @@ public class DAO_Producto {
 
                     talla.setTalla(rs.getDouble("Talla"));
                     talla.setGeneroZapato(rs.getString("Genero"));
-                    talla.setCategoriaZapato("Categoria");
+                    talla.setCategoriaZapato(rs.getString("Categoria"));
 
                     prod.setTallaZapato(talla);
 
@@ -309,8 +309,8 @@ public class DAO_Producto {
                 prod.setCodigoUnico(rs.getString("CodigoUnico"));
                 prod.setFechaIngreso(rs.getDate("FechaIngreso"));
                 prod.setColor(rs.getString("Color"));
-                prod.setMarca("Marca");
-                prod.setEmpresa("Empresa");
+                prod.setMarca(rs.getString("Marca"));
+                prod.setEmpresa(rs.getString("Empresa"));
                 prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                 prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                 prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
@@ -362,14 +362,9 @@ public class DAO_Producto {
         try {
             ps = con.prepareStatement("Select * From productofactura Where IdProducto = ?");
             ps.setInt(1, id);
-            if(ps.executeQuery().next()){
+            if (ps.executeQuery().next()) {
                 eliminar = false;
             }
-            //existencia = ps.executeUpdate();
-
-            /*if (existencia > 0) {
-                eliminar = false;
-            }*/
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -377,6 +372,74 @@ public class DAO_Producto {
         cerrarConexion();
 
         return eliminar;
+    }
+
+    public boolean modificarProducto(BL_Producto prod) {
+        boolean modificado = false;
+        int insertado = 0;
+        conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            if (prod.isEsZapato()) {
+                ps = con.prepareStatement("Update producto Set CodigoUnico = ?, FechaIngreso = ?, "
+                        + " Color = ?, Marca = ?, Empresa = ?, PrecioCosto = ?, PrecioImpuesto = ?,"
+                        + " PrecioGanancia = ?, Descripcion = ?, Cantidad = ?, EsZapato = 1 Where IdProducto = ?");
+                ps.setString(1, prod.getCodigoUnico());
+                ps.setDate(2, prod.getFechaIngreso());
+                ps.setString(3, prod.getColor());
+                ps.setString(4, prod.getMarca());
+                ps.setString(5, prod.getEmpresa());
+                ps.setDouble(6, prod.getPrecioCosto());
+                ps.setDouble(7, prod.getPrecioImpuesto());
+                ps.setDouble(8, prod.getPrecioGanancia());
+                ps.setString(9, prod.getDescripcion());
+                ps.setInt(10, prod.getCantidad());
+                ps.setInt(11, prod.getIdProducto());
+
+                insertado = ps.executeUpdate();
+                if (insertado > 0) {
+                    ps = con.prepareStatement("Update zapatocategoriatalla "
+                            + "Set IdCategoria = (Select IdCategoria From categoriatalla Where Descripcion = '" + prod.getTallaZapato().getCategoriaZapato() + "'), "
+                            + " Talla = ?, Genero = ?");
+                    ps.setDouble(1, prod.getTallaZapato().getTalla());
+
+                    if (prod.getTallaZapato().getGeneroZapato().equals("M")) {
+                        ps.setInt(2, 1);
+                    } else {
+                        ps.setInt(2, 0);
+                    }
+                    insertado = ps.executeUpdate();
+                }
+
+            } else {
+                ps = con.prepareStatement("Update producto Set CodigoUnico = ?, FechaIngreso = ?, "
+                        + " Color = ?, Marca = ?, Empresa = ?, PrecioCosto = ?, PrecioImpuesto = ?,"
+                        + " PrecioGanancia = ?, Descripcion = ?, Cantidad = ?, EsZapato = 0 Where IdProducto = ?");
+                ps.setString(1, prod.getCodigoUnico());
+                ps.setDate(2, prod.getFechaIngreso());
+                ps.setString(3, prod.getColor());
+                ps.setString(4, prod.getMarca());
+                ps.setString(5, prod.getEmpresa());
+                ps.setDouble(6, prod.getPrecioCosto());
+                ps.setDouble(7, prod.getPrecioImpuesto());
+                ps.setDouble(8, prod.getPrecioGanancia());
+                ps.setString(9, prod.getDescripcion());
+                ps.setInt(10, prod.getCantidad());
+                ps.setInt(11, prod.getIdProducto());
+
+                insertado = ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (insertado > 0) {
+            modificado = true;
+        }
+
+        cerrarConexion();
+        return modificado;
     }
 
 }
