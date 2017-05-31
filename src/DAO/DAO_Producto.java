@@ -32,7 +32,7 @@ public class DAO_Producto {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -140,7 +140,7 @@ public class DAO_Producto {
             }
 
             if (cantidadProductos > 0) {
-                rs = st.executeQuery("Select max(IdProducto) From Producto");
+                rs = st.executeQuery("Select max(IdProducto) From producto");
                 while (rs.next()) {
                     siguienteCodigo = rs.getInt(1);
                 }
@@ -400,7 +400,7 @@ public class DAO_Producto {
 
                 insertado = ps.executeUpdate();
                 if (insertado > 0) {
-                    ps = con.prepareStatement("Update zapatocategoriatalla "
+                    ps = con.prepareStatement("Update zapatotallacategoria "
                             + "Set IdCategoria = (Select IdCategoria From categoriatalla Where Descripcion = '" + prod.getTallaZapato().getCategoriaZapato() + "'), "
                             + " Talla = ?, Genero = ?");
                     ps.setDouble(1, prod.getTallaZapato().getTalla());
