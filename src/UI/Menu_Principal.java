@@ -146,7 +146,7 @@ public class Menu_Principal extends javax.swing.JFrame {
 
     private void btn_InventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InventarioActionPerformed
         this.dispose();
-        Inventario inventario = new Inventario();
+        Inventario inventario = new Inventario(null);
         inventario.setVisible(true);
     }//GEN-LAST:event_btn_InventarioActionPerformed
 
