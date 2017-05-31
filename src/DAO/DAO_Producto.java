@@ -195,7 +195,7 @@ public class DAO_Producto {
             }
 
             rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
-                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto Where P.EsZapato = 0");
+                    + "P.Cantidad, P.EsZapato FROM zapateriamary.producto P Where P.EsZapato = 0");
 
             while (rs.next()) {
                 BL_Producto prod = new BL_Producto();

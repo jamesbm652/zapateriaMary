@@ -29,8 +29,7 @@ public class BL_ManejadorProducto {
     }
 
     public void CargarProductos() {
-        //cargarLista
-
+        listaProducto = new DAO.DAO_Producto().cargarTodosProductos();
     }
 
     public void BuscarPorFiltro(String genero, String color, double talla, String marca, String empresa, double precio, Date fecha, String categoria, boolean tipoProd) {
