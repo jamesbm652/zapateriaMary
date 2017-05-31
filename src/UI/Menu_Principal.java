@@ -7,6 +7,8 @@ package UI;
 
 import javax.swing.JOptionPane;
 import BL.BL_Logueo;
+import BL.BL_Usuario;
+import java.awt.Cursor;
 
 /**
  *
@@ -20,6 +22,9 @@ public class Menu_Principal extends javax.swing.JFrame {
     public Menu_Principal() {
         initComponents();
         BL_Logueo lg = new BL_Logueo();
+        if(!lg.isAdmin()){
+            labSettings.setVisible(false);
+        }
     }
 
     /**
@@ -37,6 +42,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         lab_TituloMenu = new javax.swing.JLabel();
         btn_RevisarFacturas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        labSettings = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +104,16 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel1.setText("Seleccione una opción:");
 
+        labSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/settings.png"))); // NOI18N
+        labSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labSettingsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labSettingsMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,16 +131,23 @@ public class Menu_Principal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btn_Facturar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
+                                    .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(lab_TituloMenu)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(lab_TituloMenu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addComponent(labSettings)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lab_TituloMenu)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lab_TituloMenu)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labSettings)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
@@ -135,7 +158,7 @@ public class Menu_Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -192,12 +215,21 @@ public class Menu_Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_ReporteVentasKeyTyped
 
+    private void labSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseClicked
+        JOptionPane.showMessageDialog(null, "Aqui debe llevarlo a la ventana mantenUsuarios");
+    }//GEN-LAST:event_labSettingsMouseClicked
+
+    private void labSettingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseEntered
+        labSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labSettingsMouseEntered
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Facturar;
     private javax.swing.JButton btn_Inventario;
     private javax.swing.JButton btn_ReporteVentas;
     private javax.swing.JButton btn_RevisarFacturas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labSettings;
     private javax.swing.JLabel lab_TituloMenu;
     // End of variables declaration//GEN-END:variables
 }
