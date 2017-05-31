@@ -9,10 +9,14 @@ import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -22,6 +26,7 @@ public class Inventario extends javax.swing.JFrame {
     ArrayList<BL_Producto> listaTotalProductos = new ArrayList<BL_Producto>();
     BL_ManejadorProducto manejador = new BL_ManejadorProducto();
     DefaultTableModel modelo;
+    
     /**
      * Creates new form
      */
@@ -71,9 +76,9 @@ public class Inventario extends javax.swing.JFrame {
         txt_Empresa = new javax.swing.JTextField();
         txt_Precio = new javax.swing.JTextField();
         lbl_Categoria = new javax.swing.JLabel();
-        cbx_Categoria = new javax.swing.JComboBox<String>();
+        cbx_Categoria = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        cbx_TipoProducto = new javax.swing.JComboBox<String>();
+        cbx_TipoProducto = new javax.swing.JComboBox<>();
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -164,6 +169,11 @@ public class Inventario extends javax.swing.JFrame {
         getContentPane().add(labBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 24, -1, -1));
 
         txtBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 24, 312, -1));
 
         btnBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
@@ -251,7 +261,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 54, -1, -1));
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 52, 137, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -259,7 +269,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
@@ -439,6 +449,18 @@ public class Inventario extends javax.swing.JFrame {
        
     }//GEN-LAST:event_tablaInventarioMouseClicked
 
+    
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        String filtro = txtBuscar.getText();
+        filtro(filtro);
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void filtro(String filtro){
+        TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
+        tablaInventario.setRowSorter(trsFiltro);
+        trsFiltro.setRowFilter(RowFilter.regexFilter(filtro));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
