@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class DetalleProducto extends javax.swing.JFrame {
     ArrayList<BL_Producto> lista;
-    int id;
+    int posicion;
     /**
      * Creates new form AgregarProducto
      */
@@ -29,9 +29,8 @@ public class DetalleProducto extends javax.swing.JFrame {
     public DetalleProducto(int ventana, ArrayList<BL_Producto> listaProductos, int id) {
         initComponents();
         lista = listaProductos;
-        this.id = id;
+        this.posicion = id;
         verificarVentana(ventana);
-        txtCodigo.setEditable(false);
     }
     
     
@@ -47,7 +46,7 @@ public class DetalleProducto extends javax.swing.JFrame {
             labInstruccion.setText("Modifique los datos necesarios:");
             btnAgregar.setVisible(true);
             btnAgregar.setText("Modificar");
-            btnGenerarCodigo.setVisible(true);
+            btnGenerarCodigo.setVisible(false);
             
             habilitarCampos(true);
             cargarProducto();
@@ -78,32 +77,32 @@ public class DetalleProducto extends javax.swing.JFrame {
     }
     
     private void cargarProducto(){
-        if(lista.get(id).isEsZapato()){
+        if(lista.get(posicion).isEsZapato()){
             rdbZapato.setSelected(true);
             
             
-            cmbCategoria.setSelectedItem(lista.get(id).getTallaZapato().getCategoriaZapato());
-            if(lista.get(id).getTallaZapato().getGeneroZapato().equals("1")){
+            cmbCategoria.setSelectedItem(lista.get(posicion).getTallaZapato().getCategoriaZapato());
+            if(lista.get(posicion).getTallaZapato().getGeneroZapato().equals("1")){
                 cmbGenero.setSelectedItem("M");
             }else{
                 cmbGenero.setSelectedItem("F");
             }
             
-            txtTalla.setText(lista.get(id).getTallaZapato().getTalla() + "");
+            txtTalla.setText(lista.get(posicion).getTallaZapato().getTalla() + "");
         }else{
             rdbBolso.setSelected(true);
             
         }
-        txtCodigo.setText(lista.get(id).getCodigoUnico());
-        txtFechaIngreso.setDate(lista.get(id).getFechaIngreso());
-        txtDescripcion.setText(lista.get(id).getDescripcion());
-        txtCantidad.setValue(lista.get(id).getCantidad());
-        txtMarca.setText(lista.get(id).getMarca());
-        txtColor.setText(lista.get(id).getColor());
-        txtEmpresa.setText(lista.get(id).getEmpresa());
-        txtImpuesto.setText(lista.get(id).getPrecioImpuesto() + "");
-        txtPrecioCosto.setText(lista.get(id).getPrecioCosto() + "");
-        txtPrecioVenta.setText(lista.get(id).getPrecioGanancia() + "");
+        txtCodigo.setText(lista.get(posicion).getCodigoUnico());
+        txtFechaIngreso.setDate(lista.get(posicion).getFechaIngreso());
+        txtDescripcion.setText(lista.get(posicion).getDescripcion());
+        txtCantidad.setValue(lista.get(posicion).getCantidad());
+        txtMarca.setText(lista.get(posicion).getMarca());
+        txtColor.setText(lista.get(posicion).getColor());
+        txtEmpresa.setText(lista.get(posicion).getEmpresa());
+        txtImpuesto.setText(lista.get(posicion).getPrecioImpuesto() + "");
+        txtPrecioCosto.setText(lista.get(posicion).getPrecioCosto() + "");
+        txtPrecioVenta.setText(lista.get(posicion).getPrecioGanancia() + "");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,7 +171,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setText("Marca:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel7.setText("Precio a costo:");
@@ -209,8 +208,10 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 109, -1));
 
+        txtCodigo.setEditable(false);
         txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 44, 220, 31));
+        txtCodigo.setEnabled(false);
+        getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 45, 220, 30));
 
         txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 130, -1));
@@ -251,7 +252,7 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 328, -1, 40));
-        getContentPane().add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 44, 170, 31));
+        getContentPane().add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 45, 170, 30));
 
         grup1.add(rdbBolso);
         rdbBolso.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
@@ -399,20 +400,10 @@ public class DetalleProducto extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Error al insertar el producto","Error",JOptionPane.ERROR_MESSAGE);
                         }
                 }else{
-                    if(producto.modificarProducto()){
-                        lista.get(id).setCodigoUnico(txtCodigo.getText());
-                        lista.get(id).setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getYear(), txtFechaIngreso.getDate().getMonth(), txtFechaIngreso.getDate().getDay()));
-                        lista.get(id).setColor(txtColor.getText().trim());
-                        lista.get(id).setMarca(txtMarca.getText().trim());
-                        lista.get(id).setEmpresa(txtEmpresa.getText().trim());
-                        lista.get(id).setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
-                        lista.get(id).setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
-                        lista.get(id).setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
-                        lista.get(id).setDescripcion(txtDescripcion.getText().trim());
-                        lista.get(id).setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
-                        lista.get(id).setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
-
+                    if(producto.modificarProducto(posicion,lista)){
+                        lista.set(posicion, producto);
                         JOptionPane.showMessageDialog(null, "Datos modificados","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                        txtCodigo.setText(producto.getCodigoUnico());
                     }else{
                         JOptionPane.showMessageDialog(null, "Error al modificar el producto","Error",JOptionPane.ERROR_MESSAGE);
                     }

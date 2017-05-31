@@ -7,6 +7,7 @@ package BL;
 
 import DAO.DAO_Producto;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -158,7 +159,7 @@ public class BL_Producto {
         return new DAO_Producto().insertarProducto(this);
     }
 
-    public Boolean modificarProducto(){
+    public Boolean modificarProducto(int posicion, ArrayList<BL_Producto> lista){
         return true;
     }
     
