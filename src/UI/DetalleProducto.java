@@ -147,7 +147,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         btnGenerarCodigo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Agregar Producto");
         setMinimumSize(new java.awt.Dimension(590, 430));
         setPreferredSize(new java.awt.Dimension(590, 430));
@@ -300,7 +300,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
 
-        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 70, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N

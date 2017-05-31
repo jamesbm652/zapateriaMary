@@ -411,7 +411,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnVerDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDetalleActionPerformed
         if(tablaInventario.getSelectedRow() >= 0){
-            
+            this.dispose();
             int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
 
             DetalleProducto detalle = new DetalleProducto(3,listaTotalProductos,id);
@@ -456,7 +456,7 @@ public class Inventario extends javax.swing.JFrame {
     private void filtro(String filtro){
         TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
         tablaInventario.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter(filtro));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
