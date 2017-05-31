@@ -6,7 +6,7 @@
 package BL;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
