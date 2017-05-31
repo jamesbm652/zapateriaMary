@@ -23,10 +23,11 @@ import javax.swing.table.TableRowSorter;
  * @author oscal
  */
 public class Inventario extends javax.swing.JFrame {
+
     ArrayList<BL_Producto> listaTotalProductos = new ArrayList<BL_Producto>();
     BL_ManejadorProducto manejador = new BL_ManejadorProducto();
     DefaultTableModel modelo;
-    
+
     /**
      * Creates new form
      */
@@ -34,18 +35,18 @@ public class Inventario extends javax.swing.JFrame {
         initComponents();
         modelo = (DefaultTableModel) tablaInventario.getModel();
         jpanBusquedaAvanzada.setVisible(false);
-        
-        if(lista == null){
+
+        if (lista == null) {
             manejador.CargarProductos();
             listaTotalProductos = manejador.ObtenerListaProductos();
-        }else{
+        } else {
             listaTotalProductos = lista;
         }
-        
+
         cargarProductosEnTabla(listaTotalProductos);
-        
+
         ocultarColumnaID();
-        
+
     }
 
     /**
@@ -291,19 +292,19 @@ public class Inventario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ocultarColumnaID(){
+    private void ocultarColumnaID() {
         tablaInventario.getColumn("HiddenID").setMaxWidth(0);
         tablaInventario.getColumn("HiddenID").setMinWidth(0);
         tablaInventario.getColumn("HiddenID").setPreferredWidth(0);
         tablaInventario.getColumn("HiddenID").setWidth(0);
         tablaInventario.getColumn("HiddenID").setResizable(false);
     }
-    
-    private void cargarProductosEnTabla(ArrayList<BL_Producto> listaParaMostrar){
-        
+
+    private void cargarProductosEnTabla(ArrayList<BL_Producto> listaParaMostrar) {
+
         limpiarTabla(modelo);
         Object[] fila = new Object[modelo.getColumnCount()];
-        
+
         for (int i = 0; i < listaParaMostrar.size(); i++) {
             fila[0] = listaParaMostrar.get(i).getCodigoUnico();
             fila[1] = listaParaMostrar.get(i).getDescripcion();
@@ -311,28 +312,28 @@ public class Inventario extends javax.swing.JFrame {
             fila[3] = listaParaMostrar.get(i).getFechaIngreso().toString();
             fila[4] = listaParaMostrar.get(i).getPrecioGanancia();
             fila[5] = i;
-            
-            modelo.addRow(fila);    
-        }    
+
+            modelo.addRow(fila);
+        }
         listaTotalProductos = listaParaMostrar;
     }
-    
-    private void limpiarTabla(DefaultTableModel modelo){
+
+    private void limpiarTabla(DefaultTableModel modelo) {
         int filas = tablaInventario.getRowCount();
-        for (int i = 0;filas>i; i++) {
+        for (int i = 0; filas > i; i++) {
             modelo.removeRow(0);
         }
     }
-    
-    private void validarNumeros(java.awt.event.KeyEvent evt){
+
+    private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
-        
-        if((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE){
+
+        if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null,"Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
         Menu_Principal mp = new Menu_Principal();
@@ -341,7 +342,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         this.dispose();
-        DetalleProducto modificar = new DetalleProducto(1,listaTotalProductos,-1);
+        DetalleProducto modificar = new DetalleProducto(1, listaTotalProductos, -1);
         modificar.setTitle("Agregar Producto");
         modificar.setVisible(true);
 
@@ -354,28 +355,31 @@ public class Inventario extends javax.swing.JFrame {
         double precio = 0;
         String genero = cbx_Genero.getSelectedItem().toString();
         String categoria = cbx_Categoria.getSelectedItem().toString();
-        
-        if (!txt_Talla.getText().equals("")) talla = Double.parseDouble(txt_Talla.getText());
-        if (!txt_Precio.getText().equals("")) precio = Double.parseDouble(txt_Precio.getText());
-        
-        if (cbx_TipoProducto.getSelectedIndex() == 1){
+
+        if (!txt_Talla.getText().equals("")) {
+            talla = Double.parseDouble(txt_Talla.getText());
+        }
+        if (!txt_Precio.getText().equals("")) {
+            precio = Double.parseDouble(txt_Precio.getText());
+        }
+
+        if (cbx_TipoProducto.getSelectedIndex() == 1) {
             tipoProducto = false;
             genero = "";
             categoria = "";
         }
-            
+
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
-        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, txt_Fecha.getDate(), categoria, tipoProducto);
-        
-        
+        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, (java.sql.Date) txt_Fecha.getDate(), categoria, tipoProducto);
+
         limpiarTabla(modelo);
-        
+
         cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
-       
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBusquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaActionPerformed
-        
+
     }//GEN-LAST:event_btnBusquedaAvanzadaActionPerformed
 
     private void btnBusquedaAvanzadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaMouseClicked
@@ -388,37 +392,37 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int identificador = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
-        if(new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())){
+        if (new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())) {
             listaTotalProductos.remove(identificador);
             JOptionPane.showMessageDialog(null, "Producto eliminado");
             cargarProductosEnTabla(listaTotalProductos);
-        }else{
-            JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado\nNo se puede eliminar del inventario","Error",JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado\nNo se puede eliminar del inventario", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        if(tablaInventario.getSelectedRow() >= 0){
+        if (tablaInventario.getSelectedRow() >= 0) {
             this.dispose();
             int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
-            DetalleProducto modificar = new DetalleProducto(2,listaTotalProductos,id);
+            DetalleProducto modificar = new DetalleProducto(2, listaTotalProductos, id);
             modificar.setTitle("Modificar Producto");
             modificar.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto","Error",JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnVerDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDetalleActionPerformed
-        if(tablaInventario.getSelectedRow() >= 0){
+        if (tablaInventario.getSelectedRow() >= 0) {
             this.dispose();
             int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
 
-            DetalleProducto detalle = new DetalleProducto(3,listaTotalProductos,id);
+            DetalleProducto detalle = new DetalleProducto(3, listaTotalProductos, id);
             detalle.setTitle("Mostrar Producto");
             detalle.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto","Error",JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnVerDetalleActionPerformed
 
@@ -444,21 +448,20 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_PrecioKeyTyped
 
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
-       
+
     }//GEN-LAST:event_tablaInventarioMouseClicked
 
-    
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         String filtro = txtBuscar.getText();
         filtro(filtro);
     }//GEN-LAST:event_txtBuscarKeyReleased
 
-    private void filtro(String filtro){
+    private void filtro(String filtro) {
         TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
         tablaInventario.setRowSorter(trsFiltro);
         trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;

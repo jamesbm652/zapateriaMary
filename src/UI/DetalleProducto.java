@@ -8,6 +8,7 @@ package UI;
 import BL.BL_Producto;
 import BL.BL_TallaZapato;
 import java.util.ArrayList;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,8 +16,10 @@ import javax.swing.JOptionPane;
  * @author oscal
  */
 public class DetalleProducto extends javax.swing.JFrame {
+
     ArrayList<BL_Producto> lista;
     int posicion;
+
     /**
      * Creates new form AgregarProducto
      */
@@ -24,33 +27,30 @@ public class DetalleProducto extends javax.swing.JFrame {
         initComponents();
     }
 
-    
-    
     public DetalleProducto(int ventana, ArrayList<BL_Producto> listaProductos, int id) {
         initComponents();
         lista = listaProductos;
         this.posicion = id;
         verificarVentana(ventana);
     }
-    
-    
-    private void verificarVentana(int ventana){
-        if(ventana == 1){
+
+    private void verificarVentana(int ventana) {
+        if (ventana == 1) {
             habilitarCampos(true);
             labInstruccion.setText("Ingrese los datos del nuevo producto:");
             rdbZapato.setSelected(true);
             btnAgregar.setText("Agregar");
             btnAgregar.setVisible(true);
             btnGenerarCodigo.setVisible(true);
-        }else if(ventana == 2){
+        } else if (ventana == 2) {
             labInstruccion.setText("Modifique los datos necesarios:");
             btnAgregar.setVisible(true);
             btnAgregar.setText("Modificar");
             btnGenerarCodigo.setVisible(false);
-            
+
             habilitarCampos(true);
             cargarProducto();
-        }else{
+        } else {
             labInstruccion.setText("Detalles del producto:");
             btnAgregar.setVisible(false);
             btnGenerarCodigo.setVisible(false);
@@ -58,8 +58,8 @@ public class DetalleProducto extends javax.swing.JFrame {
             cargarProducto();
         }
     }
-    
-    private void habilitarCampos(boolean valor){
+
+    private void habilitarCampos(boolean valor) {
         txtColor.setEditable(valor);
         txtDescripcion.setEditable(valor);
         txtFechaIngreso.setEnabled(valor);
@@ -75,23 +75,22 @@ public class DetalleProducto extends javax.swing.JFrame {
         rdbBolso.setEnabled(valor);
         rdbZapato.setEnabled(valor);
     }
-    
-    private void cargarProducto(){
-        if(lista.get(posicion).isEsZapato()){
+
+    private void cargarProducto() {
+        if (lista.get(posicion).isEsZapato()) {
             rdbZapato.setSelected(true);
-            
-            
+
             cmbCategoria.setSelectedItem(lista.get(posicion).getTallaZapato().getCategoriaZapato());
-            if(lista.get(posicion).getTallaZapato().getGeneroZapato().equals("1")){
+            if (lista.get(posicion).getTallaZapato().getGeneroZapato().equals("1")) {
                 cmbGenero.setSelectedItem("M");
-            }else{
+            } else {
                 cmbGenero.setSelectedItem("F");
             }
-            
+
             txtTalla.setText(lista.get(posicion).getTallaZapato().getTalla() + "");
-        }else{
+        } else {
             rdbBolso.setSelected(true);
-            
+
         }
         txtCodigo.setText(lista.get(posicion).getCodigoUnico());
         txtFechaIngreso.setDate(lista.get(posicion).getFechaIngreso());
@@ -104,6 +103,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtPrecioCosto.setText(lista.get(posicion).getPrecioCosto() + "");
         txtPrecioVenta.setText(lista.get(posicion).getPrecioGanancia() + "");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -352,71 +352,73 @@ public class DetalleProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtColorActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-            if(txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("") ||
-                txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("") ||
-                    txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")){
 
-                JOptionPane.showMessageDialog(null, "Debe completar los datos","ERROR",JOptionPane.ERROR_MESSAGE);
-            }else{
-                if(!rdbZapato.isSelected() && !rdbBolso.isSelected()){
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto","ERROR",JOptionPane.ERROR_MESSAGE);
-                }else{
-                    BL_Producto producto = new BL_Producto();
-                    producto.setCodigoUnico(txtCodigo.getText());
-                    producto.setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getYear(), txtFechaIngreso.getDate().getMonth(), txtFechaIngreso.getDate().getDay()));
-                    producto.setColor(txtColor.getText().trim());
-                    producto.setMarca(txtMarca.getText().trim());
-                    producto.setEmpresa(txtEmpresa.getText().trim());
-                    producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
-                    producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
-                    producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
-                    producto.setDescripcion(txtDescripcion.getText().trim());
-                    producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
-                    producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
-                    if(rdbZapato.isSelected()){
-                        producto.setEsZapato(true);
-                    }else{
-                        producto.setEsZapato(false);
+        if (txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("")
+                || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
+                || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Debe completar los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (!rdbZapato.isSelected() && !rdbBolso.isSelected()) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                BL_Producto producto = new BL_Producto();
+                producto.setIdProducto(producto.obtenerSiguienteCodigo());
+                producto.setCodigoUnico(txtCodigo.getText());
+                producto.setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getTime()));
+                producto.setColor(txtColor.getText().trim());
+                producto.setMarca(txtMarca.getText().trim());
+                producto.setEmpresa(txtEmpresa.getText().trim());
+                producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
+                producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
+                producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
+                producto.setDescripcion(txtDescripcion.getText().trim());
+                producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
+                producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
+                if (rdbZapato.isSelected()) {
+                    producto.setEsZapato(true);
+                } else {
+                    producto.setEsZapato(false);
+                }
+                producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(), cmbCategoria.getSelectedItem().toString(), Double.parseDouble(txtTalla.getText().toString())));
+
+                if (btnAgregar.getText().equals("Agregar")) {
+                    if (producto.insertarProducto()) {
+                        txtCodigo.setText("");
+                        txtDescripcion.setText("");
+                        txtFechaIngreso.setDate(null);
+                        txtTalla.setText("");
+                        txtCantidad.setValue(1);
+                        txtMarca.setText("");
+                        txtColor.setText("");
+                        txtEmpresa.setText("");
+                        txtImpuesto.setText("");
+                        txtPrecioCosto.setText("");
+                        txtPrecioVenta.setText("");
+                        JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        lista.add(producto);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al insertar el producto", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                    producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(),cmbCategoria.getSelectedItem().toString(),Double.parseDouble(txtTalla.getText().toString())));
-
-                    if(btnAgregar.getText().equals("Agregar")){
-                        if(producto.insertarProducto()){
-                            txtCodigo.setText("");
-                            txtDescripcion.setText("");
-                            txtFechaIngreso.setDate(null);
-                            txtTalla.setText("");
-                            txtCantidad.setValue(1);
-                            txtMarca.setText("");
-                            txtColor.setText("");
-                            txtEmpresa.setText("");
-                            txtImpuesto.setText("");
-                            txtPrecioCosto.setText("");
-                            txtPrecioVenta.setText("");
-                            JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                            lista.add(producto);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Error al insertar el producto","Error",JOptionPane.ERROR_MESSAGE);
-                        }
-                }else{
-                    if(producto.modificarProducto(posicion,lista)){
+                } else {
+                    producto.setIdProducto(lista.get(posicion).getIdProducto());
+                    if (producto.modificarProducto(posicion, lista)) {
                         lista.set(posicion, producto);
-                        JOptionPane.showMessageDialog(null, "Datos modificados","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Datos modificados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         txtCodigo.setText(producto.getCodigoUnico());
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Error al modificar el producto","Error",JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al modificar el producto", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                    
+
                 }
             }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGenerarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCodigoActionPerformed
-        if(txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código","Aviso",JOptionPane.WARNING_MESSAGE);
-        }else{
+        if (txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
             txtCodigo.setText(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "");
             txtCodigo.setText(txtCodigo.getText() + "-" + new BL_Producto().obtenerSiguienteCodigo());
         }
@@ -435,13 +437,12 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtTalla.setEnabled(true);
     }//GEN-LAST:event_rdbZapatoActionPerformed
 
-    
-    private void validarNumeros(java.awt.event.KeyEvent evt){
+    private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
-        
-        if((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE){
+
+        if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null,"Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
     }
 
