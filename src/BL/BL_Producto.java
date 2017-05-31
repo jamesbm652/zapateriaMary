@@ -154,8 +154,16 @@ public class BL_Producto {
         return new DAO_Producto().obtenerSiguienteCodigo();
     }
     
-    public Boolean insertarZapato() {
+    public Boolean insertarProducto() {
         return new DAO_Producto().insertarProducto(this);
     }
 
+    public Boolean modificarProducto(){
+        return true;
+    }
+    
+    public Boolean eliminarProducto(int id){
+        return new DAO_Producto().eliminarProducto(id);
+    }
+    
 }

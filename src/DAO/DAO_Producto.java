@@ -176,8 +176,8 @@ public class DAO_Producto {
                 prod.setCodigoUnico(rs.getString("CodigoUnico"));
                 prod.setFechaIngreso(rs.getDate("FechaIngreso"));
                 prod.setColor(rs.getString("Color"));
-                prod.setMarca("Marca");
-                prod.setEmpresa("Empresa");
+                prod.setMarca(rs.getString("Marca"));
+                prod.setEmpresa(rs.getString("Empresa"));
                 prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                 prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                 prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
@@ -187,7 +187,7 @@ public class DAO_Producto {
 
                 talla.setTalla(rs.getDouble("Talla"));
                 talla.setGeneroZapato(rs.getString("Genero"));
-                talla.setCategoriaZapato("Categoria");
+                talla.setCategoriaZapato(rs.getString("Categoria"));
 
                 prod.setTallaZapato(talla);
 
@@ -204,8 +204,8 @@ public class DAO_Producto {
                 prod.setCodigoUnico(rs.getString("CodigoUnico"));
                 prod.setFechaIngreso(rs.getDate("FechaIngreso"));
                 prod.setColor(rs.getString("Color"));
-                prod.setMarca("Marca");
-                prod.setEmpresa("Empresa");
+                prod.setMarca(rs.getString("Marca"));
+                prod.setEmpresa(rs.getString("Empresa"));
                 prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                 prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                 prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
@@ -362,11 +362,14 @@ public class DAO_Producto {
         try {
             ps = con.prepareStatement("Select * From productofactura Where IdProducto = ?");
             ps.setInt(1, id);
-            existencia = ps.executeUpdate();
-
-            if (existencia > 0) {
+            if(ps.executeQuery().next()){
                 eliminar = false;
             }
+            //existencia = ps.executeUpdate();
+
+            /*if (existencia > 0) {
+                eliminar = false;
+            }*/
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }

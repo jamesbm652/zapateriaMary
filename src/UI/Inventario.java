@@ -25,13 +25,18 @@ public class Inventario extends javax.swing.JFrame {
     /**
      * Creates new form
      */
-    public Inventario() {
+    public Inventario(ArrayList<BL_Producto> lista) {
         initComponents();
         modelo = (DefaultTableModel) tablaInventario.getModel();
         jpanBusquedaAvanzada.setVisible(false);
         
-        manejador.CargarProductos();
-        listaTotalProductos = manejador.ObtenerListaProductos();
+        if(lista == null){
+            manejador.CargarProductos();
+            listaTotalProductos = manejador.ObtenerListaProductos();
+        }else{
+            listaTotalProductos = lista;
+        }
+        
         cargarProductosEnTabla(listaTotalProductos);
         
         ocultarColumnaID();
@@ -78,13 +83,8 @@ public class Inventario extends javax.swing.JFrame {
         txt_color = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Inventario Zapateria Mary");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                volverAlMenu(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnRegresar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -329,21 +329,12 @@ public class Inventario extends javax.swing.JFrame {
         mp.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void volverAlMenu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_volverAlMenu
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_volverAlMenu
-
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if(tablaInventario.getSelectedRow() >= 0){
-            
-            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
-            DetalleProducto modificar = new DetalleProducto(1,listaTotalProductos,id);
-            modificar.setTitle("Agregar Producto");
-            modificar.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto","Error",JOptionPane.ERROR_MESSAGE);
-        }
+        this.dispose();
+        DetalleProducto modificar = new DetalleProducto(1,listaTotalProductos,-1);
+        modificar.setTitle("Agregar Producto");
+        modificar.setVisible(true);
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -386,12 +377,19 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBusquedaAvanzadaMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        int identificador = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+        if(new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())){
+            listaTotalProductos.remove(identificador);
+            JOptionPane.showMessageDialog(null, "Producto eliminado");
+            cargarProductosEnTabla(listaTotalProductos);
+        }else{
+            JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado\nNo se puede eliminar del inventario","Error",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         if(tablaInventario.getSelectedRow() >= 0){
-            
+            this.dispose();
             int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
             DetalleProducto modificar = new DetalleProducto(2,listaTotalProductos,id);
             modificar.setTitle("Modificar Producto");

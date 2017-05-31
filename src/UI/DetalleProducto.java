@@ -15,7 +15,8 @@ import javax.swing.JOptionPane;
  * @author oscal
  */
 public class DetalleProducto extends javax.swing.JFrame {
-
+    ArrayList<BL_Producto> lista;
+    int id;
     /**
      * Creates new form AgregarProducto
      */
@@ -25,10 +26,14 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     
     
-    public DetalleProducto(int ventana, ArrayList<BL_Producto> lista, int id) {
+    public DetalleProducto(int ventana, ArrayList<BL_Producto> listaProductos, int id) {
         initComponents();
+        lista = listaProductos;
+        this.id = id;
         verificarVentana(ventana);
+        txtCodigo.setEditable(false);
     }
+    
     
     private void verificarVentana(int ventana){
         if(ventana == 1){
@@ -39,16 +44,19 @@ public class DetalleProducto extends javax.swing.JFrame {
             btnAgregar.setVisible(true);
             btnGenerarCodigo.setVisible(true);
         }else if(ventana == 2){
-            habilitarCampos(true);
             labInstruccion.setText("Modifique los datos necesarios:");
             btnAgregar.setVisible(true);
             btnAgregar.setText("Modificar");
             btnGenerarCodigo.setVisible(true);
+            
+            habilitarCampos(true);
+            cargarProducto();
         }else{
-            habilitarCampos(false);
             labInstruccion.setText("Detalles del producto:");
             btnAgregar.setVisible(false);
             btnGenerarCodigo.setVisible(false);
+            habilitarCampos(false);
+            cargarProducto();
         }
     }
     
@@ -56,8 +64,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtColor.setEditable(valor);
         txtDescripcion.setEditable(valor);
         txtFechaIngreso.setEnabled(valor);
-        cmbGenero.setEditable(valor);
-        cmbCategoria.setEditable(valor);
+        cmbGenero.setEnabled(valor);
+        cmbCategoria.setEnabled(valor);
         txtTalla.setEditable(valor);
         txtCantidad.setEnabled(valor);
         txtEmpresa.setEditable(valor);
@@ -65,6 +73,37 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtMarca.setEditable(valor);
         txtPrecioCosto.setEditable(valor);
         txtPrecioVenta.setEditable(valor);
+        rdbBolso.setEnabled(valor);
+        rdbZapato.setEnabled(valor);
+    }
+    
+    private void cargarProducto(){
+        if(lista.get(id).isEsZapato()){
+            rdbZapato.setSelected(true);
+            
+            
+            cmbCategoria.setSelectedItem(lista.get(id).getTallaZapato().getCategoriaZapato());
+            if(lista.get(id).getTallaZapato().getGeneroZapato().equals("1")){
+                cmbGenero.setSelectedItem("M");
+            }else{
+                cmbGenero.setSelectedItem("F");
+            }
+            
+            txtTalla.setText(lista.get(id).getTallaZapato().getTalla() + "");
+        }else{
+            rdbBolso.setSelected(true);
+            
+        }
+        txtCodigo.setText(lista.get(id).getCodigoUnico());
+        txtFechaIngreso.setDate(lista.get(id).getFechaIngreso());
+        txtDescripcion.setText(lista.get(id).getDescripcion());
+        txtCantidad.setValue(lista.get(id).getCantidad());
+        txtMarca.setText(lista.get(id).getMarca());
+        txtColor.setText(lista.get(id).getColor());
+        txtEmpresa.setText(lista.get(id).getEmpresa());
+        txtImpuesto.setText(lista.get(id).getPrecioImpuesto() + "");
+        txtPrecioCosto.setText(lista.get(id).getPrecioCosto() + "");
+        txtPrecioVenta.setText(lista.get(id).getPrecioGanancia() + "");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +150,8 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
+        setMinimumSize(new java.awt.Dimension(590, 430));
+        setPreferredSize(new java.awt.Dimension(590, 430));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
@@ -123,34 +164,34 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel4.setText("Fecha de Ingreso:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 56, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel5.setText("Color:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 176, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setText("Marca:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 176, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel7.setText("Precio a costo:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 248, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel8.setText("Precio de venta:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 248, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel9.setText("Empresa:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 215, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel10.setText("Impuesto:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 215, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
 
         txtDescripcion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 93, 476, -1));
+        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 93, 480, -1));
 
         txtColor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtColor.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +199,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 txtColorActionPerformed(evt);
             }
         });
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 174, 80, -1));
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 80, -1));
 
         txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -166,14 +207,13 @@ public class DetalleProducto extends javax.swing.JFrame {
                 txtPrecioCostoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 246, 109, -1));
+        getContentPane().add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 109, -1));
 
         txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txtCodigo.setEnabled(false);
-        getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 44, 245, 31));
+        getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 44, 220, 31));
 
         txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 174, 130, -1));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 130, -1));
 
         txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -181,7 +221,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 txtPrecioVentaKeyTyped(evt);
             }
         });
-        getContentPane().add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(422, 246, 134, -1));
+        getContentPane().add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 130, -1));
 
         txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtImpuesto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -189,10 +229,10 @@ public class DetalleProducto extends javax.swing.JFrame {
                 txtImpuestoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 213, 80, -1));
+        getContentPane().add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 80, -1));
 
         txtEmpresa.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 213, 346, -1));
+        getContentPane().add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 346, -1));
 
         btnAtras.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         btnAtras.setText("Atrás");
@@ -211,7 +251,7 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 328, -1, 40));
-        getContentPane().add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 44, 155, 31));
+        getContentPane().add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 44, 170, 31));
 
         grup1.add(rdbBolso);
         rdbBolso.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
@@ -242,14 +282,14 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel11.setText("Categoría:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 133, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninos", "Jovenes", "Adulto" }));
-        getContentPane().add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 132, 115, -1));
+        getContentPane().add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 115, -1));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel12.setText("Talla:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 137, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
 
         txtTalla.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtTalla.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -257,10 +297,10 @@ public class DetalleProducto extends javax.swing.JFrame {
                 txtTallaKeyTyped(evt);
             }
         });
-        getContentPane().add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 135, 80, -1));
+        getContentPane().add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
 
         txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 176, 70, -1));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 70, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel13.setText("Cantidad:");
@@ -273,7 +313,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 btnGenerarCodigoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 285, -1, -1));
+        getContentPane().add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel2.setText("Código:");
@@ -287,6 +327,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         this.dispose();
+        new Inventario(lista).setVisible(true);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
@@ -310,49 +351,72 @@ public class DetalleProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtColorActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if(txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("") ||
-            txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("") ||
-                txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")){
-            
-            JOptionPane.showMessageDialog(null, "Debe completar los datos","ERROR",JOptionPane.ERROR_MESSAGE);
-        }else{
-            if(!rdbZapato.isSelected() && !rdbBolso.isSelected()){
-                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto","ERROR",JOptionPane.ERROR_MESSAGE);
+        
+            if(txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("") ||
+                txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("") ||
+                    txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")){
+
+                JOptionPane.showMessageDialog(null, "Debe completar los datos","ERROR",JOptionPane.ERROR_MESSAGE);
             }else{
-                BL_Producto producto = new BL_Producto();
-                producto.setCodigoUnico(txtCodigo.getText());
-                producto.setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getYear(), txtFechaIngreso.getDate().getMonth(), txtFechaIngreso.getDate().getDay()));
-                producto.setColor(txtColor.getText().trim());
-                producto.setMarca(txtMarca.getText().trim());
-                producto.setEmpresa(txtEmpresa.getText().trim());
-                producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
-                producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
-                producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
-                producto.setDescripcion(txtDescripcion.getText().trim());
-                producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
-                producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
-                if(rdbZapato.isSelected()){
-                    producto.setEsZapato(true);
+                if(!rdbZapato.isSelected() && !rdbBolso.isSelected()){
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto","ERROR",JOptionPane.ERROR_MESSAGE);
                 }else{
-                    producto.setEsZapato(false);
-                }
-                producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(),cmbCategoria.getSelectedItem().toString(),Double.parseDouble(txtTalla.getText().toString())));
-            
-                if(producto.insertarZapato()){
-                    txtCodigo.setText("");
-                    txtDescripcion.setText("");
-                    txtFechaIngreso.setDate(null);
-                    txtTalla.setText("");
-                    txtCantidad.setValue(1);
-                    txtMarca.setText("");
-                    txtColor.setText("");
-                    txtEmpresa.setText("");
-                    txtImpuesto.setText("");
-                    txtPrecioCosto.setText("");
-                    txtPrecioVenta.setText("");
-                    JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    BL_Producto producto = new BL_Producto();
+                    producto.setCodigoUnico(txtCodigo.getText());
+                    producto.setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getYear(), txtFechaIngreso.getDate().getMonth(), txtFechaIngreso.getDate().getDay()));
+                    producto.setColor(txtColor.getText().trim());
+                    producto.setMarca(txtMarca.getText().trim());
+                    producto.setEmpresa(txtEmpresa.getText().trim());
+                    producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
+                    producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
+                    producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
+                    producto.setDescripcion(txtDescripcion.getText().trim());
+                    producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
+                    producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
+                    if(rdbZapato.isSelected()){
+                        producto.setEsZapato(true);
+                    }else{
+                        producto.setEsZapato(false);
+                    }
+                    producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(),cmbCategoria.getSelectedItem().toString(),Double.parseDouble(txtTalla.getText().toString())));
+
+                    if(btnAgregar.getText().equals("Agregar")){
+                        if(producto.insertarProducto()){
+                            txtCodigo.setText("");
+                            txtDescripcion.setText("");
+                            txtFechaIngreso.setDate(null);
+                            txtTalla.setText("");
+                            txtCantidad.setValue(1);
+                            txtMarca.setText("");
+                            txtColor.setText("");
+                            txtEmpresa.setText("");
+                            txtImpuesto.setText("");
+                            txtPrecioCosto.setText("");
+                            txtPrecioVenta.setText("");
+                            JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            lista.add(producto);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Error al insertar el producto","Error",JOptionPane.ERROR_MESSAGE);
+                        }
                 }else{
-                    JOptionPane.showMessageDialog(null, "Error al insertar el producto","Error",JOptionPane.ERROR_MESSAGE);
+                    if(producto.modificarProducto()){
+                        lista.get(id).setCodigoUnico(txtCodigo.getText());
+                        lista.get(id).setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getYear(), txtFechaIngreso.getDate().getMonth(), txtFechaIngreso.getDate().getDay()));
+                        lista.get(id).setColor(txtColor.getText().trim());
+                        lista.get(id).setMarca(txtMarca.getText().trim());
+                        lista.get(id).setEmpresa(txtEmpresa.getText().trim());
+                        lista.get(id).setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
+                        lista.get(id).setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
+                        lista.get(id).setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
+                        lista.get(id).setDescripcion(txtDescripcion.getText().trim());
+                        lista.get(id).setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
+                        lista.get(id).setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
+
+                        JOptionPane.showMessageDialog(null, "Datos modificados","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Error al modificar el producto","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                 }
             }
         }
