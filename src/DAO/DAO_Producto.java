@@ -16,8 +16,10 @@ import java.util.logging.Logger;
 import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
 import BL.BL_TallaZapato;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -47,6 +49,9 @@ public class DAO_Producto {
     }
 
     public boolean insertarProducto(BL.BL_Producto producto) {
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = formato.format(producto.getFechaIngreso());
+
         conexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -55,10 +60,10 @@ public class DAO_Producto {
         if (!producto.isEsZapato()) {
 
             try {
-                ps = con.prepareStatement("Insert Into Producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 ps.setString(1, producto.getCodigoUnico());
-                ps.setString(2, producto.getFechaIngreso().toString());
+                ps.setString(2, fecha);
                 ps.setString(3, producto.getColor());
                 ps.setString(4, producto.getMarca());
                 ps.setString(5, producto.getEmpresa());
@@ -78,9 +83,9 @@ public class DAO_Producto {
             try {
                 int idProductoInsertado = 0;
 
-                ps = con.prepareStatement("Insert Into Producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ps.RETURN_GENERATED_KEYS);
+                ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ps.RETURN_GENERATED_KEYS);
                 ps.setString(1, producto.getCodigoUnico());
-                ps.setString(2, producto.getFechaIngreso().toString());
+                ps.setString(2, fecha);
                 ps.setString(3, producto.getColor());
                 ps.setString(4, producto.getMarca());
                 ps.setString(5, producto.getEmpresa());
@@ -142,7 +147,7 @@ public class DAO_Producto {
             if (cantidadProductos > 0) {
                 rs = st.executeQuery("Select max(IdProducto) From producto");
                 while (rs.next()) {
-                    siguienteCodigo = rs.getInt(1);
+                    siguienteCodigo = rs.getInt(1) + 1;
                 }
             }
         } catch (SQLException ex) {
@@ -355,7 +360,6 @@ public class DAO_Producto {
     public boolean validarEliminacion(int id) {
         boolean eliminar = true;
         conexion();
-        int existencia = 0;
 
         PreparedStatement ps = null;
 
@@ -377,6 +381,9 @@ public class DAO_Producto {
     public boolean modificarProducto(BL_Producto prod) {
         boolean modificado = false;
         int insertado = 0;
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = formato.format(prod.getFechaIngreso());
+
         conexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -387,7 +394,7 @@ public class DAO_Producto {
                         + " Color = ?, Marca = ?, Empresa = ?, PrecioCosto = ?, PrecioImpuesto = ?,"
                         + " PrecioGanancia = ?, Descripcion = ?, Cantidad = ?, EsZapato = 1 Where IdProducto = ?");
                 ps.setString(1, prod.getCodigoUnico());
-                ps.setDate(2, prod.getFechaIngreso());
+                ps.setString(2, fecha);
                 ps.setString(3, prod.getColor());
                 ps.setString(4, prod.getMarca());
                 ps.setString(5, prod.getEmpresa());
@@ -418,7 +425,7 @@ public class DAO_Producto {
                         + " Color = ?, Marca = ?, Empresa = ?, PrecioCosto = ?, PrecioImpuesto = ?,"
                         + " PrecioGanancia = ?, Descripcion = ?, Cantidad = ?, EsZapato = 0 Where IdProducto = ?");
                 ps.setString(1, prod.getCodigoUnico());
-                ps.setDate(2, prod.getFechaIngreso());
+                ps.setString(2, fecha);
                 ps.setString(3, prod.getColor());
                 ps.setString(4, prod.getMarca());
                 ps.setString(5, prod.getEmpresa());
