@@ -353,10 +353,12 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        if (txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("")
-                || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
-                || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")) {
+        if (txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
+            || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")
+            || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
 
+            
+            
             JOptionPane.showMessageDialog(null, "Debe completar los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             if (!rdbZapato.isSelected() && !rdbBolso.isSelected()) {
@@ -377,10 +379,11 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
                 if (rdbZapato.isSelected()) {
                     producto.setEsZapato(true);
+                    producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(), cmbCategoria.getSelectedItem().toString(), Double.parseDouble(txtTalla.getText().toString())));
                 } else {
                     producto.setEsZapato(false);
                 }
-                producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(), cmbCategoria.getSelectedItem().toString(), Double.parseDouble(txtTalla.getText().toString())));
+                
 
                 if (btnAgregar.getText().equals("Agregar")) {
                     if (producto.insertarProducto()) {

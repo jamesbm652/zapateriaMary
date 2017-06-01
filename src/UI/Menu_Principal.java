@@ -216,7 +216,8 @@ public class Menu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ReporteVentasKeyTyped
 
     private void labSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseClicked
-        JOptionPane.showMessageDialog(null, "Aqui debe llevarlo a la ventana mantenUsuarios");
+        this.dispose();
+        new AdministrarUsuarios().setVisible(true);
     }//GEN-LAST:event_labSettingsMouseClicked
 
     private void labSettingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseEntered
