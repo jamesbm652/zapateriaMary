@@ -5,12 +5,15 @@
  */
 package DAO;
 
+import BL.BL_ManejadorProducto;
+import BL.BL_ManejadorUsuario;
 import BL.BL_Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,4 +69,39 @@ public class DAO_Usuario {
         cerrarConexion();
         return logueo;
     }
+    
+    public ArrayList<BL_Usuario> cargarUsuarios(){
+        conexion();
+
+        Statement st = null;
+        ResultSet rs = null;
+        BL_ManejadorUsuario manejador = new BL_ManejadorUsuario();
+        
+        try{
+            st = this.con.createStatement();
+            rs = st.executeQuery("SELECT U.IdUsuario,U.NombreCompleto,U.NombreUsuario,U.Contrasena,U.Administrador FROM usuario U");
+            
+            while(rs.next()){
+                BL_Usuario usuario = new BL_Usuario();
+                
+                usuario.setIdUsuario(rs.getInt("IdUsuario"));
+                usuario.setNombreCompleto(rs.getString("NombreCompleto"));
+                usuario.setNombreUsuario(rs.getString("NombreUsuario"));
+                usuario.setContrasena(rs.getString("Contrasena"));
+                if(rs.getInt("Administrador") == 1){
+                    usuario.setAdministrador(true);
+                }else{
+                    usuario.setAdministrador(false);
+                }
+                
+                manejador.Agregar(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        cerrarConexion();
+        return manejador.ObtenerListaUsuarios();
+    }
+    
 }
