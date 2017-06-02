@@ -5,17 +5,34 @@
  */
 package UI;
 
+import BL.BL_ManejadorProducto;
+import BL.BL_ManejadorUsuario;
+import BL.BL_Producto;
+import BL.BL_Usuario;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author oscal
  */
 public class AdministrarUsuarios extends javax.swing.JFrame {
-
+    ArrayList<BL_Usuario> listaTotalUsuarios = new ArrayList<BL_Usuario>();
+    BL_ManejadorUsuario manejador = new BL_ManejadorUsuario();
+    DefaultTableModel modelo;
     /**
      * Creates new form AdministrarUsuarios
      */
     public AdministrarUsuarios() {
         initComponents();
+        modelo = (DefaultTableModel) tablaUsuarios.getModel();
+        
+        manejador.CargarUsuarios();
+        listaTotalUsuarios = manejador.ObtenerListaUsuarios();
+        cargarProductosEnTabla(listaTotalUsuarios);
         ocultarColumnaID();
         btnAccion.setVisible(false);
     }
@@ -57,6 +74,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jLabel1.setText("Buscar:");
 
         txtBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel2.setText("Usuarios registrados en el sistema:");
@@ -88,6 +110,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaUsuariosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tablaUsuarios);
@@ -257,34 +284,99 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAccionActionPerformed
-        if(cmbAccion.getSelectedIndex() == 0){
-            labTituloAccion.setText("Información del usuario");
-            labMensajeAlUsuario.setText("");
-            habilitarCampos(false);
-            btnAccion.setVisible(false);
-        }else if(cmbAccion.getSelectedIndex() == 1){
-            labTituloAccion.setText("Agregar usuario al sistema");
-            labMensajeAlUsuario.setText("Complete los siguientes datos:");
-            habilitarCampos(true);
-            btnAccion.setVisible(true);
-        }else if(cmbAccion.getSelectedIndex() == 2){
-            labTituloAccion.setText("Modificar usuario seleccionado");
-            labMensajeAlUsuario.setText("Modifique los datos del usuario:");
-            habilitarCampos(true);
-            btnAccion.setVisible(true);
+        if(cmbAccion.getSelectedIndex() != 1){
+            if(tablaUsuarios.getSelectedRow() >= 0){
+                validarAccion();
+            }else{
+                cmbAccion.setSelectedIndex(0);
+                validarAccion();
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un cliente de la tabla");
+            }
         }else{
-            labTituloAccion.setText("Eliminar usuario del sistema");
-            labMensajeAlUsuario.setText("");
-            habilitarCampos(false);
-            btnAccion.setVisible(true);
+            validarAccion();
         }
     }//GEN-LAST:event_cmbAccionActionPerformed
 
+    private void validarAccion(){
+        if(cmbAccion.getSelectedIndex() == 0){
+                labTituloAccion.setText("Información del usuario");
+                labMensajeAlUsuario.setText("");
+                habilitarCampos(false);
+                btnAccion.setVisible(false);
+            }else if(cmbAccion.getSelectedIndex() == 1){
+                labTituloAccion.setText("Agregar usuario al sistema");
+                labMensajeAlUsuario.setText("Complete los siguientes datos:");
+                habilitarCampos(true);
+                btnAccion.setVisible(true);
+                btnAccion.setText("Agregar");
+                
+                txtNombreCompleto.setText("");
+                txtNombreUsuario.setText("");
+                txtContrasena.setText("");
+                checkAdministrador.setSelected(false);
+                
+                tablaUsuarios.clearSelection();
+            }else if(cmbAccion.getSelectedIndex() == 2){
+                labTituloAccion.setText("Modificar usuario seleccionado");
+                labMensajeAlUsuario.setText("Modifique los datos del usuario:");
+                habilitarCampos(true);
+                btnAccion.setVisible(true);
+                btnAccion.setText("Modificar");
+            }else{
+                labTituloAccion.setText("Eliminar usuario del sistema");
+                labMensajeAlUsuario.setText("");
+                habilitarCampos(false);
+                btnAccion.setVisible(true);
+                btnAccion.setText("Eliminar");
+            }
+    }
+    private void cargarUsuarioSeleccionado(){
+        if(cmbAccion.getSelectedIndex() != 1){
+            txtNombreCompleto.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 0).toString());
+            txtNombreUsuario.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+            txtContrasena.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 2).toString());
+
+            if(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 3).toString().equals("true")){
+                checkAdministrador.setSelected(true);
+            }else{
+                checkAdministrador.setSelected(false);
+            }
+        }
+    }
+    
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
         new Menu_Principal().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        filtro(txtBuscar.getText());
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
+        if(tablaUsuarios.getSelectedRow() >= 0){
+            validarAccion();
+            cargarUsuarioSeleccionado();
+        }
+    }//GEN-LAST:event_tablaUsuariosMouseClicked
+
+    private void cargarProductosEnTabla(ArrayList<BL_Usuario> listaParaMostrar) {
+
+        limpiarTabla(modelo);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        for (int i = 0; i < listaParaMostrar.size(); i++) {
+            fila[0] = listaParaMostrar.get(i).getNombreCompleto();
+            fila[1] = listaParaMostrar.get(i).getNombreUsuario();
+            fila[2] = listaParaMostrar.get(i).getContrasena();
+            fila[3] = listaParaMostrar.get(i).isAdministrador();
+            fila[4] = i;
+
+            modelo.addRow(fila);
+        }
+        listaTotalUsuarios = listaParaMostrar;
+    }
+    
     private void habilitarCampos(boolean valor){
         txtNombreCompleto.setEditable(valor);
         txtNombreUsuario.setEditable(valor);
@@ -292,12 +384,25 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         checkAdministrador.setEnabled(valor);
     }
 
+    private void limpiarTabla(DefaultTableModel modelo) {
+        int filas = tablaUsuarios.getRowCount();
+        for (int i = 0; filas > i; i++) {
+            modelo.removeRow(0);
+        }
+    }
+    
     private void ocultarColumnaID() {
         tablaUsuarios.getColumn("HiddenID").setMaxWidth(0);
         tablaUsuarios.getColumn("HiddenID").setMinWidth(0);
         tablaUsuarios.getColumn("HiddenID").setPreferredWidth(0);
         tablaUsuarios.getColumn("HiddenID").setWidth(0);
         tablaUsuarios.getColumn("HiddenID").setResizable(false);
+    }
+    
+    private void filtro(String filtro) {
+        TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
+        tablaUsuarios.setRowSorter(trsFiltro);
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccion;
