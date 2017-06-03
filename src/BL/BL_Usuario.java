@@ -19,8 +19,7 @@ public class BL_Usuario {
     public BL_Usuario() {
     }
 
-    public BL_Usuario(int idUsuario, String nombreCompleto, String nombreUsuario, String contrasena, boolean administrador) {
-        this.idUsuario = idUsuario;
+    public BL_Usuario( String nombreCompleto, String nombreUsuario, String contrasena, boolean administrador) {
         this.nombreCompleto = nombreCompleto;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
@@ -76,5 +75,17 @@ public class BL_Usuario {
         return logueo;
     }
     
+    
+    public Boolean agregarUsuario(){
+        return new DAO_Usuario().agregarUsuario(this);
+    }
+    
+    public Boolean modificarUsuario(){
+        return new DAO_Usuario().modificarUsuario(this);
+    }
+    
+    public Boolean eliminarUsuario(){
+        return new DAO_Usuario().eliminarUsuario(this.idUsuario);
+    }
     
 }
