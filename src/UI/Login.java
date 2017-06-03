@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        lab.setFocusable(true);
+        jPanel2.setFocusable(true);
     }
 
     /**
@@ -37,30 +37,24 @@ public class Login extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         txtContrasena = new javax.swing.JPasswordField();
         txtNombreUsuario = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        lab = new javax.swing.JLabel();
-        labImagen = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pantalla Inicial");
         setBackground(new java.awt.Color(121, 178, 178));
         setForeground(new java.awt.Color(121, 178, 178));
-        setMinimumSize(new java.awt.Dimension(540, 380));
-        setPreferredSize(new java.awt.Dimension(540, 380));
+        setMinimumSize(new java.awt.Dimension(400, 350));
+        setPreferredSize(new java.awt.Dimension(400, 350));
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(121, 178, 178));
-        jPanel2.setMinimumSize(new java.awt.Dimension(520, 380));
-        jPanel2.setPreferredSize(new java.awt.Dimension(520, 380));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(175, 201, 201));
+        jPanel2.setMinimumSize(new java.awt.Dimension(400, 350));
+        jPanel2.setPreferredSize(new java.awt.Dimension(400, 350));
 
-        btnIngresar.setBackground(new java.awt.Color(102, 102, 102));
+        btnIngresar.setBackground(new java.awt.Color(163, 163, 163));
         btnIngresar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        btnIngresar.setForeground(new java.awt.Color(51, 51, 51));
+        btnIngresar.setForeground(new java.awt.Color(102, 102, 102));
         btnIngresar.setText("Ingresar");
         btnIngresar.setBorder(null);
         btnIngresar.setBorderPainted(false);
@@ -74,12 +68,11 @@ public class Login extends javax.swing.JFrame {
                 btnIngresarKeyTyped(evt);
             }
         });
-        jPanel2.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 80, 40));
 
-        txtContrasena.setBackground(new java.awt.Color(121, 178, 178));
+        txtContrasena.setBackground(new java.awt.Color(175, 201, 201));
         txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtContrasena.setForeground(new java.awt.Color(102, 102, 102));
-        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtContrasena.setText("********");
         txtContrasena.setBorder(null);
         txtContrasena.setCaretColor(new java.awt.Color(129, 129, 129));
@@ -96,12 +89,11 @@ public class Login extends javax.swing.JFrame {
                 txtContrasenaKeyTyped(evt);
             }
         });
-        jPanel2.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 180, -1));
 
-        txtNombreUsuario.setBackground(new java.awt.Color(121, 178, 178));
+        txtNombreUsuario.setBackground(new java.awt.Color(175, 201, 201));
         txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtNombreUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtNombreUsuario.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtNombreUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombreUsuario.setText("Nombre de Usuario");
         txtNombreUsuario.setBorder(null);
         txtNombreUsuario.setSelectedTextColor(new java.awt.Color(102, 102, 102));
@@ -128,40 +120,45 @@ public class Login extends javax.swing.JFrame {
                 txtNombreUsuarioKeyTyped(evt);
             }
         });
-        jPanel2.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 116, 180, 20));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Zapatería");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 220, -1));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(java.awt.Color.darkGray);
         jSeparator1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 138, 180, 10));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 180, 10));
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Contraseña:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
-
-        lab.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        lab.setForeground(new java.awt.Color(51, 51, 51));
-        lab.setText("Nombre de usuario:");
-        jPanel2.add(lab, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
-
-        labImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
-        jPanel2.add(labImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 110, 80));
-
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Mary");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(109, 109, 109))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,7 +168,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, Short.MAX_VALUE)
         );
 
         pack();
@@ -284,14 +281,9 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lab;
-    private javax.swing.JLabel labImagen;
     private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
