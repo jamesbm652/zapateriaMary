@@ -8,6 +8,7 @@ package DAO;
 import BL.BL_ManejadorProducto;
 import BL.BL_ManejadorUsuario;
 import BL.BL_Usuario;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -102,6 +103,57 @@ public class DAO_Usuario {
         
         cerrarConexion();
         return manejador.ObtenerListaUsuarios();
+    }
+    
+    public Boolean agregarUsuario(BL_Usuario usuario){
+        conexion();
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int insertado = 0;
+        
+        try {
+            
+            ps = con.prepareStatement("SELECT * FROM usuario WHERE NombreUsuario = ?");
+            ps.setString(1, usuario.getNombreUsuario());
+            
+            if((ps.executeQuery().next())){
+                return false;
+            }
+            
+            ps = con.prepareStatement("INSERT INTO usuario (NombreCompleto,NombreUsuario,Contrasena,Administrador) VALUES(?,?,?,?)",ps.RETURN_GENERATED_KEYS);
+            ps.setString(1, usuario.getNombreCompleto());
+            ps.setString(2, usuario.getNombreUsuario());
+            ps.setString(3, usuario.getContrasena());
+            if(usuario.isAdministrador()){
+                ps.setInt(4,1);
+            }else{
+                ps.setInt(4,0);
+            }
+        
+            insertado = ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            
+            if(rs.next()){
+                usuario.setIdUsuario(rs.getInt(1));
+            }
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(insertado > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public Boolean modificarUsuario(BL_Usuario usuarioModificado){
+        return true;
+    }
+    
+    public Boolean eliminarUsuario(int id){
+        return true;
     }
     
 }

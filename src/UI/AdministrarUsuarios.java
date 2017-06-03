@@ -170,6 +170,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
 
         btnAccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         btnAccion.setText("Agregar");
+        btnAccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -359,6 +364,45 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             cargarUsuarioSeleccionado();
         }
     }//GEN-LAST:event_tablaUsuariosMouseClicked
+
+    private void btnAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionActionPerformed
+        if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
+        }else{
+            BL_Usuario usuario = new BL_Usuario(txtNombreCompleto.getText().trim(),txtNombreUsuario.getText().trim(),txtContrasena.getText().trim(),checkAdministrador.isSelected());
+            switch(btnAccion.getText()){
+                case "Agregar":
+                    if(usuario.agregarUsuario()){
+                        JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE);
+                        manejador.Agregar(usuario);
+                        listaTotalUsuarios = manejador.ObtenerListaUsuarios();
+                        cargarProductosEnTabla(listaTotalUsuarios);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "Modificar":
+                    usuario.setIdUsuario(listaTotalUsuarios.get(Integer.parseInt(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 4).toString())).getIdUsuario());
+                    //codigo de modificar
+                    if(usuario.modificarUsuario()){
+                        JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "Eliminar":
+                    usuario.setIdUsuario(listaTotalUsuarios.get(Integer.parseInt(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 4).toString())).getIdUsuario());
+                    //eliminar
+                    if(usuario.eliminarUsuario()){
+                        JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Error al eliminar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                    
+            }
+        }
+    }//GEN-LAST:event_btnAccionActionPerformed
 
     private void cargarProductosEnTabla(ArrayList<BL_Usuario> listaParaMostrar) {
 
