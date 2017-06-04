@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 public class DAO_Usuario {
 
     Connection con = null;
-
+    //Prueba
+    
     public DAO_Usuario() {
     }
 
