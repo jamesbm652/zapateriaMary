@@ -70,7 +70,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtContrasena.setBackground(new java.awt.Color(175, 201, 201));
-        txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 21)); // NOI18N
         txtContrasena.setForeground(new java.awt.Color(102, 102, 102));
         txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtContrasena.setText("********");
@@ -91,7 +91,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtNombreUsuario.setBackground(new java.awt.Color(175, 201, 201));
-        txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 21)); // NOI18N
         txtNombreUsuario.setForeground(new java.awt.Color(102, 102, 102));
         txtNombreUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombreUsuario.setText("Nombre de Usuario");
