@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -67,7 +68,8 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         btnAccion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mantenimiento de Usuarios");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -236,12 +238,17 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAccionActionPerformed
+        if(btnAccion.getText().equals("Agregar")){
+            tablaUsuarios.getSelectionModel().setSelectionInterval(0, 0);
+            validarAccion();
+            cargarUsuarioSeleccionado();
+        }
+        
         if(cmbAccion.getSelectedIndex() != 1){
             if(tablaUsuarios.getSelectedRow() >= 0){
                 validarAccion();
+                cargarUsuarioSeleccionado();
             }else{
-                cmbAccion.setSelectedIndex(0);
-                validarAccion();
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un cliente de la tabla");
             }
         }else{
