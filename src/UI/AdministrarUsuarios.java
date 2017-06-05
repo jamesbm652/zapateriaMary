@@ -5,9 +5,7 @@
  */
 package UI;
 
-import BL.BL_ManejadorProducto;
 import BL.BL_ManejadorUsuario;
-import BL.BL_Producto;
 import BL.BL_Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -32,7 +30,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         
         manejador.CargarUsuarios();
         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
-        cargarProductosEnTabla(listaTotalUsuarios);
+        cargarUsuariosEnTabla(listaTotalUsuarios);
         ocultarColumnaID();
         btnAccion.setVisible(false);
     }
@@ -315,6 +313,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionActionPerformed
+        int identificador;
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
         }else{
@@ -329,25 +328,31 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                         txtContrasena.setText("");
                         checkAdministrador.setSelected(false);
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
-                        cargarProductosEnTabla(listaTotalUsuarios);
+                        cargarUsuariosEnTabla(listaTotalUsuarios);
                     }else{
                         JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     break;
                 case "Modificar":
+                    identificador = Integer.parseInt(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 4).toString());
                     usuario.setIdUsuario(listaTotalUsuarios.get(Integer.parseInt(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 4).toString())).getIdUsuario());
-                    //codigo de modificar
                     if(usuario.modificarUsuario()){
                         JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                        manejador.Modificar(identificador, usuario);
+                        listaTotalUsuarios = manejador.ObtenerListaUsuarios();
+                        cargarUsuariosEnTabla(listaTotalUsuarios);
                     }else{
                         JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     break;
                 case "Eliminar":
+                    identificador = Integer.parseInt(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 4).toString());
                     usuario.setIdUsuario(listaTotalUsuarios.get(Integer.parseInt(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 4).toString())).getIdUsuario());
-                    //eliminar
                     if(usuario.eliminarUsuario()){
                         JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                        manejador.Eliminar(identificador);
+                        listaTotalUsuarios = manejador.ObtenerListaUsuarios();
+                        cargarUsuariosEnTabla(listaTotalUsuarios);
                     }else{
                         JOptionPane.showMessageDialog(null, "Error al eliminar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
                     }
@@ -357,7 +362,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAccionActionPerformed
 
-    private void cargarProductosEnTabla(ArrayList<BL_Usuario> listaParaMostrar) {
+    private void cargarUsuariosEnTabla(ArrayList<BL_Usuario> listaParaMostrar) {
 
         limpiarTabla(modelo);
         Object[] fila = new Object[modelo.getColumnCount()];
