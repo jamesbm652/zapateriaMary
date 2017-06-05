@@ -148,7 +148,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
         setMinimumSize(new java.awt.Dimension(590, 430));
         setPreferredSize(new java.awt.Dimension(590, 430));
@@ -364,8 +364,9 @@ public class DetalleProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        this.dispose();
+
         new Inventario(lista).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
