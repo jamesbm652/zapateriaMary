@@ -5,12 +5,13 @@
  */
 package DAO;
 
-import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
+import com.mysql.jdbc.AssertionFailedException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import junit.framework.AssertionFailedError;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,12 +44,13 @@ public class DAO_ProductoTest {
     public void tearDown() {
         
     }
+    
 
     /**
      * Test of conexion method, of class DAO_Producto.
      */
-    @Test(expected = SQLException.class)
-    public void testConexion() throws SQLException {
+    @Test
+    public void testConexion() {
         System.out.println("Método conexion");
         try{
             DAO_Producto instance = new DAO_Producto();
@@ -59,13 +61,14 @@ public class DAO_ProductoTest {
         }catch(AssertionError e){
             fail("Assertion error");
         }
+        
     }
 
     /**
      * Test of cerrarConexion method, of class DAO_Producto.
      */
-    @Test(expected=SQLException.class)
-    public void testCerrarConexion() throws SQLException{
+    @Test
+    public void testCerrarConexion() {
         System.out.println("Método Cerrar Conexion");
          try{
             DAO_Producto instance = new DAO_Producto();
@@ -105,9 +108,9 @@ public class DAO_ProductoTest {
         DAO_Producto instance = new DAO_Producto();
         int expResult = 1;
         int result = instance.obtenerSiguienteCodigo();
-        assertEquals(expResult, result);
+        assertNotEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        if(result != expResult){
+        if(result == expResult){
             fail("Error en obtener siguiente código");
         }
     }
@@ -122,10 +125,10 @@ public class DAO_ProductoTest {
         DAO_Producto instance = new DAO_Producto();
         ArrayList<BL_Producto> expResult = null;
         ArrayList<BL_Producto> result = instance.cargarTodosProductos();
-        assertEquals(expResult, result);
+        assertNotEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        if(result != expResult){
-            fail("The test case is a prototype.");
+        if(result == expResult){
+            fail("Error en cargar productos, viene vacio el manejador");
         }
     }
 
@@ -147,10 +150,10 @@ public class DAO_ProductoTest {
         DAO_Producto instance = new DAO_Producto();
         ArrayList<BL_Producto> expResult = null;
         ArrayList<BL_Producto> result = instance.cargarProductosPorFiltro(genero, color, tallaZapato, marca, empresa, precio, fecha, categoria, tipoProducto);
-        assertEquals(expResult, result);
+        assertNotEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        if(result != expResult)
-        fail("The test case is a prototype.");
+        if(result == expResult)
+        fail("Error en cargar productos por filtro, existe un producto vacio");
     }
 
     /**
@@ -191,14 +194,15 @@ public class DAO_ProductoTest {
     @Test
     public void testModificarProducto() {
         System.out.println("Método Modificar Producto");
-        BL_Producto prod = null;
+        BL_Producto prod = new BL_Producto();
+        prod.setFechaIngreso(Date.valueOf(LocalDate.MAX));
         DAO_Producto instance = new DAO_Producto();
         boolean expResult = false;
         boolean result = instance.modificarProducto(prod);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         if(expResult != result)
-        fail("The test case is a prototype.");
+        fail("Error");
     }
     
 }
