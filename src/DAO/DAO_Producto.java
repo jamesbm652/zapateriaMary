@@ -334,7 +334,7 @@ public class DAO_Producto {
 
     public boolean eliminarProducto(int id) {
 
-        if (validarEliminacion(id)) {
+        if (!validarEliminacion(id)) {
             conexion();
 
             PreparedStatement ps = null;
@@ -358,7 +358,7 @@ public class DAO_Producto {
     }
 
     public boolean validarEliminacion(int id) {
-        boolean eliminar = true;
+        boolean eliminar = false;
         conexion();
 
         PreparedStatement ps = null;
@@ -367,7 +367,7 @@ public class DAO_Producto {
             ps = con.prepareStatement("Select * From productofactura Where IdProducto = ?");
             ps.setInt(1, id);
             if (ps.executeQuery().next()) {
-                eliminar = false;
+                eliminar = true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
