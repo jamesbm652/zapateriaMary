@@ -144,7 +144,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         });
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 367, 70, 40));
 
-        cmbAccion.setBackground(new java.awt.Color(237, 237, 237));
         cmbAccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         cmbAccion.setForeground(new java.awt.Color(102, 102, 102));
         cmbAccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mostrar", "Agregar", "Modificar", "Eliminar" }));
@@ -324,6 +323,10 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     if(usuario.agregarUsuario()){
                         JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE);
                         manejador.Agregar(usuario);
+                        txtNombreCompleto.setText("");
+                        txtNombreUsuario.setText("");
+                        txtContrasena.setText("");
+                        checkAdministrador.setSelected(false);
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                         cargarUsuariosEnTabla(listaTotalUsuarios);
                     }else{
@@ -368,7 +371,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             fila[0] = listaParaMostrar.get(i).getNombreCompleto();
             fila[1] = listaParaMostrar.get(i).getNombreUsuario();
             fila[2] = listaParaMostrar.get(i).getContrasena();
-            fila[3] = listaParaMostrar.get(i).isAdministrador();
+            if(listaParaMostrar.get(i).isAdministrador()){
+                fila[3] = "Si";
+            }else{
+                fila[3] = "No";
+            }
             fila[4] = i;
 
             modelo.addRow(fila);
