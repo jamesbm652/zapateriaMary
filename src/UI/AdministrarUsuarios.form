@@ -155,7 +155,7 @@
                 <Column editable="false" title="Nombre" type="java.lang.Object"/>
                 <Column editable="false" title="Nombre Usuario" type="java.lang.Object"/>
                 <Column editable="false" title="Contrase&#xf1;a" type="java.lang.Object"/>
-                <Column editable="false" title="Admin" type="java.lang.Object"/>
+                <Column editable="false" title="Administrador" type="java.lang.Object"/>
                 <Column editable="false" title="HiddenID" type="java.lang.Object"/>
               </Table>
             </Property>

@@ -69,7 +69,6 @@ public class Inventario extends javax.swing.JFrame {
         btnVerDetalle = new javax.swing.JButton();
         labBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         btnBusquedaAvanzada = new javax.swing.JButton();
         jpanBusquedaAvanzada = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -90,6 +89,7 @@ public class Inventario extends javax.swing.JFrame {
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -193,19 +193,6 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 24, 312, -1));
-
-        btnBuscar.setBackground(new java.awt.Color(177, 177, 177));
-        btnBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(102, 102, 102));
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
-        btnBuscar.setBorderPainted(false);
-        btnBuscar.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 6, 44, 40));
 
         btnBusquedaAvanzada.setBackground(new java.awt.Color(177, 177, 177));
         btnBusquedaAvanzada.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
@@ -324,7 +311,20 @@ public class Inventario extends javax.swing.JFrame {
         jLabel3.setText("Color:");
         jpanBusquedaAvanzada.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(497, 54, -1, -1));
 
-        getContentPane().add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 710, 120));
+        btnBuscar.setBackground(new java.awt.Color(177, 177, 177));
+        btnBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(102, 102, 102));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jpanBusquedaAvanzada.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 44, 40));
+
+        getContentPane().add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 860, 120));
 
         jPanel1.setBackground(new java.awt.Color(175, 201, 201));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 480));
