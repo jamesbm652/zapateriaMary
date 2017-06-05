@@ -7,6 +7,7 @@ package UI;
 
 import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -375,8 +376,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-        Menu_Principal mp = new Menu_Principal();
-        mp.setVisible(true);
+        new Menu_Principal().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
