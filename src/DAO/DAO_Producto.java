@@ -58,7 +58,6 @@ public class DAO_Producto {
         int insertado = 0;
 
         if (!producto.isEsZapato()) {
-
             try {
                 ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
