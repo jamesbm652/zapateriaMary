@@ -23,8 +23,12 @@ public class BL_ManejadorUsuario {
         listaUsuarios.add(usuario);
     }
 
-    public void Eliminar(BL_Producto producto) {
-        listaUsuarios.remove(producto);
+    public void Eliminar(int identificador) {
+        listaUsuarios.remove(identificador);
+    }
+    
+    public void Modificar(int identificador, BL_Usuario usuario){
+        listaUsuarios.set(identificador, usuario);
     }
     
     public void CargarUsuarios(){

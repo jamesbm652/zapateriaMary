@@ -34,7 +34,7 @@ public class DAO_Producto {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,7 +58,6 @@ public class DAO_Producto {
         int insertado = 0;
 
         if (!producto.isEsZapato()) {
-
             try {
                 ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -198,7 +197,6 @@ public class DAO_Producto {
 
                 manejador.Agregar(prod);
             }
-
             rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato FROM zapateriamary.producto P Where P.EsZapato = 0");
 
@@ -308,21 +306,23 @@ public class DAO_Producto {
                     manejador.Agregar(prod);
                 }
             } else {
-                BL_Producto prod = new BL_Producto();
+                while (rs.next()) {
+                    BL_Producto prod = new BL_Producto();
 
-                prod.setIdProducto(rs.getInt("IdProducto"));
-                prod.setCodigoUnico(rs.getString("CodigoUnico"));
-                prod.setFechaIngreso(rs.getDate("FechaIngreso"));
-                prod.setColor(rs.getString("Color"));
-                prod.setMarca(rs.getString("Marca"));
-                prod.setEmpresa(rs.getString("Empresa"));
-                prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
-                prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
-                prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
-                prod.setDescripcion(rs.getString("Descripcion"));
-                prod.setCantidad(rs.getInt("Cantidad"));
-                prod.setEsZapato(false);
-                manejador.Agregar(prod);
+                    prod.setIdProducto(rs.getInt("IdProducto"));
+                    prod.setCodigoUnico(rs.getString("CodigoUnico"));
+                    prod.setFechaIngreso(rs.getDate("FechaIngreso"));
+                    prod.setColor(rs.getString("Color"));
+                    prod.setMarca(rs.getString("Marca"));
+                    prod.setEmpresa(rs.getString("Empresa"));
+                    prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
+                    prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
+                    prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                    prod.setDescripcion(rs.getString("Descripcion"));
+                    prod.setCantidad(rs.getInt("Cantidad"));
+                    prod.setEsZapato(false);
+                    manejador.Agregar(prod);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
@@ -334,7 +334,7 @@ public class DAO_Producto {
 
     public boolean eliminarProducto(int id) {
 
-        if (validarEliminacion(id)) {
+        if (!validarEliminacion(id)) {
             conexion();
 
             PreparedStatement ps = null;
@@ -358,7 +358,7 @@ public class DAO_Producto {
     }
 
     public boolean validarEliminacion(int id) {
-        boolean eliminar = true;
+        boolean eliminar = false;
         conexion();
 
         PreparedStatement ps = null;
@@ -367,7 +367,7 @@ public class DAO_Producto {
             ps = con.prepareStatement("Select * From productofactura Where IdProducto = ?");
             ps.setInt(1, id);
             if (ps.executeQuery().next()) {
-                eliminar = false;
+                eliminar = true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
