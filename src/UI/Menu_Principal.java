@@ -7,6 +7,8 @@ package UI;
 
 import javax.swing.JOptionPane;
 import BL.BL_Logueo;
+import BL.BL_Usuario;
+import java.awt.Cursor;
 
 /**
  *
@@ -20,6 +22,9 @@ public class Menu_Principal extends javax.swing.JFrame {
     public Menu_Principal() {
         initComponents();
         BL_Logueo lg = new BL_Logueo();
+        if(!lg.isAdmin()){
+            labSettings.setVisible(false);
+        }
     }
 
     /**
@@ -31,16 +36,56 @@ public class Menu_Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox();
+        labSettings = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        labImagen = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btn_Inventario = new javax.swing.JButton();
         btn_Facturar = new javax.swing.JButton();
         btn_ReporteVentas = new javax.swing.JButton();
-        lab_TituloMenu = new javax.swing.JLabel();
         btn_RevisarFacturas = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(175, 201, 201));
+        setMinimumSize(new java.awt.Dimension(700, 400));
+        setPreferredSize(new java.awt.Dimension(700, 400));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labSettings.setForeground(new java.awt.Color(102, 102, 102));
+        labSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/settings.png"))); // NOI18N
+        labSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labSettingsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labSettingsMouseEntered(evt);
+            }
+        });
+        getContentPane().add(labSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Zapatería");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 220, -1));
+
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Mary");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
+
+        labImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
+        getContentPane().add(labImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 110, 80));
+
+        jPanel1.setBackground(new java.awt.Color(175, 201, 201));
+
+        btn_Inventario.setBackground(new java.awt.Color(177, 177, 177));
         btn_Inventario.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        btn_Inventario.setForeground(new java.awt.Color(51, 51, 51));
         btn_Inventario.setText("Inventario");
         btn_Inventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,7 +98,9 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
+        btn_Facturar.setBackground(new java.awt.Color(177, 177, 177));
         btn_Facturar.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        btn_Facturar.setForeground(new java.awt.Color(51, 51, 51));
         btn_Facturar.setText("Facturar");
         btn_Facturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,8 +113,10 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
+        btn_ReporteVentas.setBackground(new java.awt.Color(177, 177, 177));
         btn_ReporteVentas.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_ReporteVentas.setText("Reporte de Ventas");
+        btn_ReporteVentas.setForeground(new java.awt.Color(51, 51, 51));
+        btn_ReporteVentas.setText("Ventas");
         btn_ReporteVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ReporteVentasActionPerformed(evt);
@@ -79,10 +128,9 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        lab_TituloMenu.setFont(new java.awt.Font("Yu Gothic UI", 1, 40)); // NOI18N
-        lab_TituloMenu.setText("Menu Principal");
-
+        btn_RevisarFacturas.setBackground(new java.awt.Color(177, 177, 177));
         btn_RevisarFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        btn_RevisarFacturas.setForeground(new java.awt.Color(51, 51, 51));
         btn_RevisarFacturas.setText("Revisar Facturas");
         btn_RevisarFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,48 +143,38 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
-        jLabel1.setText("Seleccione una opción:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_Inventario, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btn_Facturar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(lab_TituloMenu)))
-                .addContainerGap(26, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(282, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lab_TituloMenu)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(113, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(80, 80, 80)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(97, 97, 97))
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 370));
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -192,12 +230,25 @@ public class Menu_Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_ReporteVentasKeyTyped
 
+    private void labSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseClicked
+        this.dispose();
+        new AdministrarUsuarios().setVisible(true);
+    }//GEN-LAST:event_labSettingsMouseClicked
+
+    private void labSettingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseEntered
+        labSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labSettingsMouseEntered
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Facturar;
     private javax.swing.JButton btn_Inventario;
     private javax.swing.JButton btn_ReporteVentas;
     private javax.swing.JButton btn_RevisarFacturas;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lab_TituloMenu;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labImagen;
+    private javax.swing.JLabel labSettings;
     // End of variables declaration//GEN-END:variables
 }

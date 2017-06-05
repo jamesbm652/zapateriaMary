@@ -146,6 +146,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         btnGenerarCodigo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Agregar Producto");
@@ -154,44 +155,55 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
+        labInstruccion.setForeground(new java.awt.Color(102, 102, 102));
         labInstruccion.setText("Ingrese los datos del nuevo producto:");
         getContentPane().add(labInstruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Descripción:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 96, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Fecha de Ingreso:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Color:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Marca:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Precio a costo:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Precio de venta:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Empresa:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Impuesto:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
 
+        txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 93, 480, -1));
 
+        txtColor.setBackground(new java.awt.Color(237, 237, 237));
         txtColor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,6 +212,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 80, -1));
 
+        txtPrecioCosto.setBackground(new java.awt.Color(237, 237, 237));
         txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -209,13 +222,16 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 109, -1));
 
         txtCodigo.setEditable(false);
+        txtCodigo.setBackground(new java.awt.Color(237, 237, 237));
         txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtCodigo.setEnabled(false);
         getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 45, 220, 30));
 
+        txtMarca.setBackground(new java.awt.Color(237, 237, 237));
         txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 130, -1));
 
+        txtPrecioVenta.setBackground(new java.awt.Color(237, 237, 237));
         txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -224,6 +240,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 130, -1));
 
+        txtImpuesto.setBackground(new java.awt.Color(237, 237, 237));
         txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtImpuesto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -232,10 +249,13 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 80, -1));
 
+        txtEmpresa.setBackground(new java.awt.Color(237, 237, 237));
         txtEmpresa.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         getContentPane().add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 346, -1));
 
+        btnAtras.setBackground(new java.awt.Color(177, 177, 177));
         btnAtras.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(51, 51, 51));
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,7 +264,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 329, -1, 40));
 
+        btnAgregar.setBackground(new java.awt.Color(177, 177, 177));
         btnAgregar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(51, 51, 51));
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,8 +274,11 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 328, -1, 40));
+
+        txtFechaIngreso.setBackground(new java.awt.Color(237, 237, 237));
         getContentPane().add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 45, 170, 30));
 
+        rdbBolso.setBackground(new java.awt.Color(175, 201, 201));
         grup1.add(rdbBolso);
         rdbBolso.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbBolso.setText("Bolso");
@@ -264,6 +289,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(rdbBolso, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 11, -1, -1));
 
+        rdbZapato.setBackground(new java.awt.Color(175, 201, 201));
         grup1.add(rdbZapato);
         rdbZapato.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbZapato.setText("Zapato");
@@ -275,6 +301,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().add(rdbZapato, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 11, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Género:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 135, -1, -1));
 
@@ -282,6 +309,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 132, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Categoría:");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
 
@@ -289,9 +317,11 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 115, -1));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("Talla:");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
 
+        txtTalla.setBackground(new java.awt.Color(237, 237, 237));
         txtTalla.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtTalla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -300,14 +330,17 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         getContentPane().add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
 
-        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 70, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Cantidad:");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 179, -1, -1));
 
+        btnGenerarCodigo.setBackground(new java.awt.Color(177, 177, 177));
         btnGenerarCodigo.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        btnGenerarCodigo.setForeground(new java.awt.Color(51, 51, 51));
         btnGenerarCodigo.setText("Generear código");
         btnGenerarCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,8 +350,12 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Código:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 56, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(175, 201, 201));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 390));
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -353,10 +390,12 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        if (txtDescripcion.getText().trim().equals("") || txtTalla.getText().trim().equals("")
-                || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
-                || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")) {
+        if (txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
+            || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")
+            || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
 
+            
+            
             JOptionPane.showMessageDialog(null, "Debe completar los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             if (!rdbZapato.isSelected() && !rdbBolso.isSelected()) {
@@ -377,10 +416,11 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
                 if (rdbZapato.isSelected()) {
                     producto.setEsZapato(true);
+                    producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(), cmbCategoria.getSelectedItem().toString(), Double.parseDouble(txtTalla.getText().toString())));
                 } else {
                     producto.setEsZapato(false);
                 }
-                producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(), cmbCategoria.getSelectedItem().toString(), Double.parseDouble(txtTalla.getText().toString())));
+                
 
                 if (btnAgregar.getText().equals("Agregar")) {
                     if (producto.insertarProducto()) {
@@ -466,6 +506,7 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labInstruccion;
     private javax.swing.JRadioButton rdbBolso;
     private javax.swing.JRadioButton rdbZapato;
