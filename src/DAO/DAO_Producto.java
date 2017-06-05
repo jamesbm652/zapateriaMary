@@ -308,21 +308,23 @@ public class DAO_Producto {
                     manejador.Agregar(prod);
                 }
             } else {
-                BL_Producto prod = new BL_Producto();
+                while (rs.next()) {
+                    BL_Producto prod = new BL_Producto();
 
-                prod.setIdProducto(rs.getInt("IdProducto"));
-                prod.setCodigoUnico(rs.getString("CodigoUnico"));
-                prod.setFechaIngreso(rs.getDate("FechaIngreso"));
-                prod.setColor(rs.getString("Color"));
-                prod.setMarca(rs.getString("Marca"));
-                prod.setEmpresa(rs.getString("Empresa"));
-                prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
-                prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
-                prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
-                prod.setDescripcion(rs.getString("Descripcion"));
-                prod.setCantidad(rs.getInt("Cantidad"));
-                prod.setEsZapato(false);
-                manejador.Agregar(prod);
+                    prod.setIdProducto(rs.getInt("IdProducto"));
+                    prod.setCodigoUnico(rs.getString("CodigoUnico"));
+                    prod.setFechaIngreso(rs.getDate("FechaIngreso"));
+                    prod.setColor(rs.getString("Color"));
+                    prod.setMarca(rs.getString("Marca"));
+                    prod.setEmpresa(rs.getString("Empresa"));
+                    prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
+                    prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
+                    prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                    prod.setDescripcion(rs.getString("Descripcion"));
+                    prod.setCantidad(rs.getInt("Cantidad"));
+                    prod.setEsZapato(false);
+                    manejador.Agregar(prod);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
