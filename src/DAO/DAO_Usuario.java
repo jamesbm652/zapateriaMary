@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import BL.BL_ManejadorProducto;
 import BL.BL_ManejadorUsuario;
 import BL.BL_Usuario;
 import java.sql.PreparedStatement;
@@ -25,13 +24,14 @@ import java.util.logging.Logger;
 public class DAO_Usuario {
 
     Connection con = null;
-
+    //Prueba
+    
     public DAO_Usuario() {
     }
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,13 +149,60 @@ public class DAO_Usuario {
             return false;
         }
     }
+    
+    public Boolean modificarUsuario(BL_Usuario usuarioModificado){
+        int insertado = 0;
+        boolean modificado = false;
+        
+        conexion();
+        PreparedStatement ps = null;
 
-    public Boolean modificarUsuario(BL_Usuario usuarioModificado) {
-        return true;
+        try {
+            
+            ps = con.prepareStatement("Update usuario Set NombreCompleto = ?, "
+                    + "NombreUsuario = ?, Contrasena = ?, Administrador = ? Where IdUsuario = ?");
+            
+            ps.setString(1, usuarioModificado.getNombreCompleto());
+            ps.setString(2, usuarioModificado.getNombreUsuario());
+            ps.setString(3, usuarioModificado.getContrasena());
+            if(usuarioModificado.isAdministrador()){
+                ps.setInt(4,1);
+            }else{
+                ps.setInt(4,0);
+            }
+            ps.setInt(5, usuarioModificado.getIdUsuario());
+            
+            insertado = ps.executeUpdate();
+            
+            if(insertado > 0){
+                modificado = true;
+            }
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cerrarConexion();
+        return modificado;
     }
+    
+    public Boolean eliminarUsuario(int id){
+        boolean eliminado = false;
+        conexion();
 
-    public Boolean eliminarUsuario(int id) {
-        return true;
+        PreparedStatement ps = null;
+
+            try {
+                ps = con.prepareStatement("Delete From usuario Where IdUsuario = ?");
+                ps.setInt(1, id);
+                ps.execute();
+                
+                eliminado = true;
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            cerrarConexion();
+            return eliminado;
     }
 
 }
