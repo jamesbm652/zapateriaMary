@@ -197,7 +197,6 @@ public class DAO_Producto {
 
                 manejador.Agregar(prod);
             }
-
             rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato FROM zapateriamary.producto P Where P.EsZapato = 0");
 
