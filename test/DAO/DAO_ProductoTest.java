@@ -73,11 +73,10 @@ public class DAO_ProductoTest {
          try{
             DAO_Producto instance = new DAO_Producto();
             instance.cerrarConexion();
-        } catch(Exception e){
-            // TODO review the generated test code and remove the default call to fail.
-            fail("Exception error");
         }catch(AssertionError e){
             fail("Assertion error");
+        }catch(NullPointerException E){
+             System.err.println("NullPointerException");
         }
     }
 
@@ -88,6 +87,7 @@ public class DAO_ProductoTest {
     public void testInsertarProducto() {
         System.out.println("Método Insertar Producto");
         BL_Producto producto = new BL_Producto();
+        producto.setCodigoUnico("1");
         producto.setFechaIngreso(Date.valueOf(LocalDate.MAX));
         DAO_Producto instance = new DAO_Producto();
         boolean expResult = false;
@@ -164,7 +164,7 @@ public class DAO_ProductoTest {
         System.out.println("Método Eliminar Producto");
         int id = 0;
         DAO_Producto instance = new DAO_Producto();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.eliminarProducto(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
