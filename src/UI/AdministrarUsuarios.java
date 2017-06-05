@@ -113,7 +113,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Nombre Usuario", "Contraseña", "Admin", "HiddenID"
+                "Nombre", "Nombre Usuario", "Contraseña", "Administrador", "HiddenID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -295,7 +295,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             txtNombreUsuario.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
             txtContrasena.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 2).toString());
 
-            if(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 3).toString().equals("true")){
+            if(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 3).toString().equals("Si")){
                 checkAdministrador.setSelected(true);
             }else{
                 checkAdministrador.setSelected(false);
