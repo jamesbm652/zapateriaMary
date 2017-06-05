@@ -358,6 +358,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     if(usuario.eliminarUsuario()){
                         JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
                         manejador.Eliminar(identificador);
+                        txtNombreCompleto.setText("");
+                        txtNombreUsuario.setText("");
+                        txtContrasena.setText("");
+                        checkAdministrador.setSelected(false);
+                        
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                         cargarUsuariosEnTabla(listaTotalUsuarios);
                     }else{
