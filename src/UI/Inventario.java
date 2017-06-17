@@ -499,7 +499,14 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_PrecioKeyTyped
 
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.dispose();
+            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
 
+            DetalleProducto detalle = new DetalleProducto(3, listaTotalProductos, id);
+            detalle.setTitle("Mostrar Producto");
+            detalle.setVisible(true);
+        }
     }//GEN-LAST:event_tablaInventarioMouseClicked
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
