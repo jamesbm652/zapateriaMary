@@ -23,7 +23,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         initComponents();
         BL_Logueo lg = new BL_Logueo();
         if(!lg.isAdmin()){
-            labSettings.setVisible(false);
+            btn_Administrar.setVisible(false);
         }
     }
 
@@ -37,7 +37,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox();
-        labSettings = new javax.swing.JLabel();
+        labSalir = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         labImagen = new javax.swing.JLabel();
@@ -46,26 +46,30 @@ public class Menu_Principal extends javax.swing.JFrame {
         btn_Facturar = new javax.swing.JButton();
         btn_ReporteVentas = new javax.swing.JButton();
         btn_RevisarFacturas = new javax.swing.JButton();
+        btn_Abonos = new javax.swing.JButton();
+        btn_Administrar = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menú Principal");
         setBackground(new java.awt.Color(175, 201, 201));
         setMinimumSize(new java.awt.Dimension(700, 400));
         setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labSettings.setForeground(new java.awt.Color(102, 102, 102));
-        labSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/settings.png"))); // NOI18N
-        labSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+        labSalir.setBackground(new java.awt.Color(175, 201, 201));
+        labSalir.setForeground(new java.awt.Color(102, 102, 102));
+        labSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir.png"))); // NOI18N
+        labSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labSettingsMouseClicked(evt);
+                labSalirMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labSettingsMouseEntered(evt);
+                labSalirMouseEntered(evt);
             }
         });
-        getContentPane().add(labSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
+        getContentPane().add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
@@ -143,21 +147,54 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
+        btn_Abonos.setBackground(new java.awt.Color(177, 177, 177));
+        btn_Abonos.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        btn_Abonos.setForeground(new java.awt.Color(51, 51, 51));
+        btn_Abonos.setText("Abonos");
+        btn_Abonos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AbonosActionPerformed(evt);
+            }
+        });
+        btn_Abonos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btn_AbonosKeyTyped(evt);
+            }
+        });
+
+        btn_Administrar.setBackground(new java.awt.Color(177, 177, 177));
+        btn_Administrar.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        btn_Administrar.setForeground(new java.awt.Color(51, 51, 51));
+        btn_Administrar.setText("Admin. Usuarios");
+        btn_Administrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AdministrarActionPerformed(evt);
+            }
+        });
+        btn_Administrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btn_AdministrarKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(282, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_Abonos, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_Administrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,11 +204,15 @@ public class Menu_Principal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Abonos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Administrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 370));
@@ -230,16 +271,35 @@ public class Menu_Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_ReporteVentasKeyTyped
 
-    private void labSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseClicked
+    private void labSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSalirMouseClicked
+        this.dispose();
+        new Login().setVisible(true);
+    }//GEN-LAST:event_labSalirMouseClicked
+
+    private void labSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSalirMouseEntered
+        labSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labSalirMouseEntered
+
+    private void btn_AbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbonosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_AbonosActionPerformed
+
+    private void btn_AbonosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_AbonosKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_AbonosKeyTyped
+
+    private void btn_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdministrarActionPerformed
         this.dispose();
         new AdministrarUsuarios().setVisible(true);
-    }//GEN-LAST:event_labSettingsMouseClicked
+    }//GEN-LAST:event_btn_AdministrarActionPerformed
 
-    private void labSettingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSettingsMouseEntered
-        labSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labSettingsMouseEntered
+    private void btn_AdministrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_AdministrarKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_AdministrarKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Abonos;
+    private javax.swing.JButton btn_Administrar;
     private javax.swing.JButton btn_Facturar;
     private javax.swing.JButton btn_Inventario;
     private javax.swing.JButton btn_ReporteVentas;
@@ -249,6 +309,6 @@ public class Menu_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labImagen;
-    private javax.swing.JLabel labSettings;
+    private javax.swing.JLabel labSalir;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,6 +59,18 @@ public class DAO_Producto {
 
         if (!producto.isEsZapato()) {
             try {
+                
+                ps = con.prepareStatement("SELECT * FROM producto as P "
+                        + "WHERE P.FechaIngreso = ? AND P.Marca = ? AND P.Empresa = ? AND P.Color = ?");
+                ps.setString(1, fecha);
+                ps.setString(2, producto.getMarca());
+                ps.setString(3, producto.getEmpresa());
+                ps.setString(4, producto.getColor());
+
+                if ((ps.executeQuery().next())) {
+                    return false;
+                }
+                
                 ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 ps.setString(1, producto.getCodigoUnico());
@@ -81,7 +93,19 @@ public class DAO_Producto {
         } else {
             try {
                 int idProductoInsertado = 0;
+                
+                ps = con.prepareStatement("SELECT * FROM producto as P INNER JOIN zapatotallacategoria as ZTC "
+                        + "ON P.IdProducto = ZTC.IdProducto "
+                        + "WHERE P.FechaIngreso = ? AND P.Marca = ? AND P.Empresa = ? AND P.Color = ? AND ZTC.Talla = ?");
+                ps.setString(1, fecha);
+                ps.setString(2, producto.getMarca());
+                ps.setString(3, producto.getEmpresa());
+                ps.setString(4, producto.getColor());
+                ps.setDouble(5, producto.getTallaZapato().getTalla());
 
+                if ((ps.executeQuery().next())) {
+                    return false;
+                }
                 ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ps.RETURN_GENERATED_KEYS);
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, fecha);
@@ -167,7 +191,7 @@ public class DAO_Producto {
 
         try {
             st = this.con.createStatement();
-            rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+            rs = st.executeQuery("SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
                     + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
                     + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1;");
@@ -197,7 +221,7 @@ public class DAO_Producto {
 
                 manejador.Agregar(prod);
             }
-            rs = st.executeQuery("SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+            rs = st.executeQuery("SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato FROM zapateriamary.producto P Where P.EsZapato = 0");
 
             while (rs.next()) {

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -67,7 +68,8 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         btnAccion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mantenimiento de Usuarios");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -111,7 +113,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Nombre Usuario", "Contraseña", "Admin", "HiddenID"
+                "Nombre", "Nombre Usuario", "Contraseña", "Administrador", "HiddenID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -236,12 +238,17 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAccionActionPerformed
+        if(btnAccion.getText().equals("Agregar")){
+            tablaUsuarios.getSelectionModel().setSelectionInterval(0, 0);
+            validarAccion();
+            cargarUsuarioSeleccionado();
+        }
+        
         if(cmbAccion.getSelectedIndex() != 1){
             if(tablaUsuarios.getSelectedRow() >= 0){
                 validarAccion();
+                cargarUsuarioSeleccionado();
             }else{
-                cmbAccion.setSelectedIndex(0);
-                validarAccion();
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un cliente de la tabla");
             }
         }else{
@@ -288,7 +295,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             txtNombreUsuario.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
             txtContrasena.setText(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 2).toString());
 
-            if(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 3).toString().equals("true")){
+            if(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 3).toString().equals("Si")){
                 checkAdministrador.setSelected(true);
             }else{
                 checkAdministrador.setSelected(false);
@@ -351,6 +358,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     if(usuario.eliminarUsuario()){
                         JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
                         manejador.Eliminar(identificador);
+                        txtNombreCompleto.setText("");
+                        txtNombreUsuario.setText("");
+                        txtContrasena.setText("");
+                        checkAdministrador.setSelected(false);
+                        
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                         cargarUsuariosEnTabla(listaTotalUsuarios);
                     }else{

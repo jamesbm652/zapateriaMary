@@ -436,7 +436,6 @@ public class Facturar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverAlMenu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_volverAlMenu
-        this.dispose();
         new Menu_Principal().setVisible(true);
     }//GEN-LAST:event_volverAlMenu
 
@@ -566,7 +565,8 @@ public class Facturar extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_TipoProductoActionPerformed
 
     private void btnRegresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new Menu_Principal().setVisible(true);
     }//GEN-LAST:event_btnRegresar2ActionPerformed
 
     private void btnRegresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar3ActionPerformed
