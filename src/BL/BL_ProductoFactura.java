@@ -9,20 +9,22 @@ package BL;
  *
  * @author Joseph
  */
-public class BL_ProdcutoFactura {
+public class BL_ProductoFactura {
     private int idProductoFactura;
     private int idProducto;
     private int cantidadVendida;
     private double precioVenta;
+    private String descripcion;
 
-    public BL_ProdcutoFactura() {
+    public BL_ProductoFactura() {
     }
 
-    public BL_ProdcutoFactura(int idProductoFactura, int idProducto, int cantidadVendida, double precioVenta) {
+    public BL_ProductoFactura(int idProductoFactura, int idProducto, int cantidadVendida, double precioVenta, String descripcion) {
         this.idProductoFactura = idProductoFactura;
         this.idProducto = idProducto;
         this.cantidadVendida = cantidadVendida;
         this.precioVenta = precioVenta;
+        this.descripcion = descripcion;
     }
 
     public int getIdProductoFactura() {
@@ -56,6 +58,15 @@ public class BL_ProdcutoFactura {
     public void setPrecioVenta(double precioVenta) {
         this.precioVenta = precioVenta;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     
     
 }

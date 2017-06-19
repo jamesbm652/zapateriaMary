@@ -17,7 +17,7 @@ public class BL_Factura {
     private Date fechaFactura;
     private boolean cancelada;
     private String tipoFactura;
-    private ArrayList<BL_ProdcutoFactura> productosFactura  = new ArrayList<>();
+    private ArrayList<BL_ProductoFactura> productosFactura  = new ArrayList<>();
     private BL_Cliente cliente;
     
     public BL_Factura() {
@@ -63,11 +63,11 @@ public class BL_Factura {
         this.tipoFactura = tipoFactura;
     }
 
-    public ArrayList<BL_ProdcutoFactura> getProductosFactura() {
+    public ArrayList<BL_ProductoFactura> getProductosFactura() {
         return productosFactura;
     }
 
-    public void setProductosFactura(ArrayList<BL_ProdcutoFactura> productosFactura) {
+    public void setProductosFactura(ArrayList<BL_ProductoFactura> productosFactura) {
         this.productosFactura = productosFactura;
     }
 
