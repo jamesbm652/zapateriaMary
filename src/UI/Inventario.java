@@ -115,7 +115,7 @@ public class Inventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta", "HiddenID", "Genero"
+                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta", "HiddenID", "Tipo Producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -247,7 +247,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Talla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         cbx_Genero.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hombre", "Mujer" }));
+        cbx_Genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Hombre", "Mujer" }));
         jpanBusquedaAvanzada.add(cbx_Genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 13, 143, -1));
 
         txt_Talla.setBackground(new java.awt.Color(237, 237, 237));
@@ -282,7 +282,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 54, -1, -1));
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 52, 137, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -291,7 +291,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
@@ -396,20 +396,23 @@ public class Inventario extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         boolean tipoProducto = true;
+        boolean ambos = false;
         double talla = 0;
         double precio = 0;
         Date fecha = null;
         String genero = cbx_Genero.getSelectedItem().toString();
         String categoria = cbx_Categoria.getSelectedItem().toString();
-
+        if (genero.equals("Cualquiera")) genero = "";
+        if (categoria.equals("Cualquiera")) categoria = ""; 
+        
         if (!txt_Talla.getText().equals("")) {
             talla = Double.parseDouble(txt_Talla.getText());
         }
         if (!txt_Precio.getText().equals("")) {
             precio = Double.parseDouble(txt_Precio.getText());
         }
-
-        if (cbx_TipoProducto.getSelectedIndex() == 1) {
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) ambos = true;
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             tipoProducto = false;
             genero = "";
             categoria = "";
@@ -420,7 +423,7 @@ public class Inventario extends javax.swing.JFrame {
 
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
         
-        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto);
+        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
 
         limpiarTabla(modelo);
 
@@ -483,11 +486,13 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerDetalleActionPerformed
 
     private void cbx_TipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_TipoProductoActionPerformed
-        if (cbx_TipoProducto.getSelectedIndex() == 1) {
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             txt_Talla.setText("");
             txt_Talla.setEnabled(false);
             cbx_Categoria.setEnabled(false);
             cbx_Genero.setEnabled(false);
+            cbx_Categoria.setSelectedItem("Cualquiera");
+            cbx_Genero.setSelectedItem("Cualquiera");
         } else {
             txt_Talla.setEnabled(true);
             cbx_Categoria.setEnabled(true);

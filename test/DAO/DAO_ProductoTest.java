@@ -144,12 +144,13 @@ public class DAO_ProductoTest {
         String marca = "";
         String empresa = "";
         double precio = 0.0;
+        boolean ambos = false;
         Date fecha = null;
         String categoria = "";
         boolean tipoProducto = false;
         DAO_Producto instance = new DAO_Producto();
         ArrayList<BL_Producto> expResult = null;
-        ArrayList<BL_Producto> result = instance.cargarProductosPorFiltro(genero, color, tallaZapato, marca, empresa, precio, fecha, categoria, tipoProducto);
+        ArrayList<BL_Producto> result = instance.cargarProductosPorFiltro(genero, color, tallaZapato, marca, empresa, precio, fecha, categoria, tipoProducto, ambos);
         assertNotEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         if(result == expResult)
