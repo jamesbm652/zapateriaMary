@@ -5,14 +5,20 @@
  */
 package UI;
 
+import BL.BL_Cliente;
+import BL.BL_ManejadorCliente;
 import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -22,9 +28,10 @@ public class Facturar extends javax.swing.JFrame {
 
     ArrayList<BL_Producto> listaTotalProductos = new ArrayList<BL_Producto>();
     BL_ManejadorProducto manejador = new BL_ManejadorProducto();
+    BL_ManejadorCliente manejadorCliente = new BL_ManejadorCliente();
     DefaultTableModel modelo;
     /**
-     * Creates new form Facturar
+     * Creates new form 
      */
     public Facturar() {
         //Holaaaaa
@@ -40,6 +47,40 @@ public class Facturar extends javax.swing.JFrame {
 
         ocultarColumnaID();
         
+        // Combo box autoCompletar
+        cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+             @Override
+             public void keyReleased (KeyEvent evt){
+                String cad = cbx_Cedula.getEditor().getItem().toString();
+                if ((evt.getKeyCode() >= 65 && evt.getKeyCode() <=90) || (evt.getKeyCode()>=96 && evt.getKeyCode()<=105) || evt.getKeyCode() == 8 || (evt.getKeyCode()>=48 && evt.getKeyCode()<=57)) {
+                   cbx_Cedula.setModel(obtenerListaComboBox(cad));
+                   if (cbx_Cedula.getItemCount()>0) {
+                       cbx_Cedula.showPopup();
+                       if (evt.getKeyCode() != 8) {
+                           ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cad.length(),
+                                   cbx_Cedula.getEditor().getItem().toString().length());
+                       }else{
+                           cbx_Cedula.getEditor().setItem(cad);
+                       }
+                   }else{
+                      cbx_Cedula.addItem(cad);
+                   }
+               }
+            }
+        });
+    }
+    
+    private DefaultComboBoxModel obtenerListaComboBox(String cad){
+        manejadorCliente.cargarClientes();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
+            if (c.getCedula().contentEquals(cad)) {
+                model.addElement(c.getCedula());
+            }
+        }
+        
+        return model;
     }
 
     /**
@@ -87,7 +128,6 @@ public class Facturar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -96,6 +136,7 @@ public class Facturar extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btn_Eliminar = new javax.swing.JButton();
+        cbx_Cedula = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -355,9 +396,6 @@ public class Facturar extends javax.swing.JFrame {
         jLabel10.setText("Dirección:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 97, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(237, 237, 237));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1088, 20, 124, -1));
-
         jTextField2.setBackground(new java.awt.Color(237, 237, 237));
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 58, 414, -1));
 
@@ -385,6 +423,9 @@ public class Facturar extends javax.swing.JFrame {
 
         btn_Eliminar.setText("Eliminar");
         jPanel2.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 440, -1, 30));
+
+        cbx_Cedula.setEditable(true);
+        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 20, 130, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 610));
 
@@ -552,6 +593,7 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar3;
     private javax.swing.JButton btn_Eliminar;
     private javax.swing.JComboBox<String> cbx_Categoria;
+    private javax.swing.JComboBox<String> cbx_Cedula;
     private javax.swing.JComboBox cbx_Genero;
     private javax.swing.JComboBox<String> cbx_TipoProducto;
     private javax.swing.JLabel jLabel1;
@@ -574,7 +616,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel jpanBusquedaAvanzada;
