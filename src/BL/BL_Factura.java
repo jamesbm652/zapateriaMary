@@ -62,7 +62,6 @@ public class BL_Factura {
     public void setTipoFactura(String tipoFactura) {
         this.tipoFactura = tipoFactura;
     }
-
     public ArrayList<BL_ProductoFactura> getProductosFactura() {
         return productosFactura;
     }
