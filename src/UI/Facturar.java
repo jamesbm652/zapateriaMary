@@ -48,6 +48,10 @@ public class Facturar extends javax.swing.JFrame {
         ocultarColumnaID();
         
         // Combo box autoCompletar
+        comboBoxAutocompletar();
+    }
+    
+    private void comboBoxAutocompletar(){
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
              @Override
              public void keyReleased (KeyEvent evt){

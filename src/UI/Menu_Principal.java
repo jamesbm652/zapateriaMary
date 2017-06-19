@@ -8,7 +8,14 @@ package UI;
 import javax.swing.JOptionPane;
 import BL.BL_Logueo;
 import BL.BL_Usuario;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -21,10 +28,12 @@ public class Menu_Principal extends javax.swing.JFrame {
      */
     public Menu_Principal() {
         initComponents();
+        
         BL_Logueo lg = new BL_Logueo();
         if(!lg.isAdmin()){
-            btn_Administrar.setVisible(false);
+            panelBtnAdministrar.setVisible(false);
         }
+       
     }
 
     /**
@@ -37,29 +46,54 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         labSalir = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        labClose = new javax.swing.JLabel();
+        panelBtnRevisar = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        panelBtnReportes = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        panelBtnInventario = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        labImagen = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        btn_Inventario = new javax.swing.JButton();
-        btn_Facturar = new javax.swing.JButton();
-        btn_ReporteVentas = new javax.swing.JButton();
-        btn_RevisarFacturas = new javax.swing.JButton();
-        btn_Abonos = new javax.swing.JButton();
-        btn_Administrar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        panelBtnAbonos = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        panelBtnFacturar = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        panelBtnAdministrar = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
         setBackground(new java.awt.Color(175, 201, 201));
-        setMinimumSize(new java.awt.Dimension(700, 400));
-        setPreferredSize(new java.awt.Dimension(700, 400));
+        setMinimumSize(new java.awt.Dimension(690, 370));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(690, 370));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+        jPanel1.setMinimumSize(new java.awt.Dimension(700, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 400));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setMinimumSize(new java.awt.Dimension(700, 74));
+        jPanel2.setPreferredSize(new java.awt.Dimension(700, 74));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         labSalir.setBackground(new java.awt.Color(175, 201, 201));
-        labSalir.setForeground(new java.awt.Color(102, 102, 102));
+        labSalir.setForeground(new java.awt.Color(204, 204, 204));
         labSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir.png"))); // NOI18N
         labSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -69,151 +103,249 @@ public class Menu_Principal extends javax.swing.JFrame {
                 labSalirMouseEntered(evt);
             }
         });
-        getContentPane().add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
+        jPanel2.add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setBackground(new java.awt.Color(196, 196, 196));
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Zapatería");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 220, -1));
+        jLabel2.setForeground(new java.awt.Color(237, 237, 237));
+        jLabel2.setText("Zapatería Mary");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 360, -1));
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Mary");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
+        labClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/close.png"))); // NOI18N
+        labClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labCloseMouseEntered(evt);
+            }
+        });
+        jPanel2.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, -1));
 
-        labImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
-        getContentPane().add(labImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 110, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 100));
 
-        jPanel1.setBackground(new java.awt.Color(175, 201, 201));
+        panelBtnRevisar.setBackground(new java.awt.Color(0, 105, 120));
+        panelBtnRevisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnRevisarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBtnRevisarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBtnRevisarMouseExited(evt);
+            }
+        });
+        panelBtnRevisar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_Inventario.setBackground(new java.awt.Color(177, 177, 177));
-        btn_Inventario.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_Inventario.setForeground(new java.awt.Color(51, 51, 51));
-        btn_Inventario.setText("Inventario");
-        btn_Inventario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_InventarioActionPerformed(evt);
-            }
-        });
-        btn_Inventario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btn_InventarioKeyTyped(evt);
-            }
-        });
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Revisar Facturas");
+        panelBtnRevisar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 79, -1, -1));
 
-        btn_Facturar.setBackground(new java.awt.Color(177, 177, 177));
-        btn_Facturar.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_Facturar.setForeground(new java.awt.Color(51, 51, 51));
-        btn_Facturar.setText("Facturar");
-        btn_Facturar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_FacturarActionPerformed(evt);
-            }
-        });
-        btn_Facturar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btn_FacturarKeyTyped(evt);
-            }
-        });
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/revisarFactura.png"))); // NOI18N
+        panelBtnRevisar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 12, -1, -1));
 
-        btn_ReporteVentas.setBackground(new java.awt.Color(177, 177, 177));
-        btn_ReporteVentas.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_ReporteVentas.setForeground(new java.awt.Color(51, 51, 51));
-        btn_ReporteVentas.setText("Ventas");
-        btn_ReporteVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ReporteVentasActionPerformed(evt);
-            }
-        });
-        btn_ReporteVentas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btn_ReporteVentasKeyTyped(evt);
-            }
-        });
+        jPanel1.add(panelBtnRevisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 180, 110));
 
-        btn_RevisarFacturas.setBackground(new java.awt.Color(177, 177, 177));
-        btn_RevisarFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_RevisarFacturas.setForeground(new java.awt.Color(51, 51, 51));
-        btn_RevisarFacturas.setText("Revisar Facturas");
-        btn_RevisarFacturas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_RevisarFacturasActionPerformed(evt);
+        panelBtnReportes.setBackground(new java.awt.Color(0, 239, 239));
+        panelBtnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnReportesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBtnReportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBtnReportesMouseExited(evt);
             }
         });
-        btn_RevisarFacturas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btn_RevisarFacturasKeyTyped(evt);
-            }
-        });
+        panelBtnReportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_Abonos.setBackground(new java.awt.Color(177, 177, 177));
-        btn_Abonos.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_Abonos.setForeground(new java.awt.Color(51, 51, 51));
-        btn_Abonos.setText("Abonos");
-        btn_Abonos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AbonosActionPerformed(evt);
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Reporte Ventas");
+        panelBtnReportes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 76, -1, -1));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reportes.png"))); // NOI18N
+        panelBtnReportes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+
+        jPanel1.add(panelBtnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 180, 110));
+
+        panelBtnInventario.setBackground(new java.awt.Color(0, 151, 167));
+        panelBtnInventario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnInventarioMouseClicked(evt);
             }
-        });
-        btn_Abonos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btn_AbonosKeyTyped(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBtnInventarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBtnInventarioMouseExited(evt);
             }
         });
 
-        btn_Administrar.setBackground(new java.awt.Color(177, 177, 177));
-        btn_Administrar.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        btn_Administrar.setForeground(new java.awt.Color(51, 51, 51));
-        btn_Administrar.setText("Admin. Usuarios");
-        btn_Administrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AdministrarActionPerformed(evt);
-            }
-        });
-        btn_Administrar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btn_AdministrarKeyTyped(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Inventario");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_Abonos, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_Administrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/inventarioIcon.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelBtnInventarioLayout = new javax.swing.GroupLayout(panelBtnInventario);
+        panelBtnInventario.setLayout(panelBtnInventarioLayout);
+        panelBtnInventarioLayout.setHorizontalGroup(
+            panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBtnInventarioLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel9))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Facturar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Abonos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_RevisarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Administrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+        panelBtnInventarioLayout.setVerticalGroup(
+            panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnInventarioLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
+
+        jPanel1.add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 110));
+
+        panelBtnAbonos.setBackground(new java.awt.Color(0, 159, 175));
+        panelBtnAbonos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBtnAbonosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBtnAbonosMouseExited(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Abonos");
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/abonar.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelBtnAbonosLayout = new javax.swing.GroupLayout(panelBtnAbonos);
+        panelBtnAbonos.setLayout(panelBtnAbonosLayout);
+        panelBtnAbonosLayout.setHorizontalGroup(
+            panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addGroup(panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel5))
+                .addGap(70, 70, 70))
+        );
+        panelBtnAbonosLayout.setVerticalGroup(
+            panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap())
+        );
+
+        jPanel1.add(panelBtnAbonos, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 180, 110));
+
+        panelBtnFacturar.setBackground(new java.awt.Color(38, 198, 218));
+        panelBtnFacturar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnFacturarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBtnFacturarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBtnFacturarMouseExited(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Facturar");
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/facturar.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelBtnFacturarLayout = new javax.swing.GroupLayout(panelBtnFacturar);
+        panelBtnFacturar.setLayout(panelBtnFacturarLayout);
+        panelBtnFacturarLayout.setHorizontalGroup(
+            panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBtnFacturarLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel10))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        panelBtnFacturarLayout.setVerticalGroup(
+            panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnFacturarLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap())
+        );
+
+        jPanel1.add(panelBtnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 180, 110));
+
+        panelBtnAdministrar.setBackground(new java.awt.Color(128, 222, 234));
+        panelBtnAdministrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnAdministrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBtnAdministrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBtnAdministrarMouseExited(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Administrar Usuarios");
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/settings.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelBtnAdministrarLayout = new javax.swing.GroupLayout(panelBtnAdministrar);
+        panelBtnAdministrar.setLayout(panelBtnAdministrarLayout);
+        panelBtnAdministrarLayout.setHorizontalGroup(
+            panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
+                .addGroup(panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel14))
+                    .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel8)))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        panelBtnAdministrarLayout.setVerticalGroup(
+            panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addContainerGap())
+        );
+
+        jPanel1.add(panelBtnAdministrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 180, 110));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/fondo.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 690, 270));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 370));
 
@@ -223,92 +355,127 @@ public class Menu_Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_InventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InventarioActionPerformed
-        this.dispose();
-        Inventario inventario = new Inventario(null);
-        inventario.setVisible(true);
-    }//GEN-LAST:event_btn_InventarioActionPerformed
-
-    private void btn_ReporteVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReporteVentasActionPerformed
-        this.dispose();
-        ReporteVentas reporte = new ReporteVentas();
-        reporte.setVisible(true);
-    }//GEN-LAST:event_btn_ReporteVentasActionPerformed
-
-    private void btn_FacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FacturarActionPerformed
-        this.dispose();
-        Facturar facturar = new Facturar();
-        facturar.setVisible(true);
-    }//GEN-LAST:event_btn_FacturarActionPerformed
-
-    private void btn_RevisarFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RevisarFacturasActionPerformed
-        this.dispose();
-        RevisarFacturas revisar = new RevisarFacturas();
-        revisar.setVisible(true);
-    }//GEN-LAST:event_btn_RevisarFacturasActionPerformed
-
-    private void btn_InventarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_InventarioKeyTyped
-        if(evt.getKeyChar() == evt.VK_ENTER){
-            btn_Inventario.doClick();
-        }
-    }//GEN-LAST:event_btn_InventarioKeyTyped
-
-    private void btn_FacturarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_FacturarKeyTyped
-        if(evt.getKeyChar() == evt.VK_ENTER){
-            btn_Facturar.doClick();
-        }
-    }//GEN-LAST:event_btn_FacturarKeyTyped
-
-    private void btn_RevisarFacturasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_RevisarFacturasKeyTyped
-        if(evt.getKeyChar() == evt.VK_ENTER){
-            btn_RevisarFacturas.doClick();
-        }
-    }//GEN-LAST:event_btn_RevisarFacturasKeyTyped
-
-    private void btn_ReporteVentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_ReporteVentasKeyTyped
-        if(evt.getKeyChar() == evt.VK_ENTER){
-            btn_ReporteVentas.doClick();
-        }
-    }//GEN-LAST:event_btn_ReporteVentasKeyTyped
+    private void labSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSalirMouseEntered
+        labSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labSalirMouseEntered
 
     private void labSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSalirMouseClicked
         this.dispose();
         new Login().setVisible(true);
     }//GEN-LAST:event_labSalirMouseClicked
 
-    private void labSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSalirMouseEntered
-        labSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labSalirMouseEntered
+    private void panelBtnInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnInventarioMouseClicked
+        this.dispose();
+        new Inventario(null).setVisible(true);
+    }//GEN-LAST:event_panelBtnInventarioMouseClicked
 
-    private void btn_AbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbonosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_AbonosActionPerformed
+    private void panelBtnInventarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnInventarioMouseEntered
+        panelBtnInventario.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        panelBtnInventario.setBackground(new Color(0,166,183));
+    }//GEN-LAST:event_panelBtnInventarioMouseEntered
 
-    private void btn_AbonosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_AbonosKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_AbonosKeyTyped
+    private void panelBtnFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnFacturarMouseClicked
+        this.dispose();
+        new Facturar().setVisible(true);
+    }//GEN-LAST:event_panelBtnFacturarMouseClicked
 
-    private void btn_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdministrarActionPerformed
+    private void panelBtnFacturarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnFacturarMouseEntered
+       panelBtnFacturar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       panelBtnFacturar.setBackground(new Color(34,181,200));
+    }//GEN-LAST:event_panelBtnFacturarMouseEntered
+
+    private void panelBtnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnReportesMouseClicked
+        this.dispose();
+        new ReporteVentas().setVisible(true);
+    }//GEN-LAST:event_panelBtnReportesMouseClicked
+
+    private void panelBtnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnReportesMouseEntered
+        panelBtnReportes.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        panelBtnReportes.setBackground(new Color(0,214,214));
+    }//GEN-LAST:event_panelBtnReportesMouseEntered
+
+    private void panelBtnRevisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRevisarMouseClicked
+        this.dispose();
+        new RevisarFacturas().setVisible(true);
+    }//GEN-LAST:event_panelBtnRevisarMouseClicked
+
+    private void panelBtnRevisarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRevisarMouseEntered
+        panelBtnRevisar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        panelBtnRevisar.setBackground(new Color(0,134,158));
+    }//GEN-LAST:event_panelBtnRevisarMouseEntered
+
+    private void panelBtnAdministrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAdministrarMouseClicked
         this.dispose();
         new AdministrarUsuarios().setVisible(true);
-    }//GEN-LAST:event_btn_AdministrarActionPerformed
+    }//GEN-LAST:event_panelBtnAdministrarMouseClicked
 
-    private void btn_AdministrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_AdministrarKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_AdministrarKeyTyped
+    private void panelBtnAdministrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAdministrarMouseEntered
+        panelBtnAdministrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        panelBtnAdministrar.setBackground(new Color(93,212,228));
+    }//GEN-LAST:event_panelBtnAdministrarMouseEntered
+
+    private void panelBtnInventarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnInventarioMouseExited
+        panelBtnInventario.setBackground(new Color(0,151,167));
+    }//GEN-LAST:event_panelBtnInventarioMouseExited
+
+    private void panelBtnFacturarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnFacturarMouseExited
+        panelBtnFacturar.setBackground(new Color(38,198,218));
+    }//GEN-LAST:event_panelBtnFacturarMouseExited
+
+    private void panelBtnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnReportesMouseExited
+        panelBtnReportes.setBackground(new Color(0,239,239));
+    }//GEN-LAST:event_panelBtnReportesMouseExited
+
+    private void panelBtnRevisarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRevisarMouseExited
+        panelBtnRevisar.setBackground(new Color(0,105,120));
+    }//GEN-LAST:event_panelBtnRevisarMouseExited
+
+    private void panelBtnAdministrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAdministrarMouseExited
+        panelBtnAdministrar.setBackground(new Color(128,222,234));
+    }//GEN-LAST:event_panelBtnAdministrarMouseExited
+
+    private void panelBtnAbonosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAbonosMouseExited
+        panelBtnAbonos.setBackground(new Color(0,159,175));
+    }//GEN-LAST:event_panelBtnAbonosMouseExited
+
+    private void panelBtnAbonosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAbonosMouseEntered
+        panelBtnAbonos.setBackground(new Color(0,180,198));
+    }//GEN-LAST:event_panelBtnAbonosMouseEntered
+
+    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
+        this.dispose();
+        new Login().setVisible(true); 
+    }//GEN-LAST:event_labCloseMouseClicked
+
+    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
+        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labCloseMouseEntered
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Abonos;
-    private javax.swing.JButton btn_Administrar;
-    private javax.swing.JButton btn_Facturar;
-    private javax.swing.JButton btn_Inventario;
-    private javax.swing.JButton btn_ReporteVentas;
-    private javax.swing.JButton btn_RevisarFacturas;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labImagen;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labClose;
     private javax.swing.JLabel labSalir;
+    private javax.swing.JPanel panelBtnAbonos;
+    private javax.swing.JPanel panelBtnAdministrar;
+    private javax.swing.JPanel panelBtnFacturar;
+    private javax.swing.JPanel panelBtnInventario;
+    private javax.swing.JPanel panelBtnReportes;
+    private javax.swing.JPanel panelBtnRevisar;
     // End of variables declaration//GEN-END:variables
 }
