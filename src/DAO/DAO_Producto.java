@@ -250,7 +250,7 @@ public class DAO_Producto {
     }
 
     public ArrayList<BL_Producto> cargarProductosPorFiltro(String genero, String color, double tallaZapato, String marca, String empresa,
-            double precio, Date fecha, String categoria, boolean tipoProducto) {
+            double precio, Date fecha, String categoria, boolean tipoProducto, boolean ambos) {
 
         BL_ManejadorProducto manejador = new BL_ManejadorProducto();
 
@@ -258,99 +258,113 @@ public class DAO_Producto {
 
         Statement st = null;
         ResultSet rs = null;
-
-        String query = "";
-
-        if (!tipoProducto) {
-            query = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
-                    + "P.Cantidad, P.EsZapato FROM zapateriamary.producto as P Where P.EsZapato = 0";
-        } else {
-            query = "SELECT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
-                    + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
-                    + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
-                    + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1";
-        }
-        if (genero != "") {
-            if (genero.equals("Hombre")) {
-                query += " And ZC.Genero = " + 1 + "";
-            } else {
-                query += " And ZC.Genero = " + 0 + "";
+        
+        int c = 1;
+        if (ambos) c = 2;  
+        
+        // For por si la busquedas de tipo de producto es cualquiera
+        for (int i = 0; i < c; i++) {
+            if (i == 1) {
+                tipoProducto = false;
+                genero = "";
+                categoria = "";
+                tallaZapato = 0;
             }
-        }
-        if (!color.equals("")) {
-            query += " And P.Color = '" + color + "'";
-        }
-        if (tallaZapato > 0) {
-            query += " And ZC.Talla = " + tallaZapato + "";
-        }
-        if (!marca.equals("")) {
-            query += " And P.Marca = '" + marca + "'";
-        }
-        if (!empresa.equals("")) {
-            query += " And P.Empresa = '" + empresa + "'";
-        }
-        if (precio > 0) {
-            query += " And P.PrecioGanancia = " + precio + "";
-        }
-        if (fecha != null) {
-            query += " And P.FechaIngreso = '" + fecha.toString() + "'";
-        }
-        if (!categoria.equals("")) {
-            query += " And CT.Descripcion = '" + categoria + "'";
-        }
 
-        try {
-            st = this.con.createStatement();
-            rs = st.executeQuery(query);
+            String query = "";
 
-            if (tipoProducto) {
-                while (rs.next()) {
-                    BL_Producto prod = new BL_Producto();
-                    BL_TallaZapato talla = new BL_TallaZapato();
-
-                    prod.setIdProducto(rs.getInt("IdProducto"));
-                    prod.setCodigoUnico(rs.getString("CodigoUnico"));
-                    prod.setFechaIngreso(rs.getDate("FechaIngreso"));
-                    prod.setColor(rs.getString("Color"));
-                    prod.setMarca(rs.getString("Marca"));
-                    prod.setEmpresa(rs.getString("Empresa"));
-                    prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
-                    prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
-                    prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
-                    prod.setDescripcion(rs.getString("Descripcion"));
-                    prod.setCantidad(rs.getInt("Cantidad"));
-                    prod.setEsZapato(true);
-
-                    talla.setTalla(rs.getDouble("Talla"));
-                    talla.setGeneroZapato(rs.getString("Genero"));
-                    talla.setCategoriaZapato(rs.getString("Categoria"));
-
-                    prod.setTallaZapato(talla);
-
-                    manejador.Agregar(prod);
-                }
+            if (!tipoProducto) {
+                query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+                        + "P.Cantidad, P.EsZapato FROM zapateriamary.producto as P Where P.EsZapato = 0";
             } else {
-                while (rs.next()) {
-                    BL_Producto prod = new BL_Producto();
-
-                    prod.setIdProducto(rs.getInt("IdProducto"));
-                    prod.setCodigoUnico(rs.getString("CodigoUnico"));
-                    prod.setFechaIngreso(rs.getDate("FechaIngreso"));
-                    prod.setColor(rs.getString("Color"));
-                    prod.setMarca(rs.getString("Marca"));
-                    prod.setEmpresa(rs.getString("Empresa"));
-                    prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
-                    prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
-                    prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
-                    prod.setDescripcion(rs.getString("Descripcion"));
-                    prod.setCantidad(rs.getInt("Cantidad"));
-                    prod.setEsZapato(false);
-                    manejador.Agregar(prod);
+                query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+                        + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
+                        + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
+                        + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1";
+            }
+            if (genero != "") {
+                if (genero.equals("Hombre")) {
+                    query += " And ZC.Genero = " + 1 + "";
+                } else {
+                    query += " And ZC.Genero = " + 0 + "";
                 }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            if (!color.equals("")) {
+                query += " And P.Color = '" + color + "'";
+            }
+            if (tallaZapato > 0) {
+                query += " And ZC.Talla = " + tallaZapato + "";
+            }
+            if (!marca.equals("")) {
+                query += " And P.Marca = '" + marca + "'";
+            }
+            if (!empresa.equals("")) {
+                query += " And P.Empresa = '" + empresa + "'";
+            }
+            if (precio > 0) {
+                query += " And P.PrecioGanancia = " + precio + "";
+            }
+            if (fecha != null) {
+                query += " And P.FechaIngreso = '" + fecha.toString() + "'";
+            }
+            if (!categoria.equals("")) {
+                query += " And CT.Descripcion = '" + categoria + "'";
+            }
+
+            try {
+                st = this.con.createStatement();
+                rs = st.executeQuery(query);
+
+                if (tipoProducto) {
+                    while (rs.next()) {
+                        BL_Producto prod = new BL_Producto();
+                        BL_TallaZapato talla = new BL_TallaZapato();
+
+                        prod.setIdProducto(rs.getInt("IdProducto"));
+                        prod.setCodigoUnico(rs.getString("CodigoUnico"));
+                        prod.setFechaIngreso(rs.getDate("FechaIngreso"));
+                        prod.setColor(rs.getString("Color"));
+                        prod.setMarca(rs.getString("Marca"));
+                        prod.setEmpresa(rs.getString("Empresa"));
+                        prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
+                        prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
+                        prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                        prod.setDescripcion(rs.getString("Descripcion"));
+                        prod.setCantidad(rs.getInt("Cantidad"));
+                        prod.setEsZapato(true);
+
+                        talla.setTalla(rs.getDouble("Talla"));
+                        talla.setGeneroZapato(rs.getString("Genero"));
+                        talla.setCategoriaZapato(rs.getString("Categoria"));
+
+                        prod.setTallaZapato(talla);
+
+                        manejador.Agregar(prod);
+                    }
+                } else {
+                    while (rs.next()) {
+                        BL_Producto prod = new BL_Producto();
+
+                        prod.setIdProducto(rs.getInt("IdProducto"));
+                        prod.setCodigoUnico(rs.getString("CodigoUnico"));
+                        prod.setFechaIngreso(rs.getDate("FechaIngreso"));
+                        prod.setColor(rs.getString("Color"));
+                        prod.setMarca(rs.getString("Marca"));
+                        prod.setEmpresa(rs.getString("Empresa"));
+                        prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
+                        prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
+                        prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                        prod.setDescripcion(rs.getString("Descripcion"));
+                        prod.setCantidad(rs.getInt("Cantidad"));
+                        prod.setEsZapato(false);
+                        manejador.Agregar(prod);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        } // Cierre del for por si la busquedas de tipo de producto es cualquiera
 
         cerrarConexion();
         return manejador.ObtenerListaProductos();
