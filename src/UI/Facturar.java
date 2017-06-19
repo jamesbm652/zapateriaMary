@@ -27,6 +27,7 @@ public class Facturar extends javax.swing.JFrame {
      * Creates new form Facturar
      */
     public Facturar() {
+        //Holaaaaa
         initComponents();
         
         modelo = (DefaultTableModel) tablaInventario.getModel();
