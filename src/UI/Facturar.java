@@ -56,6 +56,10 @@ public class Facturar extends javax.swing.JFrame {
              @Override
              public void keyReleased (KeyEvent evt){
                 String cad = cbx_Cedula.getEditor().getItem().toString();
+                
+                 if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+                     buscar(cad);
+                 }
                 if ((evt.getKeyCode() >= 65 && evt.getKeyCode() <=90) || (evt.getKeyCode()>=96 && evt.getKeyCode()<=105) || evt.getKeyCode() == 8 || (evt.getKeyCode()>=48 && evt.getKeyCode()<=57)) {
                    cbx_Cedula.setModel(obtenerListaComboBox(cad));
                    if (cbx_Cedula.getItemCount()>0) {
@@ -87,6 +91,14 @@ public class Facturar extends javax.swing.JFrame {
         return model;
     }
 
+    private void buscar(String cad){
+        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
+            if (c.getCedula().contains(cad)) {
+                txt_Senor.setText(c.getNombreCompleto());
+                txt_Direccion.setText(c.getDireccion());
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,8 +144,8 @@ public class Facturar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txt_Senor = new javax.swing.JTextField();
+        txt_Direccion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
@@ -400,11 +412,11 @@ public class Facturar extends javax.swing.JFrame {
         jLabel10.setText("Dirección:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 97, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(237, 237, 237));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 58, 414, -1));
+        txt_Senor.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 58, 414, -1));
 
-        jTextField3.setBackground(new java.awt.Color(237, 237, 237));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 96, 394, -1));
+        txt_Direccion.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 96, 394, -1));
 
         jLabel11.setBackground(new java.awt.Color(51, 51, 51));
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
@@ -620,8 +632,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel lbl_Categoria;
@@ -629,10 +639,12 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Talla;
     private javax.swing.JTable tablaInventario;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txt_Direccion;
     private javax.swing.JTextField txt_Empresa;
     private com.toedter.calendar.JDateChooser txt_Fecha;
     private javax.swing.JTextField txt_Marca;
     private javax.swing.JTextField txt_Precio;
+    private javax.swing.JTextField txt_Senor;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;
     // End of variables declaration//GEN-END:variables
