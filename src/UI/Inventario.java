@@ -115,11 +115,11 @@ public class Inventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta", "HiddenID"
+                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta", "HiddenID", "Genero"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -353,6 +353,11 @@ public class Inventario extends javax.swing.JFrame {
             fila[3] = listaParaMostrar.get(i).getFechaIngreso().toString();
             fila[4] = listaParaMostrar.get(i).getPrecioGanancia();
             fila[5] = i;
+            if (listaParaMostrar.get(i).isEsZapato()) {
+                fila[6] = "Zapato";
+            }else{
+                fila[6] = "Bolso";
+            }
 
             modelo.addRow(fila);
         }
