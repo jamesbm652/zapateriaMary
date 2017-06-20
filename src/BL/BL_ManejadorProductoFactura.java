@@ -21,11 +21,15 @@ public class BL_ManejadorProductoFactura {
         listaProdFactura.add(prod);
     }
     
-    public void Eliminar(BL_Producto producto) {
+    public void Eliminar(BL_ProductoFactura producto) {
         listaProdFactura.remove(producto);
     }
     
     public ArrayList<BL_ProductoFactura> ObtenerLista(){
         return listaProdFactura;
+    }
+    
+    public void setearLista(ArrayList<BL_ProductoFactura> listaNueva){
+        listaProdFactura = listaNueva;
     }
 }
