@@ -9,6 +9,10 @@ import BL.BL_Cliente;
 import BL.BL_ManejadorCliente;
 import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
+import BL.BL_ManejadorProductoFactura;
+import BL.BL_ProductoFactura;
+import BL.BL_Cliente;
+import BL.BL_ProductoFactura;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
@@ -29,64 +33,76 @@ public class Facturar extends javax.swing.JFrame {
     ArrayList<BL_Producto> listaTotalProductos = new ArrayList<BL_Producto>();
     BL_ManejadorProducto manejador = new BL_ManejadorProducto();
     BL_ManejadorCliente manejadorCliente = new BL_ManejadorCliente();
+    BL_ManejadorProductoFactura manejadorDetalles = new BL_ManejadorProductoFactura();
     DefaultTableModel modelo;
+    DefaultTableModel modeloDetalles;
+
     /**
-     * Creates new form 
+     * Creates new form
      */
     public Facturar() {
         //Holaaaaa
         initComponents();
-        
+
         modelo = (DefaultTableModel) tablaInventario.getModel();
+        modeloDetalles = (DefaultTableModel) tablaDetalles.getModel();
         jpanBusquedaAvanzada.setVisible(false);
 
-            manejador.CargarProductos();
-            listaTotalProductos = manejador.ObtenerListaProductos();
+        manejador.CargarProductos();
+        listaTotalProductos = manejador.ObtenerListaProductos();
 
         cargarProductosEnTabla(listaTotalProductos);
 
         ocultarColumnaID();
-        
+
         // Combo box autoCompletar
         comboBoxAutocompletar();
     }
-    
-    private void comboBoxAutocompletar(){
+
+    private void comboBoxAutocompletar() {
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-             @Override
-             public void keyReleased (KeyEvent evt){
+            @Override
+            public void keyReleased(KeyEvent evt) {
                 String cad = cbx_Cedula.getEditor().getItem().toString();
-                if ((evt.getKeyCode() >= 65 && evt.getKeyCode() <=90) || (evt.getKeyCode()>=96 && evt.getKeyCode()<=105) || evt.getKeyCode() == 8 || (evt.getKeyCode()>=48 && evt.getKeyCode()<=57)) {
-                   cbx_Cedula.setModel(obtenerListaComboBox(cad));
-                   if (cbx_Cedula.getItemCount()>0) {
-                       cbx_Cedula.showPopup();
-                       if (evt.getKeyCode() != 8) {
-                           ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cad.length(),
-                                   cbx_Cedula.getEditor().getItem().toString().length());
-                       }else{
-                           cbx_Cedula.getEditor().setItem(cad);
-                       }
-                   }else{
-                      cbx_Cedula.addItem(cad);
-                   }
-               }
+                if ((evt.getKeyCode() >= 65 && evt.getKeyCode() <= 90) || (evt.getKeyCode() >= 96 && evt.getKeyCode() <= 105) || evt.getKeyCode() == 8 || (evt.getKeyCode() >= 48 && evt.getKeyCode() <= 57)) {
+                    cbx_Cedula.setModel(obtenerListaComboBox(cad));
+                    if (cbx_Cedula.getItemCount() > 0) {
+                        cbx_Cedula.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(cad.length(),
+                                    cbx_Cedula.getEditor().getItem().toString().length());
+                        } else {
+                            cbx_Cedula.getEditor().setItem(cad);
+                        }
+                    } else {
+                        cbx_Cedula.addItem(cad);
+                    }
+                }
             }
         });
     }
-    
-    private DefaultComboBoxModel obtenerListaComboBox(String cad){
+
+    private DefaultComboBoxModel obtenerListaComboBox(String cad) {
         manejadorCliente.cargarClientes();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        
+
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
             if (c.getCedula().contentEquals(cad)) {
                 model.addElement(c.getCedula());
             }
         }
-        
+
         return model;
     }
 
+    private void buscar(String cad){
+        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
+            if (c.getCedula().contains(cad)) {
+                txt_Senor.setText(c.getNombreCompleto());
+                txt_Direccion.setText(c.getDireccion());
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,19 +140,19 @@ public class Facturar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDetalles = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        btnRegresar1 = new javax.swing.JButton();
+        btnAgregarDetalle = new javax.swing.JButton();
         btnRegresar2 = new javax.swing.JButton();
         btnRegresar3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txt_Senor = new javax.swing.JTextField();
+        txt_Direccion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        txt_PrecioTotal = new javax.swing.JLabel();
+        txt_Cantidad = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btn_Eliminar = new javax.swing.JButton();
@@ -331,18 +347,33 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 11, 10, 570));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Descripción del detalle", "Cantidad a vender.", "Precio de venta", "HiddenId", "HiddenIdOriginal"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaDetalles);
+        if (tablaDetalles.getColumnModel().getColumnCount() > 0) {
+            tablaDetalles.getColumnModel().getColumn(0).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(1).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(2).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(3).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 144, -1, 284));
 
@@ -352,16 +383,16 @@ public class Facturar extends javax.swing.JFrame {
         jLabel6.setText("N° Factura:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
 
-        btnRegresar1.setBackground(new java.awt.Color(177, 177, 177));
-        btnRegresar1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        btnRegresar1.setForeground(new java.awt.Color(51, 51, 51));
-        btnRegresar1.setText("Agregar");
-        btnRegresar1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarDetalle.setBackground(new java.awt.Color(177, 177, 177));
+        btnAgregarDetalle.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        btnAgregarDetalle.setForeground(new java.awt.Color(51, 51, 51));
+        btnAgregarDetalle.setText("Agregar");
+        btnAgregarDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresar1ActionPerformed(evt);
+                btnAgregarDetalleActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, 80, 40));
+        jPanel2.add(btnAgregarDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, 80, 40));
 
         btnRegresar2.setBackground(new java.awt.Color(177, 177, 177));
         btnRegresar2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -400,11 +431,11 @@ public class Facturar extends javax.swing.JFrame {
         jLabel10.setText("Dirección:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 97, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(237, 237, 237));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 58, 414, -1));
+        txt_Senor.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 58, 414, -1));
 
-        jTextField3.setBackground(new java.awt.Color(237, 237, 237));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 96, 394, -1));
+        txt_Direccion.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 96, 394, -1));
 
         jLabel11.setBackground(new java.awt.Color(51, 51, 51));
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
@@ -412,12 +443,12 @@ public class Facturar extends javax.swing.JFrame {
         jLabel11.setText("Total:");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 489, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("₡ 1800000");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1081, 481, 131, -1));
-        jPanel2.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, 30));
+        txt_PrecioTotal.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+        txt_PrecioTotal.setForeground(new java.awt.Color(255, 0, 0));
+        txt_PrecioTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txt_PrecioTotal.setText("₡ ");
+        jPanel2.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1092, 481, 120, -1));
+        jPanel2.add(txt_Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 50, 30));
 
         jLabel13.setText("Cantidad a Agregar:");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
@@ -454,34 +485,40 @@ public class Facturar extends javax.swing.JFrame {
         Date fecha = null;
         String genero = cbx_Genero.getSelectedItem().toString();
         String categoria = cbx_Categoria.getSelectedItem().toString();
-        if (genero.equals("Cualquiera")) genero = "";
-        if (categoria.equals("Cualquiera")) categoria = ""; 
-        
+        if (genero.equals("Cualquiera")) {
+            genero = "";
+        }
+        if (categoria.equals("Cualquiera")) {
+            categoria = "";
+        }
+
         if (!txt_Talla.getText().equals("")) {
             talla = Double.parseDouble(txt_Talla.getText());
         }
         if (!txt_Precio.getText().equals("")) {
             precio = Double.parseDouble(txt_Precio.getText());
         }
-        if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) ambos = true;
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) {
+            ambos = true;
+        }
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             tipoProducto = false;
             genero = "";
             categoria = "";
         }
-        if(txt_Fecha.getDate() != null){
+        if (txt_Fecha.getDate() != null) {
             fecha = new java.sql.Date(txt_Fecha.getDate().getTime());
         }
-        
+
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
-        
+
         listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, (java.sql.Date) txt_Fecha.getDate(), categoria, tipoProducto, ambos);
 
         limpiarTabla(modelo);
 
         cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
     }//GEN-LAST:event_btnBuscarActionPerformed
-    
+
     private void btnBusquedaAvanzadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaMouseClicked
         if (jpanBusquedaAvanzada.isVisible()) {
             jpanBusquedaAvanzada.setVisible(false);
@@ -494,11 +531,47 @@ public class Facturar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBusquedaAvanzadaActionPerformed
 
-    private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
-        this.dispose();
-        Menu_Principal mp = new Menu_Principal();
-        mp.setVisible(true);
-    }//GEN-LAST:event_btnRegresar1ActionPerformed
+    private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
+        if (tablaInventario.getSelectedRow() >= 0) {
+            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            BL_Producto prod = listaTotalProductos.get(id);
+            int cantidad = Integer.parseInt(txt_Cantidad.getValue().toString());
+            ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
+            boolean existente = false;
+
+            if ((prod.getCantidad() >= cantidad) && (cantidad > 0)) {
+                for (int i = 0; i < listaDetalles.size(); i++) {
+                    if (listaDetalles.get(i).getIdProducto() == prod.getIdProducto()) {
+                        listaDetalles.get(i).setCantidadVendida(listaDetalles.get(i).getCantidadVendida() + cantidad);
+                        listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta() + 
+                                (cantidad * prod.getPrecioGanancia()));
+                        manejadorDetalles.setearLista(listaDetalles);
+                        existente = true;
+                    }
+                }
+                if (!existente) {
+
+                    BL_ProductoFactura prodDetalle = new BL_ProductoFactura();
+
+                    String descDetalle = prod.getDescripcion() + "\n" + prod.getMarca()
+                            + "\n" + prod.getColor() + "";
+                    prodDetalle.setDescripcion(descDetalle);
+                    prodDetalle.setCantidadVendida(cantidad);
+                    prodDetalle.setIdProducto(prod.getIdProducto());
+                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioGanancia());
+                    manejadorDetalles.Agregar(prodDetalle);
+                }
+                    listaTotalProductos.get(id).setCantidad(listaTotalProductos.get(id).getCantidad() - cantidad);
+                    cargarProductosEnTabla(listaTotalProductos);
+                    cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista(), id);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgregarDetalleActionPerformed
 
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
 
@@ -517,7 +590,7 @@ public class Facturar extends javax.swing.JFrame {
         tablaInventario.setRowSorter(trsFiltro);
         trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
     }
-    
+
     private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
 
@@ -526,7 +599,7 @@ public class Facturar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     private void ocultarColumnaID() {
         tablaInventario.getColumn("HiddenID").setMaxWidth(0);
         tablaInventario.getColumn("HiddenID").setMinWidth(0);
@@ -534,7 +607,20 @@ public class Facturar extends javax.swing.JFrame {
         tablaInventario.getColumn("HiddenID").setWidth(0);
         tablaInventario.getColumn("HiddenID").setResizable(false);
     }
-    
+
+    private void ocultarColumnaDetalles() {
+        tablaDetalles.getColumn("HiddenId").setMaxWidth(0);
+        tablaDetalles.getColumn("HiddenId").setMinWidth(0);
+        tablaDetalles.getColumn("HiddenId").setPreferredWidth(0);
+        tablaDetalles.getColumn("HiddenId").setWidth(0);
+        tablaDetalles.getColumn("HiddenId").setResizable(false);
+        tablaDetalles.getColumn("HiddenIdOriginal").setMaxWidth(0);
+        tablaDetalles.getColumn("HiddenIdOriginal").setMinWidth(0);
+        tablaDetalles.getColumn("HiddenIdOriginal").setPreferredWidth(0);
+        tablaDetalles.getColumn("HiddenIdOriginal").setWidth(0);
+        tablaDetalles.getColumn("HiddenIdOriginal").setResizable(false);
+    }
+
     private void cargarProductosEnTabla(ArrayList<BL_Producto> listaParaMostrar) {
 
         limpiarTabla(modelo);
@@ -549,7 +635,7 @@ public class Facturar extends javax.swing.JFrame {
             fila[5] = i;
             if (listaParaMostrar.get(i).isEsZapato()) {
                 fila[6] = "Zapato";
-            }else{
+            } else {
                 fila[6] = "Bolso";
             }
 
@@ -558,13 +644,42 @@ public class Facturar extends javax.swing.JFrame {
         listaTotalProductos = listaParaMostrar;
     }
 
+    private void cargarProductosEnTablaDetalles(ArrayList<BL_ProductoFactura> listaParaMostrar, int idOriginal) {
+
+        limpiarTablaDetalles(modeloDetalles);
+        Object[] fila = new Object[modeloDetalles.getColumnCount()];
+        int totalPagar = 0;
+
+        for (int i = 0; i < listaParaMostrar.size(); i++) {
+            fila[0] = listaParaMostrar.get(i).getDescripcion();
+            fila[1] = listaParaMostrar.get(i).getCantidadVendida();
+            fila[2] = listaParaMostrar.get(i).getPrecioVenta();
+            fila[3] = i;
+            fila[4] = idOriginal;
+            totalPagar += listaParaMostrar.get(i).getPrecioVenta();
+            modeloDetalles.addRow(fila);
+        }
+        txt_PrecioTotal.setText("₡ " + totalPagar + "");
+        ocultarColumnaDetalles();
+        manejadorDetalles.setearLista(listaParaMostrar);
+    }
+
     private void limpiarTabla(DefaultTableModel modelo) {
         int filas = tablaInventario.getRowCount();
         for (int i = 0; filas > i; i++) {
             modelo.removeRow(0);
         }
     }
-    
+
+    private void limpiarTablaDetalles(DefaultTableModel modelo) {
+        int filas = tablaDetalles.getRowCount();
+        if (filas > 0) {
+            for (int i = 0; filas > i; i++) {
+                modelo.removeRow(0);
+            }
+        }
+    }
+
     private void cbx_TipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_TipoProductoActionPerformed
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             txt_Talla.setText("");
@@ -590,9 +705,9 @@ public class Facturar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresar3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarDetalle;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBusquedaAvanzada;
-    private javax.swing.JButton btnRegresar1;
     private javax.swing.JButton btnRegresar2;
     private javax.swing.JButton btnRegresar3;
     private javax.swing.JButton btn_Eliminar;
@@ -603,7 +718,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -618,21 +732,26 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel lbl_Categoria;
     private javax.swing.JLabel lbl_Genero;
     private javax.swing.JLabel lbl_Talla;
+    private javax.swing.JTable tablaDetalles;
     private javax.swing.JTable tablaInventario;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JSpinner txt_Cantidad;
+    private javax.swing.JTextField txt_Direccion;
     private javax.swing.JTextField txt_Empresa;
     private com.toedter.calendar.JDateChooser txt_Fecha;
     private javax.swing.JTextField txt_Marca;
     private javax.swing.JTextField txt_Precio;
+    private javax.swing.JLabel txt_PrecioTotal;
+    private javax.swing.JTextField txt_Senor;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;
     // End of variables declaration//GEN-END:variables
