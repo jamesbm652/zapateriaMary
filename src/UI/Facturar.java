@@ -447,7 +447,7 @@ public class Facturar extends javax.swing.JFrame {
         txt_PrecioTotal.setForeground(new java.awt.Color(255, 0, 0));
         txt_PrecioTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txt_PrecioTotal.setText("₡ ");
-        jPanel2.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1172, 481, 40, -1));
+        jPanel2.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1092, 481, 120, -1));
         jPanel2.add(txt_Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 50, 30));
 
         jLabel13.setText("Cantidad a Agregar:");
