@@ -161,7 +161,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
-        labAtras = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
@@ -172,6 +171,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
@@ -288,7 +288,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, 40));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 80, 40));
 
         txtFechaIngreso.setBackground(new java.awt.Color(237, 237, 237));
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 170, 30));
@@ -362,7 +362,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 btnGenerarCodigoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
+        jPanel1.add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, 40));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -406,17 +406,6 @@ public class DetalleProducto extends javax.swing.JFrame {
             }
         });
         jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
-
-        labAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/backArrow.png"))); // NOI18N
-        labAtras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labAtrasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labAtrasMouseEntered(evt);
-            }
-        });
-        jPanel4.add(labAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
@@ -544,15 +533,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labCloseMouseEntered
 
-    private void labAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseClicked
-        this.dispose();
-        new Inventario(lista).setVisible(true);
-    }//GEN-LAST:event_labAtrasMouseClicked
-
-    private void labAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseEntered
-        labAtras.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labAtrasMouseEntered
-
     private void txtImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpuestoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtImpuestoActionPerformed
@@ -599,7 +579,6 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JLabel labAtras;
     private javax.swing.JLabel labClose;
     private javax.swing.JLabel labInstruccion;
     private javax.swing.JRadioButton rdbBolso;
