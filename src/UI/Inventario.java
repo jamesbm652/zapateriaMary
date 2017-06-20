@@ -7,6 +7,8 @@ package UI;
 
 import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -17,7 +19,11 @@ import java.util.ArrayList;
 import java.sql.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -37,6 +43,8 @@ public class Inventario extends javax.swing.JFrame {
     public Inventario(ArrayList<BL_Producto> lista) {
         initComponents();
         modelo = (DefaultTableModel) tablaInventario.getModel();
+        tablaInventario.getTableHeader().setDefaultRenderer(new HeaderColor());
+        
         jpanBusquedaAvanzada.setVisible(false);
 
         if (lista == null) {
@@ -63,7 +71,6 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
-        labAtras = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
         labBuscar = new javax.swing.JLabel();
@@ -130,22 +137,12 @@ public class Inventario extends javax.swing.JFrame {
                 labCloseMouseEntered(evt);
             }
         });
-        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, -1, -1));
-
-        labAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/backArrow.png"))); // NOI18N
-        labAtras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labAtrasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labAtrasMouseEntered(evt);
-            }
-        });
-        jPanel4.add(labAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 18, -1, 20));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 50));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
@@ -306,12 +303,12 @@ public class Inventario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaInventario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 197, 708, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 197, 708, 220));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 47, 312, 10));
 
-        btnPanelModificar.setBackground(new java.awt.Color(33, 150, 243));
+        btnPanelModificar.setBackground(new java.awt.Color(102, 102, 102));
         btnPanelModificar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -332,9 +329,9 @@ public class Inventario extends javax.swing.JFrame {
         jLabel10.setText("Modificar Producto");
         btnPanelModificar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 150, 40));
+        jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 150, 40));
 
-        btnPanelEliminar.setBackground(new java.awt.Color(211, 47, 47));
+        btnPanelEliminar.setBackground(new java.awt.Color(102, 102, 102));
         btnPanelEliminar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -356,7 +353,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, 150, 40));
 
-        btnPanelAgregar.setBackground(new java.awt.Color(56, 142, 60));
+        btnPanelAgregar.setBackground(new java.awt.Color(102, 102, 102));
         btnPanelAgregar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -366,19 +363,35 @@ public class Inventario extends javax.swing.JFrame {
                 btnPanelAgregarMouseEntered(evt);
             }
         });
-        btnPanelAgregar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
-        btnPanelAgregar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Agregar Producto");
-        btnPanelAgregar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        javax.swing.GroupLayout btnPanelAgregarLayout = new javax.swing.GroupLayout(btnPanelAgregar);
+        btnPanelAgregar.setLayout(btnPanelAgregarLayout);
+        btnPanelAgregarLayout.setHorizontalGroup(
+            btnPanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnPanelAgregarLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel7))
+        );
+        btnPanelAgregarLayout.setVerticalGroup(
+            btnPanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnPanelAgregarLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(btnPanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)))
+        );
 
         jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, 150, 40));
 
-        btnPanelDetalle.setBackground(new java.awt.Color(234, 175, 0));
+        btnPanelDetalle.setBackground(new java.awt.Color(102, 102, 102));
         btnPanelDetalle.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -398,7 +411,7 @@ public class Inventario extends javax.swing.JFrame {
         jLabel14.setText("Ver Detalles");
         btnPanelDetalle.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jPanel1.add(btnPanelDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 150, 40));
+        jPanel1.add(btnPanelDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 150, 40));
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
@@ -584,15 +597,6 @@ public class Inventario extends javax.swing.JFrame {
         btnPanelDetalle.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelDetalleMouseEntered
 
-    private void labAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseEntered
-        labAtras.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labAtrasMouseEntered
-
-    private void labAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseClicked
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_labAtrasMouseClicked
-
     private void labDropdownMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labDropdownMouseEntered
         labDropdown.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labDropdownMouseEntered
@@ -650,6 +654,20 @@ public class Inventario extends javax.swing.JFrame {
         tablaInventario.setRowSorter(trsFiltro);
         trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
     }
+    
+    static public class HeaderColor extends DefaultTableCellRenderer{
+        public HeaderColor(){
+            setOpaque(true);
+        }
+        public Component getTableCellRendererComponent(JTable tabla,Object value,boolean selected,boolean fused,int row,int column){
+            super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
+            setBorder(new LineBorder(Color.BLACK, 1));
+            setForeground(Color.WHITE);
+            setBackground(new java.awt.Color(0,105,120));
+            setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
+            return this;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnPanelAgregar;
@@ -684,7 +702,6 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPanel jpanBusquedaAvanzada;
-    private javax.swing.JLabel labAtras;
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel labBuscarAvanzada;
     private javax.swing.JLabel labClose;

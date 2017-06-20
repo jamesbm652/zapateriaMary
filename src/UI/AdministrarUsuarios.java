@@ -75,7 +75,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
-        labAtras = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mantenimiento de Usuarios");
@@ -102,7 +101,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 3)); // NOI18N
         jSeparator1.setMinimumSize(new java.awt.Dimension(50, 1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, 402));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, 380));
 
         labMensajeAlUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         labMensajeAlUsuario.setForeground(new java.awt.Color(102, 102, 102));
@@ -110,6 +109,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         getContentPane().add(labMensajeAlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBuscar.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
@@ -254,18 +254,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                 labCloseMouseEntered(evt);
             }
         });
-        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
-
-        labAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/backArrow.png"))); // NOI18N
-        labAtras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labAtrasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labAtrasMouseEntered(evt);
-            }
-        });
-        jPanel4.add(labAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, 30));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 50));
 
@@ -307,15 +296,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
         labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labCloseMouseEntered
-
-    private void labAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseClicked
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_labAtrasMouseClicked
-
-    private void labAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseEntered
-        labAtras.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labAtrasMouseEntered
 
     private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
         // TODO add your handling code here:
@@ -417,7 +397,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JLabel labAtras;
     private javax.swing.JLabel labClose;
     private javax.swing.JLabel labMensajeAlUsuario;
     private javax.swing.JLabel labTituloAccion;
