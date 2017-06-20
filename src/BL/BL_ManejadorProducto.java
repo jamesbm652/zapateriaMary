@@ -32,8 +32,8 @@ public class BL_ManejadorProducto {
         listaProducto = new DAO.DAO_Producto().cargarTodosProductos();
     }
 
-    public void BuscarPorFiltro(String genero, String color, double talla, String marca, String empresa, double precio, Date fecha, String categoria, boolean tipoProd) {
-        listaProducto = new DAO.DAO_Producto().cargarProductosPorFiltro(genero, color, talla, marca, empresa, precio, fecha, categoria, tipoProd);
+    public void BuscarPorFiltro(String genero, String color, double talla, String marca, String empresa, double precio, Date fecha, String categoria, boolean tipoProd, boolean ambos) {
+        listaProducto = new DAO.DAO_Producto().cargarProductosPorFiltro(genero, color, talla, marca, empresa, precio, fecha, categoria, tipoProd, ambos);
     }
 
     public void metodoPrueba() {

@@ -5,13 +5,20 @@
  */
 package UI;
 
+import BL.BL_Cliente;
+import BL.BL_ManejadorCliente;
 import BL.BL_ManejadorProducto;
 import BL.BL_Producto;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -21,11 +28,13 @@ public class Facturar extends javax.swing.JFrame {
 
     ArrayList<BL_Producto> listaTotalProductos = new ArrayList<BL_Producto>();
     BL_ManejadorProducto manejador = new BL_ManejadorProducto();
+    BL_ManejadorCliente manejadorCliente = new BL_ManejadorCliente();
     DefaultTableModel modelo;
     /**
-     * Creates new form Facturar
+     * Creates new form 
      */
     public Facturar() {
+        //Holaaaaa
         initComponents();
         
         modelo = (DefaultTableModel) tablaInventario.getModel();
@@ -38,8 +47,58 @@ public class Facturar extends javax.swing.JFrame {
 
         ocultarColumnaID();
         
+        // Combo box autoCompletar
+        comboBoxAutocompletar();
+    }
+    
+    private void comboBoxAutocompletar(){
+        cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+             @Override
+             public void keyReleased (KeyEvent evt){
+                String cad = cbx_Cedula.getEditor().getItem().toString();
+                
+                 if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+                     buscar(cad);
+                 }
+                if ((evt.getKeyCode() >= 65 && evt.getKeyCode() <=90) || (evt.getKeyCode()>=96 && evt.getKeyCode()<=105) || evt.getKeyCode() == 8 || (evt.getKeyCode()>=48 && evt.getKeyCode()<=57)) {
+                   cbx_Cedula.setModel(obtenerListaComboBox(cad));
+                   if (cbx_Cedula.getItemCount()>0) {
+                       cbx_Cedula.showPopup();
+                       if (evt.getKeyCode() != 8) {
+                           ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cad.length(),
+                                   cbx_Cedula.getEditor().getItem().toString().length());
+                       }else{
+                           cbx_Cedula.getEditor().setItem(cad);
+                       }
+                   }else{
+                      cbx_Cedula.addItem(cad);
+                   }
+               }
+            }
+        });
+    }
+    
+    private DefaultComboBoxModel obtenerListaComboBox(String cad){
+        manejadorCliente.cargarClientes();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
+            if (c.getCedula().contentEquals(cad)) {
+                model.addElement(c.getCedula());
+            }
+        }
+        
+        return model;
     }
 
+    private void buscar(String cad){
+        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
+            if (c.getCedula().contains(cad)) {
+                txt_Senor.setText(c.getNombreCompleto());
+                txt_Direccion.setText(c.getDireccion());
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,9 +127,9 @@ public class Facturar extends javax.swing.JFrame {
         txt_Empresa = new javax.swing.JTextField();
         txt_Precio = new javax.swing.JTextField();
         lbl_Categoria = new javax.swing.JLabel();
-        cbx_Categoria = new javax.swing.JComboBox<String>();
+        cbx_Categoria = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        cbx_TipoProducto = new javax.swing.JComboBox<String>();
+        cbx_TipoProducto = new javax.swing.JComboBox<>();
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -85,11 +144,15 @@ public class Facturar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txt_Senor = new javax.swing.JTextField();
+        txt_Direccion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        btn_Eliminar = new javax.swing.JButton();
+        cbx_Cedula = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -152,11 +215,11 @@ public class Facturar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta", "HiddenID"
+                "Codigo Único", "Descripción", "Cantidad", "Fecha Ingreso", "Precio Venta", "HiddenID", "Tipo  Producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -208,7 +271,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Talla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         cbx_Genero.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hombre", "Mujer" }));
+        cbx_Genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Hombre", "Mujer" }));
         jpanBusquedaAvanzada.add(cbx_Genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 13, 143, -1));
 
         txt_Talla.setBackground(new java.awt.Color(237, 237, 237));
@@ -243,7 +306,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 54, -1, -1));
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 52, 137, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -252,7 +315,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
@@ -275,8 +338,10 @@ public class Facturar extends javax.swing.JFrame {
         getContentPane().add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 710, 120));
 
         jPanel2.setBackground(new java.awt.Color(175, 201, 201));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 11, 10, 570));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,10 +356,13 @@ public class Facturar extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 144, -1, 284));
+
         jLabel6.setBackground(new java.awt.Color(51, 51, 51));
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
 
         btnRegresar1.setBackground(new java.awt.Color(177, 177, 177));
         btnRegresar1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -305,6 +373,7 @@ public class Facturar extends javax.swing.JFrame {
                 btnRegresar1ActionPerformed(evt);
             }
         });
+        jPanel2.add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, 80, 40));
 
         btnRegresar2.setBackground(new java.awt.Color(177, 177, 177));
         btnRegresar2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -315,6 +384,7 @@ public class Facturar extends javax.swing.JFrame {
                 btnRegresar2ActionPerformed(evt);
             }
         });
+        jPanel2.add(btnRegresar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 541, 70, 40));
 
         btnRegresar3.setBackground(new java.awt.Color(177, 177, 177));
         btnRegresar3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -325,110 +395,53 @@ public class Facturar extends javax.swing.JFrame {
                 btnRegresar3ActionPerformed(evt);
             }
         });
+        jPanel2.add(btnRegresar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1122, 541, 90, 40));
 
         jLabel7.setText("0");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(823, 20, 40, -1));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Señor:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 59, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(51, 51, 51));
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Dirección:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 97, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(237, 237, 237));
+        txt_Senor.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 58, 414, -1));
 
-        jTextField2.setBackground(new java.awt.Color(237, 237, 237));
-
-        jTextField3.setBackground(new java.awt.Color(237, 237, 237));
+        txt_Direccion.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 96, 394, -1));
 
         jLabel11.setBackground(new java.awt.Color(51, 51, 51));
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Total:");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 489, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("₡ 1800000");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1081, 481, 131, -1));
+        jPanel2.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(560, 560, 560)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnRegresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnRegresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField3))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(225, 225, 225)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(btnRegresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnRegresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addGap(28, 28, 28)
-                                .addComponent(btnRegresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(19, 19, 19))
-        );
+        jLabel13.setText("Cantidad a Agregar:");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
+
+        jLabel14.setText("Cedula:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, -1, 20));
+
+        btn_Eliminar.setText("Eliminar");
+        jPanel2.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 440, -1, 30));
+
+        cbx_Cedula.setEditable(true);
+        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 20, 130, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 610));
 
@@ -447,26 +460,34 @@ public class Facturar extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         boolean tipoProducto = true;
+        boolean ambos = false;
         double talla = 0;
         double precio = 0;
+        Date fecha = null;
         String genero = cbx_Genero.getSelectedItem().toString();
         String categoria = cbx_Categoria.getSelectedItem().toString();
-
+        if (genero.equals("Cualquiera")) genero = "";
+        if (categoria.equals("Cualquiera")) categoria = ""; 
+        
         if (!txt_Talla.getText().equals("")) {
             talla = Double.parseDouble(txt_Talla.getText());
         }
         if (!txt_Precio.getText().equals("")) {
             precio = Double.parseDouble(txt_Precio.getText());
         }
-
-        if (cbx_TipoProducto.getSelectedIndex() == 1) {
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) ambos = true;
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             tipoProducto = false;
             genero = "";
             categoria = "";
         }
-
+        if(txt_Fecha.getDate() != null){
+            fecha = new java.sql.Date(txt_Fecha.getDate().getTime());
+        }
+        
         BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
-        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, (java.sql.Date) txt_Fecha.getDate(), categoria, tipoProducto);
+        
+        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, (java.sql.Date) txt_Fecha.getDate(), categoria, tipoProducto, ambos);
 
         limpiarTabla(modelo);
 
@@ -538,6 +559,11 @@ public class Facturar extends javax.swing.JFrame {
             fila[3] = listaParaMostrar.get(i).getFechaIngreso().toString();
             fila[4] = listaParaMostrar.get(i).getPrecioGanancia();
             fila[5] = i;
+            if (listaParaMostrar.get(i).isEsZapato()) {
+                fila[6] = "Zapato";
+            }else{
+                fila[6] = "Bolso";
+            }
 
             modelo.addRow(fila);
         }
@@ -552,11 +578,13 @@ public class Facturar extends javax.swing.JFrame {
     }
     
     private void cbx_TipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_TipoProductoActionPerformed
-        if (cbx_TipoProducto.getSelectedIndex() == 1) {
+        if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             txt_Talla.setText("");
             txt_Talla.setEnabled(false);
             cbx_Categoria.setEnabled(false);
             cbx_Genero.setEnabled(false);
+            cbx_Categoria.setSelectedItem("Cualquiera");
+            cbx_Genero.setSelectedItem("Cualquiera");
         } else {
             txt_Talla.setEnabled(true);
             cbx_Categoria.setEnabled(true);
@@ -579,13 +607,17 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar1;
     private javax.swing.JButton btnRegresar2;
     private javax.swing.JButton btnRegresar3;
+    private javax.swing.JButton btn_Eliminar;
     private javax.swing.JComboBox<String> cbx_Categoria;
+    private javax.swing.JComboBox<String> cbx_Cedula;
     private javax.swing.JComboBox cbx_Genero;
     private javax.swing.JComboBox<String> cbx_TipoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -598,10 +630,8 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel lbl_Categoria;
@@ -609,10 +639,12 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Talla;
     private javax.swing.JTable tablaInventario;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txt_Direccion;
     private javax.swing.JTextField txt_Empresa;
     private com.toedter.calendar.JDateChooser txt_Fecha;
     private javax.swing.JTextField txt_Marca;
     private javax.swing.JTextField txt_Precio;
+    private javax.swing.JTextField txt_Senor;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;
     // End of variables declaration//GEN-END:variables

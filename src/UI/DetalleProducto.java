@@ -7,6 +7,7 @@ package UI;
 
 import BL.BL_Producto;
 import BL.BL_TallaZapato;
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.sql.Date;
 import javax.swing.JOptionPane;
@@ -114,6 +115,7 @@ public class DetalleProducto extends javax.swing.JFrame {
     private void initComponents() {
 
         grup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         labInstruccion = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -131,7 +133,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtPrecioVenta = new javax.swing.JTextField();
         txtImpuesto = new javax.swing.JTextField();
         txtEmpresa = new javax.swing.JTextField();
-        btnAtras = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         txtFechaIngreso = new com.toedter.calendar.JDateChooser();
         rdbBolso = new javax.swing.JRadioButton();
@@ -146,123 +147,137 @@ public class DetalleProducto extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         btnGenerarCodigo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        labClose = new javax.swing.JLabel();
+        labAtras = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
-        setMinimumSize(new java.awt.Dimension(590, 430));
-        setPreferredSize(new java.awt.Dimension(590, 430));
+        setMinimumSize(new java.awt.Dimension(600, 450));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(600, 450));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         labInstruccion.setForeground(new java.awt.Color(102, 102, 102));
         labInstruccion.setText("Ingrese los datos del nuevo producto:");
-        getContentPane().add(labInstruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        jPanel1.add(labInstruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Descripción:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 96, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Fecha de Ingreso:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Color:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Marca:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel7.setText("Precio a costo:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jLabel7.setText("Precio a");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 20));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Precio de venta:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+        jLabel8.setText("Precio de");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Empresa:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 50, -1));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Impuesto:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
-        txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 93, 480, -1));
+        txtDescripcion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 480, 30));
 
-        txtColor.setBackground(new java.awt.Color(237, 237, 237));
         txtColor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtColor.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtColorActionPerformed(evt);
             }
         });
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 80, -1));
+        jPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 137, 100, 20));
 
-        txtPrecioCosto.setBackground(new java.awt.Color(237, 237, 237));
         txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioCostoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 109, -1));
+        jPanel1.add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 267, 110, 20));
 
         txtCodigo.setEditable(false);
-        txtCodigo.setBackground(new java.awt.Color(237, 237, 237));
+        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtCodigo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtCodigo.setEnabled(false);
-        getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 45, 220, 30));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 200, 30));
 
-        txtMarca.setBackground(new java.awt.Color(237, 237, 237));
         txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 130, -1));
+        txtMarca.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 177, 280, 20));
 
-        txtPrecioVenta.setBackground(new java.awt.Color(237, 237, 237));
         txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioVentaKeyTyped(evt);
             }
         });
-        getContentPane().add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 130, -1));
+        jPanel1.add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 327, 110, 20));
 
-        txtImpuesto.setBackground(new java.awt.Color(237, 237, 237));
         txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtImpuesto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtImpuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtImpuestoActionPerformed(evt);
+            }
+        });
         txtImpuesto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImpuestoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 80, -1));
+        jPanel1.add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 267, 110, 20));
 
-        txtEmpresa.setBackground(new java.awt.Color(237, 237, 237));
         txtEmpresa.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        getContentPane().add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 346, -1));
-
-        btnAtras.setBackground(new java.awt.Color(177, 177, 177));
-        btnAtras.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        btnAtras.setForeground(new java.awt.Color(51, 51, 51));
-        btnAtras.setText("Atrás");
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 329, -1, 40));
+        txtEmpresa.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 217, 280, 20));
 
         btnAgregar.setBackground(new java.awt.Color(177, 177, 177));
         btnAgregar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -273,12 +288,12 @@ public class DetalleProducto extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 328, -1, 40));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, 40));
 
         txtFechaIngreso.setBackground(new java.awt.Color(237, 237, 237));
-        getContentPane().add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 45, 170, 30));
+        jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 170, 30));
 
-        rdbBolso.setBackground(new java.awt.Color(175, 201, 201));
+        rdbBolso.setBackground(new java.awt.Color(255, 255, 255));
         grup1.add(rdbBolso);
         rdbBolso.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbBolso.setText("Bolso");
@@ -287,9 +302,9 @@ public class DetalleProducto extends javax.swing.JFrame {
                 rdbBolsoActionPerformed(evt);
             }
         });
-        getContentPane().add(rdbBolso, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 11, -1, -1));
+        jPanel1.add(rdbBolso, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
-        rdbZapato.setBackground(new java.awt.Color(175, 201, 201));
+        rdbZapato.setBackground(new java.awt.Color(255, 255, 255));
         grup1.add(rdbZapato);
         rdbZapato.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbZapato.setText("Zapato");
@@ -298,45 +313,45 @@ public class DetalleProducto extends javax.swing.JFrame {
                 rdbZapatoActionPerformed(evt);
             }
         });
-        getContentPane().add(rdbZapato, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 11, -1, -1));
+        jPanel1.add(rdbZapato, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Género:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 135, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
-        getContentPane().add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 132, -1, -1));
+        jPanel1.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 110, -1));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Categoría:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 60, -1));
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninos", "Jovenes", "Adulto" }));
-        getContentPane().add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 115, -1));
+        jPanel1.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 110, -1));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("Talla:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
-        txtTalla.setBackground(new java.awt.Color(237, 237, 237));
         txtTalla.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtTalla.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtTalla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTallaKeyTyped(evt);
             }
         });
-        getContentPane().add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
+        jPanel1.add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 217, 110, 20));
 
         txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 70, -1));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Cantidad:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 179, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
 
         btnGenerarCodigo.setBackground(new java.awt.Color(177, 177, 177));
         btnGenerarCodigo.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -347,27 +362,69 @@ public class DetalleProducto extends javax.swing.JFrame {
                 btnGenerarCodigoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, -1));
+        jPanel1.add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Código:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 56, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(175, 201, 201));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 390));
+        jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel15.setText("costo:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel14.setText(" venta:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, -1));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, -1));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 480, 10));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 110, 10));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 100, 10));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 110, 10));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 280, 10));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 280, 10));
+        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 110, 10));
+        jPanel1.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 110, 10));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 600, 390));
+
+        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
+        jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/close.png"))); // NOI18N
+        labClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labCloseMouseEntered(evt);
+            }
+        });
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
+
+        labAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/backArrow.png"))); // NOI18N
+        labAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labAtrasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labAtrasMouseEntered(evt);
+            }
+        });
+        jPanel4.add(labAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-
-        new Inventario(lista).setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
         validarNumeros(evt);
@@ -478,6 +535,28 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtTalla.setEnabled(true);
     }//GEN-LAST:event_rdbZapatoActionPerformed
 
+    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
+        this.dispose();
+        new Menu_Principal().setVisible(true);
+    }//GEN-LAST:event_labCloseMouseClicked
+
+    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
+        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labCloseMouseEntered
+
+    private void labAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseClicked
+        this.dispose();
+        new Inventario(lista).setVisible(true);
+    }//GEN-LAST:event_labAtrasMouseClicked
+
+    private void labAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseEntered
+        labAtras.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labAtrasMouseEntered
+
+    private void txtImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImpuestoActionPerformed
+
     private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
 
@@ -489,7 +568,6 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGenerarCodigo;
     private javax.swing.JComboBox cmbCategoria;
     private javax.swing.JComboBox cmbGenero;
@@ -499,6 +577,8 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -508,6 +588,19 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel labAtras;
+    private javax.swing.JLabel labClose;
     private javax.swing.JLabel labInstruccion;
     private javax.swing.JRadioButton rdbBolso;
     private javax.swing.JRadioButton rdbZapato;
