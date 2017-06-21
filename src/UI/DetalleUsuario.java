@@ -48,7 +48,6 @@ public class DetalleUsuario extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
-        labAtras = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         labTituloAccion = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -89,20 +88,10 @@ public class DetalleUsuario extends javax.swing.JFrame {
         });
         jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
 
-        labAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/backArrow.png"))); // NOI18N
-        labAtras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labAtrasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labAtrasMouseEntered(evt);
-            }
-        });
-        jPanel4.add(labAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
-
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 50));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         labTituloAccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         labTituloAccion.setForeground(new java.awt.Color(102, 102, 102));
@@ -214,7 +203,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                         .addComponent(btnPanelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +236,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPanelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 390, 350));
@@ -264,15 +253,6 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
         labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labCloseMouseEntered
-
-    private void labAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseClicked
-        this.dispose();
-        new AdministrarUsuarios().setVisible(true);
-    }//GEN-LAST:event_labAtrasMouseClicked
-
-    private void labAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAtrasMouseEntered
-        labAtras.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labAtrasMouseEntered
 
     private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
         // TODO add your handling code here:
@@ -356,7 +336,6 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JLabel labAtras;
     private javax.swing.JLabel labClose;
     private javax.swing.JLabel labTituloAccion;
     private javax.swing.JTextField txtContrasena;

@@ -50,7 +50,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         labSalir = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        labClose = new javax.swing.JLabel();
         panelBtnRevisar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -110,17 +109,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(237, 237, 237));
         jLabel2.setText("Zapatería Mary");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 360, -1));
-
-        labClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/close.png"))); // NOI18N
-        labClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labCloseMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labCloseMouseEntered(evt);
-            }
-        });
-        jPanel2.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 100));
 
@@ -442,15 +430,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAbonos.setBackground(new Color(0,180,198));
     }//GEN-LAST:event_panelBtnAbonosMouseEntered
 
-    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
-        this.dispose();
-        new Login().setVisible(true); 
-    }//GEN-LAST:event_labCloseMouseClicked
-
-    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
-        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labCloseMouseEntered
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -469,7 +448,6 @@ public class Menu_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labClose;
     private javax.swing.JLabel labSalir;
     private javax.swing.JPanel panelBtnAbonos;
     private javax.swing.JPanel panelBtnAdministrar;
