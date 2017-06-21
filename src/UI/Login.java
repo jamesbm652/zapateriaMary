@@ -150,7 +150,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/passwordKey.png"))); // NOI18N
 
-        panelbtnIngresar.setBackground(new java.awt.Color(191, 191, 191));
+        panelbtnIngresar.setBackground(new java.awt.Color(0, 57, 66));
         panelbtnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelbtnIngresarMouseClicked(evt);

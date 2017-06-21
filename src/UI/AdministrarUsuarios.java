@@ -240,7 +240,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 760, 440));
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
         jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

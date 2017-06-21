@@ -86,7 +86,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 400));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(0, 57, 66));
         jPanel2.setMinimumSize(new java.awt.Dimension(700, 74));
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 74));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

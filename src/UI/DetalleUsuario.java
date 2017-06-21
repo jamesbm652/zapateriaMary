@@ -72,7 +72,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
         jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
