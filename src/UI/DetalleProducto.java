@@ -7,6 +7,7 @@ package UI;
 
 import BL.BL_Producto;
 import BL.BL_TallaZapato;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.sql.Date;
@@ -40,20 +41,20 @@ public class DetalleProducto extends javax.swing.JFrame {
             habilitarCampos(true);
             labInstruccion.setText("Ingrese los datos del nuevo producto:");
             rdbZapato.setSelected(true);
-            btnAgregar.setText("Agregar");
-            btnAgregar.setVisible(true);
+            labBtnAgregar.setText("Agregar");
+            btnPanelAgregar.setVisible(true);
             btnGenerarCodigo.setVisible(true);
         } else if (ventana == 2) {
             labInstruccion.setText("Modifique los datos necesarios:");
-            btnAgregar.setVisible(true);
-            btnAgregar.setText("Modificar");
+            btnPanelAgregar.setVisible(true);
+            labBtnAgregar.setText("Modificar");
             btnGenerarCodigo.setVisible(false);
 
             habilitarCampos(true);
             cargarProducto();
         } else {
             labInstruccion.setText("Detalles del producto:");
-            btnAgregar.setVisible(false);
+            btnPanelAgregar.setVisible(false);
             btnGenerarCodigo.setVisible(false);
             habilitarCampos(false);
             cargarProducto();
@@ -61,20 +62,41 @@ public class DetalleProducto extends javax.swing.JFrame {
     }
 
     private void habilitarCampos(boolean valor) {
-        txtColor.setEditable(valor);
+        txtColor.setEditable(valor); 
+        txtColor.setBackground(Color.WHITE);
+        
         txtDescripcion.setEditable(valor);
+        txtDescripcion.setBackground(Color.WHITE);
+        
         txtFechaIngreso.setEnabled(valor);
+        txtFechaIngreso.setBackground(Color.WHITE);
+        
         cmbGenero.setEnabled(valor);
         cmbCategoria.setEnabled(valor);
         txtTalla.setEditable(valor);
+        txtTalla.setBackground(Color.WHITE);
+        
         txtCantidad.setEnabled(valor);
+        txtCantidad.setBackground(Color.WHITE);
+        
         txtEmpresa.setEditable(valor);
+        txtEmpresa.setBackground(Color.WHITE);
+        
         txtImpuesto.setEditable(valor);
+        txtImpuesto.setBackground(Color.WHITE);
+        
         txtMarca.setEditable(valor);
+        txtMarca.setBackground(Color.WHITE);
+        
         txtPrecioCosto.setEditable(valor);
+        txtPrecioCosto.setBackground(Color.WHITE);
+        
         txtPrecioVenta.setEditable(valor);
+        txtPrecioVenta.setBackground(Color.WHITE);
+        
         rdbBolso.setEnabled(valor);
         rdbZapato.setEnabled(valor);
+        
     }
 
     private void cargarProducto() {
@@ -133,7 +155,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtPrecioVenta = new javax.swing.JTextField();
         txtImpuesto = new javax.swing.JTextField();
         txtEmpresa = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
         txtFechaIngreso = new com.toedter.calendar.JDateChooser();
         rdbBolso = new javax.swing.JRadioButton();
         rdbZapato = new javax.swing.JRadioButton();
@@ -159,6 +180,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
+        btnPanelAgregar = new javax.swing.JPanel();
+        labBtnAgregar = new javax.swing.JLabel();
+        labErrorTalla = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -279,17 +303,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtEmpresa.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 217, 280, 20));
 
-        btnAgregar.setBackground(new java.awt.Color(177, 177, 177));
-        btnAgregar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(51, 51, 51));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 80, 40));
-
         txtFechaIngreso.setBackground(new java.awt.Color(237, 237, 237));
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 170, 30));
 
@@ -339,6 +352,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtTalla.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtTalla.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtTalla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTallaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTallaKeyTyped(evt);
             }
@@ -362,7 +378,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 btnGenerarCodigoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, 40));
+        jPanel1.add(btnGenerarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 140, 40));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -389,9 +405,35 @@ public class DetalleProducto extends javax.swing.JFrame {
         jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 110, 10));
         jPanel1.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 110, 10));
 
+        btnPanelAgregar.setBackground(new java.awt.Color(0, 93, 107));
+        btnPanelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPanelAgregarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPanelAgregarMouseEntered(evt);
+            }
+        });
+        btnPanelAgregar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labBtnAgregar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labBtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
+        labBtnAgregar.setText("Agregar");
+        btnPanelAgregar.add(labBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, -1));
+
+        jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 150, 40));
+
+        labErrorTalla.setFont(new java.awt.Font("Yu Gothic UI", 1, 11)); // NOI18N
+        labErrorTalla.setForeground(new java.awt.Color(255, 0, 51));
+        labErrorTalla.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labErrorTalla.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel1.add(labErrorTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 244, 110, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 600, 390));
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
         jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -405,7 +447,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 labCloseMouseEntered(evt);
             }
         });
-        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 18, -1, 20));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
@@ -435,9 +477,47 @@ public class DetalleProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtColorActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnGenerarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCodigoActionPerformed
+        if (txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            txtCodigo.setText(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "");
+            txtCodigo.setText(txtCodigo.getText() + "-" + new BL_Producto().obtenerSiguienteCodigo());
+        }
+    }//GEN-LAST:event_btnGenerarCodigoActionPerformed
 
-        if (txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
+    private void rdbBolsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbBolsoActionPerformed
+        cmbGenero.setEnabled(false);
+        cmbCategoria.setEnabled(false);
+        txtTalla.setEnabled(false);
+        txtTalla.setText("");
+    }//GEN-LAST:event_rdbBolsoActionPerformed
+
+    private void rdbZapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbZapatoActionPerformed
+        cmbGenero.setEnabled(true);
+        cmbCategoria.setEnabled(true);
+        txtTalla.setEnabled(true);
+    }//GEN-LAST:event_rdbZapatoActionPerformed
+
+    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
+        this.dispose();
+        new Inventario(lista).setVisible(true);
+    }//GEN-LAST:event_labCloseMouseClicked
+
+    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
+        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labCloseMouseEntered
+
+    private void txtImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImpuestoActionPerformed
+
+    private void btnPanelAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseEntered
+        btnPanelAgregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnPanelAgregarMouseEntered
+
+    private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
+        if (txtFechaIngreso.getDate() == null || txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
             || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")
             || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
 
@@ -448,7 +528,8 @@ public class DetalleProducto extends javax.swing.JFrame {
             if (!rdbZapato.isSelected() && !rdbBolso.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                BL_Producto producto = new BL_Producto();
+                if(validarRangos()){
+                    BL_Producto producto = new BL_Producto();
                 producto.setIdProducto(producto.obtenerSiguienteCodigo());
                 producto.setCodigoUnico(txtCodigo.getText());
                 producto.setFechaIngreso(new java.sql.Date(txtFechaIngreso.getDate().getTime()));
@@ -469,7 +550,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 }
                 
 
-                if (btnAgregar.getText().equals("Agregar")) {
+                if (labBtnAgregar.getText().equals("Agregar")) {
                     if (producto.insertarProducto()) {
                         txtCodigo.setText("");
                         txtDescripcion.setText("");
@@ -498,44 +579,23 @@ public class DetalleProducto extends javax.swing.JFrame {
                     }
 
                 }
+                }
+                
             }
         }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnPanelAgregarMouseClicked
 
-    private void btnGenerarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCodigoActionPerformed
-        if (txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código", "Aviso", JOptionPane.WARNING_MESSAGE);
-        } else {
-            txtCodigo.setText(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "");
-            txtCodigo.setText(txtCodigo.getText() + "-" + new BL_Producto().obtenerSiguienteCodigo());
+    private void txtTallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyReleased
+        if(!txtTalla.getText().equals("")){
+            if(Integer.parseInt(txtTalla.getText().trim().toString()) >= 15 && Integer.parseInt(txtTalla.getText().trim().toString()) <= 45){
+                labErrorTalla.setText("");
+            }else{
+                labErrorTalla.setText("Rango incorrecto");
+            }
+        }else{
+            labErrorTalla.setText("");
         }
-    }//GEN-LAST:event_btnGenerarCodigoActionPerformed
-
-    private void rdbBolsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbBolsoActionPerformed
-        cmbGenero.setEnabled(false);
-        cmbCategoria.setEnabled(false);
-        txtTalla.setEnabled(false);
-        txtTalla.setText("");
-    }//GEN-LAST:event_rdbBolsoActionPerformed
-
-    private void rdbZapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbZapatoActionPerformed
-        cmbGenero.setEnabled(true);
-        cmbCategoria.setEnabled(true);
-        txtTalla.setEnabled(true);
-    }//GEN-LAST:event_rdbZapatoActionPerformed
-
-    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_labCloseMouseClicked
-
-    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
-        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labCloseMouseEntered
-
-    private void txtImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpuestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtImpuestoActionPerformed
+    }//GEN-LAST:event_txtTallaKeyReleased
 
     private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
@@ -544,11 +604,47 @@ public class DetalleProducto extends javax.swing.JFrame {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
+        
     }
-
+    
+    public Boolean validarRangos(){
+        int rangoTalla = Integer.parseInt(txtTalla.getText().trim());
+        int valorPrecioCosto = Integer.parseInt(txtPrecioCosto.getText().trim());
+        int valorPrecioVenta = Integer.parseInt(txtPrecioVenta.getText().trim());
+        int valorImpuesto = Integer.parseInt(txtImpuesto.getText().trim());
+        String hileraError = "Se encontraron los siguientes errores:\n";
+        boolean datosCorrectos = true;
+        
+        if(rangoTalla < 15 || rangoTalla > 45){
+            hileraError += "* Rango de la talla incorrecto\n";
+            datosCorrectos = false;
+        }
+        
+        if(valorPrecioCosto < 0){
+            hileraError += "* Precio de costo incorrecto\n";
+            datosCorrectos = false;
+        }
+        
+        if(valorPrecioVenta < 0) {
+            hileraError += "* Precio de venta incorrecto\n";
+            datosCorrectos = false;
+        }
+        
+        if(valorImpuesto < 0) {
+            hileraError += "* Precio con impuesto incorrecto\n";
+            datosCorrectos = false;
+        }
+        
+        if(!datosCorrectos){
+            JOptionPane.showMessageDialog(null, hileraError,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        return datosCorrectos;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnGenerarCodigo;
+    private javax.swing.JPanel btnPanelAgregar;
     private javax.swing.JComboBox cmbCategoria;
     private javax.swing.JComboBox cmbGenero;
     private javax.swing.ButtonGroup grup1;
@@ -579,7 +675,9 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel labBtnAgregar;
     private javax.swing.JLabel labClose;
+    private javax.swing.JLabel labErrorTalla;
     private javax.swing.JLabel labInstruccion;
     private javax.swing.JRadioButton rdbBolso;
     private javax.swing.JRadioButton rdbZapato;

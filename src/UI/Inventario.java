@@ -87,9 +87,9 @@ public class Inventario extends javax.swing.JFrame {
         txt_Empresa = new javax.swing.JTextField();
         txt_Precio = new javax.swing.JTextField();
         lbl_Categoria = new javax.swing.JLabel();
-        cbx_Categoria = new javax.swing.JComboBox<>();
+        cbx_Categoria = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
-        cbx_TipoProducto = new javax.swing.JComboBox<>();
+        cbx_TipoProducto = new javax.swing.JComboBox<String>();
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -123,7 +123,7 @@ public class Inventario extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
         jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -229,7 +229,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 100, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -238,7 +238,7 @@ public class Inventario extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
@@ -277,6 +277,7 @@ public class Inventario extends javax.swing.JFrame {
         jPanel1.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 870, 120));
 
         tablaInventario.setBackground(new java.awt.Color(237, 237, 237));
+        tablaInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         tablaInventario.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         tablaInventario.setForeground(new java.awt.Color(102, 102, 102));
         tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
@@ -308,7 +309,7 @@ public class Inventario extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 47, 312, 10));
 
-        btnPanelModificar.setBackground(new java.awt.Color(102, 102, 102));
+        btnPanelModificar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelModificar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -331,7 +332,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 150, 40));
 
-        btnPanelEliminar.setBackground(new java.awt.Color(102, 102, 102));
+        btnPanelEliminar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelEliminar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -353,7 +354,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, 150, 40));
 
-        btnPanelAgregar.setBackground(new java.awt.Color(102, 102, 102));
+        btnPanelAgregar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelAgregar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -391,7 +392,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, 150, 40));
 
-        btnPanelDetalle.setBackground(new java.awt.Color(102, 102, 102));
+        btnPanelDetalle.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelDetalle.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
