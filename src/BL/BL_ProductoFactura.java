@@ -15,6 +15,7 @@ public class BL_ProductoFactura {
     private int cantidadVendida;
     private double precioVenta;
     private String descripcion;
+    private int posicionOriginal;
 
     public BL_ProductoFactura() {
     }
@@ -65,6 +66,14 @@ public class BL_ProductoFactura {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getPosicionOriginal() {
+        return posicionOriginal;
+    }
+
+    public void setPosicionOriginal(int posicionOriginal) {
+        this.posicionOriginal = posicionOriginal;
     }
 
     

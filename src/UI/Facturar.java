@@ -95,7 +95,7 @@ public class Facturar extends javax.swing.JFrame {
         return model;
     }
 
-    private void buscar(String cad){
+    private void buscar(String cad) {
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
             if (c.getCedula().contains(cad)) {
                 txt_Senor.setText(c.getNombreCompleto());
@@ -103,6 +103,7 @@ public class Facturar extends javax.swing.JFrame {
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -457,6 +458,11 @@ public class Facturar extends javax.swing.JFrame {
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, -1, 20));
 
         btn_Eliminar.setText("Eliminar");
+        btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 440, -1, 30));
 
         cbx_Cedula.setEditable(true);
@@ -543,8 +549,8 @@ public class Facturar extends javax.swing.JFrame {
                 for (int i = 0; i < listaDetalles.size(); i++) {
                     if (listaDetalles.get(i).getIdProducto() == prod.getIdProducto()) {
                         listaDetalles.get(i).setCantidadVendida(listaDetalles.get(i).getCantidadVendida() + cantidad);
-                        listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta() + 
-                                (cantidad * prod.getPrecioGanancia()));
+                        listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta()
+                                + (cantidad * prod.getPrecioGanancia()));
                         manejadorDetalles.setearLista(listaDetalles);
                         existente = true;
                     }
@@ -559,12 +565,13 @@ public class Facturar extends javax.swing.JFrame {
                     prodDetalle.setCantidadVendida(cantidad);
                     prodDetalle.setIdProducto(prod.getIdProducto());
                     prodDetalle.setPrecioVenta(cantidad * prod.getPrecioGanancia());
+                    prodDetalle.setPosicionOriginal(id);
                     manejadorDetalles.Agregar(prodDetalle);
                 }
-                    listaTotalProductos.get(id).setCantidad(listaTotalProductos.get(id).getCantidad() - cantidad);
-                    cargarProductosEnTabla(listaTotalProductos);
-                    cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista(), id);
-                
+                listaTotalProductos.get(id).setCantidad(listaTotalProductos.get(id).getCantidad() - cantidad);
+                cargarProductosEnTabla(listaTotalProductos);
+                cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista());
+
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -644,7 +651,7 @@ public class Facturar extends javax.swing.JFrame {
         listaTotalProductos = listaParaMostrar;
     }
 
-    private void cargarProductosEnTablaDetalles(ArrayList<BL_ProductoFactura> listaParaMostrar, int idOriginal) {
+    private void cargarProductosEnTablaDetalles(ArrayList<BL_ProductoFactura> listaParaMostrar) {
 
         limpiarTablaDetalles(modeloDetalles);
         Object[] fila = new Object[modeloDetalles.getColumnCount()];
@@ -654,8 +661,8 @@ public class Facturar extends javax.swing.JFrame {
             fila[0] = listaParaMostrar.get(i).getDescripcion();
             fila[1] = listaParaMostrar.get(i).getCantidadVendida();
             fila[2] = listaParaMostrar.get(i).getPrecioVenta();
-            fila[3] = i;
-            fila[4] = idOriginal;
+            fila[3] = listaParaMostrar.get(i).getIdProducto();
+            fila[4] = listaParaMostrar.get(i).getPosicionOriginal();
             totalPagar += listaParaMostrar.get(i).getPrecioVenta();
             modeloDetalles.addRow(fila);
         }
@@ -704,6 +711,42 @@ public class Facturar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresar3ActionPerformed
 
+    private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
+        // TODO add your handling code here:
+        if (tablaDetalles.getSelectedRow() >= 0) {
+            int idDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 3).toString());
+            int posOriginal = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 4).toString());
+            int cantidadDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 1).toString());
+            int totalPagar = 0;
+
+            listaTotalProductos.get(posOriginal).setCantidad(listaTotalProductos.get(posOriginal).getCantidad() + cantidadDetalle);
+            modeloDetalles.removeRow(tablaDetalles.getSelectedRow());
+            ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
+            BL_ProductoFactura detalleEliminar = new BL_ProductoFactura();
+            
+            for (int i = 0; i < listaDetalles.size(); i++) {
+                if (listaDetalles.get(i).getIdProducto() == idDetalle) {
+                    detalleEliminar = listaDetalles.get(i);
+                    listaDetalles.remove(detalleEliminar);
+                    if (listaDetalles.size() > 0) {
+                        for (int j = 0; j < listaDetalles.size(); j++) {
+                            totalPagar += listaDetalles.get(j).getPrecioVenta();
+                        }
+                    }else{
+                        totalPagar = 0;
+                    }
+                }
+            }
+            
+            txt_PrecioTotal.setText("₡ "+ totalPagar + "");
+            cargarProductosEnTabla(listaTotalProductos);
+            
+
+        } else {
+
+        }
+    }//GEN-LAST:event_btn_EliminarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarDetalle;
     private javax.swing.JButton btnBuscar;
@@ -732,10 +775,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel lbl_Categoria;
