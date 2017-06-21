@@ -216,7 +216,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         labTituloAccion.setText("Información del usuario:");
         jPanel1.add(labTituloAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, -1, -1));
 
-        btnPanelAgregar.setBackground(new java.awt.Color(56, 142, 60));
+        btnPanelAgregar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelAgregar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPanelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,7 +234,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Agregar");
-        btnPanelAgregar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
+        btnPanelAgregar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 70, 40));
 
         jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, 170, 40));
 
