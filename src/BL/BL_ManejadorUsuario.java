@@ -35,4 +35,17 @@ public class BL_ManejadorUsuario {
         listaUsuarios = new DAO_Usuario().cargarUsuarios();
     }
     
+    public boolean BuscarAdministradores(){
+        int contador = 0;
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            if(listaUsuarios.get(i).isAdministrador() == true){
+                contador++;
+                if(contador == 2){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }
