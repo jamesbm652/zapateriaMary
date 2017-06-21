@@ -510,7 +510,7 @@ public class Inventario extends javax.swing.JFrame {
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
         if (evt.getClickCount() == 2) {
             this.dispose();
-            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
 
             DetalleProducto detalle = new DetalleProducto(3, listaTotalProductos, id);
             detalle.setTitle("Mostrar Producto");
@@ -547,7 +547,7 @@ public class Inventario extends javax.swing.JFrame {
     private void btnPanelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelModificarMouseClicked
         if (tablaInventario.getSelectedRow() >= 0) {
             this.dispose();
-            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
             DetalleProducto modificar = new DetalleProducto(2, listaTotalProductos, id);
             modificar.setTitle("Modificar Producto");
             modificar.setVisible(true);
@@ -562,7 +562,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnPanelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseClicked
         if(tablaInventario.getSelectedRow() >= 0 ){
-            int identificador = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            int identificador = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
             if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if(new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())){
                     listaTotalProductos.remove(identificador);
@@ -571,7 +571,7 @@ public class Inventario extends javax.swing.JFrame {
                 }else {
                     JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado\nNo se puede eliminar del inventario", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } 
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -584,7 +584,7 @@ public class Inventario extends javax.swing.JFrame {
     private void btnPanelDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelDetalleMouseClicked
         if (tablaInventario.getSelectedRow() >= 0) {
             this.dispose();
-            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
 
             DetalleProducto detalle = new DetalleProducto(3, listaTotalProductos, id);
             detalle.setTitle("Mostrar Producto");

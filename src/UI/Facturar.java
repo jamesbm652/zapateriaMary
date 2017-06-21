@@ -56,6 +56,10 @@ public class Facturar extends javax.swing.JFrame {
         ocultarColumnaID();
 
         // Combo box autoCompletar
+        
+    }
+    
+    private void comboBoxAutocompleta(){
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             
             @Override
@@ -89,7 +93,6 @@ public class Facturar extends javax.swing.JFrame {
         });
     }
     
-
     private void buscar(String cadena) {
         boolean existe = false;
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
@@ -566,11 +569,13 @@ public class Facturar extends javax.swing.JFrame {
     }
 
     private void ocultarColumnaID() {
+        /*
         tablaInventario.getColumn("HiddenID").setMaxWidth(0);
         tablaInventario.getColumn("HiddenID").setMinWidth(0);
         tablaInventario.getColumn("HiddenID").setPreferredWidth(0);
         tablaInventario.getColumn("HiddenID").setWidth(0);
         tablaInventario.getColumn("HiddenID").setResizable(false);
+*/
     }
 
     private void ocultarColumnaDetalles() {
@@ -706,7 +711,7 @@ public class Facturar extends javax.swing.JFrame {
 
     private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
         if (tablaInventario.getSelectedRow() >= 0) {
-            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
             BL_Producto prod = listaTotalProductos.get(id);
             int cantidad = Integer.parseInt(txt_Cantidad.getValue().toString());
             ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
