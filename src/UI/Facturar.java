@@ -41,7 +41,6 @@ public class Facturar extends javax.swing.JFrame {
      * Creates new form
      */
     public Facturar() {
-        //Holaaaaa
         initComponents();
 
         modelo = (DefaultTableModel) tablaInventario.getModel();
@@ -49,6 +48,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.setVisible(false);
 
         manejador.CargarProductos();
+        manejadorCliente.cargarClientes();
         listaTotalProductos = manejador.ObtenerListaProductos();
 
         cargarProductosEnTabla(listaTotalProductos);
@@ -56,51 +56,50 @@ public class Facturar extends javax.swing.JFrame {
         ocultarColumnaID();
 
         // Combo box autoCompletar
-        comboBoxAutocompletar();
-    }
-
-    private void comboBoxAutocompletar() {
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            
             @Override
-            public void keyReleased(KeyEvent evt) {
-                String cad = cbx_Cedula.getEditor().getItem().toString();
-                if ((evt.getKeyCode() >= 65 && evt.getKeyCode() <= 90) || (evt.getKeyCode() >= 96 && evt.getKeyCode() <= 105) || evt.getKeyCode() == 8 || (evt.getKeyCode() >= 48 && evt.getKeyCode() <= 57)) {
-                    cbx_Cedula.setModel(obtenerListaComboBox(cad));
-                    if (cbx_Cedula.getItemCount() > 0) {
-                        cbx_Cedula.showPopup();
-                        if (evt.getKeyCode() != 8) {
-                            ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(cad.length(),
-                                    cbx_Cedula.getEditor().getItem().toString().length());
-                        } else {
-                            cbx_Cedula.getEditor().setItem(cad);
+            public void keyReleased(KeyEvent evt){
+               
+                if (evt.getKeyCode() != KeyEvent.VK_BACK_SPACE) {
+                    String cadena = cbx_Cedula.getEditor().getItem().toString();;  
+                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                        buscar(cadena);
+                    }
+                    if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                        cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena));
+                        if (cbx_Cedula.getItemCount() > 0) {
+                            cbx_Cedula.showPopup();
+                            if (evt.getKeyCode() != 8) {
+                                ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cadena.length(), 
+                                        cbx_Cedula.getEditor().getItem().toString().length());
+                            }else{
+                                cbx_Cedula.getEditor().setItem(cadena);
+                            }
+                        }else{
+                            cbx_Cedula.addItem(cadena);
+                            int fin = cbx_Cedula.getEditor().getItem().toString().length();
+                            ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                         }
-                    } else {
-                        cbx_Cedula.addItem(cad);
                     }
                 }
             }
         });
     }
+    
 
-    private DefaultComboBoxModel obtenerListaComboBox(String cad) {
-        manejadorCliente.cargarClientes();
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-
+    private void buscar(String cadena) {
+        boolean existe = false;
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
-            if (c.getCedula().contentEquals(cad)) {
-                model.addElement(c.getCedula());
-            }
-        }
-
-        return model;
-    }
-
-    private void buscar(String cad) {
-        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
-            if (c.getCedula().contains(cad)) {
+            if (c.getCedula().contentEquals(cadena)) {
                 txt_Senor.setText(c.getNombreCompleto());
                 txt_Direccion.setText(c.getDireccion());
+                existe = true;
             }
+        }
+        if (!existe) {
+            txt_Senor.setText("");
+            txt_Direccion.setText("");
         }
     }
 
@@ -466,7 +465,7 @@ public class Facturar extends javax.swing.JFrame {
         jPanel2.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 440, -1, 30));
 
         cbx_Cedula.setEditable(true);
-        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 20, 130, -1));
+        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 120, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 610));
 
@@ -536,49 +535,6 @@ public class Facturar extends javax.swing.JFrame {
     private void btnBusquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaAvanzadaActionPerformed
 
     }//GEN-LAST:event_btnBusquedaAvanzadaActionPerformed
-
-    private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
-        if (tablaInventario.getSelectedRow() >= 0) {
-            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
-            BL_Producto prod = listaTotalProductos.get(id);
-            int cantidad = Integer.parseInt(txt_Cantidad.getValue().toString());
-            ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
-            boolean existente = false;
-
-            if ((prod.getCantidad() >= cantidad) && (cantidad > 0)) {
-                for (int i = 0; i < listaDetalles.size(); i++) {
-                    if (listaDetalles.get(i).getIdProducto() == prod.getIdProducto()) {
-                        listaDetalles.get(i).setCantidadVendida(listaDetalles.get(i).getCantidadVendida() + cantidad);
-                        listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta()
-                                + (cantidad * prod.getPrecioGanancia()));
-                        manejadorDetalles.setearLista(listaDetalles);
-                        existente = true;
-                    }
-                }
-                if (!existente) {
-
-                    BL_ProductoFactura prodDetalle = new BL_ProductoFactura();
-
-                    String descDetalle = prod.getDescripcion() + "\n" + prod.getMarca()
-                            + "\n" + prod.getColor() + "";
-                    prodDetalle.setDescripcion(descDetalle);
-                    prodDetalle.setCantidadVendida(cantidad);
-                    prodDetalle.setIdProducto(prod.getIdProducto());
-                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioGanancia());
-                    prodDetalle.setPosicionOriginal(id);
-                    manejadorDetalles.Agregar(prodDetalle);
-                }
-                listaTotalProductos.get(id).setCantidad(listaTotalProductos.get(id).getCantidad() - cantidad);
-                cargarProductosEnTabla(listaTotalProductos);
-                cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista());
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnAgregarDetalleActionPerformed
 
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
 
@@ -702,15 +658,6 @@ public class Facturar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbx_TipoProductoActionPerformed
 
-    private void btnRegresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar2ActionPerformed
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_btnRegresar2ActionPerformed
-
-    private void btnRegresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresar3ActionPerformed
-
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         // TODO add your handling code here:
         if (tablaDetalles.getSelectedRow() >= 0) {
@@ -723,7 +670,7 @@ public class Facturar extends javax.swing.JFrame {
             modeloDetalles.removeRow(tablaDetalles.getSelectedRow());
             ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
             BL_ProductoFactura detalleEliminar = new BL_ProductoFactura();
-            
+
             for (int i = 0; i < listaDetalles.size(); i++) {
                 if (listaDetalles.get(i).getIdProducto() == idDetalle) {
                     detalleEliminar = listaDetalles.get(i);
@@ -737,15 +684,66 @@ public class Facturar extends javax.swing.JFrame {
                     }
                 }
             }
-            
+
             txt_PrecioTotal.setText("₡ "+ totalPagar + "");
             cargarProductosEnTabla(listaTotalProductos);
-            
 
         } else {
 
         }
     }//GEN-LAST:event_btn_EliminarActionPerformed
+
+    private void btnRegresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresar3ActionPerformed
+
+    private void btnRegresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar2ActionPerformed
+        this.dispose();
+        new Menu_Principal().setVisible(true);
+    }//GEN-LAST:event_btnRegresar2ActionPerformed
+
+    private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
+        if (tablaInventario.getSelectedRow() >= 0) {
+            int id = Integer.parseInt(tablaInventario.getModel().getValueAt(tablaInventario.getSelectedRow(), 5).toString());
+            BL_Producto prod = listaTotalProductos.get(id);
+            int cantidad = Integer.parseInt(txt_Cantidad.getValue().toString());
+            ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
+            boolean existente = false;
+
+            if ((prod.getCantidad() >= cantidad) && (cantidad > 0)) {
+                for (int i = 0; i < listaDetalles.size(); i++) {
+                    if (listaDetalles.get(i).getIdProducto() == prod.getIdProducto()) {
+                        listaDetalles.get(i).setCantidadVendida(listaDetalles.get(i).getCantidadVendida() + cantidad);
+                        listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta()
+                            + (cantidad * prod.getPrecioGanancia()));
+                        manejadorDetalles.setearLista(listaDetalles);
+                        existente = true;
+                    }
+                }
+                if (!existente) {
+
+                    BL_ProductoFactura prodDetalle = new BL_ProductoFactura();
+
+                    String descDetalle = prod.getDescripcion() + "\n" + prod.getMarca()
+                    + "\n" + prod.getColor() + "";
+                    prodDetalle.setDescripcion(descDetalle);
+                    prodDetalle.setCantidadVendida(cantidad);
+                    prodDetalle.setIdProducto(prod.getIdProducto());
+                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioGanancia());
+                    prodDetalle.setPosicionOriginal(id);
+                    manejadorDetalles.Agregar(prodDetalle);
+                }
+                listaTotalProductos.get(id).setCantidad(listaTotalProductos.get(id).getCantidad() - cantidad);
+                cargarProductosEnTabla(listaTotalProductos);
+                cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista());
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgregarDetalleActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarDetalle;

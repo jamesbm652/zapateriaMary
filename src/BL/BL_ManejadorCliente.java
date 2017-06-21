@@ -6,6 +6,7 @@
 package BL;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -30,6 +31,11 @@ public class BL_ManejadorCliente {
     }
     
     public void cargarClientes(){
-        // llamar al DAO
+        listaClientes = new DAO.DAO_Cliente().cargarTodosClientes();
     }
+    
+    public DefaultComboBoxModel obtenerListaComboBox(String cadena){
+        return new DAO.DAO_Cliente().obtenerListaComboBox(cadena);
+    }
+    
 }

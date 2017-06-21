@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import BL.BL_Cliente;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -43,6 +46,57 @@ public class DAO_Cliente {
 
     public void insertarCliente() {
 
+    }
+    
+    public DefaultComboBoxModel obtenerListaComboBox(String cadena){
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        String query = "SELECT Cedula FROM cliente WHERE cedula LIKE ?;";
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        conexion(); 
+        try {
+            ps = this.con.prepareStatement(query);
+            ps.setString(1, cadena + "%");
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                model.addElement(rs.getString("Cedula"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+    
+    public ArrayList<BL_Cliente> cargarTodosClientes(){
+        ArrayList<BL_Cliente> lista = new ArrayList<>();
+        
+        conexion();
+        Statement st = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM cliente;";
+        
+        try {
+            st = this.con.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                BL_Cliente cliente = new BL_Cliente();
+                cliente.setIdCliente(rs.getInt("IdCliente"));
+                cliente.setCedula(rs.getString("Cedula"));
+                cliente.setNombreCompleto(rs.getString("NombreCompleto"));
+                cliente.setDireccion(rs.getString("Direccion"));
+                
+                lista.add(cliente);
+            }
+            
+            cerrarConexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 
     public int obtenerClienteFactura(BL_Cliente cliente) {
