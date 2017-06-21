@@ -578,7 +578,7 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPanelEliminarMouseClicked
 
     private void btnPanelEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseEntered
-        btnPanelModificar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnPanelEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelEliminarMouseEntered
 
     private void btnPanelDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelDetalleMouseClicked
