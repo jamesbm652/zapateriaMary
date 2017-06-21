@@ -61,27 +61,29 @@ public class Facturar extends javax.swing.JFrame {
             @Override
             public void keyReleased(KeyEvent evt){
                
-                if (evt.getKeyCode() != KeyEvent.VK_BACK_SPACE) {
-                    String cadena = cbx_Cedula.getEditor().getItem().toString();;  
-                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                        buscar(cadena);
-                    }
-                    if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
-                        cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena));
-                        if (cbx_Cedula.getItemCount() > 0) {
-                            cbx_Cedula.showPopup();
-                            if (evt.getKeyCode() != 8) {
-                                ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cadena.length(), 
-                                        cbx_Cedula.getEditor().getItem().toString().length());
-                            }else{
-                                cbx_Cedula.getEditor().setItem(cadena);
-                            }
+                String cadena = cbx_Cedula.getEditor().getItem().toString();;  
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    buscar(cadena);
+                }
+                if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena));
+                    if (cbx_Cedula.getItemCount() > 0) {
+                        cbx_Cedula.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cadena.length(), 
+                                    cbx_Cedula.getEditor().getItem().toString().length());
                         }else{
-                            cbx_Cedula.addItem(cadena);
-                            int fin = cbx_Cedula.getEditor().getItem().toString().length();
-                            ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
+                            cbx_Cedula.getEditor().setItem(cadena);
                         }
+                    }else{
+                        cbx_Cedula.addItem(cadena);
+                        int fin = cbx_Cedula.getEditor().getItem().toString().length();
+                        ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                     }
+                }
+                if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    int fin = cbx_Cedula.getEditor().getItem().toString().length();
+                    ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                 }
             }
         });
