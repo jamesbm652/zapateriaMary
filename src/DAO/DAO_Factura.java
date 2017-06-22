@@ -36,7 +36,7 @@ public class DAO_Factura {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,6 +93,15 @@ public class DAO_Factura {
                 ps.setInt(3, factura.getProductosFactura().get(i).getCantidadVendida());
                 ps.setDouble(4, factura.getProductosFactura().get(i).getPrecioVenta());
                 ps.setString(5, factura.getProductosFactura().get(i).getDescripcion());
+                completado = ps.executeUpdate();
+            }
+            completado = 0;
+            
+            //Se proceden a actualizar los productos vendidos.
+            for (int i = 0; i < factura.getProductosFactura().size(); i++) {
+                BL_ProductoFactura prod = factura.getProductosFactura().get(i);
+                ps = con.prepareStatement("Update producto Set Cantidad = (Cantidad - ?)");
+                ps.setInt(1, prod.getCantidadVendida());
                 completado = ps.executeUpdate();
             }
             cerrarConexion();
