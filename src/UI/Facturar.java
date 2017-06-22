@@ -88,7 +88,7 @@ public class Facturar extends javax.swing.JFrame {
             
             @Override
             public void keyReleased(KeyEvent evt){
-               
+                
                 String cadena = cbx_Cedula.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     buscar(cadena);
@@ -113,8 +113,28 @@ public class Facturar extends javax.swing.JFrame {
                     int fin = cbx_Cedula.getEditor().getItem().toString().length();
                     ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                 }
+                // Metodo para permitir o no la modificacion de los datos
+                permisoParaEscribir();
             }
         });
+    }
+    
+    private void permisoParaEscribir(){
+        if(!txt_Senor.getText().equals("")){
+            txt_Senor.setEditable(false);
+            txt_Senor.setBackground(Color.WHITE);
+            txt_Direccion.setEditable(false);
+            txt_Direccion.setBackground(Color.WHITE);
+            telHabitacion.setEditable(false);
+            telHabitacion.setBackground(Color.WHITE);
+            telCelular.setEditable(false);
+            telCelular.setBackground(Color.WHITE);
+        }else{
+            txt_Senor.setEditable(true);
+            txt_Direccion.setEditable(true);
+            telHabitacion.setEditable(true);
+            telCelular.setEditable(true);
+        }
     }
     
     private void buscar(String cadena) {
@@ -312,6 +332,11 @@ public class Facturar extends javax.swing.JFrame {
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, -1, 20));
 
         cbx_Cedula.setEditable(true);
+        cbx_Cedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_CedulaActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 130, -1));
 
         tablaInventario.setBackground(new java.awt.Color(232, 232, 232));
@@ -898,6 +923,7 @@ public class Facturar extends javax.swing.JFrame {
             Map<String, Integer> map = new HashMap<>();
             map.put("pos", posOriginal);
             map.put("cant", nuevaCantidad);
+            
             listaParaActualizar.add(map);
             
             listaTotalProductos.get(posOriginal).setCantidad(nuevaCantidad);
@@ -996,6 +1022,12 @@ public class Facturar extends javax.swing.JFrame {
     private void btnPanelFacturarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseEntered
         btnPanelFacturar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelFacturarMouseEntered
+
+    private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
+        // TODO add your handling code here:
+        String cadena = cbx_Cedula.getEditor().getItem().toString();
+        buscar(cadena);
+    }//GEN-LAST:event_cbx_CedulaActionPerformed
 
     static public class HeaderColor extends DefaultTableCellRenderer{
         public HeaderColor(){
