@@ -31,7 +31,7 @@ public class DAO_Usuario {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
