@@ -998,7 +998,10 @@ public class Facturar extends javax.swing.JFrame {
         clienteInsertar.setNombreCompleto(comprador);
         clienteInsertar.setCedula(cedula);
         clienteInsertar.setDireccion(direccion);
-
+        
+        for (int i = 0; i < clienteInsertar.getListaTelefonos().size(); i++) {
+            clienteInsertar.getListaTelefonos().remove(i);
+        }
         if (telefHabitacion > 0) {
             clienteInsertar.getListaTelefonos().add(new BL_TelefonoCliente(telefHabitacion, "Habitacion"));
         }
@@ -1018,11 +1021,9 @@ public class Facturar extends javax.swing.JFrame {
                 fact.setCliente(clienteInsertar);
                 fact.setTipoFactura(tipoFactura);
                 fact.setProductosFactura(manejadorDetalles.ObtenerLista());
-                if (fact.insertarFactura()) {
-                    JOptionPane.showMessageDialog(this, "La factura se ha ingresado con éxito");
-                    this.dispose();
-                    new Menu_Principal().setVisible(true);
-                }
+                new ConfirmarFacturacion(fact, this).setVisible(true);
+                this.setEnabled(false);
+                
             } else if ((tipoFactura.equals("") || comprador.equals("") || direccion.equals("")
                     || cedula.equals("")) && manejadorDetalles.ObtenerLista().size() == 0) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios y productos a la factura", "Error", JOptionPane.ERROR_MESSAGE);
