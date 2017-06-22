@@ -33,7 +33,8 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
-
+import BL.BL_Factura;
+import BL.BL_TelefonoCliente;
 /**
  *
  * @author oscal
@@ -44,6 +45,7 @@ public class Facturar extends javax.swing.JFrame {
     BL_ManejadorProducto manejador = new BL_ManejadorProducto();
     BL_ManejadorCliente manejadorCliente = new BL_ManejadorCliente();
     BL_ManejadorProductoFactura manejadorDetalles = new BL_ManejadorProductoFactura();
+    BL_Cliente clienteInsertar = new BL_Cliente();
     DefaultTableModel modelo;
     DefaultTableModel modeloDetalles;
 
@@ -910,6 +912,15 @@ public class Facturar extends javax.swing.JFrame {
         String comprador = txt_Senor.getText();
         String direccion = txt_Direccion.getText();
         String tipoFactura = "";
+        Date fechaFactura = new Date(new java.util.Date().getTime());
+        int telefHabitacion = 0;
+        int telefCelular = 0;
+        if (!telHabitacion.getText().equals("")) {
+         telefHabitacion = Integer.parseInt(telHabitacion.getText());   
+        }
+        if (!telCelular.getText().equals("")) {
+         telefCelular = Integer.parseInt(telCelular.getText());   
+        }
         if (tipo1.isSelected()) {
             tipoFactura = tipo1.getText();
         }if (tipo2.isSelected()) {
@@ -921,10 +932,35 @@ public class Facturar extends javax.swing.JFrame {
         if (tipo4.isSelected()) {
             tipoFactura = tipo4.getText();
         }
-        BL_Cliente cliente = new BL_Cliente();
-        cliente.setNombreCompleto(comprador);
-        cliente.setCedula(cedula);
-        cliente.setDireccion(direccion);
+        
+        clienteInsertar.setNombreCompleto(comprador);
+        clienteInsertar.setCedula(cedula);
+        clienteInsertar.setDireccion(direccion);
+        
+        if (telefHabitacion > 0) {
+            clienteInsertar.getListaTelefonos().add(new BL_TelefonoCliente(telefHabitacion, "Habitacion"));
+        }
+        if (telefCelular > 0) {
+            clienteInsertar.getListaTelefonos().add(new BL_TelefonoCliente(telefCelular, "Celular"));
+        }
+        
+        if (tipoFactura.equals("Apartado") && (telefHabitacion == 0 || telefCelular == 0)) {
+            JOptionPane.showMessageDialog(this, "Para el tipo de factura Apartado, debe de introducir al menos un telefono");
+        }else if(tipoFactura.equals("Crédito") && (telefHabitacion == 0 && telefCelular == 0)){
+            JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito, debe de introducir los dos teléfonos");
+        }else{
+        
+        BL_Factura fact = new BL_Factura();
+        fact.setFechaFactura(fechaFactura);
+        fact.setCliente(clienteInsertar);
+        fact.setTipoFactura(tipoFactura);
+        fact.setProductosFactura(manejadorDetalles.ObtenerLista());
+        if(fact.insertarFactura())
+            JOptionPane.showMessageDialog(this, "La factura se ha ingresado con éxito");
+            this.dispose();
+            new Menu_Principal().setVisible(true);
+        }
+        
     }//GEN-LAST:event_btnPanelFacturarMouseClicked
 
     private void btnPanelFacturarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseEntered
