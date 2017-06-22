@@ -188,6 +188,12 @@ public class Facturar extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator11 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -241,28 +247,31 @@ public class Facturar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 50, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         jLabel7.setText("0");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 40, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 50, 80, 20));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Señor:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(51, 51, 51));
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Dirección:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, -1, -1));
 
+        txt_Senor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txt_Senor.setBorder(null);
-        jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 390, 20));
+        jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 380, 20));
 
+        txt_Direccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txt_Direccion.setBorder(null);
-        jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 390, 20));
+        jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 110, 380, 20));
 
         jLabel11.setBackground(new java.awt.Color(51, 51, 51));
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
@@ -282,11 +291,13 @@ public class Facturar extends javax.swing.JFrame {
         jLabel13.setText("Cantidad a Agregar:");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 560, -1, -1));
 
+        jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("Cedula:");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 60, -1, 20));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, -1, 20));
 
         cbx_Cedula.setEditable(true);
-        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 60, 130, -1));
+        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 130, -1));
 
         tablaInventario.setBackground(new java.awt.Color(232, 232, 232));
         tablaInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
@@ -493,8 +504,8 @@ public class Facturar extends javax.swing.JFrame {
         btnPanelAgregar.add(labBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 20));
 
         jPanel2.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 100, 40));
-        jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 390, -1));
-        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 390, 10));
+        jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 380, -1));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 380, 10));
 
         btnPanelEliminar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelEliminar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -561,6 +572,26 @@ public class Facturar extends javax.swing.JFrame {
         btnGroupTipoFactura.add(jRadioButton4);
         jRadioButton4.setText("Tarjeta");
         jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Teléfono cel:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 150, -1, -1));
+
+        jTextField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 130, -1));
+
+        jTextField2.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 150, 140, -1));
+        jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 170, 140, 10));
+        jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 170, 130, 10));
+
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Teléfono hab:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 90, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1250, 600));
 
@@ -913,6 +944,8 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -925,6 +958,8 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -933,6 +968,8 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBtnAgregar;
     private javax.swing.JLabel labBuscar1;
