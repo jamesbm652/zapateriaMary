@@ -51,6 +51,11 @@ public class DetalleProducto extends javax.swing.JFrame {
             btnGenerarCodigo.setVisible(false);
 
             habilitarCampos(true);
+            
+            cmbGenero.setEnabled(false);
+            cmbCategoria.setEnabled(false);
+            txtTalla.setEnabled(false);
+            txtTalla.setText("");
             cargarProducto();
         } else {
             labInstruccion.setText("Detalles del producto:");
@@ -573,7 +578,8 @@ public class DetalleProducto extends javax.swing.JFrame {
                     if (producto.modificarProducto(posicion, lista)) {
                         lista.set(posicion, producto);
                         JOptionPane.showMessageDialog(null, "Datos modificados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                        txtCodigo.setText(producto.getCodigoUnico());
+                        this.dispose();
+                        new Inventario(lista).setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al modificar el producto", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -587,7 +593,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void txtTallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyReleased
         if(!txtTalla.getText().equals("")){
-            if(Integer.parseInt(txtTalla.getText().trim().toString()) >= 15 && Integer.parseInt(txtTalla.getText().trim().toString()) <= 45){
+            if(Double.parseDouble(txtTalla.getText().trim().toString()) >= 15 && Double.parseDouble(txtTalla.getText().trim().toString()) <= 45){
                 labErrorTalla.setText("");
             }else{
                 labErrorTalla.setText("Rango incorrecto");
@@ -608,10 +614,10 @@ public class DetalleProducto extends javax.swing.JFrame {
     }
     
     public Boolean validarRangos(){
-        int rangoTalla = Integer.parseInt(txtTalla.getText().trim());
-        int valorPrecioCosto = Integer.parseInt(txtPrecioCosto.getText().trim());
-        int valorPrecioVenta = Integer.parseInt(txtPrecioVenta.getText().trim());
-        int valorImpuesto = Integer.parseInt(txtImpuesto.getText().trim());
+        double rangoTalla = Double.parseDouble(txtTalla.getText().trim());
+        double valorPrecioCosto = Double.parseDouble(txtPrecioCosto.getText().trim());
+        double valorPrecioVenta = Double.parseDouble(txtPrecioVenta.getText().trim());
+        double valorImpuesto = Double.parseDouble(txtImpuesto.getText().trim());
         String hileraError = "Se encontraron los siguientes errores:\n";
         boolean datosCorrectos = true;
         

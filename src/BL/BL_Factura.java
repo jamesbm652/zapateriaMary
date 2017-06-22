@@ -7,6 +7,7 @@ package BL;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import DAO.DAO_Factura;
 
 /**
  *
@@ -76,6 +77,12 @@ public class BL_Factura {
 
     public void setCliente(BL_Cliente cliente) {
         this.cliente = cliente;
+    }
+    
+    public boolean insertarFactura(){
+        boolean insertado = false;
+        insertado = new DAO_Factura().insertarFactura(this, cliente);
+        return insertado;
     }
     
     

@@ -204,6 +204,9 @@ public class Menu_Principal extends javax.swing.JFrame {
 
         panelBtnAbonos.setBackground(new java.awt.Color(0, 159, 175));
         panelBtnAbonos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnAbonosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBtnAbonosMouseEntered(evt);
             }
@@ -429,6 +432,11 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void panelBtnAbonosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAbonosMouseEntered
         panelBtnAbonos.setBackground(new Color(0,180,198));
     }//GEN-LAST:event_panelBtnAbonosMouseEntered
+
+    private void panelBtnAbonosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAbonosMouseClicked
+        this.dispose();
+        new Abonar().setVisible(true);
+    }//GEN-LAST:event_panelBtnAbonosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;

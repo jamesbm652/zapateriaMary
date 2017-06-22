@@ -259,7 +259,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
         // TODO add your handling code here:
         if(!manejador.BuscarAdministradores() && usuario.isAdministrador()){
-            JOptionPane.showMessageDialog(null, "Error","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe existir al menos un Administrador en el Sistema","Error",JOptionPane.ERROR_MESSAGE);
             checkAdministrador.setSelected(true);
         }
     }//GEN-LAST:event_checkAdministradorActionPerformed
@@ -307,13 +307,17 @@ public class DetalleUsuario extends javax.swing.JFrame {
             usuario.setIdUsuario(listaTotalUsuarios.get(identificador).getIdUsuario());
             if(JOptionPane.showConfirmDialog(null, "¿Desea eleminar este usuario?", "Eliminar usuario", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 if(usuario.getIdUsuario() != sesion.getIdUsuario()){
-                    if(usuario.eliminarUsuario()){
-                        manejador.Eliminar(identificador);
-                        JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
-                        
-                        listaTotalUsuarios = manejador.ObtenerListaUsuarios();
-                        this.dispose();
-                        new AdministrarUsuarios().setVisible(true);
+                    if(manejador.BuscarAdministradores()){
+                        if(usuario.eliminarUsuario()){
+                            manejador.Eliminar(identificador);
+                            JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+
+                            listaTotalUsuarios = manejador.ObtenerListaUsuarios();
+                            this.dispose();
+                            new AdministrarUsuarios().setVisible(true);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error",JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
                     if(manejador.BuscarAdministradores()){

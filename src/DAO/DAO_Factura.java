@@ -22,6 +22,7 @@ import BL.BL_Cliente;
 import BL.BL_ManejadorFacturas;
 import BL.BL_ProductoFactura;
 import BL.BL_ManejadorProductoFactura;
+import com.mysql.jdbc.Statement;
 
 /**
  *
@@ -62,9 +63,9 @@ public class DAO_Factura {
         ResultSet rs = null;
 
         try {
-            ps = con.prepareStatement("Insert into factura Values (?, ?, ?)");
+            ps = con.prepareStatement("Insert into factura (Fecha, Cancelada, TipoFactura) Values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, fecha);
-            if (factura.getTipoFactura().equals("Credito")) {
+            if (factura.getTipoFactura().equals("Crédito") || factura.getTipoFactura().equals("Apartado")) {
                 ps.setInt(2, 0);
             } else {
                 ps.setInt(2, 1);
@@ -80,14 +81,15 @@ public class DAO_Factura {
 
             //Se procede a insertar ClienteFactura
             int idCliente = new DAO_Cliente().obtenerClienteFactura(cliente);
-            ps = con.prepareStatement("Insert into clienteFactura Values (?, ?)");
+            ps = con.prepareStatement("Insert into clienteFactura (IdFactura, IdCliente) Values (?, ?)");
             ps.setInt(1, facturaIngresada);
             ps.setInt(2, idCliente);
             ps.executeUpdate();
 
             //Se proceden a insertar los detalles de la factura
             for (int i = 0; i < factura.getProductosFactura().size(); i++) {
-                ps = con.prepareStatement("Insert into productofactura Values(?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert into productofactura (IdProducto, IdFactura, Cantidad"
+                        + ", PrecioVenta, Descripcion) Values(?, ?, ?, ?, ?)");
                 ps.setInt(1, factura.getProductosFactura().get(i).getIdProducto());
                 ps.setInt(2, facturaIngresada);
                 ps.setInt(3, factura.getProductosFactura().get(i).getCantidadVendida());
@@ -95,6 +97,20 @@ public class DAO_Factura {
                 ps.setString(5, factura.getProductosFactura().get(i).getDescripcion());
                 completado = ps.executeUpdate();
             }
+            
+            
+            //Se proceden a actualizar los productos vendidos.
+            if (completado > 0) {
+                completado = 0;
+                for (int i = 0; i < factura.getProductosFactura().size(); i++) {
+                BL_ProductoFactura prod = factura.getProductosFactura().get(i);
+                ps = con.prepareStatement("Update producto Set Cantidad = (Cantidad - ?) Where IdProducto = ?");
+                ps.setInt(1, prod.getCantidadVendida());
+                ps.setInt(2, factura.getProductosFactura().get(i).getIdProducto());
+                completado = ps.executeUpdate();
+            }
+            }
+            
             cerrarConexion();
 
         } catch (SQLException ex) {

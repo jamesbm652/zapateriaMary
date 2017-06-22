@@ -29,12 +29,7 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                volverAlMenu(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         btnRegresar.setText("Atrás");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,11 +62,6 @@ public class ReporteVentas extends javax.swing.JFrame {
         this.dispose();
         new Menu_Principal().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void volverAlMenu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_volverAlMenu
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_volverAlMenu
 
   
 
