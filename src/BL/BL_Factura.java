@@ -17,6 +17,7 @@ public class BL_Factura {
     private Date fechaFactura;
     private boolean cancelada;
     private String tipoFactura;
+    private double montoAbonado;
     private ArrayList<BL_ProductoFactura> productosFactura  = new ArrayList<>();
     private BL_Cliente cliente;
     
@@ -62,6 +63,15 @@ public class BL_Factura {
     public void setTipoFactura(String tipoFactura) {
         this.tipoFactura = tipoFactura;
     }
+
+    public double getMontoAbonado() {
+        return montoAbonado;
+    }
+
+    public void setMontoAbonado(double montoAbonado) {
+        this.montoAbonado = montoAbonado;
+    }
+    
     public ArrayList<BL_ProductoFactura> getProductosFactura() {
         return productosFactura;
     }

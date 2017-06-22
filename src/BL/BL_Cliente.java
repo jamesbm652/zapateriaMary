@@ -59,6 +59,15 @@ public class BL_Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    public ArrayList<Integer> getListaTelefonos() {
+        return listaTelefonos;
+    }
+
+    public void setListaTelefonos(ArrayList<Integer> listaTelefonos) {
+        this.listaTelefonos = listaTelefonos;
+    }
+    
     
     
 }
