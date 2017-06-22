@@ -60,6 +60,7 @@ public class BL_Cliente {
         this.direccion = direccion;
     }
 
+
     public ArrayList<BL_TelefonoCliente> getListaTelefonos() {
         return listaTelefonos;
     }

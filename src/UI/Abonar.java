@@ -6,10 +6,15 @@
 package UI;
 
 import BL.BL_Cliente;
+import BL.BL_Factura;
 import BL.BL_ManejadorCliente;
+import BL.BL_ManejadorFacturas;
+import BL.BL_Producto;
 import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -18,16 +23,20 @@ import javax.swing.text.JTextComponent;
  */
 public class Abonar extends javax.swing.JFrame {
 
-    
+    DefaultTableModel modelo;
     BL_ManejadorCliente manejadorCliente = new BL_ManejadorCliente();
+    ArrayList<BL_Factura> listaFacturas = new ArrayList<BL_Factura>();
+    BL_Cliente cliente = new BL_Cliente();
     /**
      * Creates new form Abonar
      */
     public Abonar() {
         initComponents();
+        modelo = (DefaultTableModel) tablaInventario.getModel();
         
         manejadorCliente.cargarClientes();
         
+        ocultarColumnaID();
         comboBoxAutocompleta();
     }
 
@@ -41,7 +50,7 @@ public class Abonar extends javax.swing.JFrame {
                 String cadena = cbx_Cedula.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     if(buscar(cadena)){
-                        
+                        cargarFacturas();
                     }
                 }
                 if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
@@ -73,7 +82,14 @@ public class Abonar extends javax.swing.JFrame {
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
             if (c.getCedula().contentEquals(cadena)) {
                 txtNombreCompleto.setText(c.getNombreCompleto());
-                return true;
+
+                
+                cliente.setIdCliente(c.getIdCliente());
+                cliente.setNombreCompleto(c.getNombreCompleto());
+                cliente.setCedula(c.getCedula());
+                cliente.setDireccion(c.getDireccion());
+                cliente.setListaTelefonos(c.getListaTelefonos());
+                existe = true;
             }
         }
         if (!existe) {
@@ -82,6 +98,47 @@ public class Abonar extends javax.swing.JFrame {
         return existe;
     }
     
+    
+    private void cargarFacturas(){
+        BL_ManejadorFacturas mFacturas = new BL_ManejadorFacturas();
+        mFacturas.cargarFacturasPorCliente(cliente.getIdCliente());
+        listaFacturas = mFacturas.ObtenerLista();
+        cargarProductosEnTabla(listaFacturas);
+    }
+    
+    private void cargarProductosEnTabla(ArrayList<BL_Factura> listaParaMostrar) {
+
+        limpiarTabla(modelo);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        for (int i = 0; i < listaParaMostrar.size(); i++) {
+            fila[0] = listaParaMostrar.get(i).getIdFactura();
+            fila[1] = listaParaMostrar.get(i).getFechaFactura().toString();
+            fila[2] = listaParaMostrar.get(i).getTipoFactura();
+            fila[3] = "Sin cancelar";
+            fila[4] = i;
+            
+            modelo.addRow(fila);
+        }
+        listaFacturas = listaParaMostrar;
+    }
+    
+    private void limpiarTabla(DefaultTableModel modelo) {
+        int filas = tablaInventario.getRowCount();
+        for (int i = 0; filas > i; i++) {
+            modelo.removeRow(0);
+        }
+    }
+    
+    private void ocultarColumnaID() {
+        
+        tablaInventario.getColumn("HiddenID").setMaxWidth(0);
+        tablaInventario.getColumn("HiddenID").setMinWidth(0);
+        tablaInventario.getColumn("HiddenID").setPreferredWidth(0);
+        tablaInventario.getColumn("HiddenID").setWidth(0);
+        tablaInventario.getColumn("HiddenID").setResizable(false);
+
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -115,8 +172,8 @@ public class Abonar extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtTelHab = new javax.swing.JTextField();
+        txtTelCel = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -125,6 +182,8 @@ public class Abonar extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNombreCompleto = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        txtCedula = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -331,13 +390,13 @@ public class Abonar extends javax.swing.JFrame {
         jLabel3.setText("Teléfono cel:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 150, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 130, -1));
+        txtTelHab.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtTelHab.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtTelHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 130, -1));
 
-        jTextField2.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 150, 140, -1));
+        txtTelCel.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtTelCel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 150, 140, -1));
         jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 170, 140, 10));
         jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 170, 130, 10));
 
@@ -359,6 +418,11 @@ public class Abonar extends javax.swing.JFrame {
         txtNombreCompleto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, -1));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 310, 20));
+
+        txtCedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtCedula.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 180, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 180, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1250, 600));
 
@@ -421,7 +485,12 @@ public class Abonar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
-
+        if(evt.getClickCount() == 2){
+            txtCedula.setText(cliente.getCedula());
+            txt_Senor.setText(cliente.getNombreCompleto());
+            txt_Direccion.setText(cliente.getDireccion());
+            
+        }
     }//GEN-LAST:event_tablaInventarioMouseClicked
 
     private void btnPanelFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseClicked
@@ -495,11 +564,10 @@ public class Abonar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel labBuscar1;
     private javax.swing.JLabel labClose;
@@ -507,7 +575,10 @@ public class Abonar extends javax.swing.JFrame {
     private javax.swing.JLabel labClose2;
     private javax.swing.JTable tablaDetalles;
     private javax.swing.JTable tablaInventario;
+    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtNombreCompleto;
+    private javax.swing.JTextField txtTelCel;
+    private javax.swing.JTextField txtTelHab;
     private javax.swing.JTextField txt_Direccion;
     private javax.swing.JLabel txt_PrecioTotal;
     private javax.swing.JTextField txt_Senor;

@@ -5,6 +5,7 @@
  */
 package BL;
 
+import DAO.DAO_Factura;
 import java.util.ArrayList;
 
 /**
@@ -27,5 +28,9 @@ public class BL_ManejadorFacturas {
     
     public ArrayList<BL_Factura> ObtenerLista(){
         return listaFacturas;
+    }
+    
+    public void cargarFacturasPorCliente(int idCliente){
+        new DAO_Factura().cargarFacturasPorCliente(this, idCliente);
     }
 }
