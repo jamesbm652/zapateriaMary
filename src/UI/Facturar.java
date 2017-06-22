@@ -22,6 +22,9 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -47,6 +50,11 @@ public class Facturar extends javax.swing.JFrame {
         modelo = (DefaultTableModel) tablaInventario.getModel();
         modeloDetalles = (DefaultTableModel) tablaDetalles.getModel();
         jpanBusquedaAvanzada.setVisible(false);
+        SpinnerNumberModel spn = new SpinnerNumberModel(1, 1, 100, 1);
+        txt_Cantidad.setModel(spn);
+        JFormattedTextField tf = ((JSpinner.DefaultEditor)txt_Cantidad.getEditor()).getTextField();
+        tf.setEditable(false);
+
 
         manejador.CargarProductos();
         listaTotalProductos = manejador.ObtenerListaProductos();
@@ -713,7 +721,7 @@ public class Facturar extends javax.swing.JFrame {
 
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         // TODO add your handling code here:
-        if (tablaDetalles.getSelectedRow() >= 0) {
+        if ((tablaDetalles.getSelectedRow() >= 0) && (JOptionPane.showConfirmDialog(null, "¿Desea eleminar el producto de la lista?", "Eliminar product", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
             int idDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 3).toString());
             int posOriginal = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 4).toString());
             int cantidadDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 1).toString());
@@ -723,7 +731,7 @@ public class Facturar extends javax.swing.JFrame {
             modeloDetalles.removeRow(tablaDetalles.getSelectedRow());
             ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
             BL_ProductoFactura detalleEliminar = new BL_ProductoFactura();
-            
+
             for (int i = 0; i < listaDetalles.size(); i++) {
                 if (listaDetalles.get(i).getIdProducto() == idDetalle) {
                     detalleEliminar = listaDetalles.get(i);
@@ -737,13 +745,12 @@ public class Facturar extends javax.swing.JFrame {
                     }
                 }
             }
-            
+
             txt_PrecioTotal.setText("₡ "+ totalPagar + "");
             cargarProductosEnTabla(listaTotalProductos);
-            
 
         } else {
-
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_EliminarActionPerformed
 
