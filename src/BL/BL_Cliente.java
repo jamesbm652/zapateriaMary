@@ -16,7 +16,7 @@ public class BL_Cliente {
     private String nombreCompleto;
     private String cedula;
     private String direccion;
-    private ArrayList<Integer> listaTelefonos = new ArrayList<>();
+    private ArrayList<BL_TelefonoCliente> listaTelefonos = new ArrayList<>();
 
     public BL_Cliente() {
     }
@@ -60,14 +60,14 @@ public class BL_Cliente {
         this.direccion = direccion;
     }
 
-    public ArrayList<Integer> getListaTelefonos() {
+
+    public ArrayList<BL_TelefonoCliente> getListaTelefonos() {
         return listaTelefonos;
     }
 
-    public void setListaTelefonos(ArrayList<Integer> listaTelefonos) {
+    public void setListaTelefonos(ArrayList<BL_TelefonoCliente> listaTelefonos) {
         this.listaTelefonos = listaTelefonos;
     }
-    
     
     
 }
