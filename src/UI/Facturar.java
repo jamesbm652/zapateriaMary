@@ -17,6 +17,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -36,6 +39,7 @@ public class Facturar extends javax.swing.JFrame {
     BL_ManejadorProductoFactura manejadorDetalles = new BL_ManejadorProductoFactura();
     DefaultTableModel modelo;
     DefaultTableModel modeloDetalles;
+    List<Map<String, Integer>> listaParaActualizar = new ArrayList<>();
 
     /**
      * Creates new form
@@ -56,6 +60,7 @@ public class Facturar extends javax.swing.JFrame {
         ocultarColumnaID();
 
         // Combo box autoCompletar
+        comboBoxAutocompleta();
         
     }
     
@@ -557,6 +562,18 @@ public class Facturar extends javax.swing.JFrame {
         TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
         tablaInventario.setRowSorter(trsFiltro);
         trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        
+        //Validacion para que actualice la cantidad en la lista de productos
+        if (listaParaActualizar.size() > 0) {
+            for (int i = 0; i < tablaInventario.getRowCount(); i++) {
+                int hidden = Integer.parseInt(tablaInventario.getValueAt(i, 5).toString());
+                for (int j = 0; j < listaParaActualizar.size(); j++) {
+                    if (hidden == listaParaActualizar.get(j).get("pos")) {
+                        tablaInventario.setValueAt(listaParaActualizar.get(j).get("cant"), i, 2);
+                    }
+                }
+            }
+        }
     }
 
     private void validarNumeros(java.awt.event.KeyEvent evt) {
@@ -569,13 +586,13 @@ public class Facturar extends javax.swing.JFrame {
     }
 
     private void ocultarColumnaID() {
-        /*
+        
         tablaInventario.getColumn("HiddenID").setMaxWidth(0);
         tablaInventario.getColumn("HiddenID").setMinWidth(0);
         tablaInventario.getColumn("HiddenID").setPreferredWidth(0);
         tablaInventario.getColumn("HiddenID").setWidth(0);
         tablaInventario.getColumn("HiddenID").setResizable(false);
-*/
+
     }
 
     private void ocultarColumnaDetalles() {
@@ -671,9 +688,23 @@ public class Facturar extends javax.swing.JFrame {
             int idDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 3).toString());
             int posOriginal = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 4).toString());
             int cantidadDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 1).toString());
+            int nuevaCantidad = listaTotalProductos.get(posOriginal).getCantidad() + cantidadDetalle;
             int totalPagar = 0;
-
-            listaTotalProductos.get(posOriginal).setCantidad(listaTotalProductos.get(posOriginal).getCantidad() + cantidadDetalle);
+            
+            //Necesario para actualizar la cantidad en la tabla de inventario
+            Map<String, Integer> map = new HashMap<>();
+            map.put("pos", posOriginal);
+            map.put("cant", nuevaCantidad);
+            listaParaActualizar.add(map);
+            
+            listaTotalProductos.get(posOriginal).setCantidad(nuevaCantidad);
+            for (int i = 0; i < tablaInventario.getRowCount(); i++) {
+                int hidden = Integer.parseInt(tablaInventario.getValueAt(i, 5).toString());
+                if (hidden == posOriginal) {
+                    tablaInventario.setValueAt(nuevaCantidad, i, 2);
+                }
+            }
+            
             modeloDetalles.removeRow(tablaDetalles.getSelectedRow());
             ArrayList<BL_ProductoFactura> listaDetalles = manejadorDetalles.ObtenerLista();
             BL_ProductoFactura detalleEliminar = new BL_ProductoFactura();
@@ -691,9 +722,7 @@ public class Facturar extends javax.swing.JFrame {
                     }
                 }
             }
-
             txt_PrecioTotal.setText("₡ "+ totalPagar + "");
-            cargarProductosEnTabla(listaTotalProductos);
 
         } else {
 
@@ -740,8 +769,9 @@ public class Facturar extends javax.swing.JFrame {
                     prodDetalle.setPosicionOriginal(id);
                     manejadorDetalles.Agregar(prodDetalle);
                 }
-                listaTotalProductos.get(id).setCantidad(listaTotalProductos.get(id).getCantidad() - cantidad);
-                cargarProductosEnTabla(listaTotalProductos);
+                int nuevaCantidad = listaTotalProductos.get(id).getCantidad() - cantidad;
+                listaTotalProductos.get(id).setCantidad(nuevaCantidad);
+                tablaInventario.setValueAt(nuevaCantidad, tablaInventario.getSelectedRow(), 2);
                 cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista());
 
             } else {
