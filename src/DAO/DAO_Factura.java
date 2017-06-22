@@ -95,6 +95,15 @@ public class DAO_Factura {
                 ps.setString(5, factura.getProductosFactura().get(i).getDescripcion());
                 completado = ps.executeUpdate();
             }
+            completado = 0;
+            
+            //Se proceden a actualizar los productos vendidos.
+            for (int i = 0; i < factura.getProductosFactura().size(); i++) {
+                BL_ProductoFactura prod = factura.getProductosFactura().get(i);
+                ps = con.prepareStatement("Update producto Set Cantidad = (Cantidad - ?)");
+                ps.setInt(1, prod.getCantidadVendida());
+                completado = ps.executeUpdate();
+            }
             cerrarConexion();
 
         } catch (SQLException ex) {
