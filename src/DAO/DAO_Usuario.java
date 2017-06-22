@@ -156,31 +156,41 @@ public class DAO_Usuario {
 
         conexion();
         PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
 
-            ps = con.prepareStatement("Update usuario Set NombreCompleto = ?, "
-                    + "NombreUsuario = ?, Contrasena = ?, Administrador = ? Where IdUsuario = ?");
+            ps = con.prepareStatement("SELECT * FROM usuario WHERE NombreUsuario = ?");
+            ps.setString(1, usuarioModificado.getNombreUsuario());
+            rs = ps.executeQuery();
 
-            ps.setString(1, usuarioModificado.getNombreCompleto());
-            ps.setString(2, usuarioModificado.getNombreUsuario());
-            ps.setString(3, usuarioModificado.getContrasena());
-            if (usuarioModificado.isAdministrador()) {
-                ps.setInt(4, 1);
-            } else {
-                ps.setInt(4, 0);
-            }
-            ps.setInt(5, usuarioModificado.getIdUsuario());
+            if (rs.next() && usuarioModificado.getIdUsuario() != rs.getInt("IdUsuario")) {
+                modificado = false;
+            }else{
+                ps = con.prepareStatement("Update usuario Set NombreCompleto = ?, "
+                        + "NombreUsuario = ?, Contrasena = ?, Administrador = ? Where IdUsuario = ?");
 
-            insertado = ps.executeUpdate();
+                ps.setString(1, usuarioModificado.getNombreCompleto());
+                ps.setString(2, usuarioModificado.getNombreUsuario());
+                ps.setString(3, usuarioModificado.getContrasena());
+                if (usuarioModificado.isAdministrador()) {
+                    ps.setInt(4, 1);
+                } else {
+                    ps.setInt(4, 0);
+                }
+                ps.setInt(5, usuarioModificado.getIdUsuario());
 
-            if (insertado > 0) {
-                modificado = true;
+                insertado = ps.executeUpdate();
+
+                if (insertado > 0) {
+                    modificado = true;
+                }
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         cerrarConexion();
         return modificado;
     }
