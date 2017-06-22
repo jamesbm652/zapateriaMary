@@ -24,6 +24,7 @@ import BL.BL_ProductoFactura;
 import BL.BL_ManejadorProductoFactura;
 import com.mysql.jdbc.Statement;
 
+
 /**
  *
  * @author Joseph
@@ -123,8 +124,8 @@ public class DAO_Factura {
         }
     }
 
-    public void cargarFacturasPorCliente(BL_ManejadorFacturas listaFactura, String cedula) {
-
+    public void cargarFacturasPorCliente(BL_ManejadorFacturas mFacturas,int idCliente) {
+        
         conexion();
 
         PreparedStatement ps = null;
@@ -132,16 +133,13 @@ public class DAO_Factura {
         ResultSet rsDetalles = null;
 
         try {
-            ps = con.prepareStatement("Select F.IdFactura, F.Fecha, F.Cancelada, "
-                    + "F.TipoFactura, C.IdCliente, C.NombreCompleto, C.Cedula, "
-                    + "C.Direccion From factura as F Inner Join clientefactura "
-                    + "as CF on F.IdFactura = CF.IdFactura Inner Join cliente as "
-                    + "C on C.IdCliente = CF.IdCliente Where C.Cedula = ? ");
-            ps.setString(1, cedula);
+            ps = con.prepareStatement("SELECT distinct f.IdFactura,f.Fecha,f.Cancelada,f.TipoFactura, SUM(a.MontoAbonar) as MontoAbonado "
+            + "FROM factura f INNER JOIN clientefactura cf ON cf.IdFactura = f.IdFactura INNER JOIN abono a "
+            + "ON f.IdFactura = a.IdFactura WHERE f.Cancelada = 0 AND cf.IdCliente = ? GROUP BY f.IdFactura ORDER BY f.Fecha DESC");
+            ps.setInt(1, idCliente);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                BL_Cliente cliente = new BL_Cliente();
                 BL_Factura factura = new BL_Factura();
                 BL_ManejadorProductoFactura detallesFactura = new BL_ManejadorProductoFactura();
                 
@@ -153,12 +151,9 @@ public class DAO_Factura {
                     factura.setCancelada(false);
                 }
                 factura.setTipoFactura(rs.getString(4));
+                factura.setMontoAbonado(rs.getDouble(5));
                 
-                cliente.setIdCliente(rs.getInt(5));
-                cliente.setNombreCompleto(rs.getString(6));
-                cliente.setCedula(rs.getString(7));
-                cliente.setDireccion(rs.getString(cedula));
-                factura.setCliente(cliente);
+                
                 
                 ps = con.prepareStatement("Select Cantidad, PrecioVenta, Descripcion "
                         + "From productofactura Where IdFactura = ?");
@@ -174,9 +169,10 @@ public class DAO_Factura {
                     detallesFactura.Agregar(prodFactura);
                 }
                 factura.setProductosFactura(detallesFactura.ObtenerLista());
-                listaFactura.Agregar(factura);
+                mFacturas.Agregar(factura);
             }
             cerrarConexion();
+            
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
