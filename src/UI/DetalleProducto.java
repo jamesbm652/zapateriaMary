@@ -51,6 +51,11 @@ public class DetalleProducto extends javax.swing.JFrame {
             btnGenerarCodigo.setVisible(false);
 
             habilitarCampos(true);
+            
+            cmbGenero.setEnabled(false);
+            cmbCategoria.setEnabled(false);
+            txtTalla.setEnabled(false);
+            txtTalla.setText("");
             cargarProducto();
         } else {
             labInstruccion.setText("Detalles del producto:");
@@ -574,7 +579,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                         lista.set(posicion, producto);
                         JOptionPane.showMessageDialog(null, "Datos modificados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
-                        new AdministrarUsuarios().setVisible(true);
+                        new Inventario(lista).setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al modificar el producto", "Error", JOptionPane.ERROR_MESSAGE);
                     }
