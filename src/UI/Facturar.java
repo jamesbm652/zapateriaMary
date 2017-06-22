@@ -79,22 +79,22 @@ public class Facturar extends javax.swing.JFrame {
         ocultarColumnaID();
 
         // Combo box autoCompletar
-        comboBoxAutocompleta();
-        
+        comboBoxAutocompletaCedula();
+        comboBoxAutocompletaNombre();
     }
     
-    private void comboBoxAutocompleta(){
+    private void comboBoxAutocompletaCedula(){
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             
             @Override
             public void keyReleased(KeyEvent evt){
-                
+                boolean habilitar = false;
                 String cadena = cbx_Cedula.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    buscar(cadena);
+                    habilitar = buscarPorCedula(cadena);
                 }
                 if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
-                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena));
+                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena, "Cedula"));
                     if (cbx_Cedula.getItemCount() > 0) {
                         cbx_Cedula.showPopup();
                         if (evt.getKeyCode() != 8) {
@@ -114,15 +114,49 @@ public class Facturar extends javax.swing.JFrame {
                     ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                 }
                 // Metodo para permitir o no la modificacion de los datos
-                permisoParaEscribir();
+                permisoParaEscribir(habilitar);
             }
         });
     }
     
-    private void permisoParaEscribir(){
-        if(!txt_Senor.getText().equals("")){
-            txt_Senor.setEditable(false);
-            txt_Senor.setBackground(Color.WHITE);
+    private void comboBoxAutocompletaNombre(){
+        cbx_Senor.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            
+            @Override
+            public void keyReleased(KeyEvent evt){
+                boolean habilitar = false;
+                String cadena = cbx_Senor.getEditor().getItem().toString();;  
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    habilitar = buscarPorNombreCompleto(cadena);
+                }
+                if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                    cbx_Senor.setModel(manejadorCliente.obtenerListaComboBox(cadena, "NombreCompleto"));
+                    if (cbx_Senor.getItemCount() > 0) {
+                        cbx_Senor.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent)cbx_Senor.getEditor().getEditorComponent()).select(cadena.length(), 
+                                    cbx_Senor.getEditor().getItem().toString().length());
+                        }else{
+                            cbx_Senor.getEditor().setItem(cadena);
+                        }
+                    }else{
+                        cbx_Senor.addItem(cadena);
+                        int fin = cbx_Senor.getEditor().getItem().toString().length();
+                        ((JTextComponent)cbx_Senor.getEditor().getEditorComponent()).select(fin, fin);
+                    }
+                }
+                if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    int fin = cbx_Senor.getEditor().getItem().toString().length();
+                    ((JTextComponent)cbx_Senor.getEditor().getEditorComponent()).select(fin, fin);
+                }
+                // Metodo para permitir o no la modificacion de los datos
+                permisoParaEscribir(habilitar);
+            }
+        });
+    }
+    
+    private void permisoParaEscribir(boolean habilitar){
+        if(habilitar){
             txt_Direccion.setEditable(false);
             txt_Direccion.setBackground(Color.WHITE);
             telHabitacion.setEditable(false);
@@ -130,26 +164,52 @@ public class Facturar extends javax.swing.JFrame {
             telCelular.setEditable(false);
             telCelular.setBackground(Color.WHITE);
         }else{
-            txt_Senor.setEditable(true);
             txt_Direccion.setEditable(true);
             telHabitacion.setEditable(true);
             telCelular.setEditable(true);
         }
     }
-    
-    private void buscar(String cadena) {
+    private boolean buscarPorNombreCompleto(String cadena){
+        boolean existeNombre = false;
+        boolean cedCoincide = false;
+        String ced = cbx_Cedula.getEditor().getItem().toString();
+        for (BL_Cliente c : manejadorCliente.obtenerLista()) {
+            if (c.getNombreCompleto().contentEquals(cadena)) {
+                cbx_Cedula.getEditor().setItem(c.getCedula());
+                txt_Direccion.setText(c.getDireccion());
+                existeNombre = true;
+            }
+            if (c.getCedula().contentEquals(ced)) {
+                cedCoincide = true;
+            }
+        }
+        if (!existeNombre && cedCoincide) {
+            cbx_Cedula.getEditor().setItem("");
+            txt_Direccion.setText("");
+        }
+        if (existeNombre || cedCoincide) return true;
+        return false;
+    }
+    private boolean buscarPorCedula(String cadena) {
         boolean existe = false;
+        boolean nomCoincide = false;
+        String nombre = cbx_Senor.getEditor().getItem().toString();
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
             if (c.getCedula().contentEquals(cadena)) {
-                txt_Senor.setText(c.getNombreCompleto());
+                cbx_Senor.getEditor().setItem(c.getNombreCompleto());
                 txt_Direccion.setText(c.getDireccion());
                 existe = true;
             }
+            if (c.getNombreCompleto().contentEquals(nombre)) {
+                nomCoincide =  true;
+            }
         }
-        if (!existe) {
-            txt_Senor.setText("");
+        if (!existe && nomCoincide) {
+            cbx_Senor.getEditor().setItem("");
             txt_Direccion.setText("");
         }
+        if (existe || nomCoincide) return true;
+        return false;
     }
 
     /**
@@ -170,7 +230,6 @@ public class Facturar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txt_Senor = new javax.swing.JTextField();
         txt_Direccion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txt_PrecioTotal = new javax.swing.JLabel();
@@ -212,7 +271,6 @@ public class Facturar extends javax.swing.JFrame {
         labBuscar1 = new javax.swing.JLabel();
         btnPanelAgregar = new javax.swing.JPanel();
         labBtnAgregar = new javax.swing.JLabel();
-        jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
         btnPanelEliminar = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
@@ -229,6 +287,7 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
+        cbx_Senor = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -299,10 +358,6 @@ public class Facturar extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Dirección:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, -1, -1));
-
-        txt_Senor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txt_Senor.setBorder(null);
-        jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 380, 20));
 
         txt_Direccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txt_Direccion.setBorder(null);
@@ -544,7 +599,6 @@ public class Facturar extends javax.swing.JFrame {
         btnPanelAgregar.add(labBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 20));
 
         jPanel2.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 100, 40));
-        jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 380, -1));
         jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 380, 10));
 
         btnPanelEliminar.setBackground(new java.awt.Color(0, 93, 107));
@@ -632,6 +686,14 @@ public class Facturar extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Teléfono hab:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 90, -1));
+
+        cbx_Senor.setEditable(true);
+        cbx_Senor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_SenorActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cbx_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 380, 20));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1250, 600));
 
@@ -965,7 +1027,7 @@ public class Facturar extends javax.swing.JFrame {
     private void btnPanelFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseClicked
         // TODO add your handling code here:
         String cedula = cbx_Cedula.getSelectedItem() + "";
-        String comprador = txt_Senor.getText();
+        String comprador = cbx_Senor.getSelectedItem() + "";
         String direccion = txt_Direccion.getText();
         String tipoFactura = "";
         Date fechaFactura = new Date(new java.util.Date().getTime());
@@ -1024,10 +1086,14 @@ public class Facturar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPanelFacturarMouseEntered
 
     private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
-        // TODO add your handling code here:
         String cadena = cbx_Cedula.getEditor().getItem().toString();
-        buscar(cadena);
+        permisoParaEscribir(buscarPorCedula(cadena));
     }//GEN-LAST:event_cbx_CedulaActionPerformed
+
+    private void cbx_SenorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_SenorActionPerformed
+        String cadena = cbx_Senor.getEditor().getItem().toString();
+        permisoParaEscribir(buscarPorNombreCompleto(cadena));
+    }//GEN-LAST:event_cbx_SenorActionPerformed
 
     static public class HeaderColor extends DefaultTableCellRenderer{
         public HeaderColor(){
@@ -1054,6 +1120,7 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbx_Categoria;
     private javax.swing.JComboBox<String> cbx_Cedula;
     private javax.swing.JComboBox cbx_Genero;
+    private javax.swing.JComboBox<String> cbx_Senor;
     private javax.swing.JComboBox<String> cbx_TipoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1087,7 +1154,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBtnAgregar;
@@ -1114,7 +1180,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Marca;
     private javax.swing.JTextField txt_Precio;
     private javax.swing.JLabel txt_PrecioTotal;
-    private javax.swing.JTextField txt_Senor;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;
     // End of variables declaration//GEN-END:variables

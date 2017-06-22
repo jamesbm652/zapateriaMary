@@ -73,7 +73,7 @@ public class Abonar extends javax.swing.JFrame {
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
             if (c.getCedula().contentEquals(cadena)) {
                 txtNombreCompleto.setText(c.getNombreCompleto());
-                existe = true;
+                return true;
             }
         }
         if (!existe) {
@@ -100,7 +100,7 @@ public class Abonar extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txt_PrecioTotal = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        cbx_Cedula = new javax.swing.JComboBox<String>();
+        cbx_Cedula = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         jSeparator7 = new javax.swing.JSeparator();
@@ -221,6 +221,11 @@ public class Abonar extends javax.swing.JFrame {
         cbx_Cedula.setEditable(true);
         cbx_Cedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         cbx_Cedula.setBorder(null);
+        cbx_Cedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_CedulaActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 310, -1));
 
         tablaInventario.setBackground(new java.awt.Color(232, 232, 232));
@@ -453,6 +458,12 @@ public class Abonar extends javax.swing.JFrame {
     private void labClose2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labClose2MouseEntered
         labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labClose2MouseEntered
+
+    private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
+        // TODO add your handling code here:
+        String cadena = cbx_Cedula.getEditor().getItem().toString();
+        buscar(cadena);
+    }//GEN-LAST:event_cbx_CedulaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

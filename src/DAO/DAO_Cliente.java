@@ -31,7 +31,7 @@ public class DAO_Cliente {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,9 +49,15 @@ public class DAO_Cliente {
 
     }
 
-    public DefaultComboBoxModel obtenerListaComboBox(String cadena) {
+    public DefaultComboBoxModel obtenerListaComboBox(String cadena, String tipoFiltro) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        String query = "SELECT Cedula FROM cliente WHERE cedula LIKE ?;";
+        
+        String query = "";
+        if (tipoFiltro.equals("Cedula")) {
+            query = "SELECT Cedula, NombreCompleto FROM cliente WHERE cedula LIKE ?;";
+        }else{
+            query = "SELECT Cedula, NombreCompleto FROM cliente WHERE NombreCompleto LIKE ?;";
+        }
 
         PreparedStatement ps;
         ResultSet rs;
@@ -63,7 +69,7 @@ public class DAO_Cliente {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                model.addElement(rs.getString("Cedula"));
+                model.addElement(rs.getString(tipoFiltro));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
