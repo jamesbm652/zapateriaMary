@@ -39,7 +39,7 @@ public class DAO_Factura {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,13 +130,15 @@ public class DAO_Factura {
         conexion();
 
         PreparedStatement ps = null;
+        PreparedStatement psM = null;
         ResultSet rs = null;
         ResultSet rsDetalles = null;
+        ResultSet rsMonto = null;
 
         try {
-            ps = con.prepareStatement("SELECT distinct f.IdFactura,f.Fecha,f.Cancelada,f.TipoFactura, SUM(a.MontoAbonar) as MontoAbonado "
-            + "FROM factura f INNER JOIN clientefactura cf ON cf.IdFactura = f.IdFactura INNER JOIN abono a "
-            + "ON f.IdFactura = a.IdFactura WHERE f.Cancelada = 0 AND cf.IdCliente = ? GROUP BY f.IdFactura ORDER BY f.Fecha ASC");
+            ps = con.prepareStatement("SELECT distinct f.IdFactura,f.Fecha,f.Cancelada,f.TipoFactura "
+            + "FROM factura f INNER JOIN clientefactura cf ON cf.IdFactura = f.IdFactura "
+            + "WHERE f.Cancelada = 0 AND cf.IdCliente = ? GROUP BY f.IdFactura ORDER BY f.Fecha ASC");
             ps.setInt(1, idCliente);
             rs = ps.executeQuery();
 
@@ -152,7 +154,18 @@ public class DAO_Factura {
                     factura.setCancelada(false);
                 }
                 factura.setTipoFactura(rs.getString(4));
-                factura.setMontoAbonado(rs.getDouble(5));
+                
+                psM = con.prepareStatement("Select MontoAbonar FROM abono WHERE IdFactura = ?");
+                psM.setInt(1, factura.getIdFactura());
+                
+                rsMonto = psM.executeQuery();
+                
+                if(rsMonto.next()){
+                    factura.setMontoAbonado(rsMonto.getDouble(1));
+                }else{
+                    factura.setMontoAbonado(0);
+                }
+                
                 
                 
                 
