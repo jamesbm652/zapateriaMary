@@ -77,6 +77,7 @@ public class Facturar extends javax.swing.JFrame {
         cargarProductosEnTabla(listaTotalProductos);
 
         ocultarColumnaID();
+        ocultarColumnaDetalles();
 
         // Combo box autoCompletar
         comboBoxAutocompletaCedula();
@@ -182,8 +183,24 @@ public class Facturar extends javax.swing.JFrame {
                 cbx_Cedula.getEditor().setItem(c.getCedula());
                 txt_Direccion.setText(c.getDireccion());
                 // Validar y setear telefonos
-                if (c.getListaTelefonos().size() > 0) telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
-                if (c.getListaTelefonos().size() > 1) telCelular.setText(c.getListaTelefonos().get(1).getTelefono());
+                if (c.getListaTelefonos().size() == 1) {
+                    if (c.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
+                        telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
+                        telCelular.setText("");
+                    }else{
+                        telCelular.setText(c.getListaTelefonos().get(0).getTelefono());
+                        telHabitacion.setText("");
+                    }
+                }
+                if (c.getListaTelefonos().size() == 2) {
+                    if (c.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
+                        telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
+                        telCelular.setText(c.getListaTelefonos().get(1).getTelefono());
+                    }else{
+                        telHabitacion.setText(c.getListaTelefonos().get(1).getTelefono());
+                        telCelular.setText(c.getListaTelefonos().get(0).getTelefono());
+                    }
+                }
                 existeNombre = true;
             }
             if (c.getCedula().contentEquals(ced)) {
@@ -209,8 +226,24 @@ public class Facturar extends javax.swing.JFrame {
                 cbx_Senor.getEditor().setItem(c.getNombreCompleto());
                 txt_Direccion.setText(c.getDireccion());
                 // Validar y setear telefonos
-                if (c.getListaTelefonos().size() > 0) telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
-                if (c.getListaTelefonos().size() > 1) telCelular.setText(c.getListaTelefonos().get(1).getTelefono());
+                if (c.getListaTelefonos().size() == 1) {
+                    if (c.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
+                        telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
+                        telCelular.setText("");
+                    }else{
+                        telCelular.setText(c.getListaTelefonos().get(0).getTelefono());
+                        telHabitacion.setText("");
+                    }
+                }
+                if (c.getListaTelefonos().size() == 2) {
+                    if (c.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
+                        telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
+                        telCelular.setText(c.getListaTelefonos().get(1).getTelefono());
+                    }else{
+                        telHabitacion.setText(c.getListaTelefonos().get(1).getTelefono());
+                        telCelular.setText(c.getListaTelefonos().get(0).getTelefono());
+                    }
+                }
                 existe = true;
             }
             if (c.getNombreCompleto().contentEquals(nombre)) {
@@ -691,7 +724,7 @@ public class Facturar extends javax.swing.JFrame {
         telHabitacion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.add(telHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 130, -1));
 
-        telCelular.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        telCelular.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         telCelular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.add(telCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 150, 140, -1));
         jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 170, 140, 10));

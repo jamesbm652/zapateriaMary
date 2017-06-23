@@ -107,6 +107,7 @@ public class DAO_Cliente {
                 while (rs.next()) {
                     BL_TelefonoCliente tel = new BL_TelefonoCliente();
                     tel.setTelefono(rs.getString("Telefono"));
+                    tel.setTipoTelefono(rs.getString("TipoTelefono"));
                     listaTels.add(tel);
                 }
                 c.setListaTelefonos(listaTels);
