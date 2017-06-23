@@ -1119,9 +1119,9 @@ public class Facturar extends javax.swing.JFrame {
             clienteInsertar.getListaTelefonos().add(new BL_TelefonoCliente(telefCelular, "Celular"));
         }
 
-        if (tipoFactura.equals("Apartado") && (telefHabitacion.equals("") || telefCelular.equals(""))) {
+        if (tipoFactura.equals("Apartado") && (telefHabitacion.equals("") && telefCelular.equals(""))) {
             JOptionPane.showMessageDialog(this, "Para el tipo de factura Apartado, debe de introducir al menos un telefono");
-        } else if (tipoFactura.equals("Crédito") && (telefHabitacion.equals("") && telefCelular.equals(""))) {
+        } else if (tipoFactura.equals("Crédito") && ((telefHabitacion.equals("") && !telefCelular.equals("")) || (!telefHabitacion.equals("") && telefCelular.equals("")) || (telefHabitacion.equals("") && telefCelular.equals("")))) {
             JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito, debe de introducir los dos teléfonos");
         } else {
             if (!tipoFactura.equals("") && !comprador.equals("") && !direccion.equals("")
