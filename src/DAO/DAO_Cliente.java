@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import BL.BL_TelefonoCliente;
 
 /**
  *
@@ -81,13 +82,12 @@ public class DAO_Cliente {
         ArrayList<BL_Cliente> lista = new ArrayList<>();
 
         conexion();
-        Statement st = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM cliente;";
 
         try {
-            st = this.con.createStatement();
-            rs = st.executeQuery(query);
+            ps = con.prepareStatement("SELECT * FROM cliente");
+            rs = ps.executeQuery();
 
             while (rs.next()) {
                 BL_Cliente cliente = new BL_Cliente();
@@ -97,6 +97,19 @@ public class DAO_Cliente {
                 cliente.setDireccion(rs.getString("Direccion"));
 
                 lista.add(cliente);
+            }
+            for (BL_Cliente c : lista) {
+                ps = con.prepareStatement("SELECT * FROM cliente C INNER JOIN telefonocliente TC ON C.IdCliente = TC.IdCliente WHERE C.IdCliente = ?");
+                ps.setInt(1, c.getIdCliente());
+                rs = ps.executeQuery();
+                
+                ArrayList<BL_TelefonoCliente> listaTels = new ArrayList<>();
+                while (rs.next()) {
+                    BL_TelefonoCliente tel = new BL_TelefonoCliente();
+                    tel.setTelefono(rs.getString("Telefono"));
+                    listaTels.add(tel);
+                }
+                c.setListaTelefonos(listaTels);
             }
 
             cerrarConexion();
@@ -151,8 +164,8 @@ public class DAO_Cliente {
     public void validarTelefonos(BL_Cliente cliente) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int telHabitacion = 0;
-        int telCelular = 0;
+        String telHabitacion = "";
+        String telCelular = "";
 
         for (int i = 0; i < cliente.getListaTelefonos().size(); i++) {
             if (cliente.getListaTelefonos().get(i).getTipoTelefono().equals("Habitacion")) {
@@ -163,7 +176,7 @@ public class DAO_Cliente {
         }
 
         try {
-            if (telHabitacion > 0) {
+            if (!telHabitacion.equals("")) {
                 ps = con.prepareStatement("Select Telefono from telefonocliente Where TipoTelefono = ? "
                         + "And IdCliente = ?");
                 ps.setString(1, "Habitacion");
@@ -175,13 +188,13 @@ public class DAO_Cliente {
                     insertarTelefonoCliente(cliente.getIdCliente(), telHabitacion, "Habitacion");
                 }
             }
-            if (telCelular > 0) {
+            if (!telCelular.equals("")) {
                 ps = con.prepareStatement("Select Telefono from telefonocliente Where TipoTelefono = ? "
                         + "And IdCliente = ?");
                 ps.setString(1, "Celular");
                 ps.setInt(2, cliente.getIdCliente());
                 rs = ps.executeQuery();
-                if (rs.next() && (telHabitacion > 0)) {
+                if (rs.next() && (!telHabitacion.equals(""))) {
                     actualizarTelefonoCliente(cliente.getIdCliente(), telCelular, "Celular");
                 } else {
                     insertarTelefonoCliente(cliente.getIdCliente(), telCelular, "Celular");
@@ -193,7 +206,7 @@ public class DAO_Cliente {
 
     }
 
-    public void insertarTelefonoCliente(int idCliente, int numeroTelef, String tipoTelefono) {
+    public void insertarTelefonoCliente(int idCliente, String numeroTelef, String tipoTelefono) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int insertado = 0;
@@ -201,7 +214,7 @@ public class DAO_Cliente {
         try {
             ps = con.prepareStatement("Insert into telefonocliente (IdCliente, Telefono, TipoTelefono) Values (?, ?, ?)");
             ps.setInt(1, idCliente);
-            ps.setInt(2, numeroTelef);
+            ps.setString(2, numeroTelef);
             ps.setString(3, tipoTelefono);
             
             insertado = ps.executeUpdate();
@@ -210,14 +223,14 @@ public class DAO_Cliente {
         }
     }
 
-    public void actualizarTelefonoCliente(int idCliente, int numeroTelef, String tipoTelefono) {
+    public void actualizarTelefonoCliente(int idCliente, String numeroTelef, String tipoTelefono) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int insertado = 0;
 
         try {
             ps = con.prepareStatement("Update telefonocliente Set Telefono = ? Where IdCliente = ? And TipoTelefono = ?");
-            ps.setInt(1, numeroTelef);
+            ps.setString(1, numeroTelef);
             ps.setInt(2, idCliente);
             ps.setString(3, tipoTelefono);
             

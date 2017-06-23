@@ -181,6 +181,9 @@ public class Facturar extends javax.swing.JFrame {
             if (c.getNombreCompleto().contentEquals(cadena)) {
                 cbx_Cedula.getEditor().setItem(c.getCedula());
                 txt_Direccion.setText(c.getDireccion());
+                // Validar y setear telefonos
+                if (c.getListaTelefonos().size() > 0) telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
+                if (c.getListaTelefonos().size() > 1) telCelular.setText(c.getListaTelefonos().get(1).getTelefono());
                 existeNombre = true;
             }
             if (c.getCedula().contentEquals(ced)) {
@@ -190,6 +193,8 @@ public class Facturar extends javax.swing.JFrame {
         if (!existeNombre && cedCoincide) {
             cbx_Cedula.getEditor().setItem("");
             txt_Direccion.setText("");
+            telCelular.setText("");
+            telHabitacion.setText("");
         }
         if (existeNombre || cedCoincide) return true;
         return false;
@@ -203,6 +208,9 @@ public class Facturar extends javax.swing.JFrame {
             if (c.getCedula().contentEquals(cadena)) {
                 cbx_Senor.getEditor().setItem(c.getNombreCompleto());
                 txt_Direccion.setText(c.getDireccion());
+                // Validar y setear telefonos
+                if (c.getListaTelefonos().size() > 0) telHabitacion.setText(c.getListaTelefonos().get(0).getTelefono());
+                if (c.getListaTelefonos().size() > 1) telCelular.setText(c.getListaTelefonos().get(1).getTelefono());
                 existe = true;
             }
             if (c.getNombreCompleto().contentEquals(nombre)) {
@@ -212,6 +220,8 @@ public class Facturar extends javax.swing.JFrame {
         if (!existe && nomCoincide) {
             cbx_Senor.getEditor().setItem("");
             txt_Direccion.setText("");
+            telCelular.setText("");
+            telHabitacion.setText("");
         }
         if (existe || nomCoincide) return true;
         return false;
@@ -1041,13 +1051,13 @@ public class Facturar extends javax.swing.JFrame {
         String direccion = txt_Direccion.getText();
         String tipoFactura = "";
         Date fechaFactura = new Date(new java.util.Date().getTime());
-        int telefHabitacion = 0;
-        int telefCelular = 0;
+        String telefHabitacion = "";
+        String telefCelular = "";
         if (!telHabitacion.getText().equals("")) {
-            telefHabitacion = Integer.parseInt(telHabitacion.getText());
+            telefHabitacion = telHabitacion.getText();
         }
         if (!telCelular.getText().equals("")) {
-            telefCelular = Integer.parseInt(telCelular.getText());
+            telefCelular = telCelular.getText();
         }
         if (tipo1.isSelected()) {
             tipoFactura = tipo1.getText();
@@ -1069,16 +1079,16 @@ public class Facturar extends javax.swing.JFrame {
         for (int i = 0; i < clienteInsertar.getListaTelefonos().size(); i++) {
             clienteInsertar.getListaTelefonos().remove(i);
         }
-        if (telefHabitacion > 0) {
+        if (!telefHabitacion.equals("")) {
             clienteInsertar.getListaTelefonos().add(new BL_TelefonoCliente(telefHabitacion, "Habitacion"));
         }
-        if (telefCelular > 0) {
+        if (!telefCelular.equals("")) {
             clienteInsertar.getListaTelefonos().add(new BL_TelefonoCliente(telefCelular, "Celular"));
         }
 
-        if (tipoFactura.equals("Apartado") && (telefHabitacion == 0 || telefCelular == 0)) {
+        if (tipoFactura.equals("Apartado") && (telefHabitacion.equals("") || telefCelular.equals(""))) {
             JOptionPane.showMessageDialog(this, "Para el tipo de factura Apartado, debe de introducir al menos un telefono");
-        } else if (tipoFactura.equals("Crédito") && (telefHabitacion == 0 && telefCelular == 0)) {
+        } else if (tipoFactura.equals("Crédito") && (telefHabitacion.equals("") && telefCelular.equals(""))) {
             JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito, debe de introducir los dos teléfonos");
         } else {
             if (!tipoFactura.equals("") && !comprador.equals("") && !direccion.equals("")
