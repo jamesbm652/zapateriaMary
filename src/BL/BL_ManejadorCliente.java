@@ -34,8 +34,8 @@ public class BL_ManejadorCliente {
         listaClientes = new DAO.DAO_Cliente().cargarTodosClientes();
     }
     
-    public DefaultComboBoxModel obtenerListaComboBox(String cadena){
-        return new DAO.DAO_Cliente().obtenerListaComboBox(cadena);
+    public DefaultComboBoxModel obtenerListaComboBox(String cadena, String tipoFiltro){
+        return new DAO.DAO_Cliente().obtenerListaComboBox(cadena, tipoFiltro);
     }
     
 }
