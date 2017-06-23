@@ -208,14 +208,12 @@ public class DAO_Factura {
         conexion();
 
         PreparedStatement ps = null;
-        ResultSet rs = null;
-        ResultSet rsDetalles = null;
 
         try {
             ps = con.prepareStatement("UPDATE factura SET Cancelada = 1 WHERE idFactura = ?");
             ps.setInt(1, idFactura);
             
-            rs = ps.executeQuery();
+            ps.executeUpdate();
             
             cerrarConexion();
             
