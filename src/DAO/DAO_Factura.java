@@ -23,6 +23,7 @@ import BL.BL_ManejadorFacturas;
 import BL.BL_ProductoFactura;
 import BL.BL_ManejadorProductoFactura;
 import com.mysql.jdbc.Statement;
+import java.sql.Date;
 
 
 /**
@@ -135,7 +136,7 @@ public class DAO_Factura {
         try {
             ps = con.prepareStatement("SELECT distinct f.IdFactura,f.Fecha,f.Cancelada,f.TipoFactura, SUM(a.MontoAbonar) as MontoAbonado "
             + "FROM factura f INNER JOIN clientefactura cf ON cf.IdFactura = f.IdFactura INNER JOIN abono a "
-            + "ON f.IdFactura = a.IdFactura WHERE f.Cancelada = 0 AND cf.IdCliente = ? GROUP BY f.IdFactura ORDER BY f.Fecha DESC");
+            + "ON f.IdFactura = a.IdFactura WHERE f.Cancelada = 0 AND cf.IdCliente = ? GROUP BY f.IdFactura ORDER BY f.Fecha ASC");
             ps.setInt(1, idCliente);
             rs = ps.executeQuery();
 
@@ -165,7 +166,7 @@ public class DAO_Factura {
                     
                     prodFactura.setCantidadVendida(rsDetalles.getInt(1));
                     prodFactura.setPrecioVenta(rsDetalles.getDouble(2));
-                    prodFactura.setDescripcion(rs.getString(3));
+                    prodFactura.setDescripcion(rsDetalles.getString(3));
                     detallesFactura.Agregar(prodFactura);
                 }
                 factura.setProductosFactura(detallesFactura.ObtenerLista());
@@ -177,4 +178,52 @@ public class DAO_Factura {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void abonarAFactura(int idFactura,double abono){
+        conexion();
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaActual = formato.format(new Date(new java.util.Date().getTime()));
+        
+        
+        try {
+            ps = con.prepareStatement("Insert into abono (idFactura, Fecha, MontoAbonar) Values (?,?,?)");
+            ps.setInt(1,idFactura );
+            ps.setString(2, fechaActual);
+            ps.setDouble(3, abono);
+            
+            ps.executeUpdate();
+            
+            cerrarConexion();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cancelarFactura(int idFactura){
+        conexion();
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ResultSet rsDetalles = null;
+
+        try {
+            ps = con.prepareStatement("UPDATE factura SET Cancelada = 1 WHERE idFactura = ?");
+            ps.setInt(1, idFactura);
+            
+            rs = ps.executeQuery();
+            
+            cerrarConexion();
+            
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
 }

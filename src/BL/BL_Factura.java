@@ -95,5 +95,11 @@ public class BL_Factura {
         return insertado;
     }
     
+    public void abonarAFactura(double monto){
+        new DAO_Factura().abonarAFactura(idFactura, monto);
+    }
     
+    public void cancelarFactura(){
+        new DAO_Factura().cancelarFactura(idFactura);
+    }
 }
