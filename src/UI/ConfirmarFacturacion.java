@@ -35,9 +35,9 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         txt_Direccion.setText(fact.getCliente().getDireccion());
         for (int i = 0; i < fact.getCliente().getListaTelefonos().size(); i++) {
             if (i == 0) {
-                txt_TelHabitacion.setText(fact.getCliente().getListaTelefonos().get(i).getTelefono()+ "");
+                txt_TelHabitacion.setText(fact.getCliente().getListaTelefonos().get(i).getTelefono());
             }else{
-                txt_TelCelular.setText(fact.getCliente().getListaTelefonos().get(i).getTelefono()+ "");
+                txt_TelCelular.setText(fact.getCliente().getListaTelefonos().get(i).getTelefono());
             }
         }
         cargarProductosEnTablaDetalles(fact.getProductosFactura());

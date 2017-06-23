@@ -10,23 +10,23 @@ package BL;
  * @author Joseph
  */
 public class BL_TelefonoCliente {
-    private int telefono;
+    private String telefono;
     private String tipoTelefono;
 
     public BL_TelefonoCliente() {
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public BL_TelefonoCliente(int telefono, String tipoTelefono) {
+    public BL_TelefonoCliente(String telefono, String tipoTelefono) {
         this.telefono = telefono;
         this.tipoTelefono = tipoTelefono;
     }
     
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
