@@ -5,7 +5,12 @@
  */
 package UI;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -18,6 +23,9 @@ public class RevisarFacturas extends javax.swing.JFrame {
      */
     public RevisarFacturas() {
         initComponents();
+        
+        tablaDetalles.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
+        tablaInventario.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
     }
 
     /**
@@ -370,7 +378,19 @@ public class RevisarFacturas extends javax.swing.JFrame {
         labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labCloseMouseEntered
 
-  
+    static public class HeaderColor extends DefaultTableCellRenderer{
+        public HeaderColor(){
+            setOpaque(true);
+        }
+        public Component getTableCellRendererComponent(JTable tabla,Object value,boolean selected,boolean fused,int row,int column){
+            super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
+            setBorder(new LineBorder(Color.BLACK, 1));
+            setForeground(Color.WHITE);
+            setBackground(new java.awt.Color(0,105,120));
+            setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
+            return this;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbx_Cedula;

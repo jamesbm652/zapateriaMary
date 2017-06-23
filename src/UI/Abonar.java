@@ -13,11 +13,15 @@ import BL.BL_Producto;
 import BL.BL_ProductoFactura;
 import BL.BL_TelefonoCliente;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
@@ -40,7 +44,9 @@ public class Abonar extends javax.swing.JFrame {
     public Abonar() {
         initComponents();
         modelo = (DefaultTableModel) tablaInventario.getModel();
+        tablaInventario.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         modeloDetalles = (DefaultTableModel)tablaDetalles.getModel();
+        tablaDetalles.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         
         manejadorCliente.cargarClientes();
         
@@ -98,7 +104,7 @@ public class Abonar extends javax.swing.JFrame {
             if (c.getCedula().contentEquals(cadena)) {
                 txtNombreCompleto.setText(c.getNombreCompleto());
 
-                
+               
                 cliente.setIdCliente(c.getIdCliente());
                 cliente.setNombreCompleto(c.getNombreCompleto());
                 cliente.setCedula(c.getCedula());
@@ -641,11 +647,23 @@ public class Abonar extends javax.swing.JFrame {
             txtCedula.setText(cliente.getCedula());
             txt_Senor.setText(cliente.getNombreCompleto());
             txt_Direccion.setText(cliente.getDireccion());
-            for (int i = 0; i < cliente.getListaTelefonos().size(); i++) {
-                if(i == 0){
-                    txtTelHab.setText(cliente.getListaTelefonos().get(i).getTelefono() + "");
+            // Validar y setear telefonos
+            if (cliente.getListaTelefonos().size() == 1) {
+                if (cliente.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
+                    txtTelHab.setText(cliente.getListaTelefonos().get(0).getTelefono());
+                    txtTelCel.setText("");
                 }else{
-                    txtTelCel.setText(cliente.getListaTelefonos().get(i).getTelefono() + "");
+                    txtTelCel.setText(cliente.getListaTelefonos().get(0).getTelefono());
+                    txtTelHab.setText("");
+                }
+            }
+            if (cliente.getListaTelefonos().size() == 2) {
+                if (cliente.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
+                    txtTelHab.setText(cliente.getListaTelefonos().get(0).getTelefono());
+                    txtTelCel.setText(cliente.getListaTelefonos().get(1).getTelefono());
+                }else{
+                    txtTelHab.setText(cliente.getListaTelefonos().get(1).getTelefono());
+                    txtTelCel.setText(cliente.getListaTelefonos().get(0).getTelefono());
                 }
             }
             validarTipoFactura(facturaSeleccionada.getTipoFactura());
@@ -775,6 +793,21 @@ public class Abonar extends javax.swing.JFrame {
         }
         
     }
+    
+    static public class HeaderColor extends DefaultTableCellRenderer{
+        public HeaderColor(){
+            setOpaque(true);
+        }
+        public Component getTableCellRendererComponent(JTable tabla,Object value,boolean selected,boolean fused,int row,int column){
+            super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
+            setBorder(new LineBorder(Color.BLACK, 1));
+            setForeground(Color.WHITE);
+            setBackground(new java.awt.Color(0,105,120));
+            setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
+            return this;
+        }
+    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnPanelAbonar;
