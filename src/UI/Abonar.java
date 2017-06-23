@@ -46,6 +46,7 @@ public class Abonar extends javax.swing.JFrame {
         
         ocultarColumnaID();
         comboBoxAutocompleta();
+        setColorCampos();
     }
 
     
@@ -62,7 +63,7 @@ public class Abonar extends javax.swing.JFrame {
                     }
                 }
                 if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
-                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena));
+                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena, "Cedula"));
                     if (cbx_Cedula.getItemCount() > 0) {
                         cbx_Cedula.showPopup();
                         if (evt.getKeyCode() != 8) {
@@ -80,6 +81,12 @@ public class Abonar extends javax.swing.JFrame {
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     int fin = cbx_Cedula.getEditor().getItem().toString().length();
                     ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
+                    
+                    if(cadena.equals("")){
+                        limpiarTabla(modelo);
+                        limpiarTablaDetalles(modeloDetalles);
+                        vaciarCampos();
+                    }
                 }
             }
         });
@@ -163,6 +170,23 @@ public class Abonar extends javax.swing.JFrame {
         }
     }
     
+    private void vaciarCampos(){
+        txtCedula.setText("");
+        txt_Senor.setText("");
+        txt_Direccion.setText("");
+        txtTelHab.setText("");
+        txtTelCel.setText("");
+        txtNumFactura.setText("0");
+        txtTotalAPagar.setText("0");
+        txtRestante.setText("0");
+        txtMontoAbonar.setText("");
+        
+        rdbContado.setSelected(false);
+        rdbTarjeta.setSelected(false);
+        rdbApartado.setSelected(false);
+        rdbCredito.setSelected(false);
+    }
+    
     private void ocultarColumnaID() {
         
         tablaInventario.getColumn("HiddenID").setMaxWidth(0);
@@ -188,7 +212,7 @@ public class Abonar extends javax.swing.JFrame {
         txt_Senor = new javax.swing.JTextField();
         txt_Direccion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        cbx_Cedula = new javax.swing.JComboBox<>();
+        cbx_Cedula = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         jSeparator7 = new javax.swing.JSeparator();
@@ -276,11 +300,13 @@ public class Abonar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 50, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 50, -1, 20));
 
+        txtNumFactura.setBackground(new java.awt.Color(255, 255, 255));
         txtNumFactura.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtNumFactura.setText("0");
-        jPanel2.add(txtNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 50, 80, 20));
+        txtNumFactura.setEnabled(false);
+        jPanel2.add(txtNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, 80, 20));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -296,10 +322,12 @@ public class Abonar extends javax.swing.JFrame {
 
         txt_Senor.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txt_Senor.setBorder(null);
+        txt_Senor.setEnabled(false);
         jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 380, 20));
 
         txt_Direccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txt_Direccion.setBorder(null);
+        txt_Direccion.setEnabled(false);
         jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 110, 380, 20));
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -313,6 +341,11 @@ public class Abonar extends javax.swing.JFrame {
         cbx_Cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_CedulaActionPerformed(evt);
+            }
+        });
+        cbx_Cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cbx_CedulaKeyReleased(evt);
             }
         });
         jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 310, -1));
@@ -375,24 +408,28 @@ public class Abonar extends javax.swing.JFrame {
         rdbContado.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbContado.setForeground(new java.awt.Color(102, 102, 102));
         rdbContado.setText("Contado");
+        rdbContado.setEnabled(false);
         jPanel2.add(rdbContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, -1, -1));
 
         rdbCredito.setBackground(new java.awt.Color(255, 255, 255));
         rdbCredito.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbCredito.setForeground(new java.awt.Color(102, 102, 102));
         rdbCredito.setText("Crédito");
+        rdbCredito.setEnabled(false);
         jPanel2.add(rdbCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, -1, -1));
 
         rdbApartado.setBackground(new java.awt.Color(255, 255, 255));
         rdbApartado.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbApartado.setForeground(new java.awt.Color(102, 102, 102));
         rdbApartado.setText("Apartado");
+        rdbApartado.setEnabled(false);
         jPanel2.add(rdbApartado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, -1, -1));
 
         rdbTarjeta.setBackground(new java.awt.Color(255, 255, 255));
         rdbTarjeta.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         rdbTarjeta.setForeground(new java.awt.Color(102, 102, 102));
         rdbTarjeta.setText("Tarjeta");
+        rdbTarjeta.setEnabled(false);
         jPanel2.add(rdbTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -402,10 +439,12 @@ public class Abonar extends javax.swing.JFrame {
 
         txtTelHab.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTelHab.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTelHab.setEnabled(false);
         jPanel2.add(txtTelHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 130, -1));
 
         txtTelCel.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtTelCel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTelCel.setEnabled(false);
         jPanel2.add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 150, 140, -1));
         jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 170, 140, 10));
         jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 170, 130, 10));
@@ -418,15 +457,16 @@ public class Abonar extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Facturas de: ");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         txtNombreCompleto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtNombreCompleto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, -1));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 310, 20));
+        jPanel2.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 310, -1));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 310, 20));
 
         txtCedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCedula.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCedula.setEnabled(false);
         jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 180, -1));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 180, -1));
 
@@ -497,6 +537,7 @@ public class Abonar extends javax.swing.JFrame {
         jPanel2.add(txt_PrecioTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 510, 30, 50));
 
         txtTotalAPagar.setEditable(false);
+        txtTotalAPagar.setBackground(new java.awt.Color(255, 255, 255));
         txtTotalAPagar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotalAPagar.setText("0");
         txtTotalAPagar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -516,6 +557,7 @@ public class Abonar extends javax.swing.JFrame {
         jPanel2.add(txt_PrecioTotal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, 30, 50));
 
         txtRestante.setEditable(false);
+        txtRestante.setBackground(new java.awt.Color(255, 255, 255));
         txtRestante.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRestante.setText("0");
         txtRestante.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -586,6 +628,8 @@ public class Abonar extends javax.swing.JFrame {
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
         txtRestante.setText("0");
         txtTotalAPagar.setText("0");
+        
+        if(tablaInventario.getSelectedRow() >= 0){
             facturaSeleccionada = listaFacturas.get((int)tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 4));
         
             if(tablaInventario.getSelectedRow() != 0){
@@ -611,8 +655,8 @@ public class Abonar extends javax.swing.JFrame {
             
             txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
             txtRestante.setBackground(Color.WHITE);
-            
-        
+            setColorCampos();
+        }
         
     }//GEN-LAST:event_tablaInventarioMouseClicked
 
@@ -634,12 +678,21 @@ public class Abonar extends javax.swing.JFrame {
         }
     }
     
+    private void setColorCampos(){
+        txtCedula.setBackground(Color.WHITE);
+        txt_Senor.setBackground(Color.WHITE);
+        txt_Direccion.setBackground(Color.WHITE);
+        txtTelHab.setBackground(Color.WHITE);
+        txtTelCel.setBackground(Color.WHITE);
+        txtNumFactura.setBackground(Color.WHITE);
+    }
+    
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
         if(!txtMontoAbonar.getText().equals("")){
         if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
             facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
             if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar " + txtMontoAbonar.getText() + " a esta factura?") == JOptionPane.YES_OPTION){
-                if(Double.parseDouble(txtRestante.getText()) == 0.0){
+                if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
                     facturaSeleccionada.cancelarFactura();
                     JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","",JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -707,6 +760,10 @@ public class Abonar extends javax.swing.JFrame {
         String cadena = cbx_Cedula.getEditor().getItem().toString();
         buscar(cadena);
     }//GEN-LAST:event_cbx_CedulaActionPerformed
+
+    private void cbx_CedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_CedulaKeyReleased
+        
+    }//GEN-LAST:event_cbx_CedulaKeyReleased
 
 
   
