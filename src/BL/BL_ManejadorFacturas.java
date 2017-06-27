@@ -33,4 +33,8 @@ public class BL_ManejadorFacturas {
     public void cargarFacturasPorCliente(int idCliente){
         new DAO_Factura().cargarFacturasPorCliente(this, idCliente);
     }
+    
+    public void cargarFacturasPorFecha(String fInicio, String fFinal){
+        new DAO_Factura().cargarFacturasPorFecha(this, fInicio, fFinal);
+    }
 }
