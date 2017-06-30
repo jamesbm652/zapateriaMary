@@ -5,17 +5,33 @@
  */
 package UI;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author oscal
  */
 public class ReporteVentas extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form ReporteVentas
      */
     public ReporteVentas() {
         initComponents();
+        
+        tablaReportes.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
+        
+        tablaReportes.setRowHeight((344 - tablaReportes.getTableHeader().getHeight()) / 5);
+        jDateFechaInicio.setDate(new Date(new java.util.Date().getTime()));
+        jDateFechaFInal.setDate(new Date(new java.util.Date().getTime()));
     }
 
     /**
@@ -27,45 +43,155 @@ public class ReporteVentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRegresar = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        labClose = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jDateFechaInicio = new com.toedter.calendar.JDateChooser();
+        jDateFechaFInal = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaReportes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegresar.setText("Atrás");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
+        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
+        jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
+        jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/close.png"))); // NOI18N
+        labClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labCloseMouseEntered(evt);
             }
         });
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, -1, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegresar)
-                .addContainerGap(331, Short.MAX_VALUE))
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("Reportes desde:");
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("hasta:");
+
+        tablaReportes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Zapatos Vendidos", null, null, null, null},
+                {"Bolsos Vendidos", null, null, null, null},
+                {"Facturas Canceladas", null, null, null, null},
+                {"Facturas sin cancelar", null, null, null, null},
+                {"Dinero", null, null, null, null}
+            },
+            new String [] {
+                "Descripción", "Contado", "Tarjeta Crédito", "Apartados", "Crédito"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaReportes.setAutoscrolls(false);
+        jScrollPane1.setViewportView(tablaReportes);
+        if (tablaReportes.getColumnModel().getColumnCount() > 0) {
+            tablaReportes.getColumnModel().getColumn(0).setResizable(false);
+            tablaReportes.getColumnModel().getColumn(1).setResizable(false);
+            tablaReportes.getColumnModel().getColumn(2).setResizable(false);
+            tablaReportes.getColumnModel().getColumn(3).setResizable(false);
+            tablaReportes.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(6, 6, 6)
+                        .addComponent(jDateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addGap(23, 23, 23)
+                        .addComponent(jDateFechaFInal, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(258, Short.MAX_VALUE)
-                .addComponent(btnRegresar)
-                .addGap(19, 19, 19))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateFechaFInal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 800, 450));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
         this.dispose();
         new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_btnRegresarActionPerformed
+    }//GEN-LAST:event_labCloseMouseClicked
+
+    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
+        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labCloseMouseEntered
 
   
+    
+    static public class HeaderColor extends DefaultTableCellRenderer{
+        public HeaderColor(){
+            setOpaque(true);
+        }
+        public Component getTableCellRendererComponent(JTable tabla,Object value,boolean selected,boolean fused,int row,int column){
+            super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
+            setBorder(new LineBorder(Color.BLACK, 1));
+            setForeground(Color.WHITE);
+            setBackground(new java.awt.Color(0,105,120));
+            setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
+            return this;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegresar;
+    private com.toedter.calendar.JDateChooser jDateFechaFInal;
+    private com.toedter.calendar.JDateChooser jDateFechaInicio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labClose;
+    private javax.swing.JTable tablaReportes;
     // End of variables declaration//GEN-END:variables
 }
