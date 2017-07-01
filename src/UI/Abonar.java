@@ -18,6 +18,7 @@ import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -68,8 +69,11 @@ public class Abonar extends javax.swing.JFrame {
                         cargarFacturas();
                     }
                 }
-                if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
-                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena, "Cedula"));
+                if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                    DefaultComboBoxModel dcbxCedula = manejadorCliente.obtenerListaComboBox(cadena, "Cedula");
+                    DefaultComboBoxModel dcbxNombreCompleto = manejadorCliente.obtenerListaComboBox(cadena, "NombreCompleto");
+                    cbx_Cedula.setModel(dcbxCedula);
+                    if (dcbxNombreCompleto.getSize() > 0) cbx_Cedula.setModel(dcbxNombreCompleto);
                     if (cbx_Cedula.getItemCount() > 0) {
                         cbx_Cedula.showPopup();
                         if (evt.getKeyCode() != 8) {
@@ -101,7 +105,7 @@ public class Abonar extends javax.swing.JFrame {
     private boolean buscar(String cadena) {
         boolean existe = false;
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
-            if (c.getCedula().contentEquals(cadena)) {
+            if (c.getCedula().contentEquals(cadena) || c.getNombreCompleto().contentEquals(cadena)) {
                 cliente.setIdCliente(c.getIdCliente());
                 cliente.setNombreCompleto(c.getNombreCompleto());
                 cliente.setCedula(c.getCedula());
@@ -772,7 +776,9 @@ public class Abonar extends javax.swing.JFrame {
     private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
         // TODO add your handling code here:
         String cadena = cbx_Cedula.getEditor().getItem().toString();
-        buscar(cadena);
+        if(buscar(cadena)){
+            cargarFacturas();
+        }
     }//GEN-LAST:event_cbx_CedulaActionPerformed
 
     private void cbx_CedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_CedulaKeyReleased
