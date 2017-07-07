@@ -19,6 +19,8 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -37,11 +39,12 @@ public class RevisarFacturas extends javax.swing.JFrame {
 
     BL_ManejadorCliente manejadorCliente = new BL_ManejadorCliente();
     BL_ManejadorFacturas manejadorFacturas = new BL_ManejadorFacturas();
-    
+
     ArrayList<BL_Factura> listaFacturas = new ArrayList<BL_Factura>();
-    
+
     BL_Cliente cliente = new BL_Cliente();
     BL_Factura facturaSeleccionada;
+
     /**
      * Creates new form RevisarFacturas
      */
@@ -49,7 +52,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         initComponents();
         modelo = (DefaultTableModel) tablaFacturas.getModel();
         modeloDetalles = (DefaultTableModel) tablaDetalles.getModel();
-        
+
         tablaDetalles.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         tablaFacturas.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         
@@ -59,17 +62,27 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jpanBusquedaAvanzada.setVisible(false);
         ocultarColumnaID();
         ocultarColumnaDetalles();
-        
+
         manejadorCliente.cargarClientes();
         Date date = new Date();
-        manejadorFacturas.cargarFacturasPorFecha(dateFormat.format(date),dateFormat.format(date));
-            
+        manejadorFacturas.cargarFacturasPorFecha(dateFormat.format(date), dateFormat.format(date));
+
         listaFacturas = manejadorFacturas.ObtenerLista();
         cargarProductosEnTabla(listaFacturas);
-        
+
         comboBoxAutocompleta();
-        
-        
+        cmbEstado.removeAllItems();
+        cmbEstado.addItem("Cualquiera");
+        cmbEstado.addItem("Cancelado");
+        cmbEstado.addItem("No cancelado");
+
+        cmbTipo.removeAllItems();
+        cmbTipo.addItem("Cualquiera");
+        cmbTipo.addItem("Contado");
+        cmbTipo.addItem("Tarjeta");
+        cmbTipo.addItem("Apartado");
+        cmbTipo.addItem("Crédito");
+
     }
 
     /**
@@ -124,7 +137,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        cbx_Cedula = new javax.swing.JComboBox<String>();
+        cbx_Cedula = new javax.swing.JComboBox<>();
         rdbCredito = new javax.swing.JRadioButton();
         rdbApartado = new javax.swing.JRadioButton();
         rdbTarjeta = new javax.swing.JRadioButton();
@@ -422,40 +435,39 @@ public class RevisarFacturas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private void comboBoxAutocompleta(){
+    private void comboBoxAutocompleta() {
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-            
+
             @Override
-            public void keyReleased(KeyEvent evt){
-               
-                String cadena = cbx_Cedula.getEditor().getItem().toString();;  
+            public void keyReleased(KeyEvent evt) {
+
+                String cadena = cbx_Cedula.getEditor().getItem().toString();;
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(buscar(cadena)){
+                    if (buscar(cadena)) {
                         cargarFacturas();
                     }
                 }
-                if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                if (evt.getKeyCode() >= 48 && evt.getKeyCode() <= 57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
                     cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena, "Cedula"));
                     if (cbx_Cedula.getItemCount() > 0) {
                         cbx_Cedula.showPopup();
                         if (evt.getKeyCode() != 8) {
-                            ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(cadena.length(), 
+                            ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(cadena.length(),
                                     cbx_Cedula.getEditor().getItem().toString().length());
-                        }else{
+                        } else {
                             cbx_Cedula.getEditor().setItem(cadena);
                         }
-                    }else{
+                    } else {
                         cbx_Cedula.addItem(cadena);
                         int fin = cbx_Cedula.getEditor().getItem().toString().length();
-                        ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
+                        ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                     }
                 }
                 if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     int fin = cbx_Cedula.getEditor().getItem().toString().length();
-                    ((JTextComponent)cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
-                    
-                    if(cadena.equals("")){
+                    ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
+
+                    if (cadena.equals("")) {
                         limpiarTabla(modelo);
                         limpiarTablaDetalles(modeloDetalles);
                         vaciarCampos();
@@ -464,7 +476,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private boolean buscar(String cadena) {
         boolean existe = false;
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
@@ -477,30 +489,32 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 existe = true;
             }
         }
-        
+
         return existe;
     }
-    
-    private void vaciarCampos(){
+
+    private void vaciarCampos() {
         txtCedula.setText("");
         txt_Senor.setText("");
         txt_Direccion.setText("");
         txtTelHab.setText("");
         txtTelCel.setText("");
-        txtNumFactura.setText("0");
-        
+
         rdbContado.setSelected(false);
         rdbTarjeta.setSelected(false);
         rdbApartado.setSelected(false);
         rdbCredito.setSelected(false);
     }
-    
-    private void cargarFacturas(){
+
+    private void cargarFacturas() {
+        vaciarCampos();
+        manejadorFacturas.EliminarTodos();
         manejadorFacturas.cargarFacturasPorCliente(cliente.getIdCliente());
         listaFacturas = manejadorFacturas.ObtenerLista();
+        limpiarTabla(modelo);
         cargarProductosEnTabla(listaFacturas);
     }
-    
+
     private void cargarProductosEnTabla(ArrayList<BL_Factura> listaParaMostrar) {
 
         limpiarTabla(modelo);
@@ -510,28 +524,64 @@ public class RevisarFacturas extends javax.swing.JFrame {
             fila[0] = listaParaMostrar.get(i).getIdFactura();
             fila[1] = listaParaMostrar.get(i).getFechaFactura().toString();
             fila[2] = listaParaMostrar.get(i).getTipoFactura();
-            if(listaParaMostrar.get(i).isCancelada()){
+            if (listaParaMostrar.get(i).isCancelada()) {
                 fila[3] = "Cancelada";
-            }else{
+            } else {
                 fila[3] = "Sin cancelar";
             }
-            
+
             fila[4] = i;
-            
+
             modelo.addRow(fila);
         }
         listaFacturas = listaParaMostrar;
     }
-    
+
     private void limpiarTabla(DefaultTableModel modelo) {
         int filas = tablaFacturas.getRowCount();
         for (int i = 0; filas > i; i++) {
             modelo.removeRow(0);
         }
     }
-    
+
     private void labBuscarAvanzadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBuscarAvanzadaMouseClicked
-        
+
+        int numFactura = 0;
+        java.sql.Date fechaInicial = null;
+        java.sql.Date fechaFinal = null;
+        int cancelado = 2;
+        String tipoFactura = "";
+
+        if ((txtFechaInicio.getDate() == null && txtFechaFinal.getDate() != null)
+                || (txtFechaInicio.getDate() != null && txtFechaFinal.getDate() == null)) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar tanto la fecha de inicio como la de fin en caso de buscar por fecha. \n"
+                    + "Si no lo desea, borre los espacios de fechas ", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if ((txtFechaInicio.getDate() != null && txtFechaFinal.getDate() != null) && 
+                (txtFechaInicio.getDate().after(txtFechaFinal.getDate()))) {
+            JOptionPane.showMessageDialog(null, "La fecha de inicio debe ser menor que la fecha final ", "Error", JOptionPane.ERROR_MESSAGE);
+        }else {
+            if (!txtNumFactura.getText().equals("")) {
+                numFactura = Integer.parseInt(txtNumFactura.getText());
+            }
+            if (txtFechaInicio.getDate() != null && txtFechaFinal.getDate() != null) {
+                fechaInicial = new java.sql.Date(txtFechaInicio.getDate().getTime());
+                fechaFinal = new java.sql.Date(txtFechaFinal.getDate().getTime());
+            }
+
+            if (cmbEstado.getSelectedItem().equals("Cancelado")) {
+                cancelado = 1;
+            } else if (cmbEstado.getSelectedItem().equals("No cancelado")) {
+                cancelado = 0;
+            }
+
+            tipoFactura = cmbTipo.getSelectedItem() + "";
+            manejadorFacturas.cargarFacturasPorFiltro(fechaInicial, fechaFinal, cancelado, tipoFactura, numFactura);
+            listaFacturas = manejadorFacturas.ObtenerLista();
+            limpiarTabla(modelo);
+            cargarProductosEnTabla(listaFacturas);
+            vaciarCampos();
+        }
+        limpiarTablaDetalles(modeloDetalles);
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
     private void labBuscarAvanzadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBuscarAvanzadaMouseEntered
@@ -560,10 +610,12 @@ public class RevisarFacturas extends javax.swing.JFrame {
     }//GEN-LAST:event_labCloseMouseEntered
 
     private void tablaFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMouseClicked
-        if(tablaFacturas.getSelectedRow() >= 0){
-            facturaSeleccionada = listaFacturas.get((int)tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 4));
-            if(facturaSeleccionada.getCliente() != null) cliente = facturaSeleccionada.getCliente(); 
-            
+        if (tablaFacturas.getSelectedRow() >= 0) {
+            facturaSeleccionada = listaFacturas.get((int) tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 4));
+            if (facturaSeleccionada.getCliente() != null) {
+                cliente = facturaSeleccionada.getCliente();
+            }
+
             validarTipoFactura(facturaSeleccionada.getTipoFactura());
             txtCedula.setText(cliente.getCedula());
             txt_Senor.setText(cliente.getNombreCompleto());
@@ -573,7 +625,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 if (cliente.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
                     txtTelHab.setText(cliente.getListaTelefonos().get(0).getTelefono());
                     txtTelCel.setText("");
-                }else{
+                } else {
                     txtTelCel.setText(cliente.getListaTelefonos().get(0).getTelefono());
                     txtTelHab.setText("");
                 }
@@ -582,28 +634,27 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 if (cliente.getListaTelefonos().get(0).getTipoTelefono().equals("Habitacion")) {
                     txtTelHab.setText(cliente.getListaTelefonos().get(0).getTelefono());
                     txtTelCel.setText(cliente.getListaTelefonos().get(1).getTelefono());
-                }else{
+                } else {
                     txtTelHab.setText(cliente.getListaTelefonos().get(1).getTelefono());
                     txtTelCel.setText(cliente.getListaTelefonos().get(0).getTelefono());
                 }
             }
-            
+
             txtNumFactura.setText(facturaSeleccionada.getIdFactura() + "");
             cargarProductosEnTablaDetalles(facturaSeleccionada.getProductosFactura());
 
-            
             setColorCampos();
         }
 
     }//GEN-LAST:event_tablaFacturasMouseClicked
 
-    private void validarTipoFactura(String tipo){
+    private void validarTipoFactura(String tipo) {
         rdbContado.setSelected(false);
         rdbTarjeta.setSelected(false);
         rdbApartado.setSelected(false);
         rdbCredito.setSelected(false);
-        
-        switch(tipo){
+
+        switch (tipo) {
             case "Contado":
                 rdbContado.setSelected(true);
                 break;
@@ -616,14 +667,16 @@ public class RevisarFacturas extends javax.swing.JFrame {
             case "Crédito":
                 rdbCredito.setSelected(true);
                 break;
-                
+
         }
     }
-    
+
     private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
         // TODO add your handling code here:
         String cadena = cbx_Cedula.getEditor().getItem().toString();
-        buscar(cadena);
+        if (buscar(cadena)) {
+            cargarFacturas();
+        }
     }//GEN-LAST:event_cbx_CedulaActionPerformed
 
     private void cbx_CedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_CedulaKeyReleased
@@ -631,7 +684,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_CedulaKeyReleased
 
     private void ocultarColumnaID() {
-        
+
         tablaFacturas.getColumn("HiddenID").setMaxWidth(0);
         tablaFacturas.getColumn("HiddenID").setMinWidth(0);
         tablaFacturas.getColumn("HiddenID").setPreferredWidth(0);
@@ -639,7 +692,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         tablaFacturas.getColumn("HiddenID").setResizable(false);
 
     }
-    
+
     private void ocultarColumnaDetalles() {
         tablaDetalles.getColumn("HiddenId").setMaxWidth(0);
         tablaDetalles.getColumn("HiddenId").setMinWidth(0);
@@ -652,7 +705,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         tablaDetalles.getColumn("HiddenIdOriginal").setWidth(0);
         tablaDetalles.getColumn("HiddenIdOriginal").setResizable(false);
     }
-    
+
     private void cargarProductosEnTablaDetalles(ArrayList<BL_ProductoFactura> listaParaMostrar) {
 
         limpiarTablaDetalles(modeloDetalles);
@@ -662,15 +715,15 @@ public class RevisarFacturas extends javax.swing.JFrame {
             fila[0] = listaParaMostrar.get(i).getDescripcion();
             fila[1] = listaParaMostrar.get(i).getCantidadVendida();
             fila[2] = listaParaMostrar.get(i).getPrecioVenta();
-            
+
             modeloDetalles.addRow(fila);
-            
+
             //txtTotalAPagar.setText((Double.parseDouble(txtTotalAPagar.getText()) + listaParaMostrar.get(i).getPrecioVenta()) + "");
         }
         //txtTotalAPagar.setBackground(Color.WHITE);
     }
-    
-    private void setColorCampos(){
+
+    private void setColorCampos() {
         txtCedula.setBackground(Color.WHITE);
         txt_Senor.setBackground(Color.WHITE);
         txt_Direccion.setBackground(Color.WHITE);
@@ -678,23 +731,25 @@ public class RevisarFacturas extends javax.swing.JFrame {
         txtTelCel.setBackground(Color.WHITE);
         txtNumFactura.setBackground(Color.WHITE);
     }
-    
+
     private void limpiarTablaDetalles(DefaultTableModel modelo) {
         int filas = tablaDetalles.getRowCount();
         for (int i = 0; filas > i; i++) {
             modelo.removeRow(0);
         }
     }
-    
-    static public class HeaderColor extends DefaultTableCellRenderer{
-        public HeaderColor(){
+
+    static public class HeaderColor extends DefaultTableCellRenderer {
+
+        public HeaderColor() {
             setOpaque(true);
         }
-        public Component getTableCellRendererComponent(JTable tabla,Object value,boolean selected,boolean fused,int row,int column){
+
+        public Component getTableCellRendererComponent(JTable tabla, Object value, boolean selected, boolean fused, int row, int column) {
             super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
             setBorder(new LineBorder(Color.BLACK, 1));
             setForeground(Color.WHITE);
-            setBackground(new java.awt.Color(0,105,120));
+            setBackground(new java.awt.Color(0, 105, 120));
             setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
             return this;
         }
