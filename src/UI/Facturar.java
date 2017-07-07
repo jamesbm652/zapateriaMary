@@ -64,11 +64,15 @@ public class Facturar extends javax.swing.JFrame {
         modeloDetalles = (DefaultTableModel) tablaDetalles.getModel();
         tablaInventario.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
         tablaDetalles.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
+        tablaDetalles.getTableHeader().setReorderingAllowed(false);
+        
         jpanBusquedaAvanzada.setVisible(false);
         SpinnerNumberModel spn = new SpinnerNumberModel(1, 1, 100, 1);
         txt_Cantidad.setModel(spn);
         JFormattedTextField tf = ((JSpinner.DefaultEditor) txt_Cantidad.getEditor()).getTextField();
         tf.setEditable(false);
+        tipo1.setSelected(true);
 
         manejador.CargarProductos();
         manejadorCliente.cargarClientes();
@@ -90,10 +94,9 @@ public class Facturar extends javax.swing.JFrame {
 
             @Override
             public void keyReleased(KeyEvent evt){
-                boolean habilitar = false;
                 String cadena = cbx_Cedula.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    habilitar = buscarPorCedula(cadena);
+                    buscarPorCedula(cadena);
                 }
 
                 if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
@@ -118,7 +121,7 @@ public class Facturar extends javax.swing.JFrame {
                     ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                 }
                 // Metodo para permitir o no la modificacion de los datos
-                permisoParaEscribir(habilitar);
+                //permisoParaEscribir(habilitar);
             }
         });
     }
@@ -128,10 +131,9 @@ public class Facturar extends javax.swing.JFrame {
             
             @Override
             public void keyReleased(KeyEvent evt){
-                boolean habilitar = false;
                 String cadena = cbx_Senor.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    habilitar = buscarPorNombreCompleto(cadena);
+                    buscarPorNombreCompleto(cadena);
                 }
                 if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
                     cbx_Senor.setModel(manejadorCliente.obtenerListaComboBox(cadena, "NombreCompleto"));
@@ -154,24 +156,9 @@ public class Facturar extends javax.swing.JFrame {
                     ((JTextComponent)cbx_Senor.getEditor().getEditorComponent()).select(fin, fin);
                 }
                 // Metodo para permitir o no la modificacion de los datos
-                permisoParaEscribir(habilitar);
+                //permisoParaEscribir(habilitar);
             }
         });
-    }
-    
-    private void permisoParaEscribir(boolean habilitar){
-        if(habilitar){
-            txt_Direccion.setEditable(false);
-            txt_Direccion.setBackground(Color.WHITE);
-            telHabitacion.setEditable(false);
-            telHabitacion.setBackground(Color.WHITE);
-            telCelular.setEditable(false);
-            telCelular.setBackground(Color.WHITE);
-        }else{
-            txt_Direccion.setEditable(true);
-            telHabitacion.setEditable(true);
-            telCelular.setEditable(true);
-        }
     }
 
     private boolean buscarPorNombreCompleto(String cadena){
@@ -284,7 +271,7 @@ public class Facturar extends javax.swing.JFrame {
         txt_Cantidad = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        cbx_Cedula = new javax.swing.JComboBox<>();
+        cbx_Cedula = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         jpanBusquedaAvanzada = new javax.swing.JPanel();
@@ -298,11 +285,10 @@ public class Facturar extends javax.swing.JFrame {
         txt_Talla = new javax.swing.JTextField();
         txt_Marca = new javax.swing.JTextField();
         txt_Empresa = new javax.swing.JTextField();
-        txt_Precio = new javax.swing.JTextField();
         lbl_Categoria1 = new javax.swing.JLabel();
-        cbx_Categoria = new javax.swing.JComboBox<>();
+        cbx_Categoria = new javax.swing.JComboBox<String>();
         jLabel18 = new javax.swing.JLabel();
-        cbx_TipoProducto = new javax.swing.JComboBox<>();
+        cbx_TipoProducto = new javax.swing.JComboBox<String>();
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -312,6 +298,7 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         labBuscarAvanzada = new javax.swing.JLabel();
+        txt_Precio = new javax.swing.JSpinner();
         labDropdown = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
@@ -335,7 +322,7 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        cbx_Senor = new javax.swing.JComboBox<>();
+        cbx_Senor = new javax.swing.JComboBox<String>();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -373,6 +360,7 @@ public class Facturar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaDetalles.setCellSelectionEnabled(true);
         tablaDetalles.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane2.setViewportView(tablaDetalles);
         if (tablaDetalles.getColumnModel().getColumnCount() > 0) {
@@ -528,22 +516,13 @@ public class Facturar extends javax.swing.JFrame {
         txt_Empresa.setBorder(null);
         jpanBusquedaAvanzada.add(txt_Empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 140, 20));
 
-        txt_Precio.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txt_Precio.setBorder(null);
-        txt_Precio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PrecioKeyTyped(evt);
-            }
-        });
-        jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 170, 20));
-
         lbl_Categoria1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbl_Categoria1.setForeground(new java.awt.Color(102, 102, 102));
         lbl_Categoria1.setText("Categoría:");
         jpanBusquedaAvanzada.add(lbl_Categoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 80, -1));
 
         jLabel18.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -552,7 +531,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
@@ -592,6 +571,9 @@ public class Facturar extends javax.swing.JFrame {
             }
         });
         jpanBusquedaAvanzada.add(labBuscarAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
+
+        txt_Precio.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
+        jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 170, -1));
 
         jPanel2.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 710, 120));
 
@@ -884,10 +866,6 @@ public class Facturar extends javax.swing.JFrame {
         validarNumeros(evt);
     }//GEN-LAST:event_txt_TallaKeyTyped
 
-    private void txt_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PrecioKeyTyped
-        validarNumeros(evt);
-    }//GEN-LAST:event_txt_PrecioKeyTyped
-
     private void cbx_TipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_TipoProductoActionPerformed
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             txt_Talla.setText("");
@@ -921,8 +899,8 @@ public class Facturar extends javax.swing.JFrame {
         if (!txt_Talla.getText().equals("")) {
             talla = Double.parseDouble(txt_Talla.getText());
         }
-        if (!txt_Precio.getText().equals("")) {
-            precio = Double.parseDouble(txt_Precio.getText());
+        if (!txt_Precio.getValue().equals("0")) {
+            precio = Double.parseDouble(txt_Precio.getValue().toString());
         }
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) {
             ambos = true;
@@ -936,13 +914,17 @@ public class Facturar extends javax.swing.JFrame {
             fecha = new java.sql.Date(txt_Fecha.getDate().getTime());
         }
 
-        BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
+        if(talla == 0 || (talla >= 19 && talla <= 46)){
+            BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
 
-        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
+            listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
 
-        limpiarTabla(modelo);
+            limpiarTabla(modelo);
 
-        cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
+            cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
+        }else{
+            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
     private void labBuscarAvanzadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBuscarAvanzadaMouseEntered
@@ -1079,8 +1061,8 @@ public class Facturar extends javax.swing.JFrame {
 
     private void btnPanelFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseClicked
         // TODO add your handling code here:
-        String cedula = cbx_Cedula.getSelectedItem() + "";
-        String comprador = cbx_Senor.getSelectedItem()+ "";
+        String cedula = cbx_Cedula.getEditor().getItem().toString();
+        String comprador = cbx_Senor.getEditor().getItem().toString();
         String direccion = txt_Direccion.getText();
         String tipoFactura = "";
         Date fechaFactura = new Date(new java.util.Date().getTime());
@@ -1157,12 +1139,12 @@ public class Facturar extends javax.swing.JFrame {
 
     private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
         String cadena = cbx_Cedula.getEditor().getItem().toString();
-        permisoParaEscribir(buscarPorCedula(cadena));
+        buscarPorCedula(cadena);
     }//GEN-LAST:event_cbx_CedulaActionPerformed
 
     private void cbx_SenorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_SenorActionPerformed
         String cadena = cbx_Senor.getEditor().getItem().toString();
-        permisoParaEscribir(buscarPorNombreCompleto(cadena));
+        buscarPorNombreCompleto(cadena);
     }//GEN-LAST:event_cbx_SenorActionPerformed
 
     static public class HeaderColor extends DefaultTableCellRenderer{
@@ -1247,7 +1229,7 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Empresa;
     private com.toedter.calendar.JDateChooser txt_Fecha;
     private javax.swing.JTextField txt_Marca;
-    private javax.swing.JTextField txt_Precio;
+    private javax.swing.JSpinner txt_Precio;
     private javax.swing.JLabel txt_PrecioTotal;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;

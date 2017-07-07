@@ -55,6 +55,10 @@ public class RevisarFacturas extends javax.swing.JFrame {
 
         tablaDetalles.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         tablaFacturas.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
+        
+        tablaDetalles.getTableHeader().setReorderingAllowed(false);
+        tablaFacturas.getTableHeader().setReorderingAllowed(false);
+        
         jpanBusquedaAvanzada.setVisible(false);
         ocultarColumnaID();
         ocultarColumnaDetalles();

@@ -30,6 +30,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     public AdministrarUsuarios() {
         initComponents();
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
+        tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         
         manejador.CargarUsuarios();
         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
@@ -272,9 +273,9 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         if(evt.getClickCount() == 2){
             this.dispose();
             BL_Usuario usuario = new BL_Usuario();
-            usuario.setNombreCompleto(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 0).toString());
-            usuario.setNombreUsuario(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
-            usuario.setContrasena(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 2).toString());
+            usuario.setNombreCompleto(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 0).toString());
+            usuario.setNombreUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+            usuario.setContrasena(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 2).toString());
             
             if(tablaUsuarios.getModel().getValueAt(tablaUsuarios.getSelectedRow(), 3).toString().equals("Si")){
                 usuario.setAdministrador(true);

@@ -49,6 +49,9 @@ public class Abonar extends javax.swing.JFrame {
         modeloDetalles = (DefaultTableModel)tablaDetalles.getModel();
         tablaDetalles.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         
+        tablaFacturas.getTableHeader().setReorderingAllowed(false);
+        tablaDetalles.getTableHeader().setReorderingAllowed(false);
+        
         manejadorCliente.cargarClientes();
         
         ocultarColumnaID();
