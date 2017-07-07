@@ -8,10 +8,15 @@ package UI;
 
 import BL.BL_ManejadorUsuario;
 import BL.BL_Usuario;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -31,6 +36,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         initComponents();
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
         tablaUsuarios.getTableHeader().setReorderingAllowed(false);
+        tablaUsuarios.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
         
         manejador.CargarUsuarios();
         listaTotalUsuarios = manejador.ObtenerListaUsuarios();
@@ -376,6 +382,23 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         tablaUsuarios.setRowSorter(trsFiltro);
         trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
     }
+    
+    static public class HeaderColor extends DefaultTableCellRenderer {
+
+        public HeaderColor() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable tabla, Object value, boolean selected, boolean fused, int row, int column) {
+            super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
+            setBorder(new LineBorder(Color.BLACK, 1));
+            setForeground(Color.WHITE);
+            setBackground(new java.awt.Color(0,105,120));
+            setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
+            return this;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnPanelAgregar;
     private javax.swing.JCheckBox checkAdministrador;

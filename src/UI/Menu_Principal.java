@@ -29,9 +29,6 @@ public class Menu_Principal extends javax.swing.JFrame {
      */
     public Menu_Principal() {
         initComponents();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        pack();
-        setSize(screenSize.width,screenSize.height);
         
         BL_Logueo lg = new BL_Logueo();
         if(!lg.isAdmin()){
@@ -72,7 +69,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAdministrar = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -81,14 +77,13 @@ public class Menu_Principal extends javax.swing.JFrame {
         setBackground(new java.awt.Color(175, 201, 201));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setExtendedState(this.MAXIMIZED_BOTH);
+        setMinimumSize(new java.awt.Dimension(1370, 730));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(690, 370));
+        setPreferredSize(new java.awt.Dimension(1370, 730));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
-        jPanel1.setMinimumSize(new java.awt.Dimension(700, 400));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 400));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 57, 66));
@@ -107,7 +102,7 @@ public class Menu_Principal extends javax.swing.JFrame {
                 labSalirMouseEntered(evt);
             }
         });
-        jPanel2.add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
+        jPanel2.add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 30, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(196, 196, 196));
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
@@ -115,7 +110,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel2.setText("Zapatería Mary");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 360, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 100));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 100));
 
         panelBtnRevisar.setBackground(new java.awt.Color(0, 105, 120));
         panelBtnRevisar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,12 +129,12 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Revisar Facturas");
-        panelBtnRevisar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 79, -1, -1));
+        panelBtnRevisar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/revisarFactura.png"))); // NOI18N
-        panelBtnRevisar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 12, -1, -1));
+        panelBtnRevisar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
-        jPanel1.add(panelBtnRevisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 180, 110));
+        jPanel1.add(panelBtnRevisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, 280, 160));
 
         panelBtnReportes.setBackground(new java.awt.Color(0, 239, 239));
         panelBtnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,12 +153,12 @@ public class Menu_Principal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Reporte Ventas");
-        panelBtnReportes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 76, -1, -1));
+        panelBtnReportes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reportes.png"))); // NOI18N
-        panelBtnReportes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        panelBtnReportes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
-        jPanel1.add(panelBtnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 180, 110));
+        jPanel1.add(panelBtnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 280, 160));
 
         panelBtnInventario.setBackground(new java.awt.Color(0, 151, 167));
         panelBtnInventario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,23 +184,23 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnInventarioLayout.setHorizontalGroup(
             panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnInventarioLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(100, 100, 100)
                 .addGroup(panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel9))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         panelBtnInventarioLayout.setVerticalGroup(
             panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnInventarioLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap())
+                .addGap(34, 34, 34))
         );
 
-        jPanel1.add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 110));
+        jPanel1.add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 280, 160));
 
         panelBtnAbonos.setBackground(new java.awt.Color(0, 159, 175));
         panelBtnAbonos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -232,23 +227,23 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAbonosLayout.setHorizontalGroup(
             panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
+                .addContainerGap(121, Short.MAX_VALUE)
                 .addGroup(panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
                     .addComponent(jLabel5))
-                .addGap(70, 70, 70))
+                .addGap(110, 110, 110))
         );
         panelBtnAbonosLayout.setVerticalGroup(
             panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addContainerGap())
+                .addGap(32, 32, 32))
         );
 
-        jPanel1.add(panelBtnAbonos, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 180, 110));
+        jPanel1.add(panelBtnAbonos, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 240, 280, 160));
 
         panelBtnFacturar.setBackground(new java.awt.Color(38, 198, 218));
         panelBtnFacturar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,24 +268,24 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnFacturar.setLayout(panelBtnFacturarLayout);
         panelBtnFacturarLayout.setHorizontalGroup(
             panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBtnFacturarLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnFacturarLayout.createSequentialGroup()
+                .addContainerGap(110, Short.MAX_VALUE)
                 .addGroup(panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel10))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(104, 104, 104))
         );
         panelBtnFacturarLayout.setVerticalGroup(
             panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnFacturarLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap())
+                .addGap(37, 37, 37))
         );
 
-        jPanel1.add(panelBtnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 180, 110));
+        jPanel1.add(panelBtnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 280, 160));
 
         panelBtnAdministrar.setBackground(new java.awt.Color(128, 222, 234));
         panelBtnAdministrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -318,32 +313,28 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAdministrarLayout.setHorizontalGroup(
             panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addGroup(panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel14))
-                    .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel8)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(58, 58, 58))))
         );
         panelBtnAdministrarLayout.setVerticalGroup(
             panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addContainerGap())
+                .addGap(33, 33, 33))
         );
 
-        jPanel1.add(panelBtnAdministrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 180, 110));
+        jPanel1.add(panelBtnAdministrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 400, 280, 160));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/fondo.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 690, 270));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 370));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 1030));
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -444,7 +435,6 @@ public class Menu_Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
