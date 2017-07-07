@@ -89,7 +89,7 @@ public class Facturar extends javax.swing.JFrame {
     }
     
     private void comboBoxAutocompletaCedula(){
-      
+ 
         cbx_Cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
 
             @Override
@@ -98,8 +98,7 @@ public class Facturar extends javax.swing.JFrame {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     buscarPorCedula(cadena);
                 }
-
-                if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
                     cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena, "Cedula"));
 
                     if (cbx_Cedula.getItemCount() > 0) {

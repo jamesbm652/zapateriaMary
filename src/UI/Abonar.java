@@ -66,10 +66,14 @@ public class Abonar extends javax.swing.JFrame {
             @Override
             public void keyReleased(KeyEvent evt){
                
-                String cadena = cbx_Cedula.getEditor().getItem().toString();;  
+                String cadena = cbx_Cedula.getEditor().getItem().toString();  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     if(buscar(cadena)){
                         cargarFacturas();
+                    }else{
+                        limpiarTabla(modelo);
+                        limpiarTablaDetalles(modeloDetalles);
+                        vaciarCampos();
                     }
                 }
                 if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {

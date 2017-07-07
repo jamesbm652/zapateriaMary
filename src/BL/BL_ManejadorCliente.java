@@ -35,7 +35,21 @@ public class BL_ManejadorCliente {
     }
     
     public DefaultComboBoxModel obtenerListaComboBox(String cadena, String tipoFiltro){
-        return new DAO.DAO_Cliente().obtenerListaComboBox(cadena, tipoFiltro);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        switch(tipoFiltro){
+            case "NombreCompleto":
+                for (BL_Cliente c : listaClientes) {
+                    if (c.getNombreCompleto().toLowerCase().startsWith(cadena.toLowerCase())) model.addElement(c.getNombreCompleto());
+                }       
+                break;
+            case "Cedula":
+                for (BL_Cliente c : listaClientes) {
+                    if(c.getCedula().toLowerCase().startsWith(cadena.toLowerCase())) model.addElement(c.getCedula());
+                }
+                break;
+        }
+        return model;
+        //return new DAO.DAO_Cliente().obtenerListaComboBox(cadena, tipoFiltro);
     }
     
 }
