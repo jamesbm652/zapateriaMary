@@ -1080,7 +1080,7 @@ public class Facturar extends javax.swing.JFrame {
     private void btnPanelFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseClicked
         // TODO add your handling code here:
         String cedula = cbx_Cedula.getSelectedItem() + "";
-        String comprador = cbx_Senor.getSelectedItem() + "";
+        String comprador = cbx_Senor.getSelectedItem()+ "";
         String direccion = txt_Direccion.getText();
         String tipoFactura = "";
         Date fechaFactura = new Date(new java.util.Date().getTime());
