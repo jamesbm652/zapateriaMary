@@ -156,7 +156,7 @@ public class DAO_Factura {
                 }
                 factura.setTipoFactura(rs.getString(4));
                 
-                psM = con.prepareStatement("Select MontoAbonar FROM abono WHERE IdFactura = ?");
+                psM = con.prepareStatement("Select Sum(MontoAbonar) FROM abono WHERE IdFactura = ?");
                 psM.setInt(1, factura.getIdFactura());
                 
                 rsMonto = psM.executeQuery();
