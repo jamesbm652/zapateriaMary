@@ -69,6 +69,7 @@ public class Facturar extends javax.swing.JFrame {
         txt_Cantidad.setModel(spn);
         JFormattedTextField tf = ((JSpinner.DefaultEditor) txt_Cantidad.getEditor()).getTextField();
         tf.setEditable(false);
+        tipo1.setSelected(true);
 
         manejador.CargarProductos();
         manejadorCliente.cargarClientes();
@@ -267,7 +268,7 @@ public class Facturar extends javax.swing.JFrame {
         txt_Cantidad = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        cbx_Cedula = new javax.swing.JComboBox<>();
+        cbx_Cedula = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         jpanBusquedaAvanzada = new javax.swing.JPanel();
@@ -283,9 +284,9 @@ public class Facturar extends javax.swing.JFrame {
         txt_Empresa = new javax.swing.JTextField();
         txt_Precio = new javax.swing.JTextField();
         lbl_Categoria1 = new javax.swing.JLabel();
-        cbx_Categoria = new javax.swing.JComboBox<>();
+        cbx_Categoria = new javax.swing.JComboBox<String>();
         jLabel18 = new javax.swing.JLabel();
-        cbx_TipoProducto = new javax.swing.JComboBox<>();
+        cbx_TipoProducto = new javax.swing.JComboBox<String>();
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -318,7 +319,7 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        cbx_Senor = new javax.swing.JComboBox<>();
+        cbx_Senor = new javax.swing.JComboBox<String>();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -526,7 +527,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(lbl_Categoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 80, -1));
 
         jLabel18.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -535,7 +536,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
