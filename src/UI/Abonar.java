@@ -638,6 +638,7 @@ public class Abonar extends javax.swing.JFrame {
         txtRestante.setText("0");
         txtTotalAPagar.setText("0");
         
+        
         if(tablaFacturas.getSelectedRow() >= 0){
             facturaSeleccionada = listaFacturas.get((int)tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 4));
         
@@ -685,14 +686,26 @@ public class Abonar extends javax.swing.JFrame {
         switch(tipo){
             case "Contado":
                 rdbContado.setSelected(true);
+                rdbTarjeta.setSelected(false);
+                rdbApartado.setSelected(false);
+                rdbCredito.setSelected(false);
                 break;
             case "Tarjeta":
+                rdbContado.setSelected(false);
                 rdbTarjeta.setSelected(true);
+                rdbApartado.setSelected(false);
+                rdbCredito.setSelected(false);
                 break;
             case "Apartado":
+                rdbContado.setSelected(false);
+                rdbTarjeta.setSelected(false);
                 rdbApartado.setSelected(true);
+                rdbCredito.setSelected(false);
                 break;
             case "Crédito":
+                rdbContado.setSelected(false);
+                rdbTarjeta.setSelected(false);
+                rdbApartado.setSelected(false);
                 rdbCredito.setSelected(true);
                 break;
                 
@@ -711,14 +724,24 @@ public class Abonar extends javax.swing.JFrame {
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
         if(!txtMontoAbonar.getText().equals("")){
         if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
-            facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
-            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar " + txtMontoAbonar.getText() + " a esta factura?") == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?") == JOptionPane.YES_OPTION){
+                
                 if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
                     facturaSeleccionada.cancelarFactura();
+                    listaFacturas.remove(facturaSeleccionada);
+                    
+                    limpiarTablaDetalles(modeloDetalles);
+                    limpiarTabla(modelo);
+                    vaciarCampos();
+                    cargarProductosEnTabla(listaFacturas);
                     JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","",JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","",JOptionPane.INFORMATION_MESSAGE);
+                    facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
+                    facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Double.parseDouble(txtMontoAbonar.getText()));
+                    txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
+                    txtMontoAbonar.setText("");
                 }
-                this.dispose();
-                new Abonar().setVisible(true);
             }
         }else{
             JOptionPane.showMessageDialog(null, "El monto ingresado para abonar es mayor a la deuda\n"
