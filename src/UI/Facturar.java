@@ -299,7 +299,6 @@ public class Facturar extends javax.swing.JFrame {
         txt_Talla = new javax.swing.JTextField();
         txt_Marca = new javax.swing.JTextField();
         txt_Empresa = new javax.swing.JTextField();
-        txt_Precio = new javax.swing.JTextField();
         lbl_Categoria1 = new javax.swing.JLabel();
         cbx_Categoria = new javax.swing.JComboBox<String>();
         jLabel18 = new javax.swing.JLabel();
@@ -313,6 +312,7 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         labBuscarAvanzada = new javax.swing.JLabel();
+        txt_Precio = new javax.swing.JSpinner();
         labDropdown = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
@@ -374,6 +374,7 @@ public class Facturar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaDetalles.setCellSelectionEnabled(true);
         tablaDetalles.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane2.setViewportView(tablaDetalles);
         if (tablaDetalles.getColumnModel().getColumnCount() > 0) {
@@ -529,15 +530,6 @@ public class Facturar extends javax.swing.JFrame {
         txt_Empresa.setBorder(null);
         jpanBusquedaAvanzada.add(txt_Empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 140, 20));
 
-        txt_Precio.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txt_Precio.setBorder(null);
-        txt_Precio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PrecioKeyTyped(evt);
-            }
-        });
-        jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 170, 20));
-
         lbl_Categoria1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbl_Categoria1.setForeground(new java.awt.Color(102, 102, 102));
         lbl_Categoria1.setText("Categoría:");
@@ -593,6 +585,9 @@ public class Facturar extends javax.swing.JFrame {
             }
         });
         jpanBusquedaAvanzada.add(labBuscarAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
+
+        txt_Precio.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
+        jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 170, -1));
 
         jPanel2.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 710, 120));
 
@@ -885,10 +880,6 @@ public class Facturar extends javax.swing.JFrame {
         validarNumeros(evt);
     }//GEN-LAST:event_txt_TallaKeyTyped
 
-    private void txt_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PrecioKeyTyped
-        validarNumeros(evt);
-    }//GEN-LAST:event_txt_PrecioKeyTyped
-
     private void cbx_TipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_TipoProductoActionPerformed
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
             txt_Talla.setText("");
@@ -922,8 +913,8 @@ public class Facturar extends javax.swing.JFrame {
         if (!txt_Talla.getText().equals("")) {
             talla = Double.parseDouble(txt_Talla.getText());
         }
-        if (!txt_Precio.getText().equals("")) {
-            precio = Double.parseDouble(txt_Precio.getText());
+        if (!txt_Precio.getValue().equals("0")) {
+            precio = Double.parseDouble(txt_Precio.getValue().toString());
         }
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) {
             ambos = true;
@@ -937,13 +928,17 @@ public class Facturar extends javax.swing.JFrame {
             fecha = new java.sql.Date(txt_Fecha.getDate().getTime());
         }
 
-        BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
+        if(talla == 0 || (talla >= 19 && talla <= 46)){
+            BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
 
-        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
+            listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
 
-        limpiarTabla(modelo);
+            limpiarTabla(modelo);
 
-        cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
+            cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
+        }else{
+            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
     private void labBuscarAvanzadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBuscarAvanzadaMouseEntered
@@ -1248,7 +1243,7 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Empresa;
     private com.toedter.calendar.JDateChooser txt_Fecha;
     private javax.swing.JTextField txt_Marca;
-    private javax.swing.JTextField txt_Precio;
+    private javax.swing.JSpinner txt_Precio;
     private javax.swing.JLabel txt_PrecioTotal;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;
