@@ -34,7 +34,7 @@ public class DAO_Producto {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -260,7 +260,7 @@ public class DAO_Producto {
         ResultSet rs = null;
         
         int c = 1;
-        if (ambos) c = 2;  
+        if (ambos && genero.equals("") && tallaZapato == 0 && categoria.equals("")) c = 2;  
         
         // For por si la busquedas de tipo de producto es cualquiera
         for (int i = 0; i < c; i++) {
@@ -273,7 +273,7 @@ public class DAO_Producto {
 
             String query = "";
 
-            if (!tipoProducto) {
+            if (!tipoProducto && genero.equals("") && tallaZapato == 0 && categoria.equals("")) {
                 query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
                         + "P.Cantidad, P.EsZapato FROM zapateriamary.producto as P Where P.EsZapato = 0";
             } else {
