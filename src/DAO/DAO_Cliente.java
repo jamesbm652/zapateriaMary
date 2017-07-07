@@ -153,6 +153,22 @@ public class DAO_Cliente {
                     cliente.setIdCliente(idCliente);
                     validarTelefonos(cliente);
                 }
+            }else{
+                ps = con.prepareStatement("UPDATE cliente SET NombreCompleto = ?, Cedula = ?, Direccion = ? WHERE IdCliente = ?", Statement.RETURN_GENERATED_KEYS);
+
+                ps.setString(1, cliente.getNombreCompleto());
+                ps.setString(2, cliente.getCedula());
+                ps.setString(3, cliente.getDireccion());
+                ps.setInt(4, idCliente);
+
+                ps.executeUpdate();
+                rs = ps.getGeneratedKeys();
+
+                while (rs.next()) {
+                    idCliente = rs.getInt(1);
+                    cliente.setIdCliente(idCliente);
+                    validarTelefonos(cliente);
+                }
             }
 
             cerrarConexion();

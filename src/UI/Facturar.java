@@ -90,10 +90,9 @@ public class Facturar extends javax.swing.JFrame {
 
             @Override
             public void keyReleased(KeyEvent evt){
-                boolean habilitar = false;
                 String cadena = cbx_Cedula.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    habilitar = buscarPorCedula(cadena);
+                    buscarPorCedula(cadena);
                 }
 
                 if (evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
@@ -118,7 +117,7 @@ public class Facturar extends javax.swing.JFrame {
                     ((JTextComponent) cbx_Cedula.getEditor().getEditorComponent()).select(fin, fin);
                 }
                 // Metodo para permitir o no la modificacion de los datos
-                permisoParaEscribir(habilitar);
+                //permisoParaEscribir(habilitar);
             }
         });
     }
@@ -128,10 +127,9 @@ public class Facturar extends javax.swing.JFrame {
             
             @Override
             public void keyReleased(KeyEvent evt){
-                boolean habilitar = false;
                 String cadena = cbx_Senor.getEditor().getItem().toString();;  
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    habilitar = buscarPorNombreCompleto(cadena);
+                    buscarPorNombreCompleto(cadena);
                 }
                 if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
                     cbx_Senor.setModel(manejadorCliente.obtenerListaComboBox(cadena, "NombreCompleto"));
@@ -154,24 +152,9 @@ public class Facturar extends javax.swing.JFrame {
                     ((JTextComponent)cbx_Senor.getEditor().getEditorComponent()).select(fin, fin);
                 }
                 // Metodo para permitir o no la modificacion de los datos
-                permisoParaEscribir(habilitar);
+                //permisoParaEscribir(habilitar);
             }
         });
-    }
-    
-    private void permisoParaEscribir(boolean habilitar){
-        if(habilitar){
-            txt_Direccion.setEditable(false);
-            txt_Direccion.setBackground(Color.WHITE);
-            telHabitacion.setEditable(false);
-            telHabitacion.setBackground(Color.WHITE);
-            telCelular.setEditable(false);
-            telCelular.setBackground(Color.WHITE);
-        }else{
-            txt_Direccion.setEditable(true);
-            telHabitacion.setEditable(true);
-            telCelular.setEditable(true);
-        }
     }
 
     private boolean buscarPorNombreCompleto(String cadena){
@@ -1079,8 +1062,8 @@ public class Facturar extends javax.swing.JFrame {
 
     private void btnPanelFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseClicked
         // TODO add your handling code here:
-        String cedula = cbx_Cedula.getSelectedItem() + "";
-        String comprador = cbx_Senor.getSelectedItem()+ "";
+        String cedula = cbx_Cedula.getEditor().getItem().toString();
+        String comprador = cbx_Senor.getEditor().getItem().toString();
         String direccion = txt_Direccion.getText();
         String tipoFactura = "";
         Date fechaFactura = new Date(new java.util.Date().getTime());
@@ -1157,12 +1140,12 @@ public class Facturar extends javax.swing.JFrame {
 
     private void cbx_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_CedulaActionPerformed
         String cadena = cbx_Cedula.getEditor().getItem().toString();
-        permisoParaEscribir(buscarPorCedula(cadena));
+        buscarPorCedula(cadena);
     }//GEN-LAST:event_cbx_CedulaActionPerformed
 
     private void cbx_SenorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_SenorActionPerformed
         String cadena = cbx_Senor.getEditor().getItem().toString();
-        permisoParaEscribir(buscarPorNombreCompleto(cadena));
+        buscarPorNombreCompleto(cadena);
     }//GEN-LAST:event_cbx_SenorActionPerformed
 
     static public class HeaderColor extends DefaultTableCellRenderer{
