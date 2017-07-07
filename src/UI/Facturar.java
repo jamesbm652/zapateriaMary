@@ -1156,7 +1156,7 @@ public class Facturar extends javax.swing.JFrame {
             super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
 
             setForeground(Color.WHITE);
-            setBackground(new java.awt.Color(153, 153, 153));
+            setBackground(new java.awt.Color(0,105,120));
             setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
             return this;
         }

@@ -43,6 +43,10 @@ public class ReporteVentas extends javax.swing.JFrame {
         modeloTarjeta = (DefaultTableModel) tablaTar.getModel();
         modeloAbono = (DefaultTableModel) tablaAbono.getModel();
         modeloCredito = (DefaultTableModel) tablaCredito.getModel();
+        tablaCon.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
+        tablaTar.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
+        tablaAbono.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
+        tablaCredito.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         
         Date fActual = new Date(new java.util.Date().getTime());
         jDateFechaInicio.setDate(fActual);
@@ -52,6 +56,7 @@ public class ReporteVentas extends javax.swing.JFrame {
         manejadorFacturas.cargarFacturasPorFecha(fActual.toString(), fActual.toString());
         listaFacturas = manejadorFacturas.ObtenerLista();
         separarListasSegunTipo();
+        limpiarTablas();
         cargarProductosEnTabla("Contado", reporte.getFacturasContado());
         cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
         cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
@@ -89,7 +94,6 @@ public class ReporteVentas extends javax.swing.JFrame {
     
     
     private void cargarProductosEnTabla(String tabla,ArrayList<BL_Factura> listaParaMostrar) {
-        limpiarTablas(tabla);
         switch(tabla){
             case "Contado":
                 Object[] fila = new Object[modeloContado.getColumnCount()];
@@ -156,33 +160,25 @@ public class ReporteVentas extends javax.swing.JFrame {
         
     }
     
-    private void limpiarTablas(String tabla) {
-        switch(tabla){
-            case "Contado":
+    private void limpiarTablas() {
+        
                 int filas = tablaCon.getRowCount();
                 for (int i = 0; filas > i; i++) {
                     modeloContado.removeRow(0);
                 }
-                break;
-            case "Tarjeta":
                 int filasTar = tablaTar.getRowCount();
                 for (int i = 0; filasTar > i; i++) {
                     modeloTarjeta.removeRow(0);
                 }
-                break;
-            case "Abono":
                 int filasAbo = tablaAbono.getRowCount();
                 for (int i = 0; filasAbo > i; i++) {
                     modeloAbono.removeRow(0);
                 }
-                break;
-            case "Credito":
                 int filasCre = tablaCredito.getRowCount();
                 for (int i = 0; filasCre > i; i++) {
                     modeloCredito.removeRow(0);
                 }
-                break;
-        }
+        
     }
     
     /**
@@ -843,9 +839,12 @@ public class ReporteVentas extends javax.swing.JFrame {
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         
+        manejadorFacturas.EliminarTodos();
+        reporte.vaciarListas();
         manejadorFacturas.cargarFacturasPorFecha(formato.format(jDateFechaInicio.getDate().getTime()), formato.format(jDateFechaFInal.getDate().getTime()));
         listaFacturas = manejadorFacturas.ObtenerLista();
         separarListasSegunTipo();
+        limpiarTablas();
         cargarProductosEnTabla("Contado", reporte.getFacturasContado());
         cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
         cargarProductosEnTabla("Abono", reporte.getFacturasAbono());

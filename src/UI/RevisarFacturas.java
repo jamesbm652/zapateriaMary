@@ -749,7 +749,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
             super.getTableCellRendererComponent(tabla, value, selected, fused, row, column);
             setBorder(new LineBorder(Color.BLACK, 1));
             setForeground(Color.WHITE);
-            setBackground(new java.awt.Color(0, 105, 120));
+            setBackground(new java.awt.Color(0,105,120));
             setHorizontalAlignment((int) tabla.CENTER_ALIGNMENT);
             return this;
         }
