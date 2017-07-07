@@ -44,6 +44,7 @@ public class Inventario extends javax.swing.JFrame {
         initComponents();
         modelo = (DefaultTableModel) tablaInventario.getModel();
         tablaInventario.getTableHeader().setDefaultRenderer(new HeaderColor());
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
         
         jpanBusquedaAvanzada.setVisible(false);
 
@@ -290,6 +291,7 @@ public class Inventario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaInventario.setColumnSelectionAllowed(false);
         tablaInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaInventario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

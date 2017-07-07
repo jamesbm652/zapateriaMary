@@ -64,6 +64,9 @@ public class Facturar extends javax.swing.JFrame {
         modeloDetalles = (DefaultTableModel) tablaDetalles.getModel();
         tablaInventario.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
         tablaDetalles.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
+        tablaDetalles.getTableHeader().setReorderingAllowed(false);
+        
         jpanBusquedaAvanzada.setVisible(false);
         SpinnerNumberModel spn = new SpinnerNumberModel(1, 1, 100, 1);
         txt_Cantidad.setModel(spn);
