@@ -52,10 +52,10 @@ public class ReporteVentas extends javax.swing.JFrame {
         manejadorFacturas.cargarFacturasPorFecha(fActual.toString(), fActual.toString());
         listaFacturas = manejadorFacturas.ObtenerLista();
         separarListasSegunTipo();
-        //cargarProductosEnTabla(modeloContado, reporte.getFacturasContado());
-        //cargarProductosEnTabla(modeloTarjeta, reporte.getFacturasTarjeta());
-        //cargarProductosEnTabla(modeloAbono, reporte.getFacturasAbono());
-        //cargarProductosEnTabla(modeloCredito, reporte.getFacturasCredito());
+        cargarProductosEnTabla("Contado", reporte.getFacturasContado());
+        cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
+        cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
+        cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
     }
 
     private void separarListasSegunTipo(){
@@ -88,41 +88,100 @@ public class ReporteVentas extends javax.swing.JFrame {
     }
     
     
-    private void cargarProductosEnTabla(DefaultTableModel modelo,ArrayList<BL_Factura> listaParaMostrar) {
+    private void cargarProductosEnTabla(String tabla,ArrayList<BL_Factura> listaParaMostrar) {
+        limpiarTablas(tabla);
+        switch(tabla){
+            case "Contado":
+                Object[] fila = new Object[modeloContado.getColumnCount()];
 
-        limpiarTablas(modelo);
-        Object[] fila = new Object[modelo.getColumnCount()];
+                for (int i = 0; i < listaParaMostrar.size(); i++) {
+                    fila[0] = listaParaMostrar.get(i).getIdFactura();
+                    fila[1] = listaParaMostrar.get(i).getFechaFactura().toString();
+                    fila[2] = listaParaMostrar.get(i).getTipoFactura();
+                    if (listaParaMostrar.get(i).isCancelada()) {
+                        fila[3] = "Cancelada";
+                    } else {
+                        fila[3] = "Sin cancelar";
+                    }
+                    modeloContado.addRow(fila);
+                }
+                break;
+            case "Tarjeta":
+                Object[] filaTar = new Object[modeloTarjeta.getColumnCount()];
 
-        for (int i = 0; i < listaParaMostrar.size(); i++) {
-            fila[0] = listaParaMostrar.get(i).getIdFactura();
-            fila[1] = listaParaMostrar.get(i).getFechaFactura().toString();
-            fila[2] = listaParaMostrar.get(i).getTipoFactura();
-            if (listaParaMostrar.get(i).isCancelada()) {
-                fila[3] = "Cancelada";
-            } else {
-                fila[3] = "Sin cancelar";
-            }
-            modelo.addRow(fila);
-        }
-    }
-    
-    private void limpiarTablas(DefaultTableModel modelo) {
-        int filas = tablaCon.getRowCount();
-        for (int i = 0; filas > i; i++) {
-            modelo.removeRow(0);
+                for (int i = 0; i < listaParaMostrar.size(); i++) {
+                    filaTar[0] = listaParaMostrar.get(i).getIdFactura();
+                    filaTar[1] = listaParaMostrar.get(i).getFechaFactura().toString();
+                    filaTar[2] = listaParaMostrar.get(i).getTipoFactura();
+                    if (listaParaMostrar.get(i).isCancelada()) {
+                        filaTar[3] = "Cancelada";
+                    } else {
+                        filaTar[3] = "Sin cancelar";
+                    }
+                    modeloTarjeta.addRow(filaTar);
+                }
+                break;
+            case "Abono":
+                Object[] filaAbono = new Object[modeloAbono.getColumnCount()];
+
+                for (int i = 0; i < listaParaMostrar.size(); i++) {
+                    filaAbono[0] = listaParaMostrar.get(i).getIdFactura();
+                    filaAbono[1] = listaParaMostrar.get(i).getFechaFactura().toString();
+                    filaAbono[2] = listaParaMostrar.get(i).getTipoFactura();
+                    if (listaParaMostrar.get(i).isCancelada()) {
+                        filaAbono[3] = "Cancelada";
+                    } else {
+                        filaAbono[3] = "Sin cancelar";
+                    }
+                    modeloAbono.addRow(filaAbono);
+                }
+                break;
+            case "Credito":
+                Object[] filaCredito = new Object[modeloCredito.getColumnCount()];
+
+                for (int i = 0; i < listaParaMostrar.size(); i++) {
+                    filaCredito[0] = listaParaMostrar.get(i).getIdFactura();
+                    filaCredito[1] = listaParaMostrar.get(i).getFechaFactura().toString();
+                    filaCredito[2] = listaParaMostrar.get(i).getTipoFactura();
+                    if (listaParaMostrar.get(i).isCancelada()) {
+                        filaCredito[3] = "Cancelada";
+                    } else {
+                        filaCredito[3] = "Sin cancelar";
+                    }
+                    modeloCredito.addRow(filaCredito);
+                }
+                break;
         }
         
-        int filasTar = tablaTar.getRowCount();
-        for (int i = 0; filasTar > i; i++) {
-            modelo.removeRow(0);
-        }
-        int filasAbo = tablaAbono.getRowCount();
-        for (int i = 0; filasAbo > i; i++) {
-            modelo.removeRow(0);
-        }
-        int filasCre = tablaCredito.getRowCount();
-        for (int i = 0; filasCre > i; i++) {
-            modelo.removeRow(0);
+        
+    }
+    
+    private void limpiarTablas(String tabla) {
+        switch(tabla){
+            case "Contado":
+                int filas = tablaCon.getRowCount();
+                for (int i = 0; filas > i; i++) {
+                    modeloContado.removeRow(0);
+                }
+                break;
+            case "Tarjeta":
+                int filasTar = tablaTar.getRowCount();
+                for (int i = 0; filasTar > i; i++) {
+                    modeloTarjeta.removeRow(0);
+                }
+                break;
+            case "Abono":
+                int filasAbo = tablaAbono.getRowCount();
+                for (int i = 0; filasAbo > i; i++) {
+                    modeloAbono.removeRow(0);
+                }
+                break;
+            case "Credito":
+                int filasCre = tablaCredito.getRowCount();
+                for (int i = 0; filasCre > i; i++) {
+                    modeloCredito.removeRow(0);
+                }
+                break;
         }
     }
     
@@ -269,6 +328,7 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtCantTotalFacturas = new javax.swing.JTextField();
         jSeparator34 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -366,10 +426,7 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "N° Factura", "Fecha", "Estado", "Tipo Factura"
@@ -464,10 +521,7 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         tablaTar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "N° Factura", "Fecha", "Estado", "Tipo Factura"
@@ -549,10 +603,7 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         tablaAbono.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "N° Factura", "Fecha", "Estado", "Tipo Factura"
@@ -634,10 +685,7 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         tablaCredito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "N° Factura", "Fecha", "Estado", "Tipo Factura"
@@ -766,6 +814,17 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 1120, 570));
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseEntered(evt);
+            }
+        });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 30, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
 
         pack();
@@ -780,6 +839,22 @@ public class ReporteVentas extends javax.swing.JFrame {
         this.dispose();
         new Menu_Principal().setVisible(true);
     }//GEN-LAST:event_labCloseMouseClicked
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        
+        manejadorFacturas.cargarFacturasPorFecha(formato.format(jDateFechaInicio.getDate().getTime()), formato.format(jDateFechaFInal.getDate().getTime()));
+        listaFacturas = manejadorFacturas.ObtenerLista();
+        separarListasSegunTipo();
+        cargarProductosEnTabla("Contado", reporte.getFacturasContado());
+        cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
+        cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
+        cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
+    }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
+        btnBuscar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnBuscarMouseEntered
 
   
     
@@ -798,6 +873,7 @@ public class ReporteVentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnBuscar;
     private com.toedter.calendar.JDateChooser jDateFechaFInal;
     private com.toedter.calendar.JDateChooser jDateFechaInicio;
     private javax.swing.JLabel jLabel1;
