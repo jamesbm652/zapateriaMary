@@ -36,6 +36,39 @@ public class BL_ReporteVenta {
         this.facturasCredito = new ArrayList<>();
     }
 
+    public BL_ReportePorTipo getReporteContado() {
+        return reporteContado;
+    }
+
+    public void setReporteContado(BL_ReportePorTipo reporteContado) {
+        this.reporteContado = reporteContado;
+    }
+
+    public BL_ReportePorTipo getReporteTarjeta() {
+        return reporteTarjeta;
+    }
+
+    public void setReporteTarjeta(BL_ReportePorTipo reporteTarjeta) {
+        this.reporteTarjeta = reporteTarjeta;
+    }
+
+    public BL_ReportePorTipo getReporteAbonos() {
+        return reporteAbonos;
+    }
+
+    public void setReporteAbonos(BL_ReportePorTipo reporteAbonos) {
+        this.reporteAbonos = reporteAbonos;
+    }
+
+    public BL_ReportePorTipo getReporteCredito() {
+        return reporteCredito;
+    }
+
+    public void setReporteCredito(BL_ReportePorTipo reporteCredito) {
+        this.reporteCredito = reporteCredito;
+    }
+
+    
     public void agregarFacturaContado(BL_Factura factura) {
         facturasContado.add(factura);
     }
@@ -100,7 +133,7 @@ public class BL_ReporteVenta {
         this.facturasCredito = facturasCredito;
     }
 
-    private void generarReporteIndividual() {
+    public void generarReporteIndividual() {
         //Se leen las facturas por contado
         calcularContado();
         // Se leen las facturas de tarjeta

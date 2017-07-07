@@ -7,6 +7,7 @@ package UI;
 
 import BL.BL_Factura;
 import BL.BL_ManejadorFacturas;
+import BL.BL_ReportePorTipo;
 import BL.BL_ReporteVenta;
 import java.awt.Color;
 import java.awt.Component;
@@ -61,8 +62,49 @@ public class ReporteVentas extends javax.swing.JFrame {
         cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
         cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
         cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
+        
+        reporte.generarReporteIndividual();
+        
+        llenarInformacion();
     }
 
+    private void llenarInformacion (){
+        BL_ReportePorTipo abono = reporte.getReporteAbonos();
+        BL_ReportePorTipo credito = reporte.getReporteCredito();
+        BL_ReportePorTipo contado = reporte.getReporteAbonos();
+        BL_ReportePorTipo tarjeta = reporte.getReporteTarjeta();
+        
+        txtConCanceladas.setText(contado.getCantidadCanceladas() + "");
+        txtConSinCancelar.setText(contado.getCantidadSinCancelar() + "");
+        txtConZapVendidos.setText(contado.getCantidadZapatosVendidos() + "");
+        txtConBolsosVendidos.setText(contado.getCantidadBolsosVendidos() + "");
+        txtConTotal.setText(contado.getGanancias() + "");
+        txtGanFacContado.setText(contado.getGanancias() + "");
+        
+        txtAbonCanceladas.setText(abono.getCantidadCanceladas() + "");
+        txtAbonSinCancelar.setText(abono.getCantidadSinCancelar() + "");
+        txtAbonZapVendidos.setText(abono.getCantidadZapatosVendidos() + "");
+        txtAbonBolsosVendidos.setText(abono.getCantidadBolsosVendidos() + "");
+        txtAbonTotal.setText(abono.getGanancias() + "");
+        txtGanFacAbono.setText(abono.getGanancias() + "");
+        
+        txtCreCanceladas.setText(credito.getCantidadCanceladas() + "");
+        txtCreSinCancelar.setText(credito.getCantidadSinCancelar() + "");
+        txtCreZapVendidos.setText(credito.getCantidadZapatosVendidos() + "");
+        txtCreBolsosVendidos.setText(credito.getCantidadBolsosVendidos() + "");
+        txtCreTotal.setText(credito.getGanancias() + "");
+        txtGanFacCredito.setText(credito.getGanancias() + "");
+        
+        txtTarCanceladas.setText(tarjeta.getCantidadCanceladas() + "");
+        txtTarSinCancelar.setText(tarjeta.getCantidadSinCancelar() + "");
+        txtTarZapVendidos.setText(tarjeta.getCantidadZapatosVendidos() + "");
+        txtTarBolsosVendidos.setText(tarjeta.getCantidadBolsosVendidos() + "");
+        txtTarTotal.setText(tarjeta.getGanancias() + "");
+        txtGanFacTarjeta.setText(tarjeta.getGanancias() + "");
+        
+        txtTotalGanancia.setText(contado.getGanancias() + abono.getGanancias() + tarjeta.getGanancias() + credito.getGanancias() + "");
+    }
+    
     private void separarListasSegunTipo(){
         for (BL_Factura f : listaFacturas) {
             switch(f.getTipoFactura()){
@@ -849,6 +891,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
         cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
         cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
+        
+        llenarInformacion();
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
