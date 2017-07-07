@@ -12,14 +12,15 @@ import java.util.ArrayList;
  * @author oscal
  */
 public class BL_ReporteVenta {
+
     private ArrayList<BL_Factura> facturasContado;
     private ArrayList<BL_Factura> facturasTarjeta;
     private ArrayList<BL_Factura> facturasAbono;
     private ArrayList<BL_Factura> facturasCredito;
-    private double gananciaContado = 0;
-    private double gananciaTarjeta = 0;
-    private double gananciaAbono = 0;
-    private double gananciaCredito = 0;
+    private BL_ReportePorTipo reporteContado = new BL_ReportePorTipo();
+    private BL_ReportePorTipo reporteTarjeta = new BL_ReportePorTipo();
+    private BL_ReportePorTipo reporteAbonos = new BL_ReportePorTipo();
+    private BL_ReportePorTipo reporteCredito = new BL_ReportePorTipo();
 
     public BL_ReporteVenta(ArrayList<BL_Factura> facturasContado, ArrayList<BL_Factura> facturasTarjeta, ArrayList<BL_Factura> facturasAbono, ArrayList<BL_Factura> facturasCredito) {
         this.facturasContado = facturasContado;
@@ -35,35 +36,38 @@ public class BL_ReporteVenta {
         this.facturasCredito = new ArrayList<>();
     }
 
-    public void agregarFacturaContado(BL_Factura factura){
+    public void agregarFacturaContado(BL_Factura factura) {
         facturasContado.add(factura);
     }
-    public void agregarFacturaTarjeta(BL_Factura factura){
+
+    public void agregarFacturaTarjeta(BL_Factura factura) {
         facturasTarjeta.add(factura);
     }
-    public void agregarFacturaAbono(BL_Factura factura){
+
+    public void agregarFacturaAbono(BL_Factura factura) {
         facturasAbono.add(factura);
     }
-    public void agregarFacturaCredito(BL_Factura factura){
+
+    public void agregarFacturaCredito(BL_Factura factura) {
         facturasCredito.add(factura);
     }
-    
-    public void vaciarListas(){
+
+    public void vaciarListas() {
         facturasContado.clear();
         facturasTarjeta.clear();
         facturasAbono.clear();
         facturasCredito.clear();
     }
-    
-    public double obtenerGananciaFacturasContado(){
+
+    public double obtenerGananciaFacturasContado() {
         for (int i = 0; i < facturasContado.size(); i++) {
             for (BL_Factura facturasContado1 : facturasContado) {
-                
+
             }
         }
         return 0;
     }
-    
+
     public ArrayList<BL_Factura> getFacturasContado() {
         return facturasContado;
     }
@@ -95,8 +99,175 @@ public class BL_ReporteVenta {
     public void setFacturasCredito(ArrayList<BL_Factura> facturasCredito) {
         this.facturasCredito = facturasCredito;
     }
+
+    private void generarReporteIndividual() {
+        //Se leen las facturas por contado
+        calcularContado();
+        // Se leen las facturas de tarjeta
+        calcularTarjeta();
+        // Se leen las facturas de apartados
+        calcularAbonos();
+        // Se leen las facturas de credito
+        calcularCredito();
+    }
     
+    private void calcularContado(){
+        BL_ManejadorProducto todosProductos = new BL_ManejadorProducto();
+        todosProductos.CargarProductos();
+        ArrayList<BL_Producto> listaTodosProductos = todosProductos.ObtenerListaProductos();
+        
+        double ganancias = 0;
+        int cantidadZapatos = 0;
+        int cantidadBolsos = 0;
+        
+        reporteContado.setTipoFactura("Contado");
+        reporteContado.setCantidadFacturas(facturasContado.size());
+        reporteContado.setCantidadCanceladas(facturasContado.size());
+        reporteContado.setCantidadSinCancelar(0);
+
+        for (int i = 0; i < facturasContado.size(); i++) {
+            ArrayList<BL_ProductoFactura> listaProductos = facturasContado.get(i).getProductosFactura();
+            for (int j = 0; j < listaProductos.size(); j++) {
+                for (int k = 0; k < listaTodosProductos.size(); k++) {
+                    if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadZapatos++;
+                        break;
+                    } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && !listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadBolsos++;
+                    }
+                }
+                ganancias += listaProductos.get(j).getPrecioVenta();
+            }
+        }
+        reporteContado.setCantidadBolsosVendidos(cantidadBolsos);
+        reporteContado.setCantidadZapatosVendidos(cantidadZapatos);
+        reporteContado.setGanancias(ganancias);
+    }
     
+    private void calcularTarjeta(){
+        BL_ManejadorProducto todosProductos = new BL_ManejadorProducto();
+        todosProductos.CargarProductos();
+        ArrayList<BL_Producto> listaTodosProductos = todosProductos.ObtenerListaProductos();
+        
+        double ganancias = 0;
+        int cantidadZapatos = 0;
+        int cantidadBolsos = 0;
+        
+        reporteTarjeta.setTipoFactura("Tarjeta");
+        reporteTarjeta.setCantidadFacturas(facturasTarjeta.size());
+        reporteTarjeta.setCantidadCanceladas(facturasTarjeta.size());
+        reporteTarjeta.setCantidadSinCancelar(0);
+
+        for (int i = 0; i < facturasTarjeta.size(); i++) {
+            ArrayList<BL_ProductoFactura> listaProductos = facturasTarjeta.get(i).getProductosFactura();
+            for (int j = 0; j < listaProductos.size(); j++) {
+                for (int k = 0; k < listaTodosProductos.size(); k++) {
+                    if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadZapatos++;
+                        break;
+                    } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && !listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadBolsos++;
+                    }
+                }
+                ganancias += listaProductos.get(j).getPrecioVenta();
+            }
+        }
+        
+        reporteTarjeta.setCantidadBolsosVendidos(cantidadBolsos);
+        reporteTarjeta.setCantidadZapatosVendidos(cantidadZapatos);
+        reporteTarjeta.setGanancias(ganancias);
+    }
     
+    private void calcularAbonos(){
+        BL_ManejadorProducto todosProductos = new BL_ManejadorProducto();
+        todosProductos.CargarProductos();
+        ArrayList<BL_Producto> listaTodosProductos = todosProductos.ObtenerListaProductos();
+        
+        double ganancias = 0;
+        int cantidadZapatos = 0;
+        int cantidadBolsos = 0;
+        int cantidadCanceladas = 0;
+        int cantidadSinCancelar = 0;
+        
+        reporteAbonos.setTipoFactura("Abonos");
+        reporteAbonos.setCantidadFacturas(facturasAbono.size());
+        
+
+        for (int i = 0; i < facturasAbono.size(); i++) {
+            if (facturasAbono.get(i).isCancelada()) {
+                cantidadCanceladas ++;
+            }else{
+                cantidadSinCancelar ++;
+            }
+            ArrayList<BL_ProductoFactura> listaProductos = facturasAbono.get(i).getProductosFactura();
+            for (int j = 0; j < listaProductos.size(); j++) {
+                for (int k = 0; k < listaTodosProductos.size(); k++) {
+                    if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadZapatos++;
+                        break;
+                    } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && !listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadBolsos++;
+                    }
+                }
+                ganancias += listaProductos.get(j).getPrecioVenta();
+            }
+        }
+        
+        reporteAbonos.setCantidadBolsosVendidos(cantidadBolsos);
+        reporteAbonos.setCantidadZapatosVendidos(cantidadZapatos);
+        reporteAbonos.setGanancias(ganancias);
+        reporteAbonos.setCantidadCanceladas(cantidadCanceladas);
+        reporteAbonos.setCantidadSinCancelar(cantidadSinCancelar);
+    }
     
+    public void calcularCredito(){
+        BL_ManejadorProducto todosProductos = new BL_ManejadorProducto();
+        todosProductos.CargarProductos();
+        ArrayList<BL_Producto> listaTodosProductos = todosProductos.ObtenerListaProductos();
+        
+        double ganancias = 0;
+        int cantidadZapatos = 0;
+        int cantidadBolsos = 0;
+        int cantidadCanceladas = 0;
+        int cantidadSinCancelar = 0;
+        
+        reporteCredito.setTipoFactura("Abonos");
+        reporteCredito.setCantidadFacturas(facturasCredito.size());
+        
+
+        for (int i = 0; i < facturasCredito.size(); i++) {
+            if (facturasCredito.get(i).isCancelada()) {
+                cantidadCanceladas ++;
+            }else{
+                cantidadSinCancelar ++;
+            }
+            ArrayList<BL_ProductoFactura> listaProductos = facturasCredito.get(i).getProductosFactura();
+            for (int j = 0; j < listaProductos.size(); j++) {
+                for (int k = 0; k < listaTodosProductos.size(); k++) {
+                    if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadZapatos++;
+                        break;
+                    } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                            && !listaTodosProductos.get(k).isEsZapato()) {
+                        cantidadBolsos++;
+                    }
+                }
+                ganancias += listaProductos.get(j).getPrecioVenta();
+            }
+        }
+        
+        reporteCredito.setCantidadBolsosVendidos(cantidadBolsos);
+        reporteCredito.setCantidadZapatosVendidos(cantidadZapatos);
+        reporteCredito.setGanancias(ganancias);
+        reporteCredito.setCantidadCanceladas(cantidadCanceladas);
+        reporteCredito.setCantidadSinCancelar(cantidadSinCancelar);
+    }
+
 }
