@@ -19,6 +19,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -99,7 +100,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDetalles = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        txt_Factura = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txt_Senor = new javax.swing.JTextField();
@@ -193,9 +194,9 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jLabel6.setText("N° Factura:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 90, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        jLabel7.setText("0");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 90, 80, 20));
+        txt_Factura.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txt_Factura.setText("0");
+        jPanel2.add(txt_Factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 90, 80, 20));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -445,10 +446,17 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (buscar(cadena)) {
                         cargarFacturas();
+                    }else{
+                        limpiarTabla(modelo);
+                        limpiarTablaDetalles(modeloDetalles);
+                        vaciarCampos();
                     }
                 }
-                if (evt.getKeyCode() >= 48 && evt.getKeyCode() <= 57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
-                    cbx_Cedula.setModel(manejadorCliente.obtenerListaComboBox(cadena, "Cedula"));
+                if (evt.getKeyCode() >= 65 && evt.getKeyCode() <=90 || evt.getKeyCode() >=97 && evt.getKeyCode() <= 122 || evt.getKeyCode() == 45 || evt.getKeyCode() >= 48 && evt.getKeyCode() <=57 || evt.getKeyCode() == 45 || evt.getKeyCode() == 8) {
+                    DefaultComboBoxModel dcbxCedula = manejadorCliente.obtenerListaComboBox(cadena, "Cedula");
+                    DefaultComboBoxModel dcbxNombreCompleto = manejadorCliente.obtenerListaComboBox(cadena, "NombreCompleto");
+                    cbx_Cedula.setModel(dcbxCedula);
+                    if (dcbxNombreCompleto.getSize() > 0) cbx_Cedula.setModel(dcbxNombreCompleto);
                     if (cbx_Cedula.getItemCount() > 0) {
                         cbx_Cedula.showPopup();
                         if (evt.getKeyCode() != 8) {
@@ -480,7 +488,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
     private boolean buscar(String cadena) {
         boolean existe = false;
         for (BL_Cliente c : manejadorCliente.obtenerLista()) {
-            if (c.getCedula().contentEquals(cadena)) {
+            if (c.getCedula().contentEquals(cadena) || c.getNombreCompleto().contentEquals(cadena)) {
                 cliente.setIdCliente(c.getIdCliente());
                 cliente.setNombreCompleto(c.getNombreCompleto());
                 cliente.setCedula(c.getCedula());
@@ -499,6 +507,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         txt_Direccion.setText("");
         txtTelHab.setText("");
         txtTelCel.setText("");
+        txt_Factura.setText("");
 
         rdbContado.setSelected(false);
         rdbTarjeta.setSelected(false);
@@ -640,7 +649,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 }
             }
 
-            txtNumFactura.setText(facturaSeleccionada.getIdFactura() + "");
+            txt_Factura.setText(facturaSeleccionada.getIdFactura() + "");
             cargarProductosEnTablaDetalles(facturaSeleccionada.getProductosFactura());
 
             setColorCampos();
@@ -772,7 +781,6 @@ public class RevisarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
@@ -805,6 +813,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelCel;
     private javax.swing.JTextField txtTelHab;
     private javax.swing.JTextField txt_Direccion;
+    private javax.swing.JLabel txt_Factura;
     private javax.swing.JTextField txt_Senor;
     // End of variables declaration//GEN-END:variables
 }
