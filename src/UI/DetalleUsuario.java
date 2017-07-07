@@ -281,15 +281,35 @@ public class DetalleUsuario extends javax.swing.JFrame {
                     usuario.setAdministrador(false);
                 }
                 
-                if(usuario.modificarUsuario()){
-                    JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
-                    manejador.Modificar(identificador, usuario);
-                    listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
-                    
-                    this.dispose();
-                    new AdministrarUsuarios().setVisible(true);
+                if(sesion.getIdUsuario() == usuario.getIdUsuario() && sesion.isAdmin() && !usuario.isAdministrador()){
+                    if(JOptionPane.showConfirmDialog(null, "¿Desea dejar de ser Administrador?", "Confirmar modificación Administrador", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                        if(usuario.modificarUsuario()){
+                            JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                            manejador.Modificar(identificador, usuario);
+                            listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
+                            
+                            sesion.setAdmin(false);
+                            this.dispose();
+                            new Menu_Principal().setVisible(true);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                        checkAdministrador.setSelected(true);
+                    }
+            
                 }else{
-                    JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                
+                    if(usuario.modificarUsuario()){
+                        JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                        manejador.Modificar(identificador, usuario);
+                        listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
+
+                        this.dispose();
+                        new AdministrarUsuarios().setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }
