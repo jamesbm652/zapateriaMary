@@ -567,7 +567,9 @@ public class Inventario extends javax.swing.JFrame {
                 if(new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())){
                     listaTotalProductos.remove(identificador);
                     JOptionPane.showMessageDialog(null, "Producto eliminado");
-                    cargarProductosEnTabla(listaTotalProductos);
+                    int rowModel = tablaInventario.convertRowIndexToModel(tablaInventario.getSelectedRow());
+                    DefaultTableModel model = (DefaultTableModel)tablaInventario.getModel();
+                    model.removeRow(rowModel);
                 }else {
                     JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado\nNo se puede eliminar del inventario", "Error", JOptionPane.ERROR_MESSAGE);
                 }

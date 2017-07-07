@@ -130,9 +130,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtMarca.setText(lista.get(posicion).getMarca());
         txtColor.setText(lista.get(posicion).getColor());
         txtEmpresa.setText(lista.get(posicion).getEmpresa());
-        txtImpuesto.setValue(lista.get(posicion).getPrecioImpuesto() + "");
-        txtPrecioCosto.setValue(lista.get(posicion).getPrecioCosto() + "");
-        txtPrecioVenta.setValue(lista.get(posicion).getPrecioGanancia() + "");
+        txtImpuesto.setValue(lista.get(posicion).getPrecioImpuesto());
+        txtPrecioCosto.setValue(lista.get(posicion).getPrecioCosto());
+        txtPrecioVenta.setValue(lista.get(posicion).getPrecioGanancia());
     }
 
     /**
