@@ -11,6 +11,9 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -81,22 +84,22 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtTalla.setEditable(valor);
         txtTalla.setBackground(Color.WHITE);
         
-        txtCantidad.setEnabled(valor);
-        txtCantidad.setBackground(Color.WHITE);
+        txtImpuesto.setEnabled(valor);
+        txtImpuesto.setBackground(Color.WHITE);
         
         txtEmpresa.setEditable(valor);
         txtEmpresa.setBackground(Color.WHITE);
         
-        txtImpuesto.setEditable(valor);
+        txtImpuesto.setEnabled(valor);
         txtImpuesto.setBackground(Color.WHITE);
         
         txtMarca.setEditable(valor);
         txtMarca.setBackground(Color.WHITE);
         
-        txtPrecioCosto.setEditable(valor);
+        txtPrecioCosto.setEnabled(valor);
         txtPrecioCosto.setBackground(Color.WHITE);
         
-        txtPrecioVenta.setEditable(valor);
+        txtPrecioVenta.setEnabled(valor);
         txtPrecioVenta.setBackground(Color.WHITE);
         
         rdbBolso.setEnabled(valor);
@@ -123,13 +126,13 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtCodigo.setText(lista.get(posicion).getCodigoUnico());
         txtFechaIngreso.setDate(lista.get(posicion).getFechaIngreso());
         txtDescripcion.setText(lista.get(posicion).getDescripcion());
-        txtCantidad.setValue(lista.get(posicion).getCantidad());
+        txtImpuesto.setValue(lista.get(posicion).getCantidad());
         txtMarca.setText(lista.get(posicion).getMarca());
         txtColor.setText(lista.get(posicion).getColor());
         txtEmpresa.setText(lista.get(posicion).getEmpresa());
-        txtImpuesto.setText(lista.get(posicion).getPrecioImpuesto() + "");
-        txtPrecioCosto.setText(lista.get(posicion).getPrecioCosto() + "");
-        txtPrecioVenta.setText(lista.get(posicion).getPrecioGanancia() + "");
+        txtImpuesto.setValue(lista.get(posicion).getPrecioImpuesto() + "");
+        txtPrecioCosto.setValue(lista.get(posicion).getPrecioCosto() + "");
+        txtPrecioVenta.setValue(lista.get(posicion).getPrecioGanancia() + "");
     }
 
     /**
@@ -154,11 +157,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
-        txtPrecioCosto = new javax.swing.JTextField();
         txtCodigo = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
-        txtPrecioVenta = new javax.swing.JTextField();
-        txtImpuesto = new javax.swing.JTextField();
         txtEmpresa = new javax.swing.JTextField();
         txtFechaIngreso = new com.toedter.calendar.JDateChooser();
         rdbBolso = new javax.swing.JRadioButton();
@@ -169,7 +169,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         cmbCategoria = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         txtTalla = new javax.swing.JTextField();
-        txtCantidad = new javax.swing.JSpinner();
+        txtImpuesto = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         btnGenerarCodigo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -188,6 +188,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         btnPanelAgregar = new javax.swing.JPanel();
         labBtnAgregar = new javax.swing.JLabel();
         labErrorTalla = new javax.swing.JLabel();
+        txtPrecioVenta = new javax.swing.JSpinner();
+        txtCantidad = new javax.swing.JSpinner();
+        txtPrecioCosto = new javax.swing.JSpinner();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -261,15 +264,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         jPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 137, 100, 20));
 
-        txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txtPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioCostoKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 267, 110, 20));
-
         txtCodigo.setEditable(false);
         txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
@@ -280,29 +274,6 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtMarca.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtMarca.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 177, 280, 20));
-
-        txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txtPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioVentaKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 327, 110, 20));
-
-        txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txtImpuesto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtImpuesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtImpuestoActionPerformed(evt);
-            }
-        });
-        txtImpuesto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtImpuestoKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 267, 110, 20));
 
         txtEmpresa.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtEmpresa.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -366,8 +337,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         jPanel1.add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 217, 110, 20));
 
-        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 110, -1));
+        txtImpuesto.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 100.0d, 1.0d));
+        jPanel1.add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
@@ -436,6 +407,15 @@ public class DetalleProducto extends javax.swing.JFrame {
         labErrorTalla.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jPanel1.add(labErrorTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 244, 110, 20));
 
+        txtPrecioVenta.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(1.0d), null, Double.valueOf(1.0d)));
+        jPanel1.add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 110, -1));
+
+        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 110, -1));
+
+        txtPrecioCosto.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(1.0d), null, Double.valueOf(1.0d)));
+        jPanel1.add(txtPrecioCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 110, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 600, 390));
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
@@ -465,18 +445,6 @@ public class DetalleProducto extends javax.swing.JFrame {
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
         validarNumeros(evt);
     }//GEN-LAST:event_txtTallaKeyTyped
-
-    private void txtImpuestoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpuestoKeyTyped
-        validarNumeros(evt);
-    }//GEN-LAST:event_txtImpuestoKeyTyped
-
-    private void txtPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVentaKeyTyped
-        validarNumeros(evt);
-    }//GEN-LAST:event_txtPrecioVentaKeyTyped
-
-    private void txtPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCostoKeyTyped
-        validarNumeros(evt);
-    }//GEN-LAST:event_txtPrecioCostoKeyTyped
 
     private void txtColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtColorActionPerformed
         // TODO add your handling code here:
@@ -513,20 +481,13 @@ public class DetalleProducto extends javax.swing.JFrame {
         labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labCloseMouseEntered
 
-    private void txtImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpuestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtImpuestoActionPerformed
-
     private void btnPanelAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseEntered
         btnPanelAgregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelAgregarMouseEntered
 
     private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
         if (txtFechaIngreso.getDate() == null || txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
-            || txtImpuesto.getText().trim().equals("") || txtPrecioCosto.getText().trim().equals("") || txtPrecioVenta.getText().trim().equals("")
-            || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
-
-            
+             || txtPrecioCosto.getValue().equals("") || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
             
             JOptionPane.showMessageDialog(null, "Debe completar los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -541,9 +502,9 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setColor(txtColor.getText().trim());
                 producto.setMarca(txtMarca.getText().trim());
                 producto.setEmpresa(txtEmpresa.getText().trim());
-                producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getText().trim()));
-                producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getText().trim()));
-                producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getText().trim()));
+                producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getValue().toString()));
+                producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getValue().toString()));
+                producto.setPrecioGanancia(Double.parseDouble(txtPrecioVenta.getValue().toString()));
                 producto.setDescripcion(txtDescripcion.getText().trim());
                 producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
                 producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
@@ -561,13 +522,13 @@ public class DetalleProducto extends javax.swing.JFrame {
                         txtDescripcion.setText("");
                         txtFechaIngreso.setDate(null);
                         txtTalla.setText("");
-                        txtCantidad.setValue(1);
+                        txtImpuesto.setValue(1);
                         txtMarca.setText("");
                         txtColor.setText("");
                         txtEmpresa.setText("");
-                        txtImpuesto.setText("");
-                        txtPrecioCosto.setText("");
-                        txtPrecioVenta.setText("");
+                        txtImpuesto.setValue(0);
+                        txtPrecioCosto.setValue(1);
+                        txtPrecioVenta.setValue(1);
                         JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         lista.add(producto);
                     } else {
@@ -593,7 +554,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void txtTallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyReleased
         if(!txtTalla.getText().equals("")){
-            if(Double.parseDouble(txtTalla.getText().trim().toString()) >= 15 && Double.parseDouble(txtTalla.getText().trim().toString()) <= 45){
+            if(Double.parseDouble(txtTalla.getText().trim().toString()) >= 19 && Double.parseDouble(txtTalla.getText().trim().toString()) <= 46){
                 labErrorTalla.setText("");
             }else{
                 labErrorTalla.setText("Rango incorrecto");
@@ -614,15 +575,23 @@ public class DetalleProducto extends javax.swing.JFrame {
     }
     
     public Boolean validarRangos(){
-        double rangoTalla = Double.parseDouble(txtTalla.getText().trim());
-        double valorPrecioCosto = Double.parseDouble(txtPrecioCosto.getText().trim());
-        double valorPrecioVenta = Double.parseDouble(txtPrecioVenta.getText().trim());
-        double valorImpuesto = Double.parseDouble(txtImpuesto.getText().trim());
-        String hileraError = "Se encontraron los siguientes errores:\n";
         boolean datosCorrectos = true;
-        
-        if(rangoTalla < 15 || rangoTalla > 45){
+        String hileraError = "Se encontraron los siguientes errores:\n";
+        if(rdbZapato.isSelected()){
+            double rangoTalla = Double.parseDouble(txtTalla.getText().trim());
+            if(rangoTalla < 19 || rangoTalla > 46){
             hileraError += "* Rango de la talla incorrecto\n";
+            datosCorrectos = false;
+        }
+        }
+        double valorPrecioCosto = Double.parseDouble(txtPrecioCosto.getValue().toString());
+        double valorPrecioVenta = Double.parseDouble(txtPrecioVenta.getValue().toString());
+        double valorImpuesto = Double.parseDouble(txtImpuesto.getValue().toString());
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        if(Calendar.getInstance().getTime().before(txtFechaIngreso.getDate())){
+            hileraError += "* La fecha seleccionada es mayor a la actual\n";
             datosCorrectos = false;
         }
         
@@ -693,10 +662,10 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtEmpresa;
     private com.toedter.calendar.JDateChooser txtFechaIngreso;
-    private javax.swing.JTextField txtImpuesto;
+    private javax.swing.JSpinner txtImpuesto;
     private javax.swing.JTextField txtMarca;
-    private javax.swing.JTextField txtPrecioCosto;
-    private javax.swing.JTextField txtPrecioVenta;
+    private javax.swing.JSpinner txtPrecioCosto;
+    private javax.swing.JSpinner txtPrecioVenta;
     private javax.swing.JTextField txtTalla;
     // End of variables declaration//GEN-END:variables
 }

@@ -339,7 +339,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_labCloseMouseClicked
 
     private void clickIngresar(){
-        if (txtNombreUsuario.getText() != "" || txtContrasena.getText() != "") {
+        if (!txtNombreUsuario.getText().equals("") && !txtContrasena.getText().equals("") && !txtNombreUsuario.getText().equals("Nombre de Usuario") && !txtContrasena.equals("********")) {
             BL_Usuario blUsuario = new BL_Usuario();
             BL_Logueo lg = new BL_Logueo();
             if (blUsuario.login(txtNombreUsuario.getText(), txtContrasena.getText())) {
