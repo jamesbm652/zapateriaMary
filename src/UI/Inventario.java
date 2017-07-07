@@ -85,7 +85,6 @@ public class Inventario extends javax.swing.JFrame {
         txt_Talla = new javax.swing.JTextField();
         txt_Marca = new javax.swing.JTextField();
         txt_Empresa = new javax.swing.JTextField();
-        txt_Precio = new javax.swing.JTextField();
         lbl_Categoria = new javax.swing.JLabel();
         cbx_Categoria = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
@@ -99,6 +98,7 @@ public class Inventario extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         labBuscarAvanzada = new javax.swing.JLabel();
+        txt_Precio = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
@@ -214,15 +214,6 @@ public class Inventario extends javax.swing.JFrame {
         txt_Empresa.setBorder(null);
         jpanBusquedaAvanzada.add(txt_Empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 47, 190, 20));
 
-        txt_Precio.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
-        txt_Precio.setBorder(null);
-        txt_Precio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PrecioKeyTyped(evt);
-            }
-        });
-        jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 45, 170, 20));
-
         lbl_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         lbl_Categoria.setForeground(new java.awt.Color(102, 102, 102));
         lbl_Categoria.setText("Categoría:");
@@ -273,6 +264,9 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
         jpanBusquedaAvanzada.add(labBuscarAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
+
+        txt_Precio.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
+        jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 170, -1));
 
         jPanel1.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 870, 120));
 
@@ -503,10 +497,6 @@ public class Inventario extends javax.swing.JFrame {
         validarNumeros(evt);
     }//GEN-LAST:event_txt_TallaKeyTyped
 
-    private void txt_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PrecioKeyTyped
-        validarNumeros(evt);
-    }//GEN-LAST:event_txt_PrecioKeyTyped
-
     private void tablaInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInventarioMouseClicked
         if (evt.getClickCount() == 2) {
             this.dispose();
@@ -628,8 +618,8 @@ public class Inventario extends javax.swing.JFrame {
         if (!txt_Talla.getText().equals("")) {
             talla = Double.parseDouble(txt_Talla.getText());
         }
-        if (!txt_Precio.getText().equals("")) {
-            precio = Double.parseDouble(txt_Precio.getText());
+        if (!txt_Precio.getValue().equals("0")) {
+            precio = Double.parseDouble(txt_Precio.getValue().toString());
         }
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Cualquiera")) ambos = true;
         if (cbx_TipoProducto.getSelectedItem().toString().equals("Bolso")) {
@@ -641,13 +631,19 @@ public class Inventario extends javax.swing.JFrame {
             fecha = new java.sql.Date(txt_Fecha.getDate().getTime());
         }
 
-        BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
         
-        listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
+        
+        if(talla == 0 || (talla >= 19 && talla <= 46)){
+            BL.BL_ManejadorProducto listaProductos = new BL_ManejadorProducto();
 
-        limpiarTabla(modelo);
+            listaProductos.BuscarPorFiltro(genero, txt_color.getText(), talla, txt_Marca.getText(), txt_Empresa.getText(), precio, fecha, categoria, tipoProducto, ambos);
 
-        cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
+            limpiarTabla(modelo);
+
+            cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
+        }else{
+            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
     private void filtro(String filtro) {
@@ -715,7 +711,7 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Empresa;
     private com.toedter.calendar.JDateChooser txt_Fecha;
     private javax.swing.JTextField txt_Marca;
-    private javax.swing.JTextField txt_Precio;
+    private javax.swing.JSpinner txt_Precio;
     private javax.swing.JTextField txt_Talla;
     private javax.swing.JTextField txt_color;
     // End of variables declaration//GEN-END:variables
