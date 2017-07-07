@@ -26,10 +26,6 @@ public class ReporteVentas extends javax.swing.JFrame {
      */
     public ReporteVentas() {
         initComponents();
-        
-        tablaReportes.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
-        
-        tablaReportes.setRowHeight((344 - tablaReportes.getTableHeader().getHeight()) / 5);
         jDateFechaInicio.setDate(new Date(new java.util.Date().getTime()));
         jDateFechaFInal.setDate(new Date(new java.util.Date().getTime()));
     }
