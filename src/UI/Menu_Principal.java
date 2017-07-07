@@ -10,6 +10,7 @@ import BL.BL_Logueo;
 import BL.BL_Usuario;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -28,6 +29,9 @@ public class Menu_Principal extends javax.swing.JFrame {
      */
     public Menu_Principal() {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        pack();
+        setSize(screenSize.width,screenSize.height);
         
         BL_Logueo lg = new BL_Logueo();
         if(!lg.isAdmin()){
@@ -75,7 +79,8 @@ public class Menu_Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
         setBackground(new java.awt.Color(175, 201, 201));
-        setMinimumSize(new java.awt.Dimension(690, 370));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setExtendedState(this.MAXIMIZED_BOTH);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(690, 370));
         setResizable(false);
@@ -343,7 +348,6 @@ public class Menu_Principal extends javax.swing.JFrame {
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void labSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labSalirMouseEntered
