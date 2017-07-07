@@ -29,6 +29,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     public ConfirmarFacturacion(BL_Factura fact, Facturar uifacturar) {
         initComponents();
         modeloDetalles = (DefaultTableModel) tablaDetalles.getModel();
+        tablaDetalles.getTableHeader().setReorderingAllowed(false);
         txt_TipoFactura.setText(fact.getTipoFactura());
         txt_NombreCompleto.setText(fact.getCliente().getNombreCompleto());
         txt_Cedula.setText(fact.getCliente().getCedula());
