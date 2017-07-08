@@ -71,7 +71,7 @@ public class DAO_Producto {
                     return false;
                 }
                 
-                ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia, PrecioVenta,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, fecha);
@@ -81,9 +81,10 @@ public class DAO_Producto {
                 ps.setDouble(6, producto.getPrecioCosto());
                 ps.setDouble(7, producto.getPrecioImpuesto());
                 ps.setDouble(8, producto.getPrecioGanancia());
-                ps.setString(9, producto.getDescripcion());
-                ps.setInt(10, producto.getCantidad());
-                ps.setInt(11, 0);
+                ps.setDouble(9, producto.getPrecioVenta());
+                ps.setString(10, producto.getDescripcion());
+                ps.setInt(11, producto.getCantidad());
+                ps.setInt(12, 0);
 
                 insertado = ps.executeUpdate();
 
@@ -106,7 +107,7 @@ public class DAO_Producto {
                 if ((ps.executeQuery().next())) {
                     return false;
                 }
-                ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ps.RETURN_GENERATED_KEYS);
+                ps = con.prepareStatement("Insert Into producto (CodigoUnico,FechaIngreso,Color,Marca,Empresa,PrecioCosto,PrecioImpuesto,PrecioGanancia, PrecioVenta,Descripcion,Cantidad,EsZapato) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ps.RETURN_GENERATED_KEYS);
                 ps.setString(1, producto.getCodigoUnico());
                 ps.setString(2, fecha);
                 ps.setString(3, producto.getColor());
@@ -115,9 +116,10 @@ public class DAO_Producto {
                 ps.setDouble(6, producto.getPrecioCosto());
                 ps.setDouble(7, producto.getPrecioImpuesto());
                 ps.setDouble(8, producto.getPrecioGanancia());
-                ps.setString(9, producto.getDescripcion());
-                ps.setInt(10, producto.getCantidad());
-                ps.setInt(11, 1);
+                ps.setDouble(9, producto.getPrecioVenta());
+                ps.setString(10, producto.getDescripcion());
+                ps.setInt(11, producto.getCantidad());
+                ps.setInt(12, 1);
 
                 ps.executeUpdate();
                 rs = ps.getGeneratedKeys();
@@ -191,7 +193,7 @@ public class DAO_Producto {
 
         try {
             st = this.con.createStatement();
-            rs = st.executeQuery("SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+            rs = st.executeQuery("SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.PrecioVenta, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
                     + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
                     + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1;");
@@ -209,6 +211,7 @@ public class DAO_Producto {
                 prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                 prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                 prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                prod.setPrecioVenta(rs.getDouble("PrecioVenta"));
                 prod.setDescripcion(rs.getString("Descripcion"));
                 prod.setCantidad(rs.getInt("Cantidad"));
                 prod.setEsZapato(true);
@@ -221,7 +224,7 @@ public class DAO_Producto {
 
                 manejador.Agregar(prod);
             }
-            rs = st.executeQuery("SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+            rs = st.executeQuery("SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.PrecioVenta, P.Descripcion, "
                     + "P.Cantidad, P.EsZapato FROM zapateriamary.producto P Where P.EsZapato = 0");
 
             while (rs.next()) {
@@ -236,6 +239,7 @@ public class DAO_Producto {
                 prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                 prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                 prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                prod.setPrecioVenta(rs.getDouble("PrecioVenta"));
                 prod.setDescripcion(rs.getString("Descripcion"));
                 prod.setCantidad(rs.getInt("Cantidad"));
                 prod.setEsZapato(false);
@@ -274,10 +278,10 @@ public class DAO_Producto {
             String query = "";
 
             if (!tipoProducto && genero.equals("") && tallaZapato == 0 && categoria.equals("")) {
-                query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+                query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.PrecioVenta, P.Descripcion, "
                         + "P.Cantidad, P.EsZapato FROM zapateriamary.producto as P Where P.EsZapato = 0";
             } else {
-                query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.Descripcion, "
+                query = "SELECT DISTINCT P.IdProducto, P.CodigoUnico, P.FechaIngreso, P.Color, P.Marca, P.Empresa, P.PrecioCosto, P.PrecioImpuesto, P.PrecioGanancia, P.PrecioVenta, P.Descripcion, "
                         + "P.Cantidad, P.EsZapato, ZC.Talla, ZC.Genero, CT.Descripcion as Categoria FROM zapateriamary.producto as P INNER JOIN zapateriamary.zapatotallacategoria as ZC on "
                         + "P.IdProducto = ZC.IdProducto INNER JOIN zapateriamary.categoriatalla as CT on "
                         + "ZC.IdCategoria = CT.IdCategoria Where P.EsZapato = 1";
@@ -302,7 +306,7 @@ public class DAO_Producto {
                 query += " And P.Empresa = '" + empresa + "'";
             }
             if (precio > 0) {
-                query += " And P.PrecioGanancia = " + precio + "";
+                query += " And P.PrecioVenta = " + precio + "";
             }
             if (fecha != null) {
                 query += " And P.FechaIngreso = '" + fecha.toString() + "'";
@@ -329,6 +333,7 @@ public class DAO_Producto {
                         prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                         prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                         prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                        prod.setPrecioVenta(rs.getDouble("PrecioVenta"));
                         prod.setDescripcion(rs.getString("Descripcion"));
                         prod.setCantidad(rs.getInt("Cantidad"));
                         prod.setEsZapato(true);
@@ -354,6 +359,7 @@ public class DAO_Producto {
                         prod.setPrecioCosto(rs.getDouble("PrecioCosto"));
                         prod.setPrecioImpuesto(rs.getDouble("PrecioImpuesto"));
                         prod.setPrecioGanancia(rs.getDouble("PrecioGanancia"));
+                        prod.setPrecioVenta(rs.getDouble("PrecioVenta"));
                         prod.setDescripcion(rs.getString("Descripcion"));
                         prod.setCantidad(rs.getInt("Cantidad"));
                         prod.setEsZapato(false);
@@ -430,7 +436,7 @@ public class DAO_Producto {
             if (prod.isEsZapato()) {
                 ps = con.prepareStatement("Update producto Set CodigoUnico = ?, FechaIngreso = ?, "
                         + " Color = ?, Marca = ?, Empresa = ?, PrecioCosto = ?, PrecioImpuesto = ?,"
-                        + " PrecioGanancia = ?, Descripcion = ?, Cantidad = ?, EsZapato = 1 Where IdProducto = ?");
+                        + " PrecioGanancia = ?, PrecioVenta = ?, Descripcion = ?, Cantidad = ?, EsZapato = 1 Where IdProducto = ?");
                 ps.setString(1, prod.getCodigoUnico());
                 ps.setString(2, fecha);
                 ps.setString(3, prod.getColor());
@@ -439,9 +445,10 @@ public class DAO_Producto {
                 ps.setDouble(6, prod.getPrecioCosto());
                 ps.setDouble(7, prod.getPrecioImpuesto());
                 ps.setDouble(8, prod.getPrecioGanancia());
-                ps.setString(9, prod.getDescripcion());
-                ps.setInt(10, prod.getCantidad());
-                ps.setInt(11, prod.getIdProducto());
+                ps.setDouble(9, prod.getPrecioVenta());
+                ps.setString(10, prod.getDescripcion());
+                ps.setInt(11, prod.getCantidad());
+                ps.setInt(12, prod.getIdProducto());
 
                 insertado = ps.executeUpdate();
                 if (insertado > 0) {
