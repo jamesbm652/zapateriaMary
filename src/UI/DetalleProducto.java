@@ -45,7 +45,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         double impuesto = Double.parseDouble(txtImpuesto.getValue().toString());
         double ganancia = Double.parseDouble(txtGanancia.getValue().toString());
         double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
-        txtPrecioVenta.setText("₡"+precioVenta);
+        txtPrecioVenta.setText(precioVenta+"");
     }
 
     private void verificarVentana(int ventana) {
@@ -207,6 +207,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtGanancia = new javax.swing.JSpinner();
         jSeparator11 = new javax.swing.JSeparator();
         txtPrecioVenta = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -454,6 +455,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         jPanel1.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 110, 10));
         jPanel1.add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 110, -1));
 
+        jLabel16.setText("₡");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 10, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 600, 390));
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
@@ -682,6 +686,7 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
