@@ -24,6 +24,7 @@ public class BL_Producto {
     private double precioCosto;
     private double precioImpuesto;
     private double precioGanancia;
+    private double precioVenta;
     private String descripcion;
     private int cantidad;
     private boolean esZapato;
@@ -97,6 +98,14 @@ public class BL_Producto {
 
     public double getPrecioCosto() {
         return precioCosto;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
     public void setPrecioCosto(double precioCosto) {
