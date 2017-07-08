@@ -734,6 +734,7 @@ public class Facturar extends javax.swing.JFrame {
         jPanel2.add(lbl_Descuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 470, -1, -1));
 
         txtDescuento.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 100.0d, 1.0d));
+        txtDescuento.setValue(0);
         txtDescuento.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 txtDescuentoStateChanged(evt);
@@ -996,7 +997,7 @@ public class Facturar extends javax.swing.JFrame {
                     if (listaDetalles.get(i).getIdProducto() == prod.getIdProducto()) {
                         listaDetalles.get(i).setCantidadVendida(listaDetalles.get(i).getCantidadVendida() + cantidad);
                         listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta()
-                                + (cantidad * prod.getPrecioGanancia()));
+                                + (cantidad * prod.getPrecioVenta()));
                         manejadorDetalles.setearLista(listaDetalles);
                         existente = true;
                     }
@@ -1009,7 +1010,7 @@ public class Facturar extends javax.swing.JFrame {
                     prodDetalle.setDescripcion(descDetalle);
                     prodDetalle.setCantidadVendida(cantidad);
                     prodDetalle.setIdProducto(prod.getIdProducto());
-                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioGanancia());
+                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioVenta());
                     prodDetalle.setPosicionOriginal(id);
                     manejadorDetalles.Agregar(prodDetalle);
                 }
