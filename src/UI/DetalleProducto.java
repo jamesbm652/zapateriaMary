@@ -99,6 +99,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtGanancia.setEnabled(valor);
         txtGanancia.setBackground(Color.WHITE);
         
+        txtCantidad.setEnabled(valor);
+        txtCantidad.setBackground(Color.WHITE);
+        
         txtEmpresa.setEditable(valor);
         txtEmpresa.setBackground(Color.WHITE);
         
@@ -145,7 +148,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtEmpresa.setText(lista.get(posicion).getEmpresa());
         txtImpuesto.setValue(lista.get(posicion).getPrecioImpuesto());
         txtPrecioCosto.setValue(lista.get(posicion).getPrecioCosto());
-        txtPrecioVenta.setText(lista.get(posicion).getPrecioGanancia() + "");
+        txtGanancia.setValue(lista.get(posicion).getPrecioGanancia());
+        txtPrecioVenta.setText(lista.get(posicion).getPrecioVenta() + "");
     }
 
     /**
