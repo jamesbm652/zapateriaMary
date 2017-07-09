@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,8 +11,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 import java.util.regex.PatternSyntaxException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -27,13 +26,13 @@ import javax.swing.table.TableRowSorter;
  * @author oscal
  */
 public class AdministrarUsuarios extends javax.swing.JFrame {
+
     ArrayList<BL_Usuario> listaTotalUsuarios = new ArrayList<BL_Usuario>();
     BL_ManejadorUsuario manejador = new BL_ManejadorUsuario();
     DefaultTableModel modelo;
     /**
-     * Creates new form AdministrarUsuarios
+     * Creates new form AdministrarUsu
      */
-    
     public AdministrarUsuarios() {
         initComponents();
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
@@ -55,8 +54,8 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 100), new java.awt.Dimension(0, 100), new java.awt.Dimension(32767, 100));
-        labMensajeAlUsuario = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        labClose = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -79,23 +78,23 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        labClose = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Mantenimiento de Usuarios");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
-        setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        filler1.setBackground(new java.awt.Color(0, 0, 0));
-        filler1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 0));
+        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labMensajeAlUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        labMensajeAlUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        labMensajeAlUsuario.setText(" ");
-        getContentPane().add(labMensajeAlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
+        labClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/close.png"))); // NOI18N
+        labClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labCloseMouseEntered(evt);
+            }
+        });
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 10, -1, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -178,9 +177,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tablaUsuarios);
-        if (tablaUsuarios.getColumnModel().getColumnCount() > 0) {
-            tablaUsuarios.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 580, 290));
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 200, 270, 10));
@@ -237,35 +233,55 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jLabel2.setText("Usuarios registrados en el sistema:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
-
-        jPanel4.setBackground(new java.awt.Color(0, 57, 66));
-        jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
-        jPanel4.setPreferredSize(new java.awt.Dimension(700, 74));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        labClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/close.png"))); // NOI18N
-        labClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labCloseMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labCloseMouseEntered(evt);
-            }
-        });
-        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 10, -1, 30));
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 50));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1370, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 730, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
+        this.dispose();
+        new Menu_Principal().setVisible(true);
+    }//GEN-LAST:event_labCloseMouseClicked
+
+    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
+        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_labCloseMouseEntered
+
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         filtro(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
+        /*
+        if(!manejador.BuscarAdministradores() && usuario.isAdministrador()){
+            JOptionPane.showMessageDialog(null, "Debe existir al menos un Administrador en el Sistema","Error",JOptionPane.ERROR_MESSAGE);
+            checkAdministrador.setSelected(true);
+        }
+        */
+    }//GEN-LAST:event_checkAdministradorActionPerformed
 
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         if(evt.getClickCount() == 2){
@@ -288,27 +304,14 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
-    private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
-        this.dispose();
-        new Menu_Principal().setVisible(true);
-    }//GEN-LAST:event_labCloseMouseClicked
-
-    private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
-        labClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_labCloseMouseEntered
-
-    private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkAdministradorActionPerformed
-
     private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
         int identificador;
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos.","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{
             BL_Usuario usuario = new BL_Usuario(txtNombreCompleto.getText().trim(),txtNombreUsuario.getText().trim(),txtContrasena.getText().trim(),checkAdministrador.isSelected());
                 if(usuario.agregarUsuario()){
-                    JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                    JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema.","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     manejador.Agregar(usuario);
                     txtNombreCompleto.setText("");
                     txtNombreUsuario.setText("");
@@ -317,10 +320,9 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                     cargarUsuariosEnTabla(listaTotalUsuarios);
                 }else{
-                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario","Error al agregar usuario",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario.","Error al agregar usuario",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
         }
-
     }//GEN-LAST:event_btnPanelAgregarMouseClicked
 
     private void btnPanelAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseEntered
@@ -377,7 +379,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
         } catch (PatternSyntaxException e) {
             txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
-            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha digitado un caracter inválido.", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -397,10 +399,10 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         }
     }
     
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnPanelAgregar;
     private javax.swing.JCheckBox checkAdministrador;
-    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -417,7 +419,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel labClose;
-    private javax.swing.JLabel labMensajeAlUsuario;
     private javax.swing.JLabel labTituloAccion;
     private javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtBuscar;

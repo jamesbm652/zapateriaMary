@@ -519,7 +519,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void btnGenerarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCodigoActionPerformed
         if (txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código", "Datos incompletos", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código.", "Datos incompletos", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         } else {
             txtCodigo.setText(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "");
             txtCodigo.setText(txtCodigo.getText() + "-" + new BL_Producto().obtenerSiguienteCodigo());
@@ -556,10 +556,10 @@ public class DetalleProducto extends javax.swing.JFrame {
         if (txtFechaIngreso.getDate() == null || txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
              || txtPrecioCosto.getValue().equals("") || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
             
-            JOptionPane.showMessageDialog(null, "Debe completar los datos", "Datos incompletos", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "Debe completar los datos solicitados.", "Datos incompletos", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         } else {
             if (!rdbZapato.isSelected() && !rdbBolso.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             } else {
                 if(validarRangos()){
                     BL_Producto producto = new BL_Producto();
@@ -598,20 +598,20 @@ public class DetalleProducto extends javax.swing.JFrame {
                         txtGanancia.setValue(0);
                         txtPrecioCosto.setValue(1);
                         txtPrecioVenta.setText("0.0");
-                        JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito al insertar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                        JOptionPane.showMessageDialog(null, "Producto insertado correctamente.", "Éxito al insertar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                         lista.add(producto);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al insertar el producto", "Error al insertar", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                        JOptionPane.showMessageDialog(null, "Error al insertar el producto.", "Error al insertar", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                     }
                 } else {
                     producto.setIdProducto(lista.get(posicion).getIdProducto());
                     if (producto.modificarProducto(posicion, lista)) {
                         lista.set(posicion, producto);
-                        JOptionPane.showMessageDialog(null, "Datos modificados", "Éxito al modificar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                        JOptionPane.showMessageDialog(null, "Datos modificados correctamente.", "Éxito al modificar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                         this.dispose();
                         new Inventario(lista).setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al modificar el producto", "Error al modificar", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/recursos/error.png"));
+                        JOptionPane.showMessageDialog(null, "Error al modificar el producto.", "Error al modificar", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/recursos/error.png"));
                     }
 
                 }
@@ -665,7 +665,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         if(rdbZapato.isSelected()){
             double rangoTalla = Double.parseDouble(txtTalla.getText().trim());
             if(rangoTalla < 19 || rangoTalla > 46){
-            hileraError += "* Rango de la talla incorrecto\n";
+            hileraError += "* Rango de la talla incorrecto.\n";
             datosCorrectos = false;
         }
         }
@@ -676,12 +676,12 @@ public class DetalleProducto extends javax.swing.JFrame {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         if(Calendar.getInstance().getTime().before(txtFechaIngreso.getDate())){
-            hileraError += "* La fecha seleccionada es mayor a la actual\n";
+            hileraError += "* La fecha seleccionada es mayor a la actual.\n";
             datosCorrectos = false;
         }
         
         if(valorPrecioCosto < 0){
-            hileraError += "* Precio de costo incorrecto\n";
+            hileraError += "* Precio de costo incorrecto.\n";
             datosCorrectos = false;
         }
         /*
@@ -691,7 +691,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         }
         */
         if(valorImpuesto < 0) {
-            hileraError += "* Precio con impuesto incorrecto\n";
+            hileraError += "* Precio con impuesto incorrecto.\n";
             datosCorrectos = false;
         }
         

@@ -368,7 +368,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     public void validarInserción(BL_Factura factura, Facturar uifacturar){
         
         if (factura.insertarFactura()) {
-                    JOptionPane.showMessageDialog(this, "La factura se ha ingresado con éxito","Facturación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                    JOptionPane.showMessageDialog(this, "La factura se ha ingresado con éxito.","Facturación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     this.dispose();
                     uifacturar.dispose();
                     uifacturar = new Facturar();

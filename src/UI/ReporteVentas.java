@@ -1047,27 +1047,32 @@ public class ReporteVentas extends javax.swing.JFrame {
         
         if(jDateFechaInicio.getDate() == null && jDateFechaFInal.getDate() == null){
             JOptionPane.showMessageDialog(null, "Debe ingresar ambas fechas\npara poder realizar la búsqueda.","Datos incompletos",JOptionPane.WARNING_MESSAGE ,new ImageIcon("src/recursos/warning.png"));
-        }else if(jDateFechaFInal.getDate() == null){
-            JOptionPane.showMessageDialog(null, "Debe ingresar una fecha final\npara poder realizar la búsqueda.","Datos incompletos",JOptionPane.WARNING_MESSAGE ,new ImageIcon("src/recursos/warning.png"));
-        }else if(jDateFechaInicio.getDate() == null){
-            JOptionPane.showMessageDialog(null, "Debe ingresar una fecha de inicio\npara poder realizar la búsqueda.","Datos incompletos",JOptionPane.WARNING_MESSAGE ,new ImageIcon("src/recursos/warning.png"));
-        }
-
-        if(jDateFechaInicio.getDate().after(jDateFechaFInal.getDate())){
-            JOptionPane.showMessageDialog(null, "La fecha inicial es mayor que la fecha final","Rango de fechas incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }else{
-            manejadorFacturas.EliminarTodos();
-            reporte.vaciarListas();
-            manejadorFacturas.cargarFacturasPorFecha(formato.format(jDateFechaInicio.getDate().getTime()), formato.format(jDateFechaFInal.getDate().getTime()));
-            listaFacturas = manejadorFacturas.ObtenerLista();
-            separarListasSegunTipo();
-            limpiarTablas();
-            cargarProductosEnTabla("Contado", reporte.getFacturasContado());
-            cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
-            cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
-            cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
+            if(jDateFechaFInal.getDate() == null){
+                JOptionPane.showMessageDialog(null, "Debe ingresar una fecha final\npara poder realizar la búsqueda.","Datos incompletos",JOptionPane.WARNING_MESSAGE ,new ImageIcon("src/recursos/warning.png"));
+            }
 
-            llenarInformacion();
+            if(jDateFechaInicio.getDate() == null){
+                JOptionPane.showMessageDialog(null, "Debe ingresar una fecha de inicio\npara poder realizar la búsqueda.","Datos incompletos",JOptionPane.WARNING_MESSAGE ,new ImageIcon("src/recursos/warning.png"));
+            } 
+        } 
+        if(jDateFechaInicio.getDate() != null && jDateFechaFInal.getDate() != null){
+            if(jDateFechaInicio.getDate().after(jDateFechaFInal.getDate())){
+                JOptionPane.showMessageDialog(null, "La fecha inicial es mayor que la fecha final.","Rango de fechas incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            }else{
+                manejadorFacturas.EliminarTodos();
+                reporte.vaciarListas();
+                manejadorFacturas.cargarFacturasPorFecha(formato.format(jDateFechaInicio.getDate().getTime()), formato.format(jDateFechaFInal.getDate().getTime()));
+                listaFacturas = manejadorFacturas.ObtenerLista();
+                separarListasSegunTipo();
+                limpiarTablas();
+                cargarProductosEnTabla("Contado", reporte.getFacturasContado());
+                cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
+                cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
+                cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
+
+                llenarInformacion();
+            }
         }
     }//GEN-LAST:event_btnBuscarMouseClicked
 
