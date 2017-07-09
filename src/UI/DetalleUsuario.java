@@ -221,19 +221,20 @@ public class DetalleUsuario extends javax.swing.JFrame {
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{            
-        
             usuario.setIdUsuario(listaTotalUsuarios.get(identificador).getIdUsuario());
-            if(JOptionPane.showConfirmDialog(null, "¿Desea actualizar los datos?", "Actualizar datos", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
-                usuario.setNombreCompleto(txtNombreCompleto.getText().trim());
-                usuario.setNombreUsuario(txtNombreUsuario.getText().trim());
-                usuario.setContrasena(txtContrasena.getText().trim());
-                
-                if(checkAdministrador.isSelected()){
-                    usuario.setAdministrador(true);
-                }else{
-                    usuario.setAdministrador(false);
-                }
-                if (manejador.BuscarAdministradores(usuario.getIdUsuario())) {
+            if (!checkAdministrador.isSelected() && !manejador.BuscarAdministradores(usuario.getIdUsuario())) {
+                JOptionPane.showMessageDialog(null, "El usuario que desea modificar es el único Administrador y debe existir al menos uno","Error al modificar",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            }else{
+                if(JOptionPane.showConfirmDialog(null, "¿Desea actualizar los datos?", "Actualizar datos", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
+                    usuario.setNombreCompleto(txtNombreCompleto.getText().trim());
+                    usuario.setNombreUsuario(txtNombreUsuario.getText().trim());
+                    usuario.setContrasena(txtContrasena.getText().trim());
+
+                    if(checkAdministrador.isSelected()){
+                        usuario.setAdministrador(true);
+                    }else{
+                        usuario.setAdministrador(false);
+                    }
                     if(sesion.getIdUsuario() == usuario.getIdUsuario() && sesion.isAdmin() && !usuario.isAdministrador()){
                         if(JOptionPane.showConfirmDialog(null, "¿Desea dejar de ser Administrador?", "Confirmar modificación Administrador", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                             if(usuario.modificarUsuario()){
@@ -266,8 +267,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                         }
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null, "El usuario que desea modificar es el único Administrador y debe existir al menos uno","Error al modificar",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+
                 }
             }
         }
