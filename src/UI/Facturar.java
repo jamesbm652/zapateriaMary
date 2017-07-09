@@ -798,7 +798,7 @@ public class Facturar extends javax.swing.JFrame {
             trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
         } catch (PatternSyntaxException e) {
             txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
-            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha digitado un caracter inválido.", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
         }
 
         //Validacion para que actualice la cantidad en la lista de productos
@@ -966,7 +966,7 @@ public class Facturar extends javax.swing.JFrame {
 
             cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
         }else{
-            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto.", "Rango incorrecto", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
@@ -1044,10 +1044,10 @@ public class Facturar extends javax.swing.JFrame {
                 cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista());
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelAgregarMouseClicked
 
@@ -1094,7 +1094,7 @@ public class Facturar extends javax.swing.JFrame {
 
             txt_PrecioTotal.setText("₡ " + totalPagar + "");
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelEliminarMouseClicked
 
@@ -1145,9 +1145,9 @@ public class Facturar extends javax.swing.JFrame {
         }
 
         if (tipoFactura.equals("Apartado") && (telefHabitacion.equals("") && telefCelular.equals(""))) {
-            JOptionPane.showMessageDialog(this, "Para el tipo de factura Apartado, debe de introducir al menos un telefono");
+            JOptionPane.showMessageDialog(this, "Para el tipo de factura Apartado,\ndebe de introducir al menos un teléfono.");
         } else if (tipoFactura.equals("Crédito") && ((telefHabitacion.equals("") && !telefCelular.equals("")) || (!telefHabitacion.equals("") && telefCelular.equals("")) || (telefHabitacion.equals("") && telefCelular.equals("")))) {
-            JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito, debe de introducir los dos teléfonos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito,\ndebe de introducir los dos teléfonos.","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         } else {
             if (!tipoFactura.equals("") && !comprador.equals("") && !direccion.equals("")
                     && !cedula.equals("") && manejadorDetalles.ObtenerLista().size() > 0) {
@@ -1161,15 +1161,15 @@ public class Facturar extends javax.swing.JFrame {
                 
             } else if ((tipoFactura.equals("") || comprador.equals("") || direccion.equals("")
                     || cedula.equals("")) && manejadorDetalles.ObtenerLista().size() == 0) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios y productos a la factura", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios y productos a la factura.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             } else if (tipoFactura.equals("") || comprador.equals("") || direccion.equals("")
                     || cedula.equals("") && manejadorDetalles.ObtenerLista().size() > 0) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios "
-                        + "del cliente", "Datos incompletos", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+                        + "del cliente.", "Datos incompletos", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
             } else {
                 if (!tipoFactura.equals("") && !comprador.equals("") && !direccion.equals("")
                         && !cedula.equals("") && manejadorDetalles.ObtenerLista().size() == 0) {
-                    JOptionPane.showMessageDialog(null, "Debe ingresar productos a la factura ",
+                    JOptionPane.showMessageDialog(null, "Debe ingresar productos a la factura.",
                              "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
             }

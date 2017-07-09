@@ -260,6 +260,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
 
                         this.dispose();
+                        ventanaAnterior.dispose();
                         ventanaAnterior = new AdministrarUsuarios();
                         ventanaAnterior.setVisible(true);
                     }else{
@@ -289,11 +290,12 @@ public class DetalleUsuario extends javax.swing.JFrame {
 
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                             this.dispose();
+                            ventanaAnterior.dispose();
                             ventanaAnterior = new AdministrarUsuarios();
                             ventanaAnterior.setVisible(true);
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error al eliminar",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador \ny no existen más administradores en el sistema","Error al eliminar",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                     }
                 }else{
                     if(manejador.BuscarAdministradores(usuario.getIdUsuario())){

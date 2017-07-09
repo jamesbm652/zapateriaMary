@@ -384,7 +384,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             this.dispose();
             new ReporteVentas().setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "No tienes los permisos para ingresar\n a esta opción, favor comunicar al\nadministrador para solicitar el acceso","Acceso denegado",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "No tienes los permisos para ingresar\n a esta opción, comuniquelo al\nadministrador para solicitar el acceso.","Acceso denegado",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
         
     }//GEN-LAST:event_panelBtnReportesMouseClicked
@@ -410,7 +410,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             this.dispose();
             new AdministrarUsuarios().setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "No tienes los permisos para ingresar\n a esta opción, favor comunicar al\nadministrador para solicitar el acceso","Acceso denegado",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "No tienes los permisos para ingresar\n a esta opción, comuniquelo al\nadministrador para solicitar el acceso.","Acceso denegado",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
     }//GEN-LAST:event_panelBtnAdministrarMouseClicked
 
