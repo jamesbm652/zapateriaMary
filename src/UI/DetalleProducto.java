@@ -48,6 +48,8 @@ public class DetalleProducto extends javax.swing.JFrame {
       
         txtPrecioVenta.setText(precioVenta+"");
 
+    }
+    
     private void verificarVentana(int ventana) {
         if (ventana == 1) {
             habilitarCampos(true);

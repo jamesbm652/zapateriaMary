@@ -684,7 +684,7 @@ public class Facturar extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Tipo de factura:");
+        jLabel2.setText("Tipo factura:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, -1, -1));
 
         tipo1.setBackground(new java.awt.Color(255, 255, 255));
