@@ -6,7 +6,6 @@
 package BL;
 
 import DAO.DAO_Producto;
-import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -22,10 +21,10 @@ public class BL_Producto {
     private String color;
     private String marca;
     private String empresa;
-    private int precioCosto;
+    private double precioCosto;
     private double precioImpuesto;
     private double precioGanancia;
-    private int precioVenta;
+    private double precioVenta;
     private String descripcion;
     private int cantidad;
     private boolean esZapato;
@@ -34,7 +33,7 @@ public class BL_Producto {
     public BL_Producto() {
     }
 
-    public BL_Producto(int idProducto, String codigoUnico, Date fechaIngreso, String color, String marca, String empresa, int precioCosto, double precioImpuesto, double precioGanancia, int precioVenta, String descripcion, int cantidad, boolean esZapato, BL_TallaZapato tallaZapato) {
+    public BL_Producto(int idProducto, String codigoUnico, Date fechaIngreso, String color, String marca, String empresa, double precioCosto, double precioImpuesto, double precioGanancia, String descripcion, int cantidad, boolean esZapato) {
         this.idProducto = idProducto;
         this.codigoUnico = codigoUnico;
         this.fechaIngreso = fechaIngreso;
@@ -44,17 +43,10 @@ public class BL_Producto {
         this.precioCosto = precioCosto;
         this.precioImpuesto = precioImpuesto;
         this.precioGanancia = precioGanancia;
-        this.precioVenta = precioVenta;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.esZapato = esZapato;
-        this.tallaZapato = tallaZapato;
     }
-
-    
-    
-
-    
 
     public int getIdProducto() {
         return idProducto;
@@ -104,11 +96,19 @@ public class BL_Producto {
         this.empresa = empresa;
     }
 
-    public int getPrecioCosto() {
+    public double getPrecioCosto() {
         return precioCosto;
     }
 
-    public void setPrecioCosto(int precioCosto) {
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    public void setPrecioCosto(double precioCosto) {
         this.precioCosto = precioCosto;
     }
 
@@ -127,18 +127,6 @@ public class BL_Producto {
     public void setPrecioGanancia(double precioGanancia) {
         this.precioGanancia = precioGanancia;
     }
-
-    
-
-    public int getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(int precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    
 
     public String getDescripcion() {
         return descripcion;

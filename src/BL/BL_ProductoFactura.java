@@ -13,14 +13,14 @@ public class BL_ProductoFactura {
     private int idProductoFactura;
     private int idProducto;
     private int cantidadVendida;
-    private int precioVenta;
+    private double precioVenta;
     private String descripcion;
     private int posicionOriginal;
 
     public BL_ProductoFactura() {
     }
 
-    public BL_ProductoFactura(int idProductoFactura, int idProducto, int cantidadVendida, int precioVenta, String descripcion) {
+    public BL_ProductoFactura(int idProductoFactura, int idProducto, int cantidadVendida, double precioVenta, String descripcion) {
         this.idProductoFactura = idProductoFactura;
         this.idProducto = idProducto;
         this.cantidadVendida = cantidadVendida;
@@ -52,11 +52,11 @@ public class BL_ProductoFactura {
         this.cantidadVendida = cantidadVendida;
     }
 
-    public int getPrecioVenta() {
+    public double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(int precioVenta) {
+    public void setPrecioVenta(double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
