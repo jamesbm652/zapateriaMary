@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -149,10 +150,16 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         });
         tablaDetalles.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane2.setViewportView(tablaDetalles);
+        if (tablaDetalles.getColumnModel().getColumnCount() > 0) {
+            tablaDetalles.getColumnModel().getColumn(0).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(1).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(2).setResizable(false);
+            tablaDetalles.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 234, 490, 153));
 
-        btnAceptar.setBackground(new java.awt.Color(0, 57, 66));
+        btnAceptar.setBackground(new java.awt.Color(0, 93, 107));
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,7 +193,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
 
         jPanel6.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 150, 50));
 
-        btnCancelar.setBackground(new java.awt.Color(0, 57, 66));
+        btnCancelar.setBackground(new java.awt.Color(0, 93, 107));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -223,17 +230,17 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Cédula: ");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 98, -1, -1));
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Cliente:");
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 129, -1, -1));
+        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Dirección: ");
-        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 165, -1, -1));
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 165, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -283,7 +290,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Tipo factura: ");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 62, -1, -1));
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         txt_TipoFactura.setEditable(false);
         txt_TipoFactura.setBackground(new java.awt.Color(255, 255, 255));
@@ -307,7 +314,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Teléfono hab: ");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 199, -1, -1));
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
         jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 120, -1));
         jPanel6.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 370, 10));
         jPanel6.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 120, 10));
@@ -361,7 +368,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     public void validarInserción(BL_Factura factura, Facturar uifacturar){
         
         if (factura.insertarFactura()) {
-                    JOptionPane.showMessageDialog(this, "La factura se ha ingresado con éxito");
+                    JOptionPane.showMessageDialog(this, "La factura se ha ingresado con éxito","Facturación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     this.dispose();
                     uifacturar.dispose();
                     uifacturar = new Facturar();

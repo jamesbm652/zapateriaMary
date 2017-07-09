@@ -96,7 +96,6 @@
                     <Column editable="false" title="HiddenIdOriginal" type="java.lang.Object"/>
                   </Table>
                 </Property>
-                <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
@@ -151,7 +150,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="1080" y="130" width="-1" height="-1"/>
+              <AbsoluteConstraints x="1100" y="30" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -167,7 +166,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="1200" y="130" width="130" height="30"/>
+              <AbsoluteConstraints x="1210" y="30" width="130" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -242,7 +241,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="960" y="630" width="-1" height="-1"/>
+              <AbsoluteConstraints x="1000" y="630" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

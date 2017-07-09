@@ -10,6 +10,7 @@ import BL.BL_ManejadorUsuario;
 import BL.BL_Usuario;
 import java.awt.Cursor;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -211,14 +212,14 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
         // TODO add your handling code here:
         if(!manejador.BuscarAdministradores(usuario.getIdUsuario()) && usuario.isAdministrador()){
-            JOptionPane.showMessageDialog(null, "Debe existir al menos un Administrador en el Sistema","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe existir al menos un Administrador en el Sistema","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             checkAdministrador.setSelected(true);
         }
     }//GEN-LAST:event_checkAdministradorActionPerformed
 
     private void btnPanelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelModificarMouseClicked
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{            
         
             usuario.setIdUsuario(listaTotalUsuarios.get(identificador).getIdUsuario());
@@ -236,7 +237,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 if(sesion.getIdUsuario() == usuario.getIdUsuario() && sesion.isAdmin() && !usuario.isAdministrador()){
                     if(JOptionPane.showConfirmDialog(null, "¿Desea dejar de ser Administrador?", "Confirmar modificación Administrador", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                         if(usuario.modificarUsuario()){
-                            JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                             manejador.Modificar(identificador, usuario);
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
                             
@@ -245,7 +246,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             this.dispose();
                             new Menu_Principal().setVisible(true);
                         }else{
-                            JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                         }
                     }else{
                         checkAdministrador.setSelected(true);
@@ -262,7 +263,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                         ventanaAnterior = new AdministrarUsuarios();
                         ventanaAnterior.setVisible(true);
                     }else{
-                        JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                     }
                 }
             }
@@ -284,7 +285,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                     if(manejador.BuscarAdministradores(usuario.getIdUsuario())){
                         if(usuario.eliminarUsuario()){
                             manejador.Eliminar(identificador);
-                            JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
 
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                             this.dispose();
@@ -292,14 +293,14 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             ventanaAnterior.setVisible(true);
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error al eliminar",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                     }
                 }else{
                     if(manejador.BuscarAdministradores(usuario.getIdUsuario())){
                         if(JOptionPane.showConfirmDialog(null, "¿Desea eliminar su cuenta?\n" + "Se cerrará la sesión y no podra ingresar con sus credenciales en otra ocasión", "Confirmar eliminación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                             if(usuario.eliminarUsuario()){
                                 manejador.Eliminar(identificador); 
-                                JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                                 
                                 listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                                         
@@ -308,7 +309,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             }
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                     }
                 }
             }

@@ -38,6 +38,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 import BL.BL_Factura;
 import BL.BL_TelefonoCliente;
+import javax.swing.ImageIcon;
 import java.util.regex.PatternSyntaxException;
 
 /**
@@ -272,7 +273,7 @@ public class Facturar extends javax.swing.JFrame {
         txt_Cantidad = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        cbx_Cedula = new javax.swing.JComboBox<>();
+        cbx_Cedula = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInventario = new javax.swing.JTable();
         jpanBusquedaAvanzada = new javax.swing.JPanel();
@@ -287,9 +288,9 @@ public class Facturar extends javax.swing.JFrame {
         txt_Marca = new javax.swing.JTextField();
         txt_Empresa = new javax.swing.JTextField();
         lbl_Categoria1 = new javax.swing.JLabel();
-        cbx_Categoria = new javax.swing.JComboBox<>();
+        cbx_Categoria = new javax.swing.JComboBox<String>();
         jLabel18 = new javax.swing.JLabel();
-        cbx_TipoProducto = new javax.swing.JComboBox<>();
+        cbx_TipoProducto = new javax.swing.JComboBox<String>();
         txt_Fecha = new com.toedter.calendar.JDateChooser();
         txt_color = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -322,7 +323,7 @@ public class Facturar extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        cbx_Senor = new javax.swing.JComboBox<>();
+        cbx_Senor = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -362,7 +363,6 @@ public class Facturar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaDetalles.setCellSelectionEnabled(true);
         tablaDetalles.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane2.setViewportView(tablaDetalles);
         if (tablaDetalles.getColumnModel().getColumnCount() > 0) {
@@ -379,12 +379,12 @@ public class Facturar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 130, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("0");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 130, 130, 30));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 30, 130, 30));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
@@ -407,7 +407,7 @@ public class Facturar extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Total:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 630, -1, -1));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 630, -1, -1));
 
         txt_PrecioTotal.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txt_PrecioTotal.setForeground(new java.awt.Color(255, 0, 0));
@@ -535,7 +535,7 @@ public class Facturar extends javax.swing.JFrame {
 
         cbx_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         cbx_Categoria.setForeground(new java.awt.Color(51, 51, 51));
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Ninos", "Jovenes", "Adulto" }));
         jpanBusquedaAvanzada.add(cbx_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 90, -1));
 
         jLabel18.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -545,7 +545,7 @@ public class Facturar extends javax.swing.JFrame {
 
         cbx_TipoProducto.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         cbx_TipoProducto.setForeground(new java.awt.Color(51, 51, 51));
-        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Zapato", "Bolso" }));
+        cbx_TipoProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Zapato", "Bolso" }));
         cbx_TipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_TipoProductoActionPerformed(evt);
@@ -588,7 +588,7 @@ public class Facturar extends javax.swing.JFrame {
         jpanBusquedaAvanzada.add(labBuscarAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
 
         txt_Precio.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        txt_Precio.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        txt_Precio.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
         jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 160, -1));
 
         jPanel2.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 710, 120));
@@ -819,7 +819,7 @@ public class Facturar extends javax.swing.JFrame {
 
         if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
     }
 
@@ -966,7 +966,7 @@ public class Facturar extends javax.swing.JFrame {
 
             cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
         }else{
-            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
@@ -1044,10 +1044,10 @@ public class Facturar extends javax.swing.JFrame {
                 cargarProductosEnTablaDetalles(manejadorDetalles.ObtenerLista());
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No existe la cantidad solicitada de productos", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelAgregarMouseClicked
 
@@ -1094,7 +1094,7 @@ public class Facturar extends javax.swing.JFrame {
 
             txt_PrecioTotal.setText("₡ " + totalPagar + "");
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelEliminarMouseClicked
 
@@ -1147,7 +1147,7 @@ public class Facturar extends javax.swing.JFrame {
         if (tipoFactura.equals("Apartado") && (telefHabitacion.equals("") && telefCelular.equals(""))) {
             JOptionPane.showMessageDialog(this, "Para el tipo de factura Apartado, debe de introducir al menos un telefono");
         } else if (tipoFactura.equals("Crédito") && ((telefHabitacion.equals("") && !telefCelular.equals("")) || (!telefHabitacion.equals("") && telefCelular.equals("")) || (telefHabitacion.equals("") && telefCelular.equals("")))) {
-            JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito, debe de introducir los dos teléfonos");
+            JOptionPane.showMessageDialog(this, "Para el tipo de factura Crédito, debe de introducir los dos teléfonos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         } else {
             if (!tipoFactura.equals("") && !comprador.equals("") && !direccion.equals("")
                     && !cedula.equals("") && manejadorDetalles.ObtenerLista().size() > 0) {
@@ -1161,16 +1161,16 @@ public class Facturar extends javax.swing.JFrame {
                 
             } else if ((tipoFactura.equals("") || comprador.equals("") || direccion.equals("")
                     || cedula.equals("")) && manejadorDetalles.ObtenerLista().size() == 0) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios y productos a la factura", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios y productos a la factura", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             } else if (tipoFactura.equals("") || comprador.equals("") || direccion.equals("")
                     || cedula.equals("") && manejadorDetalles.ObtenerLista().size() > 0) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos necesarios "
-                        + "del cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                        + "del cliente", "Datos incompletos", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
             } else {
                 if (!tipoFactura.equals("") && !comprador.equals("") && !direccion.equals("")
                         && !cedula.equals("") && manejadorDetalles.ObtenerLista().size() == 0) {
                     JOptionPane.showMessageDialog(null, "Debe ingresar productos a la factura ",
-                             "Error", JOptionPane.ERROR_MESSAGE);
+                             "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
             }
         }
