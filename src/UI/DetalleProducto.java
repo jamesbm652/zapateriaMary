@@ -9,6 +9,7 @@ import BL.BL_Producto;
 import BL.BL_TallaZapato;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -44,8 +45,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         double precioCosto = Double.parseDouble(txtPrecioCosto.getValue().toString());
         double impuesto = Double.parseDouble(txtImpuesto.getValue().toString());
         double ganancia = Double.parseDouble(txtGanancia.getValue().toString());
-        double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
-        txtPrecioVenta.setText(precioVenta+"");
+        Double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
+        int precio = precioVenta.intValue();
+        txtPrecioVenta.setText(precio+"");
     }
 
     private void verificarVentana(int ventana) {
@@ -545,9 +547,11 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setMarca(txtMarca.getText().trim());
                 producto.setEmpresa(txtEmpresa.getText().trim());
                 producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getValue().toString()));
-                producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getValue().toString()));
+                Double precioCos = Double.parseDouble(txtPrecioCosto.getValue().toString());
+                producto.setPrecioCosto(precioCos.intValue());
                 producto.setPrecioGanancia(Double.parseDouble(txtGanancia.getValue().toString()));
-                producto.setPrecioVenta(Double.parseDouble(txtPrecioVenta.getText()));
+                Double precioVen = Double.parseDouble(txtPrecioVenta.getText());
+                producto.setPrecioVenta(precioVen.intValue());
                 producto.setDescripcion(txtDescripcion.getText().trim());
                 producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
                 producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());

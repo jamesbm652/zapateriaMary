@@ -96,7 +96,7 @@ public class DAO_Factura {
                 ps.setInt(1, factura.getProductosFactura().get(i).getIdProducto());
                 ps.setInt(2, facturaIngresada);
                 ps.setInt(3, factura.getProductosFactura().get(i).getCantidadVendida());
-                ps.setDouble(4, factura.getProductosFactura().get(i).getPrecioVenta());
+                ps.setInt(4, factura.getProductosFactura().get(i).getPrecioVenta());
                 ps.setString(5, factura.getProductosFactura().get(i).getDescripcion());
                 completado = ps.executeUpdate();
             }
@@ -162,7 +162,7 @@ public class DAO_Factura {
                 rsMonto = psM.executeQuery();
 
                 if (rsMonto.next()) {
-                    factura.setMontoAbonado(rsMonto.getDouble(1));
+                    factura.setMontoAbonado(rsMonto.getInt(1));
                 } else {
                     factura.setMontoAbonado(0);
                 }
@@ -176,7 +176,7 @@ public class DAO_Factura {
                     BL_ProductoFactura prodFactura = new BL_ProductoFactura();
 
                     prodFactura.setCantidadVendida(rsDetalles.getInt(1));
-                    prodFactura.setPrecioVenta(rsDetalles.getDouble(2));
+                    prodFactura.setPrecioVenta(rsDetalles.getInt(2));
                     prodFactura.setDescripcion(rsDetalles.getString(3));
                     detallesFactura.Agregar(prodFactura);
                 }
@@ -190,7 +190,7 @@ public class DAO_Factura {
         }
     }
 
-    public void abonarAFactura(int idFactura, double abono) {
+    public void abonarAFactura(int idFactura, int abono) {
         conexion();
 
         PreparedStatement ps = null;
@@ -203,7 +203,7 @@ public class DAO_Factura {
             ps = con.prepareStatement("Insert into abono (idFactura, Fecha, MontoAbonar) Values (?,?,?)");
             ps.setInt(1, idFactura);
             ps.setString(2, fechaActual);
-            ps.setDouble(3, abono);
+            ps.setInt(3, abono);
 
             ps.executeUpdate();
 
@@ -270,7 +270,7 @@ public class DAO_Factura {
                 rsMonto = psM.executeQuery();
 
                 if (rsMonto.next()) {
-                    factura.setMontoAbonado(rsMonto.getDouble(1));
+                    factura.setMontoAbonado(rsMonto.getInt(1));
                 } else {
                     factura.setMontoAbonado(0);
                 }
@@ -284,7 +284,7 @@ public class DAO_Factura {
                     BL_ProductoFactura prodFactura = new BL_ProductoFactura();
 
                     prodFactura.setCantidadVendida(rsDetalles.getInt(1));
-                    prodFactura.setPrecioVenta(rsDetalles.getDouble(2));
+                    prodFactura.setPrecioVenta(rsDetalles.getInt(2));
                     prodFactura.setDescripcion(rsDetalles.getString(3));
                     detallesFactura.Agregar(prodFactura);
                 }
@@ -315,6 +315,7 @@ public class DAO_Factura {
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cerrarConexion();
     }
 
     public void cargarFacturasPorFiltro(BL_ManejadorFacturas mFacturas, Date fechaInicial, Date fechaFinal, 
@@ -399,7 +400,7 @@ public class DAO_Factura {
                 rsMonto = psM.executeQuery();
 
                 if (rsMonto.next()) {
-                    factura.setMontoAbonado(rsMonto.getDouble(1));
+                    factura.setMontoAbonado(rsMonto.getInt(1));
                 } else {
                     factura.setMontoAbonado(0);
                 }
@@ -413,7 +414,7 @@ public class DAO_Factura {
                     BL_ProductoFactura prodFactura = new BL_ProductoFactura();
 
                     prodFactura.setCantidadVendida(rsDetalles.getInt(1));
-                    prodFactura.setPrecioVenta(rsDetalles.getDouble(2));
+                    prodFactura.setPrecioVenta(rsDetalles.getInt(2));
                     prodFactura.setDescripcion(rsDetalles.getString(3));
                     detallesFactura.Agregar(prodFactura);
                 }

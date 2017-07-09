@@ -162,7 +162,7 @@ public class Abonar extends javax.swing.JFrame {
             
             modeloDetalles.addRow(fila);
             
-            txtTotalAPagar.setText((Double.parseDouble(txtTotalAPagar.getText()) + listaParaMostrar.get(i).getPrecioVenta()) + "");
+            txtTotalAPagar.setText((Integer.parseInt(txtTotalAPagar.getText()) + listaParaMostrar.get(i).getPrecioVenta()) + "");
         }
         txtTotalAPagar.setBackground(Color.WHITE);
     }
@@ -679,7 +679,7 @@ public class Abonar extends javax.swing.JFrame {
             cargarProductosEnTablaDetalles(facturaSeleccionada.getProductosFactura());
             
             
-            txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
+            txtRestante.setText((Integer.parseInt(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
             txtRestante.setBackground(Color.WHITE);
             setColorCampos();
         }
@@ -727,10 +727,10 @@ public class Abonar extends javax.swing.JFrame {
     
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
         if(!txtMontoAbonar.getText().equals("")){
-        if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
+        if(Integer.parseInt(txtMontoAbonar.getText()) <= Integer.parseInt(txtRestante.getText())){
             if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?") == JOptionPane.YES_OPTION){
                 
-                if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
+                if(Integer.parseInt(txtMontoAbonar.getText()) == Integer.parseInt(txtRestante.getText())){
                     facturaSeleccionada.cancelarFactura();
                     listaFacturas.remove(facturaSeleccionada);
                     
@@ -741,9 +741,9 @@ public class Abonar extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","",JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","",JOptionPane.INFORMATION_MESSAGE);
-                    facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
-                    facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Double.parseDouble(txtMontoAbonar.getText()));
-                    txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
+                    facturaSeleccionada.abonarAFactura(Integer.parseInt(txtMontoAbonar.getText()));
+                    facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Integer.parseInt(txtMontoAbonar.getText()));
+                    txtRestante.setText((Integer.parseInt(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
                     txtMontoAbonar.setText("");
                 }
             }
@@ -797,7 +797,7 @@ public class Abonar extends javax.swing.JFrame {
 
     private void txtMontoAbonarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoAbonarKeyReleased
         if(!txtMontoAbonar.getText().equals("")){
-            if(Double.parseDouble(txtMontoAbonar.getText().trim()) <= 0){
+            if(Integer.parseInt(txtMontoAbonar.getText().trim()) <= 0){
                 txtMontoAbonar.setText("");
             }
         }

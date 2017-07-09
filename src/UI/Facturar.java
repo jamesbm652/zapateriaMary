@@ -977,7 +977,7 @@ public class Facturar extends javax.swing.JFrame {
                     if (listaDetalles.get(i).getIdProducto() == prod.getIdProducto()) {
                         listaDetalles.get(i).setCantidadVendida(listaDetalles.get(i).getCantidadVendida() + cantidad);
                         listaDetalles.get(i).setPrecioVenta(listaDetalles.get(i).getPrecioVenta()
-                                + (cantidad * prod.getPrecioGanancia()));
+                                + (cantidad * prod.getPrecioVenta()));
                         manejadorDetalles.setearLista(listaDetalles);
                         existente = true;
                     }
@@ -990,7 +990,7 @@ public class Facturar extends javax.swing.JFrame {
                     prodDetalle.setDescripcion(descDetalle);
                     prodDetalle.setCantidadVendida(cantidad);
                     prodDetalle.setIdProducto(prod.getIdProducto());
-                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioGanancia());
+                    prodDetalle.setPrecioVenta(cantidad * prod.getPrecioVenta());
                     prodDetalle.setPosicionOriginal(id);
                     manejadorDetalles.Agregar(prodDetalle);
                 }

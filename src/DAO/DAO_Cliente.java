@@ -75,6 +75,7 @@ public class DAO_Cliente {
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cerrarConexion();
         return model;
     }
 
