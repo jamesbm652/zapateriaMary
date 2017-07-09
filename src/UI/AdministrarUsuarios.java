@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -302,11 +303,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
         int identificador;
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{
             BL_Usuario usuario = new BL_Usuario(txtNombreCompleto.getText().trim(),txtNombreUsuario.getText().trim(),txtContrasena.getText().trim(),checkAdministrador.isSelected());
                 if(usuario.agregarUsuario()){
-                    JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     manejador.Agregar(usuario);
                     txtNombreCompleto.setText("");
                     txtNombreUsuario.setText("");
@@ -315,7 +316,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                     cargarUsuariosEnTabla(listaTotalUsuarios);
                 }else{
-                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario","Error al agregar usuario",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
         }
 

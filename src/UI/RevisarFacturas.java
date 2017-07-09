@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -588,10 +589,10 @@ public class RevisarFacturas extends javax.swing.JFrame {
         if ((txtFechaInicio.getDate() == null && txtFechaFinal.getDate() != null)
                 || (txtFechaInicio.getDate() != null && txtFechaFinal.getDate() == null)) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar tanto la fecha de inicio como la de fin en caso de buscar por fecha. \n"
-                    + "Si no lo desea, borre los espacios de fechas ", "Error", JOptionPane.ERROR_MESSAGE);
+                    + "Si no lo desea, borre los espacios de fechas ", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }else if ((txtFechaInicio.getDate() != null && txtFechaFinal.getDate() != null) && 
                 (txtFechaInicio.getDate().after(txtFechaFinal.getDate()))) {
-            JOptionPane.showMessageDialog(null, "La fecha de inicio debe ser menor que la fecha final ", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La fecha de inicio debe ser menor que la fecha final ", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }else {
             if (!txtNumFactura.getText().equals("")) {
                 numFactura = Integer.parseInt(txtNumFactura.getText());

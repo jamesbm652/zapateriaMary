@@ -19,6 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -743,7 +744,7 @@ public class Abonar extends javax.swing.JFrame {
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
         if(!txtMontoAbonar.getText().equals("")){
         if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
-            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?") == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 
                 if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
                     facturaSeleccionada.cancelarFactura();
@@ -753,9 +754,9 @@ public class Abonar extends javax.swing.JFrame {
                     limpiarTabla(modelo);
                     vaciarCampos();
                     cargarProductosEnTabla(listaFacturas);
-                    JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","Factura cancelada",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                 }else{
-                    JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","Abono realizado",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
                     facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Double.parseDouble(txtMontoAbonar.getText()));
                     txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
@@ -764,10 +765,10 @@ public class Abonar extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(null, "El monto ingresado para abonar es mayor a la deuda\n"
-                    + "Ingrese un monto menor para cancelar la factura","ERROR",JOptionPane.ERROR_MESSAGE);
+                    + "Ingrese un monto menor para cancelar la factura","Monto incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
         }else{
-            JOptionPane.showMessageDialog(null, "Debe ingresar un monto");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un monto","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
     }//GEN-LAST:event_btnPanelAbonarMouseClicked
 
@@ -836,7 +837,7 @@ public class Abonar extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
         
     }
