@@ -159,19 +159,18 @@ public class BL_ReporteVenta {
         reporteContado.setCantidadSinCancelar(0);
 
         for (int i = 0; i < facturasContado.size(); i++) {
-            ArrayList<BL_ProductoFactura> listaProductos = facturasContado.get(i).getProductosFactura();
-            for (int j = 0; j < listaProductos.size(); j++) {
+            for (int j = 0; j < facturasContado.get(i).getProductosFactura().size(); j++) {
                 for (int k = 0; k < listaTodosProductos.size(); k++) {
-                    if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                    if (facturasContado.get(i).getProductosFactura().get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && listaTodosProductos.get(k).isEsZapato()) {
                         cantidadZapatos++;
                         break;
-                    } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
+                    } else if (facturasContado.get(i).getProductosFactura().get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && !listaTodosProductos.get(k).isEsZapato()) {
                         cantidadBolsos++;
                     }
                 }
-                ganancias += listaProductos.get(j).getPrecioVenta();
+                ganancias += facturasContado.get(i).getProductosFactura().get(j).getPrecioVenta();
             }
         }
         reporteContado.setCantidadBolsosVendidos(cantidadBolsos);

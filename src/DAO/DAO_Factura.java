@@ -40,7 +40,7 @@ public class DAO_Factura {
 
     public void conexion() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/zapateriamary", "root", "1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/zapateriamary", "root", "1234");
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,17 +275,19 @@ public class DAO_Factura {
                     factura.setMontoAbonado(0);
                 }
 
-                ps = con.prepareStatement("Select Cantidad, PrecioVenta, Descripcion "
+                ps = con.prepareStatement("Select IdProducto, Cantidad, PrecioVenta, Descripcion "
                         + "From productofactura Where IdFactura = ?");
                 ps.setInt(1, factura.getIdFactura());
                 rsDetalles = ps.executeQuery();
 
                 while (rsDetalles.next()) {
                     BL_ProductoFactura prodFactura = new BL_ProductoFactura();
-
-                    prodFactura.setCantidadVendida(rsDetalles.getInt(1));
-                    prodFactura.setPrecioVenta(rsDetalles.getDouble(2));
-                    prodFactura.setDescripcion(rsDetalles.getString(3));
+                    prodFactura.setIdProductoFactura(factura.getIdFactura());
+                    
+                    prodFactura.setIdProducto(rsDetalles.getInt(1));
+                    prodFactura.setCantidadVendida(rsDetalles.getInt(2));
+                    prodFactura.setPrecioVenta(rsDetalles.getDouble(3));
+                    prodFactura.setDescripcion(rsDetalles.getString(4));
                     detallesFactura.Agregar(prodFactura);
                 }
                 factura.setProductosFactura(detallesFactura.ObtenerLista());
@@ -446,5 +448,26 @@ public class DAO_Factura {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
         cerrarConexion();
+    }
+    
+    public int cargarSiguienteNumeroFactura(){
+        int numeroFactura = 0;
+        conexion();
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            ps = con.prepareStatement("Select Max(IdFactura) From factura");
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                numeroFactura = rs.getInt(1) +1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        cerrarConexion();
+        return numeroFactura;
     }
 }
