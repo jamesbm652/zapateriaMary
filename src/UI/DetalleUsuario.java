@@ -22,15 +22,17 @@ public class DetalleUsuario extends javax.swing.JFrame {
     BL_ManejadorUsuario manejador;
     ArrayList<BL_Usuario> listaTotalUsuarios;
     int identificador;
+    AdministrarUsuarios ventanaAnterior;
     
     /**
      * Creates new form DetalleUsuario
      */
-    public DetalleUsuario(BL_Usuario usu, ArrayList<BL_Usuario> lista, int id, BL_ManejadorUsuario manejador) {
+    public DetalleUsuario(AdministrarUsuarios vAnterior,BL_Usuario usu, ArrayList<BL_Usuario> lista, int id, BL_ManejadorUsuario manejador) {
         usuario = usu;
         listaTotalUsuarios = lista;
         identificador = id;
         this.manejador = manejador;
+        ventanaAnterior = vAnterior;
         initComponents();
         
         mostrarDatosUsuario();
@@ -65,10 +67,8 @@ public class DetalleUsuario extends javax.swing.JFrame {
         checkAdministrador = new javax.swing.JCheckBox();
         btnPanelModificar = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         btnPanelEliminar = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -88,50 +88,67 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 labCloseMouseEntered(evt);
             }
         });
-        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
+        jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 50));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 50));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labTituloAccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
+        labTituloAccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
         labTituloAccion.setForeground(new java.awt.Color(102, 102, 102));
-        labTituloAccion.setText("Información del usuario:");
+        labTituloAccion.setText("Información del usuario");
+        jPanel1.add(labTituloAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 12, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Nombre completo: ");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 81, -1, -1));
 
-        txtNombreCompleto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtNombreCompleto.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtNombreCompleto.setForeground(new java.awt.Color(51, 51, 51));
         txtNombreCompleto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 91, 216, 20));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 112, 216, 7));
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Nombre de usuario: ");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 164, -1, -1));
 
-        txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtNombreUsuario.setForeground(new java.awt.Color(51, 51, 51));
         txtNombreUsuario.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 171, 216, 20));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 195, 216, 7));
 
-        txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtContrasena.setForeground(new java.awt.Color(51, 51, 51));
         txtContrasena.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 250, 210, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 271, 216, 10));
 
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Contraseña:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 243, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Administrador:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 302, -1, -1));
 
         checkAdministrador.setBackground(new java.awt.Color(255, 255, 255));
-        checkAdministrador.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
+        checkAdministrador.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        checkAdministrador.setForeground(new java.awt.Color(51, 51, 51));
         checkAdministrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkAdministradorActionPerformed(evt);
             }
         });
+        jPanel1.add(checkAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, -1, -1));
 
         btnPanelModificar.setBackground(new java.awt.Color(33, 150, 243));
         btnPanelModificar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -145,14 +162,14 @@ public class DetalleUsuario extends javax.swing.JFrame {
         });
         btnPanelModificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/update.png"))); // NOI18N
+        jLabel14.setText("Modificar");
         jLabel14.setToolTipText("");
-        btnPanelModificar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, -1));
+        btnPanelModificar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 30));
 
-        jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Modificar");
-        btnPanelModificar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
+        jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 150, 50));
 
         btnPanelEliminar.setBackground(new java.awt.Color(211, 47, 47));
         btnPanelEliminar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -166,82 +183,15 @@ public class DetalleUsuario extends javax.swing.JFrame {
         });
         btnPanelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
-        btnPanelEliminar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, -1));
+        jLabel12.setText("Eliminar");
+        btnPanelEliminar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, 30));
 
-        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Eliminar");
-        btnPanelEliminar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 60, 20));
+        jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 150, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labTituloAccion)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkAdministrador)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtNombreCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                        .addComponent(jSeparator5)
-                                        .addComponent(txtNombreUsuario)
-                                        .addComponent(jSeparator4)
-                                        .addComponent(txtContrasena)
-                                        .addComponent(jSeparator2))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(btnPanelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labTituloAccion)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(checkAdministrador))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPanelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 390, 350));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 450, 420));
 
         pack();
         setLocationRelativeTo(null);
@@ -249,7 +199,8 @@ public class DetalleUsuario extends javax.swing.JFrame {
 
     private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
         this.dispose();
-        new AdministrarUsuarios().setVisible(true);
+        ventanaAnterior.setEnabled(true);
+        ventanaAnterior.setVisible(true);
     }//GEN-LAST:event_labCloseMouseClicked
 
     private void labCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseEntered
@@ -289,6 +240,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
                             
                             sesion.setAdmin(false);
+                            
                             this.dispose();
                             new Menu_Principal().setVisible(true);
                         }else{
@@ -306,7 +258,8 @@ public class DetalleUsuario extends javax.swing.JFrame {
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
 
                         this.dispose();
-                        new AdministrarUsuarios().setVisible(true);
+                        ventanaAnterior = new AdministrarUsuarios();
+                        ventanaAnterior.setVisible(true);
                     }else{
                         JOptionPane.showMessageDialog(null, "Error al modificar el usuario seleccionado","Error",JOptionPane.ERROR_MESSAGE);
                     }
@@ -334,7 +287,8 @@ public class DetalleUsuario extends javax.swing.JFrame {
 
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                             this.dispose();
-                            new AdministrarUsuarios().setVisible(true);
+                            ventanaAnterior = new AdministrarUsuarios();
+                            ventanaAnterior.setVisible(true);
                         }
                     }else{
                         JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error",JOptionPane.ERROR_MESSAGE);
@@ -370,9 +324,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel btnPanelModificar;
     private javax.swing.JCheckBox checkAdministrador;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
