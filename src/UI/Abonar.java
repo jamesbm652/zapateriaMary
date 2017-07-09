@@ -351,7 +351,7 @@ public class Abonar extends javax.swing.JFrame {
 
         cbx_Cedula.setEditable(true);
         cbx_Cedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        cbx_Cedula.setForeground(null);
+        cbx_Cedula.setForeground(new java.awt.Color(51, 51, 51));
         cbx_Cedula.setBorder(null);
         cbx_Cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,28 +422,28 @@ public class Abonar extends javax.swing.JFrame {
 
         rdbContado.setBackground(new java.awt.Color(255, 255, 255));
         rdbContado.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbContado.setForeground(new java.awt.Color(102, 102, 102));
+        rdbContado.setForeground(new java.awt.Color(51, 51, 51));
         rdbContado.setText("Contado");
         rdbContado.setEnabled(false);
         jPanel2.add(rdbContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 60, 80, -1));
 
         rdbCredito.setBackground(new java.awt.Color(255, 255, 255));
         rdbCredito.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbCredito.setForeground(new java.awt.Color(102, 102, 102));
+        rdbCredito.setForeground(new java.awt.Color(51, 51, 51));
         rdbCredito.setText("Crédito");
         rdbCredito.setEnabled(false);
         jPanel2.add(rdbCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 60, 70, -1));
 
         rdbApartado.setBackground(new java.awt.Color(255, 255, 255));
         rdbApartado.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbApartado.setForeground(new java.awt.Color(102, 102, 102));
+        rdbApartado.setForeground(new java.awt.Color(51, 51, 51));
         rdbApartado.setText("Apartado");
         rdbApartado.setEnabled(false);
         jPanel2.add(rdbApartado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 60, 90, -1));
 
         rdbTarjeta.setBackground(new java.awt.Color(255, 255, 255));
         rdbTarjeta.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbTarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        rdbTarjeta.setForeground(new java.awt.Color(51, 51, 51));
         rdbTarjeta.setText("Tarjeta");
         rdbTarjeta.setEnabled(false);
         jPanel2.add(rdbTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 60, 70, -1));

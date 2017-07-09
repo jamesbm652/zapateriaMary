@@ -206,9 +206,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtGanancia = new javax.swing.JSpinner();
         txtPrecioVenta = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-      
         txt_PrecioTotal = new javax.swing.JLabel();
-
+        jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -484,8 +483,10 @@ public class DetalleProducto extends javax.swing.JFrame {
         txt_PrecioTotal.setText("₡ ");
         jPanel1.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 440, 30, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
+        jLabel17.setText("₡");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 10, 20));
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 690));
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
@@ -503,7 +504,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, -1, 30));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 50));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1370, 60));
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -718,6 +719,7 @@ public class DetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

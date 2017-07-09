@@ -200,7 +200,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private void labCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCloseMouseClicked
         this.dispose();
         ventanaAnterior.setEnabled(true);
-        ventanaAnterior.setVisible(true);
+        ventanaAnterior.toFront();
         
     }//GEN-LAST:event_labCloseMouseClicked
 
