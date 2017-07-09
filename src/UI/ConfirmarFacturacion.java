@@ -123,10 +123,10 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(196, 196, 196));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel8.setText("Informe de la venta.");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 220, 30));
+        jLabel8.setText("Informe de la venta");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 220, 30));
 
-        jPanel6.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 476, 50));
+        jPanel6.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 530, 50));
 
         tablaDetalles.setBackground(new java.awt.Color(232, 232, 232));
         tablaDetalles.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
@@ -150,7 +150,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         tablaDetalles.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane2.setViewportView(tablaDetalles);
 
-        jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 234, 460, 153));
+        jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 234, 490, 153));
 
         btnAceptar.setBackground(new java.awt.Color(0, 57, 66));
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,19 +172,19 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         btnAceptarLayout.setHorizontalGroup(
             btnAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAceptarLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addGap(25, 25, 25))
+                .addGap(42, 42, 42))
         );
         btnAceptarLayout.setVerticalGroup(
             btnAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnAceptarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel6.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, -1, 50));
+        jPanel6.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 150, 50));
 
         btnCancelar.setBackground(new java.awt.Color(0, 57, 66));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -205,59 +205,72 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         btnCancelar.setLayout(btnCancelarLayout);
         btnCancelarLayout.setHorizontalGroup(
             btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnCancelarLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCancelarLayout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
         btnCancelarLayout.setVerticalGroup(
             btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnCancelarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
+        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 50));
 
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Cédula: ");
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 98, -1, -1));
 
-        jLabel2.setText("Nombre Completo: ");
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Cliente:");
         jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 129, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Dirección: ");
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 165, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Teléfono cel: ");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, 20));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, 20));
 
         txt_Cedula.setEditable(false);
         txt_Cedula.setBackground(new java.awt.Color(255, 255, 255));
+        txt_Cedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_Cedula.setForeground(new java.awt.Color(153, 153, 153));
         txt_Cedula.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel6.add(txt_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 120, -1));
+        jPanel6.add(txt_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 120, 20));
 
         txt_NombreCompleto.setEditable(false);
         txt_NombreCompleto.setBackground(new java.awt.Color(255, 255, 255));
+        txt_NombreCompleto.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_NombreCompleto.setForeground(new java.awt.Color(153, 153, 153));
         txt_NombreCompleto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel6.add(txt_NombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 346, -1));
+        jPanel6.add(txt_NombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 370, 20));
 
         txt_Direccion.setEditable(false);
         txt_Direccion.setBackground(new java.awt.Color(255, 255, 255));
+        txt_Direccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_Direccion.setForeground(new java.awt.Color(153, 153, 153));
         txt_Direccion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel6.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 346, -1));
+        jPanel6.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 370, 20));
 
         txt_TelHabitacion.setEditable(false);
         txt_TelHabitacion.setBackground(new java.awt.Color(255, 255, 255));
+        txt_TelHabitacion.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_TelHabitacion.setForeground(new java.awt.Color(153, 153, 153));
         txt_TelHabitacion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel6.add(txt_TelHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 120, -1));
+        jPanel6.add(txt_TelHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 120, 20));
 
         txt_TelCelular.setEditable(false);
         txt_TelCelular.setBackground(new java.awt.Color(255, 255, 255));
+        txt_TelCelular.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_TelCelular.setForeground(new java.awt.Color(153, 153, 153));
         txt_TelCelular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txt_TelCelular.addActionListener(new java.awt.event.ActionListener() {
@@ -265,37 +278,42 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
                 txt_TelCelularActionPerformed(evt);
             }
         });
-        jPanel6.add(txt_TelCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 200, 120, -1));
+        jPanel6.add(txt_TelCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 120, 20));
 
-        jLabel5.setText("Tipo de Factura: ");
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setText("Tipo factura: ");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 62, -1, -1));
 
         txt_TipoFactura.setEditable(false);
         txt_TipoFactura.setBackground(new java.awt.Color(255, 255, 255));
+        txt_TipoFactura.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_TipoFactura.setForeground(new java.awt.Color(153, 153, 153));
         txt_TipoFactura.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel6.add(txt_TipoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 120, -1));
+        jPanel6.add(txt_TipoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 120, 20));
 
         jLabel11.setBackground(new java.awt.Color(51, 51, 51));
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Total:");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 401, -1, -1));
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, -1, -1));
 
         txt_PrecioTotal.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txt_PrecioTotal.setForeground(new java.awt.Color(255, 0, 0));
         txt_PrecioTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txt_PrecioTotal.setText("₡ ");
-        jPanel6.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 398, 130, 22));
+        jPanel6.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 130, 22));
 
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Teléfono hab: ");
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 199, -1, -1));
-        jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 120, -1));
-        jPanel6.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 350, 10));
-        jPanel6.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 120, 10));
-        jPanel6.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 350, 10));
-        jPanel6.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 120, 10));
-        jPanel6.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 120, 10));
+        jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 120, -1));
+        jPanel6.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 370, 10));
+        jPanel6.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 120, 10));
+        jPanel6.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 370, 10));
+        jPanel6.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 120, 10));
+        jPanel6.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, 10));
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 

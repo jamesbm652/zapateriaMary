@@ -47,6 +47,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
       
         txtPrecioVenta.setText(precioVenta+"");
+
     }
     
     private void verificarVentana(int ventana) {
