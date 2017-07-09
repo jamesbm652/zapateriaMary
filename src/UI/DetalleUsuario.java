@@ -210,7 +210,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
 
     private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
         // TODO add your handling code here:
-        if(!manejador.BuscarAdministradores() && usuario.isAdministrador()){
+        if(!manejador.BuscarAdministradores(usuario.getIdUsuario()) && usuario.isAdministrador()){
             JOptionPane.showMessageDialog(null, "Debe existir al menos un Administrador en el Sistema","Error",JOptionPane.ERROR_MESSAGE);
             checkAdministrador.setSelected(true);
         }
@@ -281,7 +281,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
             usuario.setIdUsuario(listaTotalUsuarios.get(identificador).getIdUsuario());
             if(JOptionPane.showConfirmDialog(null, "¿Desea eleminar este usuario?", "Eliminar usuario", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 if(usuario.getIdUsuario() != sesion.getIdUsuario()){
-                    if(manejador.BuscarAdministradores()){
+                    if(manejador.BuscarAdministradores(usuario.getIdUsuario())){
                         if(usuario.eliminarUsuario()){
                             manejador.Eliminar(identificador);
                             JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
@@ -295,7 +295,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "El usuario que desea eliminar es un Administrador y no existen más administradores en el sistema","Error",JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
-                    if(manejador.BuscarAdministradores()){
+                    if(manejador.BuscarAdministradores(usuario.getIdUsuario())){
                         if(JOptionPane.showConfirmDialog(null, "¿Desea eliminar su cuenta?\n" + "Se cerrará la sesión y no podra ingresar con sus credenciales en otra ocasión", "Confirmar eliminación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                             if(usuario.eliminarUsuario()){
                                 manejador.Eliminar(identificador); 

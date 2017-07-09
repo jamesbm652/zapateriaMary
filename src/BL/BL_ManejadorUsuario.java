@@ -35,17 +35,24 @@ public class BL_ManejadorUsuario {
         listaUsuarios = new DAO_Usuario().cargarUsuarios();
     }
     
-    public boolean BuscarAdministradores(){
+    public boolean BuscarAdministradores(int idUsuario){
         int contador = 0;
+        boolean borrable = false;
         for (int i = 0; i < listaUsuarios.size(); i++) {
             if(listaUsuarios.get(i).isAdministrador() == true){
                 contador++;
+                borrable = true;
                 if(contador == 2){
-                    return true;
+                    borrable = true;
+                }
+                else{
+                    if (contador == 1 && listaUsuarios.get(i).isAdministrador() && listaUsuarios.get(i).getIdUsuario() == idUsuario) {
+                        borrable = false;
+                    }
                 }
             }
         }
-        return false;
+        return borrable;
     }
     
 }

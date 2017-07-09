@@ -71,7 +71,7 @@ public class ReporteVentas extends javax.swing.JFrame {
     private void llenarInformacion (){
         BL_ReportePorTipo abono = reporte.getReporteAbonos();
         BL_ReportePorTipo credito = reporte.getReporteCredito();
-        BL_ReportePorTipo contado = reporte.getReporteAbonos();
+        BL_ReportePorTipo contado = reporte.getReporteContado();
         BL_ReportePorTipo tarjeta = reporte.getReporteTarjeta();
         
         txtConCanceladas.setText(contado.getCantidadCanceladas() + "");

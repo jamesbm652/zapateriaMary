@@ -102,4 +102,8 @@ public class BL_Factura {
     public void cancelarFactura(){
         new DAO_Factura().cancelarFactura(idFactura);
     }
+    
+    public int siguienteNumFactura(){
+        return new DAO_Factura().cargarSiguienteNumeroFactura();
+    }
 }
