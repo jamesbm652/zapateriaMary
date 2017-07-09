@@ -1,3 +1,4 @@
+
 //GEN-FIRST:event_checkAdministradorActionPerformed
 /*//GEN-LAST:event_checkAdministradorActionPerformed
  * To change this license header, choose License Headers in Project Properties.
@@ -36,6 +37,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     
     public AdministrarUsuarios() {
         initComponents();
+        
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
         tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         tablaUsuarios.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
