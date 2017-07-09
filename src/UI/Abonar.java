@@ -19,6 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -351,7 +352,7 @@ public class Abonar extends javax.swing.JFrame {
 
         cbx_Cedula.setEditable(true);
         cbx_Cedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        cbx_Cedula.setForeground(null);
+        cbx_Cedula.setForeground(new java.awt.Color(51, 51, 51));
         cbx_Cedula.setBorder(null);
         cbx_Cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,28 +423,28 @@ public class Abonar extends javax.swing.JFrame {
 
         rdbContado.setBackground(new java.awt.Color(255, 255, 255));
         rdbContado.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbContado.setForeground(new java.awt.Color(102, 102, 102));
+        rdbContado.setForeground(new java.awt.Color(51, 51, 51));
         rdbContado.setText("Contado");
         rdbContado.setEnabled(false);
         jPanel2.add(rdbContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 60, 80, -1));
 
         rdbCredito.setBackground(new java.awt.Color(255, 255, 255));
         rdbCredito.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbCredito.setForeground(new java.awt.Color(102, 102, 102));
+        rdbCredito.setForeground(new java.awt.Color(51, 51, 51));
         rdbCredito.setText("Crédito");
         rdbCredito.setEnabled(false);
         jPanel2.add(rdbCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 60, 70, -1));
 
         rdbApartado.setBackground(new java.awt.Color(255, 255, 255));
         rdbApartado.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbApartado.setForeground(new java.awt.Color(102, 102, 102));
+        rdbApartado.setForeground(new java.awt.Color(51, 51, 51));
         rdbApartado.setText("Apartado");
         rdbApartado.setEnabled(false);
         jPanel2.add(rdbApartado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 60, 90, -1));
 
         rdbTarjeta.setBackground(new java.awt.Color(255, 255, 255));
         rdbTarjeta.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        rdbTarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        rdbTarjeta.setForeground(new java.awt.Color(51, 51, 51));
         rdbTarjeta.setText("Tarjeta");
         rdbTarjeta.setEnabled(false);
         jPanel2.add(rdbTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 60, 70, -1));
@@ -743,7 +744,7 @@ public class Abonar extends javax.swing.JFrame {
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
         if(!txtMontoAbonar.getText().equals("")){
         if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
-            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?") == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 
                 if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
                     facturaSeleccionada.cancelarFactura();
@@ -753,9 +754,9 @@ public class Abonar extends javax.swing.JFrame {
                     limpiarTabla(modelo);
                     vaciarCampos();
                     cargarProductosEnTabla(listaFacturas);
-                    JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","Factura cancelada",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                 }else{
-                    JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","Abono realizado",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
                     facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Double.parseDouble(txtMontoAbonar.getText()));
                     txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
@@ -764,10 +765,10 @@ public class Abonar extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(null, "El monto ingresado para abonar es mayor a la deuda\n"
-                    + "Ingrese un monto menor para cancelar la factura","ERROR",JOptionPane.ERROR_MESSAGE);
+                    + "Ingrese un monto menor para cancelar la factura","Monto incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
         }else{
-            JOptionPane.showMessageDialog(null, "Debe ingresar un monto");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un monto","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
     }//GEN-LAST:event_btnPanelAbonarMouseClicked
 
@@ -836,7 +837,7 @@ public class Abonar extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
         
     }

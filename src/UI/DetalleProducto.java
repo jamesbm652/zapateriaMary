@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -206,13 +207,11 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtGanancia = new javax.swing.JSpinner();
         txtPrecioVenta = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-      
         txt_PrecioTotal = new javax.swing.JLabel();
-
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Agregar Producto");
         setMinimumSize(new java.awt.Dimension(1370, 725));
         setUndecorated(true);
@@ -484,8 +483,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         txt_PrecioTotal.setText("₡ ");
         jPanel1.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 440, 30, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
-
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1370, 670));
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
@@ -503,7 +501,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, -1, 30));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 50));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -521,7 +519,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
     private void btnGenerarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCodigoActionPerformed
         if (txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe completar los datos para generar el código", "Datos incompletos", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         } else {
             txtCodigo.setText(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "");
             txtCodigo.setText(txtCodigo.getText() + "-" + new BL_Producto().obtenerSiguienteCodigo());
@@ -558,10 +556,10 @@ public class DetalleProducto extends javax.swing.JFrame {
         if (txtFechaIngreso.getDate() == null || txtDescripcion.getText().trim().equals("") || txtMarca.getText().trim().equals("") || txtColor.getText().trim().equals("") || txtEmpresa.getText().trim().equals("")
              || txtPrecioCosto.getValue().equals("") || (rdbZapato.isSelected() && txtTalla.getText().trim().equals(""))   ) {
             
-            JOptionPane.showMessageDialog(null, "Debe completar los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe completar los datos", "Datos incompletos", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         } else {
             if (!rdbZapato.isSelected() && !rdbBolso.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             } else {
                 if(validarRangos()){
                     BL_Producto producto = new BL_Producto();
@@ -600,20 +598,20 @@ public class DetalleProducto extends javax.swing.JFrame {
                         txtGanancia.setValue(0);
                         txtPrecioCosto.setValue(1);
                         txtPrecioVenta.setText("0.0");
-                        JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Producto insertado correctamente", "Éxito al insertar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                         lista.add(producto);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al insertar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error al insertar el producto", "Error al insertar", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                     }
                 } else {
                     producto.setIdProducto(lista.get(posicion).getIdProducto());
                     if (producto.modificarProducto(posicion, lista)) {
                         lista.set(posicion, producto);
-                        JOptionPane.showMessageDialog(null, "Datos modificados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Datos modificados", "Éxito al modificar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                         this.dispose();
                         new Inventario(lista).setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al modificar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error al modificar el producto", "Error al modificar", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/recursos/error.png"));
                     }
 
                 }
@@ -656,7 +654,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
         
     }
@@ -698,7 +696,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         }
         
         if(!datosCorrectos){
-            JOptionPane.showMessageDialog(null, hileraError,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, hileraError,"Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
         return datosCorrectos;
     }

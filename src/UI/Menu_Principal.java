@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
@@ -28,13 +29,7 @@ public class Menu_Principal extends javax.swing.JFrame {
      * Creates new form Menu_Principal
      */
     public Menu_Principal() {
-        initComponents();
-        
-        BL_Logueo lg = new BL_Logueo();
-        if(!lg.isAdmin()){
-            panelBtnAdministrar.setVisible(false);
-        }
-       
+        initComponents();       
     }
 
     /**
@@ -124,10 +119,10 @@ public class Menu_Principal extends javax.swing.JFrame {
         });
         panelBtnRevisar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Revisar Facturas");
-        panelBtnRevisar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        panelBtnRevisar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/revisarFactura.png"))); // NOI18N
         panelBtnRevisar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
@@ -148,10 +143,10 @@ public class Menu_Principal extends javax.swing.JFrame {
         });
         panelBtnReportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Reporte Ventas");
-        panelBtnReportes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        panelBtnReportes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reportes.png"))); // NOI18N
         panelBtnReportes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
@@ -171,7 +166,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Inventario");
 
@@ -182,16 +177,19 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnInventarioLayout.setHorizontalGroup(
             panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnInventarioLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
                 .addGroup(panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel9))
-                .addContainerGap(117, Short.MAX_VALUE))
+                    .addGroup(panelBtnInventarioLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel9))
+                    .addGroup(panelBtnInventarioLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel3)))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         panelBtnInventarioLayout.setVerticalGroup(
             panelBtnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnInventarioLayout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
@@ -213,7 +211,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Abonos");
 
@@ -224,17 +222,20 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAbonos.setLayout(panelBtnAbonosLayout);
         panelBtnAbonosLayout.setHorizontalGroup(
             panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addGroup(panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel5))
-                .addGap(110, 110, 110))
+            .addGroup(panelBtnAbonosLayout.createSequentialGroup()
+                .addContainerGap(103, Short.MAX_VALUE)
+                .addGroup(panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(95, 95, 95))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(111, 111, 111))))
         );
         panelBtnAbonosLayout.setVerticalGroup(
             panelBtnAbonosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAbonosLayout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -256,7 +257,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Facturar");
 
@@ -267,16 +268,18 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnFacturarLayout.setHorizontalGroup(
             panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnFacturarLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addGroup(panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel10))
-                .addGap(104, 104, 104))
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(94, 94, 94))
+            .addGroup(panelBtnFacturarLayout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBtnFacturarLayout.setVerticalGroup(
             panelBtnFacturarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnFacturarLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -298,7 +301,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Administrar Usuarios");
@@ -311,19 +314,19 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAdministrarLayout.setHorizontalGroup(
             panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
                 .addGroup(panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(112, 112, 112))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(58, 58, 58))))
+                    .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(jLabel14))
+                    .addGroup(panelBtnAdministrarLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         panelBtnAdministrarLayout.setVerticalGroup(
             panelBtnAdministrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
@@ -336,7 +339,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,8 +379,14 @@ public class Menu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_panelBtnFacturarMouseEntered
 
     private void panelBtnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnReportesMouseClicked
-        this.dispose();
-        new ReporteVentas().setVisible(true);
+        BL_Logueo lg = new BL_Logueo();
+        if(lg.isAdmin()){
+            this.dispose();
+            new ReporteVentas().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "No tienes los permisos para ingresar\n a esta opción, favor comunicar al\nadministrador para solicitar el acceso","Acceso denegado",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+        }
+        
     }//GEN-LAST:event_panelBtnReportesMouseClicked
 
     private void panelBtnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnReportesMouseEntered
@@ -396,8 +405,13 @@ public class Menu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_panelBtnRevisarMouseEntered
 
     private void panelBtnAdministrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAdministrarMouseClicked
-        this.dispose();
-        new AdministrarUsuarios().setVisible(true);
+        BL_Logueo lg = new BL_Logueo();
+        if(lg.isAdmin()){
+            this.dispose();
+            new AdministrarUsuarios().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "No tienes los permisos para ingresar\n a esta opción, favor comunicar al\nadministrador para solicitar el acceso","Acceso denegado",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+        }
     }//GEN-LAST:event_panelBtnAdministrarMouseClicked
 
     private void panelBtnAdministrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnAdministrarMouseEntered

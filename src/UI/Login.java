@@ -11,6 +11,7 @@ import BL.BL_Logueo;
 import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -349,10 +350,10 @@ public class Login extends javax.swing.JFrame {
                 Menu_Principal mp = new Menu_Principal();
                 mp.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(this, "Credenciales incorrectas, intente de nuevo.");
+                JOptionPane.showMessageDialog(this, "Credenciales incorrectas, intente de nuevo.","Error al ingresar",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Debe de ingresar los datos solicitados.");
+            JOptionPane.showMessageDialog(this, "Debe de ingresar los datos solicitados.","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
     }
     
