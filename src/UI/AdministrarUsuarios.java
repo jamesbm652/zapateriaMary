@@ -34,6 +34,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     
     public AdministrarUsuarios() {
         initComponents();
+        
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
         tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         tablaUsuarios.getTableHeader().setDefaultRenderer(new Facturar.HeaderColor());
