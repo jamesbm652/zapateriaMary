@@ -450,7 +450,7 @@ public class Inventario extends javax.swing.JFrame {
             fila[1] = listaParaMostrar.get(i).getDescripcion();
             fila[2] = listaParaMostrar.get(i).getCantidad();
             fila[3] = listaParaMostrar.get(i).getFechaIngreso().toString();
-            fila[4] = listaParaMostrar.get(i).getPrecioVenta();
+            fila[4] = listaParaMostrar.get(i).getPrecioGanancia();
             fila[5] = i;
 
             if (listaParaMostrar.get(i).isEsZapato()) {
