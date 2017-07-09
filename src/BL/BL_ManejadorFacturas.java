@@ -46,4 +46,13 @@ public class BL_ManejadorFacturas {
     public void cargarFacturasPorFiltro(Date fechaInicial, Date fechaFinal, int estado, String tipo, int numFactura){
         new DAO_Factura().cargarFacturasPorFiltro(this, fechaInicial, fechaFinal, estado, tipo, numFactura);
     }
+    
+    public ArrayList<BL_Factura> cargarTodasFacturaPorCliente(int idCliente){
+        ArrayList<BL_Factura> lista = new ArrayList<>();
+        for (BL_Factura f : listaFacturas) {
+            if (f.getCliente().getIdCliente() == idCliente)
+            lista.add(f);
+        }
+        return lista;
+    }
 }

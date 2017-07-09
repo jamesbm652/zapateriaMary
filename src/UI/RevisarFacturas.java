@@ -541,9 +541,8 @@ public class RevisarFacturas extends javax.swing.JFrame {
 
     private void cargarFacturas() {
         vaciarCampos();
-        manejadorFacturas.EliminarTodos();
-        manejadorFacturas.cargarFacturasPorCliente(cliente.getIdCliente());
-        listaFacturas = manejadorFacturas.ObtenerLista();
+        //manejadorFacturas.EliminarTodos();
+        listaFacturas = manejadorFacturas.cargarTodasFacturaPorCliente(cliente.getIdCliente());
         limpiarTabla(modelo);
         cargarProductosEnTabla(listaFacturas);
     }
