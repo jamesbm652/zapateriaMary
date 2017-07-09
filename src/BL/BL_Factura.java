@@ -18,7 +18,7 @@ public class BL_Factura {
     private Date fechaFactura;
     private boolean cancelada;
     private String tipoFactura;
-    private double montoAbonado;
+    private int montoAbonado;
     private ArrayList<BL_ProductoFactura> productosFactura  = new ArrayList<>();
     private BL_Cliente cliente;
     
@@ -65,11 +65,11 @@ public class BL_Factura {
         this.tipoFactura = tipoFactura;
     }
 
-    public double getMontoAbonado() {
+    public int getMontoAbonado() {
         return montoAbonado;
     }
 
-    public void setMontoAbonado(double montoAbonado) {
+    public void setMontoAbonado(int montoAbonado) {
         this.montoAbonado = montoAbonado;
     }
     
@@ -95,7 +95,7 @@ public class BL_Factura {
         return insertado;
     }
     
-    public void abonarAFactura(double monto){
+    public void abonarAFactura(int monto){
         new DAO_Factura().abonarAFactura(idFactura, monto);
     }
     
