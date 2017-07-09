@@ -17,6 +17,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -636,9 +637,14 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
     private void filtro(String filtro) {
-        TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
-        tablaInventario.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        try {
+            TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
+            tablaInventario.setRowSorter(trsFiltro);
+            trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        } catch (PatternSyntaxException e) {
+            txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
+            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     static public class HeaderColor extends DefaultTableCellRenderer{

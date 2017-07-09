@@ -39,6 +39,7 @@ import javax.swing.text.JTextComponent;
 import BL.BL_Factura;
 import BL.BL_TelefonoCliente;
 import javax.swing.ImageIcon;
+import java.util.regex.PatternSyntaxException;
 
 /**
  *
@@ -791,9 +792,14 @@ public class Facturar extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaInventarioMouseClicked
 
     private void filtro(String filtro) {
-        TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
-        tablaInventario.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        try {
+            TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
+            tablaInventario.setRowSorter(trsFiltro);
+            trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        } catch (PatternSyntaxException e) {
+            txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
+            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+        }
 
         //Validacion para que actualice la cantidad en la lista de productos
         if (listaParaActualizar.size() > 0) {
