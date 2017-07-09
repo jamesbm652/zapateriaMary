@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -370,9 +371,14 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }
     
     private void filtro(String filtro) {
-        TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
-        tablaUsuarios.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        try {
+            TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
+            tablaUsuarios.setRowSorter(trsFiltro);
+            trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+        } catch (PatternSyntaxException e) {
+            txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
+            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     static public class HeaderColor extends DefaultTableCellRenderer {
