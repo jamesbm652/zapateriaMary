@@ -71,7 +71,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
         btnPanelEliminar = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -223,7 +223,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
         }else{            
         
             usuario.setIdUsuario(listaTotalUsuarios.get(identificador).getIdUsuario());
-            if(JOptionPane.showConfirmDialog(null, "¿Desea actualizar los datos?", "Actualizar datos", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "¿Desea actualizar los datos?", "Actualizar datos", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
                 usuario.setNombreCompleto(txtNombreCompleto.getText().trim());
                 usuario.setNombreUsuario(txtNombreUsuario.getText().trim());
                 usuario.setContrasena(txtContrasena.getText().trim());
@@ -235,7 +235,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 }
                 
                 if(sesion.getIdUsuario() == usuario.getIdUsuario() && sesion.isAdmin() && !usuario.isAdministrador()){
-                    if(JOptionPane.showConfirmDialog(null, "¿Desea dejar de ser Administrador?", "Confirmar modificación Administrador", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    if(JOptionPane.showConfirmDialog(null, "¿Desea dejar de ser Administrador?", "Confirmar modificación Administrador", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
                         if(usuario.modificarUsuario()){
                             JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                             manejador.Modificar(identificador, usuario);
@@ -255,7 +255,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 }else{
                 
                     if(usuario.modificarUsuario()){
-                        JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El nuevo usuario se modificó correctamente ","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/recursos/exito.png"));
                         manejador.Modificar(identificador, usuario);
                         listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
 
@@ -276,11 +276,11 @@ public class DetalleUsuario extends javax.swing.JFrame {
 
     private void btnPanelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseClicked
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{            
             
             usuario.setIdUsuario(listaTotalUsuarios.get(identificador).getIdUsuario());
-            if(JOptionPane.showConfirmDialog(null, "¿Desea eleminar este usuario?", "Eliminar usuario", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "¿Desea eleminar este usuario?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
                 if(usuario.getIdUsuario() != sesion.getIdUsuario()){
                     if(manejador.BuscarAdministradores(usuario.getIdUsuario())){
                         if(usuario.eliminarUsuario()){
@@ -297,7 +297,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                     }
                 }else{
                     if(manejador.BuscarAdministradores(usuario.getIdUsuario())){
-                        if(JOptionPane.showConfirmDialog(null, "¿Desea eliminar su cuenta?\n" + "Se cerrará la sesión y no podra ingresar con sus credenciales en otra ocasión", "Confirmar eliminación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                        if(JOptionPane.showConfirmDialog(null, "¿Desea eliminar su cuenta?\n" + "Se cerrará la sesión y no podra ingresar con sus credenciales en otra ocasión", "Confirmar eliminación", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
                             if(usuario.eliminarUsuario()){
                                 manejador.Eliminar(identificador); 
                                 JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
