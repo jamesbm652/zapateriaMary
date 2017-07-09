@@ -468,7 +468,7 @@ public class DAO_Producto {
             } else {
                 ps = con.prepareStatement("Update producto Set CodigoUnico = ?, FechaIngreso = ?, "
                         + " Color = ?, Marca = ?, Empresa = ?, PrecioCosto = ?, PrecioImpuesto = ?,"
-                        + " PrecioGanancia = ?, Descripcion = ?, Cantidad = ?, EsZapato = 0 Where IdProducto = ?");
+                        + " PrecioGanancia = ?, PrecioVenta = ?, Descripcion = ?, Cantidad = ?, EsZapato = 0 Where IdProducto = ?");
                 ps.setString(1, prod.getCodigoUnico());
                 ps.setString(2, fecha);
                 ps.setString(3, prod.getColor());
@@ -477,9 +477,10 @@ public class DAO_Producto {
                 ps.setDouble(6, prod.getPrecioCosto());
                 ps.setDouble(7, prod.getPrecioImpuesto());
                 ps.setDouble(8, prod.getPrecioGanancia());
-                ps.setString(9, prod.getDescripcion());
-                ps.setInt(10, prod.getCantidad());
-                ps.setInt(11, prod.getIdProducto());
+                ps.setDouble(9, prod.getPrecioVenta());
+                ps.setString(10, prod.getDescripcion());
+                ps.setInt(11, prod.getCantidad());
+                ps.setInt(12, prod.getIdProducto());
 
                 insertado = ps.executeUpdate();
             }

@@ -45,8 +45,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         double impuesto = Double.parseDouble(txtImpuesto.getValue().toString());
         double ganancia = Double.parseDouble(txtGanancia.getValue().toString());
         double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
-        txtPrecioVenta.setText("" + precioVenta);
-    }
+      
+        txtPrecioVenta.setText(precioVenta+"");
 
     private void verificarVentana(int ventana) {
         if (ventana == 1) {
@@ -204,7 +204,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         txtGanancia = new javax.swing.JSpinner();
         txtPrecioVenta = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+      
         txt_PrecioTotal = new javax.swing.JLabel();
+
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -481,6 +483,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         jPanel1.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 440, 30, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
+
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
