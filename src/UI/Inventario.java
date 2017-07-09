@@ -541,7 +541,7 @@ public class Inventario extends javax.swing.JFrame {
     private void btnPanelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseClicked
         if(tablaInventario.getSelectedRow() >= 0 ){
             int identificador = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
-            if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION) {
                 if(new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())){
                     listaTotalProductos.remove(identificador);
                     JOptionPane.showMessageDialog(null, "Producto eliminado","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
