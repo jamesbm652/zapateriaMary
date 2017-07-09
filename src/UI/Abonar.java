@@ -742,33 +742,37 @@ public class Abonar extends javax.swing.JFrame {
     }
     
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
-        if(!txtMontoAbonar.getText().equals("")){
-        if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
-            if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
-                
-                if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
-                    facturaSeleccionada.cancelarFactura();
-                    listaFacturas.remove(facturaSeleccionada);
-                    
-                    limpiarTablaDetalles(modeloDetalles);
-                    limpiarTabla(modelo);
-                    vaciarCampos();
-                    cargarProductosEnTabla(listaFacturas);
-                    JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","Factura cancelada",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
-                }else{
-                    JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura","Abono realizado",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
-                    facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
-                    facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Double.parseDouble(txtMontoAbonar.getText()));
-                    txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
-                    txtMontoAbonar.setText("");
+        if(tablaFacturas.getSelectedRow() >= 0){
+            if(!txtMontoAbonar.getText().equals("")){
+            if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
+                if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea abonar ₡" + txtMontoAbonar.getText() + " a esta factura?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION){
+
+                    if(Double.parseDouble(txtMontoAbonar.getText()) == Double.parseDouble(txtRestante.getText())){
+                        facturaSeleccionada.cancelarFactura();
+                        listaFacturas.remove(facturaSeleccionada);
+
+                        limpiarTablaDetalles(modeloDetalles);
+                        limpiarTabla(modelo);
+                        vaciarCampos();
+                        cargarProductosEnTabla(listaFacturas);
+                        JOptionPane.showMessageDialog(null, "Se ha cancelado esta factura","Factura cancelada",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Se ha abonado ₡" + txtMontoAbonar.getText() + " a la factura.","Abono realizado",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                        facturaSeleccionada.abonarAFactura(Double.parseDouble(txtMontoAbonar.getText()));
+                        facturaSeleccionada.setMontoAbonado(facturaSeleccionada.getMontoAbonado() + Double.parseDouble(txtMontoAbonar.getText()));
+                        txtRestante.setText((Double.parseDouble(txtTotalAPagar.getText()) - facturaSeleccionada.getMontoAbonado()) + "");
+                        txtMontoAbonar.setText("");
+                    }
                 }
+            }else{
+                JOptionPane.showMessageDialog(null, "El monto ingresado para abonar es mayor a la deuda.\n"
+                        + "Ingrese un monto menor para cancelar la factura.","Monto incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe ingresar un monto.","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
             }
         }else{
-            JOptionPane.showMessageDialog(null, "El monto ingresado para abonar es mayor a la deuda\n"
-                    + "Ingrese un monto menor para cancelar la factura","Monto incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
-        }
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe ingresar un monto","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una factura","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelAbonarMouseClicked
 

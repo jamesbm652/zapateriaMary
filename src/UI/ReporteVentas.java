@@ -1058,7 +1058,7 @@ public class ReporteVentas extends javax.swing.JFrame {
         } 
         if(jDateFechaInicio.getDate() != null && jDateFechaFInal.getDate() != null){
             if(jDateFechaInicio.getDate().after(jDateFechaFInal.getDate())){
-                JOptionPane.showMessageDialog(null, "La fecha inicial es mayor que la fecha final","Rango de fechas incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                JOptionPane.showMessageDialog(null, "La fecha inicial es mayor que la fecha final.","Rango de fechas incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             }else{
                 manejadorFacturas.EliminarTodos();
                 reporte.vaciarListas();
