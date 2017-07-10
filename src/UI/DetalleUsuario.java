@@ -262,6 +262,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
 
                             this.dispose();
+                            ventanaAnterior.dispose();
                             ventanaAnterior = new AdministrarUsuarios();
                             ventanaAnterior.setVisible(true);
                         }else{
