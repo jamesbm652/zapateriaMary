@@ -516,7 +516,7 @@ public class Abonar extends javax.swing.JFrame {
 
         txtMontoAbonar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         txtMontoAbonar.setForeground(new java.awt.Color(51, 51, 51));
-        txtMontoAbonar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtMontoAbonar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMontoAbonar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtMontoAbonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,14 +531,14 @@ public class Abonar extends javax.swing.JFrame {
                 txtMontoAbonarKeyTyped(evt);
             }
         });
-        panelCamposAbonar.add(txtMontoAbonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, 20));
-        panelCamposAbonar.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 10));
+        panelCamposAbonar.add(txtMontoAbonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 130, 20));
+        panelCamposAbonar.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, 10));
 
         txt_PrecioTotal.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txt_PrecioTotal.setForeground(new java.awt.Color(51, 51, 51));
         txt_PrecioTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txt_PrecioTotal.setText("₡ ");
-        panelCamposAbonar.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 30, 40));
+        panelCamposAbonar.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 30, 40));
 
         labMontoAbonar.setBackground(new java.awt.Color(51, 51, 51));
         labMontoAbonar.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
@@ -561,7 +561,9 @@ public class Abonar extends javax.swing.JFrame {
 
         txtTotalAPagar.setEditable(false);
         txtTotalAPagar.setBackground(new java.awt.Color(255, 255, 255));
-        txtTotalAPagar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTotalAPagar.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtTotalAPagar.setForeground(new java.awt.Color(51, 51, 51));
+        txtTotalAPagar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotalAPagar.setText("0");
         txtTotalAPagar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtTotalAPagar.setEnabled(false);
@@ -581,11 +583,13 @@ public class Abonar extends javax.swing.JFrame {
 
         txtRestante.setEditable(false);
         txtRestante.setBackground(new java.awt.Color(255, 255, 255));
-        txtRestante.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRestante.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtRestante.setForeground(new java.awt.Color(51, 51, 51));
+        txtRestante.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtRestante.setText("0");
         txtRestante.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtRestante.setEnabled(false);
-        jPanel2.add(txtRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 620, 110, -1));
+        jPanel2.add(txtRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 620, 110, 20));
         jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 640, 110, 10));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
