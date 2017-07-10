@@ -36,7 +36,7 @@ public class ReporteVentas extends javax.swing.JFrame {
     DefaultTableModel modeloTarjeta;
     DefaultTableModel modeloAbono;
     DefaultTableModel modeloCredito;
-    
+    Date fActual;
     /**
      * Creates new form ReporteVentas
      */
@@ -51,7 +51,7 @@ public class ReporteVentas extends javax.swing.JFrame {
         tablaAbono.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         tablaCredito.getTableHeader().setDefaultRenderer(new Inventario.HeaderColor());
         
-        Date fActual = new Date(new java.util.Date().getTime());
+        fActual = new Date(new java.util.Date().getTime());
         jDateFechaInicio.setDate(fActual);
         jDateFechaFInal.setDate(fActual);
         
@@ -439,30 +439,40 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtConBolsosVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtConBolsosVendidos.setForeground(new java.awt.Color(51, 51, 51));
         txtConBolsosVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConBolsosVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtConBolsosVendidos.setEnabled(false);
         jPanel3.add(txtConBolsosVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 100, 20));
 
         txtConCantFacturas.setBackground(new java.awt.Color(244, 244, 244));
         txtConCantFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtConCantFacturas.setForeground(new java.awt.Color(51, 51, 51));
         txtConCantFacturas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConCantFacturas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtConCantFacturas.setEnabled(false);
         jPanel3.add(txtConCantFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 100, 20));
 
         txtConCanceladas.setBackground(new java.awt.Color(244, 244, 244));
         txtConCanceladas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtConCanceladas.setForeground(new java.awt.Color(51, 51, 51));
         txtConCanceladas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConCanceladas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtConCanceladas.setEnabled(false);
         jPanel3.add(txtConCanceladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 20));
 
         txtConSinCancelar.setBackground(new java.awt.Color(244, 244, 244));
         txtConSinCancelar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtConSinCancelar.setForeground(new java.awt.Color(51, 51, 51));
         txtConSinCancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConSinCancelar.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtConSinCancelar.setEnabled(false);
         jPanel3.add(txtConSinCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, 20));
 
         txtConZapVendidos.setBackground(new java.awt.Color(244, 244, 244));
         txtConZapVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtConZapVendidos.setForeground(new java.awt.Color(51, 51, 51));
         txtConZapVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConZapVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtConZapVendidos.setEnabled(false);
         jPanel3.add(txtConZapVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 100, 20));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -513,6 +523,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtConTotal.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtConTotal.setForeground(new java.awt.Color(51, 51, 51));
         txtConTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConTotal.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtConTotal.setEnabled(false);
         jPanel3.add(txtConTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 100, 20));
         jPanel3.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 100, 10));
 
@@ -549,26 +561,36 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTarBolsosVendidos.setBackground(new java.awt.Color(244, 244, 244));
         txtTarBolsosVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTarBolsosVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTarBolsosVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTarBolsosVendidos.setEnabled(false);
         jPanel5.add(txtTarBolsosVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 100, 20));
 
         txtTarCantFacturas.setBackground(new java.awt.Color(244, 244, 244));
         txtTarCantFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTarCantFacturas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTarCantFacturas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTarCantFacturas.setEnabled(false);
         jPanel5.add(txtTarCantFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 100, 20));
 
         txtTarCanceladas.setBackground(new java.awt.Color(244, 244, 244));
         txtTarCanceladas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTarCanceladas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTarCanceladas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTarCanceladas.setEnabled(false);
         jPanel5.add(txtTarCanceladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 20));
 
         txtTarSinCancelar.setBackground(new java.awt.Color(244, 244, 244));
         txtTarSinCancelar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTarSinCancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTarSinCancelar.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTarSinCancelar.setEnabled(false);
         jPanel5.add(txtTarSinCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, 20));
 
         txtTarZapVendidos.setBackground(new java.awt.Color(244, 244, 244));
         txtTarZapVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTarZapVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTarZapVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTarZapVendidos.setEnabled(false);
         jPanel5.add(txtTarZapVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 100, 20));
 
         jLabel41.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -590,8 +612,10 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTarTotal.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTarTotal.setForeground(new java.awt.Color(51, 51, 51));
         txtTarTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.add(txtTarTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 100, 20));
-        jPanel5.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 100, 10));
+        txtTarTotal.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTarTotal.setEnabled(false);
+        jPanel5.add(txtTarTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 100, 20));
+        jPanel5.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 100, 10));
 
         tablaTar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         tablaTar.setForeground(new java.awt.Color(51, 51, 51));
@@ -682,30 +706,40 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtAbonBolsosVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtAbonBolsosVendidos.setForeground(new java.awt.Color(51, 51, 51));
         txtAbonBolsosVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtAbonBolsosVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtAbonBolsosVendidos.setEnabled(false);
         jPanel6.add(txtAbonBolsosVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 100, 20));
 
         txtAbonCantFacturas.setBackground(new java.awt.Color(244, 244, 244));
         txtAbonCantFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtAbonCantFacturas.setForeground(new java.awt.Color(51, 51, 51));
         txtAbonCantFacturas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtAbonCantFacturas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtAbonCantFacturas.setEnabled(false);
         jPanel6.add(txtAbonCantFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 100, 20));
 
         txtAbonCanceladas.setBackground(new java.awt.Color(244, 244, 244));
         txtAbonCanceladas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtAbonCanceladas.setForeground(new java.awt.Color(51, 51, 51));
         txtAbonCanceladas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtAbonCanceladas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtAbonCanceladas.setEnabled(false);
         jPanel6.add(txtAbonCanceladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 20));
 
         txtAbonSinCancelar.setBackground(new java.awt.Color(244, 244, 244));
         txtAbonSinCancelar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtAbonSinCancelar.setForeground(new java.awt.Color(51, 51, 51));
         txtAbonSinCancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtAbonSinCancelar.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtAbonSinCancelar.setEnabled(false);
         jPanel6.add(txtAbonSinCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, 20));
 
         txtAbonZapVendidos.setBackground(new java.awt.Color(244, 244, 244));
         txtAbonZapVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtAbonZapVendidos.setForeground(new java.awt.Color(51, 51, 51));
         txtAbonZapVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtAbonZapVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtAbonZapVendidos.setEnabled(false);
         jPanel6.add(txtAbonZapVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 100, 20));
 
         jLabel48.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -727,6 +761,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtAbonTotal.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtAbonTotal.setForeground(new java.awt.Color(51, 51, 51));
         txtAbonTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtAbonTotal.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtAbonTotal.setEnabled(false);
         jPanel6.add(txtAbonTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 100, 20));
         jPanel6.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 100, 10));
 
@@ -792,26 +828,36 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtCreBolsosVendidos.setBackground(new java.awt.Color(244, 244, 244));
         txtCreBolsosVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCreBolsosVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCreBolsosVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCreBolsosVendidos.setEnabled(false);
         jPanel7.add(txtCreBolsosVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 100, 20));
 
         txtCreCantFacturas.setBackground(new java.awt.Color(244, 244, 244));
         txtCreCantFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCreCantFacturas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCreCantFacturas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCreCantFacturas.setEnabled(false);
         jPanel7.add(txtCreCantFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 100, 20));
 
         txtCreCanceladas.setBackground(new java.awt.Color(244, 244, 244));
         txtCreCanceladas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCreCanceladas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCreCanceladas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCreCanceladas.setEnabled(false);
         jPanel7.add(txtCreCanceladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 20));
 
         txtCreSinCancelar.setBackground(new java.awt.Color(244, 244, 244));
         txtCreSinCancelar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCreSinCancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCreSinCancelar.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCreSinCancelar.setEnabled(false);
         jPanel7.add(txtCreSinCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, 20));
 
         txtCreZapVendidos.setBackground(new java.awt.Color(244, 244, 244));
         txtCreZapVendidos.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCreZapVendidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCreZapVendidos.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCreZapVendidos.setEnabled(false);
         jPanel7.add(txtCreZapVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 100, 20));
 
         jLabel55.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -833,6 +879,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtCreTotal.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCreTotal.setForeground(new java.awt.Color(51, 51, 51));
         txtCreTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCreTotal.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCreTotal.setEnabled(false);
         jPanel7.add(txtCreTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 100, 20));
         jPanel7.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 100, 10));
 
@@ -911,6 +959,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTotalGanancia.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTotalGanancia.setForeground(new java.awt.Color(51, 51, 51));
         txtTotalGanancia.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTotalGanancia.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTotalGanancia.setEnabled(false);
         jPanel8.add(txtTotalGanancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 90, 20));
         jPanel8.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 90, 10));
 
@@ -918,6 +968,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTotalFacTarjeta.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTotalFacTarjeta.setForeground(new java.awt.Color(51, 51, 51));
         txtTotalFacTarjeta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTotalFacTarjeta.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTotalFacTarjeta.setEnabled(false);
         jPanel8.add(txtTotalFacTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 70, 20));
         jPanel8.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, 10));
 
@@ -925,6 +977,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTotalFacAbono.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTotalFacAbono.setForeground(new java.awt.Color(51, 51, 51));
         txtTotalFacAbono.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTotalFacAbono.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTotalFacAbono.setEnabled(false);
         jPanel8.add(txtTotalFacAbono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 70, 20));
         jPanel8.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 70, 10));
 
@@ -932,6 +986,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTotalFacCredito.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTotalFacCredito.setForeground(new java.awt.Color(51, 51, 51));
         txtTotalFacCredito.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTotalFacCredito.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTotalFacCredito.setEnabled(false);
         jPanel8.add(txtTotalFacCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 70, 20));
         jPanel8.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 70, 10));
 
@@ -939,6 +995,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtTotalFacContado.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtTotalFacContado.setForeground(new java.awt.Color(51, 51, 51));
         txtTotalFacContado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTotalFacContado.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTotalFacContado.setEnabled(false);
         jPanel8.add(txtTotalFacContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 70, 20));
         jPanel8.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 70, 10));
 
@@ -956,6 +1014,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtGanFacContado.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtGanFacContado.setForeground(new java.awt.Color(51, 51, 51));
         txtGanFacContado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtGanFacContado.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtGanFacContado.setEnabled(false);
         jPanel8.add(txtGanFacContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 90, 20));
         jPanel8.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 90, 10));
 
@@ -963,6 +1023,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtGanFacTarjeta.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtGanFacTarjeta.setForeground(new java.awt.Color(51, 51, 51));
         txtGanFacTarjeta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtGanFacTarjeta.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtGanFacTarjeta.setEnabled(false);
         jPanel8.add(txtGanFacTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 90, 20));
         jPanel8.add(jSeparator31, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 90, 10));
 
@@ -975,6 +1037,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtGanFacAbono.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtGanFacAbono.setForeground(new java.awt.Color(51, 51, 51));
         txtGanFacAbono.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtGanFacAbono.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtGanFacAbono.setEnabled(false);
         jPanel8.add(txtGanFacAbono, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 90, 20));
         jPanel8.add(jSeparator32, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 90, 10));
 
@@ -987,6 +1051,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtGanFacCredito.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtGanFacCredito.setForeground(new java.awt.Color(51, 51, 51));
         txtGanFacCredito.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtGanFacCredito.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtGanFacCredito.setEnabled(false);
         jPanel8.add(txtGanFacCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 90, 20));
         jPanel8.add(jSeparator33, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 90, 10));
 
@@ -1004,6 +1070,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         txtCantTotalFacturas.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtCantTotalFacturas.setForeground(new java.awt.Color(51, 51, 51));
         txtCantTotalFacturas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCantTotalFacturas.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCantTotalFacturas.setEnabled(false);
         jPanel8.add(txtCantTotalFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 70, 20));
         jPanel8.add(jSeparator34, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 70, 10));
 
@@ -1060,19 +1128,23 @@ public class ReporteVentas extends javax.swing.JFrame {
             if(jDateFechaInicio.getDate().after(jDateFechaFInal.getDate())){
                 JOptionPane.showMessageDialog(null, "La fecha inicial es mayor que la fecha final.","Rango de fechas incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
             }else{
-                manejadorFacturas.EliminarTodos();
-                reporte.vaciarListas();
-                manejadorFacturas.cargarFacturasPorFecha(formato.format(jDateFechaInicio.getDate().getTime()), formato.format(jDateFechaFInal.getDate().getTime()));
-                listaFacturas = manejadorFacturas.ObtenerLista();
-                separarListasSegunTipo();
-                limpiarTablas();
-                reporte.generarReporteIndividual();
-                cargarProductosEnTabla("Contado", reporte.getFacturasContado());
-                cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
-                cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
-                cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
+                if(jDateFechaFInal.getDate().after(fActual)){
+                    JOptionPane.showMessageDialog(null, "La fecha final es mayor a la actual.","Rango de fechas incorrecto",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                }else{
+                    manejadorFacturas.EliminarTodos();
+                    reporte.vaciarListas();
+                    manejadorFacturas.cargarFacturasPorFecha(formato.format(jDateFechaInicio.getDate().getTime()), formato.format(jDateFechaFInal.getDate().getTime()));
+                    listaFacturas = manejadorFacturas.ObtenerLista();
+                    separarListasSegunTipo();
+                    limpiarTablas();
+                    reporte.generarReporteIndividual();
+                    cargarProductosEnTabla("Contado", reporte.getFacturasContado());
+                    cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
+                    cargarProductosEnTabla("Abono", reporte.getFacturasAbono());
+                    cargarProductosEnTabla("Credito", reporte.getFacturasCredito());
 
-                llenarInformacion();
+                    llenarInformacion();
+                }
             }
         }
     }//GEN-LAST:event_btnBuscarMouseClicked
