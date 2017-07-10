@@ -176,7 +176,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -185,6 +185,9 @@ public class RevisarFacturas extends javax.swing.JFrame {
         });
         tablaDetalles.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane2.setViewportView(tablaDetalles);
+        if (tablaDetalles.getColumnModel().getColumnCount() > 0) {
+            tablaDetalles.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 310, 520, 350));
 
@@ -215,11 +218,15 @@ public class RevisarFacturas extends javax.swing.JFrame {
         txt_Senor.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_Senor.setForeground(new java.awt.Color(51, 51, 51));
         txt_Senor.setBorder(null);
+        txt_Senor.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txt_Senor.setEnabled(false);
         jPanel2.add(txt_Senor, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 190, 390, 20));
 
         txt_Direccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txt_Direccion.setForeground(new java.awt.Color(51, 51, 51));
         txt_Direccion.setBorder(null);
+        txt_Direccion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txt_Direccion.setEnabled(false);
         jPanel2.add(txt_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 230, 390, 20));
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
@@ -247,11 +254,15 @@ public class RevisarFacturas extends javax.swing.JFrame {
         txtTelHab.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtTelHab.setForeground(new java.awt.Color(51, 51, 51));
         txtTelHab.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTelHab.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTelHab.setEnabled(false);
         jPanel2.add(txtTelHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 270, 120, 20));
 
         txtTelCel.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtTelCel.setForeground(new java.awt.Color(51, 51, 51));
         txtTelCel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtTelCel.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTelCel.setEnabled(false);
         jPanel2.add(txtTelCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 270, 110, 20));
         jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 290, 110, 10));
         jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 290, 120, 10));
@@ -372,6 +383,8 @@ public class RevisarFacturas extends javax.swing.JFrame {
         txtCedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtCedula.setForeground(new java.awt.Color(51, 51, 51));
         txtCedula.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtCedula.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtCedula.setEnabled(false);
         jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 150, 140, 20));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 170, 140, -1));
 

@@ -213,16 +213,16 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Agregar Producto");
-        setMinimumSize(new java.awt.Dimension(1370, 725));
+        setMinimumSize(new java.awt.Dimension(1370, 760));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1370, 725));
+        setPreferredSize(new java.awt.Dimension(1370, 760));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1240, 590));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1240, 590));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1230, 620));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1230, 620));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labInstruccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 32)); // NOI18N
@@ -316,6 +316,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         jPanel1.add(rdbBolso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 80, -1, -1));
 
         txtFechaIngreso.setBackground(new java.awt.Color(237, 237, 237));
+        txtFechaIngreso.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 150, 30));
 
         rdbZapato.setBackground(new java.awt.Color(255, 255, 255));
@@ -335,6 +336,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         jLabel1.setText("Género:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, -1, 30));
 
+        cmbGenero.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        cmbGenero.setForeground(new java.awt.Color(51, 51, 51));
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
         jPanel1.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, 110, -1));
 
@@ -343,6 +346,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         jLabel11.setText("Categoría:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 90, 30));
 
+        cmbCategoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        cmbCategoria.setForeground(new java.awt.Color(51, 51, 51));
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninos", "Jovenes", "Adulto" }));
         cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +374,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         jPanel1.add(txtTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 110, 20));
 
+        txtImpuesto.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtImpuesto.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 100.0d, 1.0d));
         txtImpuesto.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -448,10 +454,12 @@ public class DetalleProducto extends javax.swing.JFrame {
         labErrorTalla.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jPanel1.add(labErrorTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 110, 20));
 
+        txtCantidad.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, 110, 30));
 
-        txtPrecioCosto.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(1.0d), null, Double.valueOf(1.0d)));
+        txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtPrecioCosto.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(10.0d), Double.valueOf(10.0d), null, Double.valueOf(10.0d)));
         txtPrecioCosto.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 txtPrecioCostoStateChanged(evt);
@@ -464,7 +472,8 @@ public class DetalleProducto extends javax.swing.JFrame {
         lblGanancia.setText("% Ganancia:");
         jPanel1.add(lblGanancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 380, -1, -1));
 
-        txtGanancia.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 100.0d, 1.0d));
+        txtGanancia.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        txtGanancia.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
         txtGanancia.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 txtGananciaStateChanged(evt);
@@ -488,7 +497,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         txt_PrecioTotal.setText("₡ ");
         jPanel1.add(txt_PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 440, 30, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1370, 670));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 710));
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
         jPanel4.setMinimumSize(new java.awt.Dimension(700, 74));
@@ -506,7 +515,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         });
         jPanel4.add(labClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, -1, 30));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 50));
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -585,7 +594,6 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setPrecioVenta(precioVenta.intValue());
                 producto.setDescripcion(txtDescripcion.getText().trim());
                 producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
-                producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
                 if (rdbZapato.isSelected()) {
                     producto.setEsZapato(true);
                     producto.setTallaZapato(new BL_TallaZapato(cmbGenero.getSelectedItem().toString(), cmbCategoria.getSelectedItem().toString(), Double.parseDouble(txtTalla.getText().toString())));
@@ -595,6 +603,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                 
 
                 if (labAgregar.getText().equals("Agregar")) {
+                    producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
                     if (producto.insertarProducto()) {
                         txtCodigo.setText("");
                         txtDescripcion.setText("");
@@ -615,6 +624,7 @@ public class DetalleProducto extends javax.swing.JFrame {
                     }
                 } else {
                     producto.setIdProducto(lista.get(posicion).getIdProducto());
+                    producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + producto.getCodigoUnico().split("-")[1].toString());
                     if (producto.modificarProducto(posicion, lista)) {
                         lista.set(posicion, producto);
                         JOptionPane.showMessageDialog(null, "Datos modificados correctamente.", "Éxito al modificar", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));

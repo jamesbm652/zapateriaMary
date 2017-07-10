@@ -151,12 +151,12 @@ public class Inventario extends javax.swing.JFrame {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 312, 20));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 312, 20));
 
         labBuscar.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         labBuscar.setForeground(new java.awt.Color(102, 102, 102));
         labBuscar.setText("Buscar:");
-        jPanel1.add(labBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 40));
+        jPanel1.add(labBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 40));
 
         jpanBusquedaAvanzada.setBackground(new java.awt.Color(255, 255, 255));
         jpanBusquedaAvanzada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -275,7 +275,7 @@ public class Inventario extends javax.swing.JFrame {
         txt_Precio.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
         jpanBusquedaAvanzada.add(txt_Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, 170, -1));
 
-        jPanel1.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 870, 130));
+        jPanel1.add(jpanBusquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 870, 130));
 
         tablaInventario.setBackground(new java.awt.Color(237, 237, 237));
         tablaInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -305,10 +305,10 @@ public class Inventario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaInventario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 870, 350));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 870, 350));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 312, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 312, 10));
 
         btnPanelModificar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelModificar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -334,7 +334,7 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelModificar.add(labBtnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
 
-        jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 460, 150, 40));
+        jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 480, 150, 40));
 
         btnPanelEliminar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelEliminar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -359,7 +359,7 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelEliminar.add(labBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, -1));
 
-        jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, 150, 40));
+        jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 370, 150, 40));
 
         btnPanelAgregar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelAgregar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -384,7 +384,7 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelAgregar.add(labBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
 
-        jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 250, 150, 40));
+        jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 270, 150, 40));
 
         btnPanelDetalle.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelDetalle.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -409,12 +409,12 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelDetalle.add(labBtnVerDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
 
-        jPanel1.add(btnPanelDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 560, 150, 40));
+        jPanel1.add(btnPanelDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 580, 150, 40));
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Filtrar por:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, -1, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, 30));
 
         labDropdown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/dropdown.png"))); // NOI18N
         labDropdown.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -425,14 +425,14 @@ public class Inventario extends javax.swing.JFrame {
                 labDropdownMouseEntered(evt);
             }
         });
-        jPanel1.add(labDropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, -1, 20));
+        jPanel1.add(labDropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Inventario");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 710));
 
         pack();
         setLocationRelativeTo(null);
