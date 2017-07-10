@@ -70,9 +70,9 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDetalles = new javax.swing.JTable();
         btnAceptar = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        labConfirmar = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        labCancelar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -170,9 +170,14 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Confirmar");
+        labConfirmar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        labConfirmar.setText("Confirmar");
+        labConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labConfirmarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnAceptarLayout = new javax.swing.GroupLayout(btnAceptar);
         btnAceptar.setLayout(btnAceptarLayout);
@@ -180,14 +185,14 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
             btnAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAceptarLayout.createSequentialGroup()
                 .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addComponent(labConfirmar)
                 .addGap(42, 42, 42))
         );
         btnAceptarLayout.setVerticalGroup(
             btnAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnAceptarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(labConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -204,9 +209,14 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Cancelar");
+        labCancelar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        labCancelar.setText("Cancelar");
+        labCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labCancelarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnCancelarLayout = new javax.swing.GroupLayout(btnCancelar);
         btnCancelar.setLayout(btnCancelarLayout);
@@ -214,14 +224,14 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
             btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCancelarLayout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addComponent(labCancelar)
                 .addGap(46, 46, 46))
         );
         btnCancelarLayout.setVerticalGroup(
             btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnCancelarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(labCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -341,12 +351,10 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_TelCelularActionPerformed
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        // TODO add your handling code here:
         validarInserción(factura, uifactura);
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        // TODO add your handling code here:
         uifactura.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarMouseClicked
@@ -360,6 +368,15 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnCancelarMouseEntered
+
+    private void labCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labCancelarMouseClicked
+        uifactura.setEnabled(true);
+        this.dispose();
+    }//GEN-LAST:event_labCancelarMouseClicked
+
+    private void labConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labConfirmarMouseClicked
+        validarInserción(factura, uifactura);
+    }//GEN-LAST:event_labConfirmarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -427,13 +444,11 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     private javax.swing.JPanel btnAceptar;
     private javax.swing.JPanel btnCancelar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -446,7 +461,9 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel labCancelar;
     private javax.swing.JLabel labClose;
+    private javax.swing.JLabel labConfirmar;
     private javax.swing.JTable tablaDetalles;
     private javax.swing.JTextField txt_Cedula;
     private javax.swing.JTextField txt_Direccion;
