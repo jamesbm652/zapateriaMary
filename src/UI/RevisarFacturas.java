@@ -71,7 +71,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
 
         listaFacturas = manejadorFacturas.ObtenerLista();
         cargarProductosEnTabla(listaFacturas);
-
+        manejadorFacturas.cargarFacturasPorFiltro(null, null, 2, "", 0);
         comboBoxAutocompleta();
         cmbEstado.removeAllItems();
         cmbEstado.addItem("Cualquiera");
