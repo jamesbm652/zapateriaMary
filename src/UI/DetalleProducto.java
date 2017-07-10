@@ -459,11 +459,11 @@ public class DetalleProducto extends javax.swing.JFrame {
         jPanel1.add(labErrorTalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 110, 20));
 
         txtCantidad.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        txtCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
         jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, 110, 30));
 
         txtPrecioCosto.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        txtPrecioCosto.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(10.0d), Double.valueOf(10.0d), null, Double.valueOf(10.0d)));
+        txtPrecioCosto.setModel(new javax.swing.SpinnerNumberModel(10.0d, 10.0d, null, 10.0d));
         txtPrecioCosto.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 txtPrecioCostoStateChanged(evt);
@@ -477,7 +477,7 @@ public class DetalleProducto extends javax.swing.JFrame {
         jPanel1.add(lblGanancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 380, -1, -1));
 
         txtGanancia.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        txtGanancia.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(0.0d), null, Double.valueOf(1.0d)));
+        txtGanancia.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, null, 1.0d));
         txtGanancia.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 txtGananciaStateChanged(evt);
