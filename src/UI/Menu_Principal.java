@@ -468,7 +468,7 @@ public class Menu_Principal extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "src\\recursos\\B32178_Informe Individual_Sprint4_Autoevaluación.pdf");
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "src\\recursos\\Manual_de_usuario-Zapatería_Mary.pdf");
             } catch (IOException ex) {
             Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1066,6 +1066,7 @@ public class ReporteVentas extends javax.swing.JFrame {
                 listaFacturas = manejadorFacturas.ObtenerLista();
                 separarListasSegunTipo();
                 limpiarTablas();
+                reporte.generarReporteIndividual();
                 cargarProductosEnTabla("Contado", reporte.getFacturasContado());
                 cargarProductosEnTabla("Tarjeta", reporte.getFacturasTarjeta());
                 cargarProductosEnTabla("Abono", reporte.getFacturasAbono());

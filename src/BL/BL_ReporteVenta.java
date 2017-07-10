@@ -163,11 +163,11 @@ public class BL_ReporteVenta {
                 for (int k = 0; k < listaTodosProductos.size(); k++) {
                     if (facturasContado.get(i).getProductosFactura().get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadZapatos++;
+                        cantidadZapatos += facturasContado.get(i).getProductosFactura().get(j).getCantidadVendida();
                         break;
                     } else if (facturasContado.get(i).getProductosFactura().get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && !listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadBolsos++;
+                        cantidadBolsos += facturasContado.get(i).getProductosFactura().get(j).getCantidadVendida();
                     }
                 }
                 ganancias += facturasContado.get(i).getProductosFactura().get(j).getPrecioVenta();
@@ -198,11 +198,11 @@ public class BL_ReporteVenta {
                 for (int k = 0; k < listaTodosProductos.size(); k++) {
                     if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadZapatos++;
+                        cantidadZapatos += listaProductos.get(j).getCantidadVendida();
                         break;
                     } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && !listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadBolsos++;
+                        cantidadBolsos += listaProductos.get(j).getCantidadVendida();
                     }
                 }
                 ganancias += listaProductos.get(j).getPrecioVenta();
@@ -240,11 +240,11 @@ public class BL_ReporteVenta {
                 for (int k = 0; k < listaTodosProductos.size(); k++) {
                     if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadZapatos++;
+                        cantidadZapatos += listaProductos.get(j).getCantidadVendida();
                         break;
                     } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && !listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadBolsos++;
+                        cantidadBolsos += listaProductos.get(j).getCantidadVendida();
                     }
                 }
                 ganancias += listaProductos.get(j).getPrecioVenta();
@@ -284,11 +284,11 @@ public class BL_ReporteVenta {
                 for (int k = 0; k < listaTodosProductos.size(); k++) {
                     if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadZapatos++;
+                        cantidadZapatos += listaProductos.get(j).getCantidadVendida();
                         break;
                     } else if (listaProductos.get(j).getIdProducto() == listaTodosProductos.get(k).getIdProducto()
                             && !listaTodosProductos.get(k).isEsZapato()) {
-                        cantidadBolsos++;
+                        cantidadBolsos += listaProductos.get(j).getCantidadVendida();
                     }
                 }
                 ganancias += listaProductos.get(j).getPrecioVenta();
