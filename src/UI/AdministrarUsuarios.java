@@ -74,7 +74,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         labTituloAccion = new javax.swing.JLabel();
         btnPanelAgregar = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        labAgregar = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -108,28 +108,28 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 390, 20));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 390, 20));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Nombre completo:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 250, -1, -1));
 
         txtNombreCompleto.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtNombreCompleto.setForeground(new java.awt.Color(51, 51, 51));
         txtNombreCompleto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 180, 270, -1));
+        jPanel1.add(txtNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 250, 270, -1));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Contraseña:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 350, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 420, -1, -1));
 
         txtContrasena.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtContrasena.setForeground(new java.awt.Color(51, 51, 51));
         txtContrasena.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 350, 270, -1));
+        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 420, 270, -1));
 
         checkAdministrador.setBackground(new java.awt.Color(255, 255, 255));
         checkAdministrador.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
@@ -139,15 +139,15 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                 checkAdministradorActionPerformed(evt);
             }
         });
-        jPanel1.add(checkAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 440, 30, 20));
+        jPanel1.add(checkAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 510, 30, 20));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Nombre de usuario:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 270, -1, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 370, 270, 10));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 390, 10));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 290, 270, 10));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, -1, -1));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 440, 270, 10));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 390, 10));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 360, 270, 10));
 
         tablaUsuarios.setBackground(new java.awt.Color(244, 244, 244));
         tablaUsuarios.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
@@ -178,23 +178,23 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaUsuarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 580, 290));
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 200, 270, 10));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 580, 290));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 270, 270, 10));
 
         txtNombreUsuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 11)); // NOI18N
         txtNombreUsuario.setForeground(new java.awt.Color(51, 51, 51));
         txtNombreUsuario.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 270, 270, -1));
+        jPanel1.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 340, 270, -1));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Administrador:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 510, -1, -1));
 
         labTituloAccion.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
         labTituloAccion.setForeground(new java.awt.Color(102, 102, 102));
         labTituloAccion.setText("Añadir nuevo usuario");
-        jPanel1.add(labTituloAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, -1, -1));
+        jPanel1.add(labTituloAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, -1, -1));
 
         btnPanelAgregar.setBackground(new java.awt.Color(0, 93, 107));
         btnPanelAgregar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -208,30 +208,35 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         });
         btnPanelAgregar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
-        jLabel10.setText("Agregar");
-        btnPanelAgregar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, 30));
+        labAgregar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        labAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
+        labAgregar.setText("Agregar");
+        labAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labAgregarMouseClicked(evt);
+            }
+        });
+        btnPanelAgregar.add(labAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, 30));
 
-        jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 580, 150, 50));
+        jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 570, 150, 50));
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 3)); // NOI18N
         jSeparator1.setMinimumSize(new java.awt.Dimension(50, 1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 40, 20, 590));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, 20, 560));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Buscar:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Usuarios registrados en el sistema:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -305,6 +310,10 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
+        agregarUsuario();
+    }//GEN-LAST:event_btnPanelAgregarMouseClicked
+
+    private void agregarUsuario(){
         int identificador;
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos.","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
@@ -323,11 +332,15 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario.","Error al agregar usuario",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
         }
-    }//GEN-LAST:event_btnPanelAgregarMouseClicked
-
+    }
+    
     private void btnPanelAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseEntered
         btnPanelAgregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelAgregarMouseEntered
+
+    private void labAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAgregarMouseClicked
+        agregarUsuario();
+    }//GEN-LAST:event_labAgregarMouseClicked
 
     private void cargarUsuariosEnTabla(ArrayList<BL_Usuario> listaParaMostrar) {
 
@@ -404,7 +417,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel btnPanelAgregar;
     private javax.swing.JCheckBox checkAdministrador;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -418,6 +430,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JLabel labAgregar;
     private javax.swing.JLabel labClose;
     private javax.swing.JLabel labTituloAccion;
     private javax.swing.JTable tablaUsuarios;

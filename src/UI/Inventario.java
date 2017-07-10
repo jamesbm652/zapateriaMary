@@ -104,13 +104,13 @@ public class Inventario extends javax.swing.JFrame {
         tablaInventario = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         btnPanelModificar = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        labBtnModificar = new javax.swing.JLabel();
         btnPanelEliminar = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        labBtnEliminar = new javax.swing.JLabel();
         btnPanelAgregar = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        labBtnAgregar = new javax.swing.JLabel();
         btnPanelDetalle = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        labBtnVerDetalle = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         labDropdown = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -322,12 +322,17 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelModificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/update.png"))); // NOI18N
-        jLabel8.setText("Modificar");
-        jLabel8.setToolTipText("");
-        btnPanelModificar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
+        labBtnModificar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/update.png"))); // NOI18N
+        labBtnModificar.setText("Modificar");
+        labBtnModificar.setToolTipText("");
+        labBtnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnModificarMouseClicked(evt);
+            }
+        });
+        btnPanelModificar.add(labBtnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
 
         jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 460, 150, 40));
 
@@ -343,11 +348,16 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
-        jLabel11.setText("Eliminar");
-        btnPanelEliminar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
+        labBtnEliminar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
+        labBtnEliminar.setText("Eliminar");
+        labBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnEliminarMouseClicked(evt);
+            }
+        });
+        btnPanelEliminar.add(labBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, -1));
 
         jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, 150, 40));
 
@@ -363,11 +373,16 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelAgregar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
-        jLabel6.setText("Agregar");
-        btnPanelAgregar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
+        labBtnAgregar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
+        labBtnAgregar.setText("Agregar");
+        labBtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnAgregarMouseClicked(evt);
+            }
+        });
+        btnPanelAgregar.add(labBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
 
         jPanel1.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 250, 150, 40));
 
@@ -383,11 +398,16 @@ public class Inventario extends javax.swing.JFrame {
         });
         btnPanelDetalle.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/showMore.png"))); // NOI18N
-        jLabel13.setText("Ver detalles");
-        btnPanelDetalle.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
+        labBtnVerDetalle.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnVerDetalle.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnVerDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/showMore.png"))); // NOI18N
+        labBtnVerDetalle.setText("Ver detalles");
+        labBtnVerDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnVerDetalleMouseClicked(evt);
+            }
+        });
+        btnPanelDetalle.add(labBtnVerDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, -1));
 
         jPanel1.add(btnPanelDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 560, 150, 40));
 
@@ -523,6 +543,10 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPanelAgregarMouseEntered
 
     private void btnPanelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelModificarMouseClicked
+        modificarProducto();
+    }//GEN-LAST:event_btnPanelModificarMouseClicked
+
+    private void modificarProducto(){
         if (tablaInventario.getSelectedRow() >= 0) {
             this.dispose();
             int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
@@ -532,13 +556,17 @@ public class Inventario extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
-    }//GEN-LAST:event_btnPanelModificarMouseClicked
-
+    }
+    
     private void btnPanelModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelModificarMouseEntered
         btnPanelModificar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelModificarMouseEntered
 
     private void btnPanelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseClicked
+        eliminarProducto();
+    }//GEN-LAST:event_btnPanelEliminarMouseClicked
+
+    private void eliminarProducto(){
         if(tablaInventario.getSelectedRow() >= 0 ){
             int identificador = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
             if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION) {
@@ -555,13 +583,17 @@ public class Inventario extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
-    }//GEN-LAST:event_btnPanelEliminarMouseClicked
-
+    }
+    
     private void btnPanelEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseEntered
         btnPanelEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelEliminarMouseEntered
 
     private void btnPanelDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelDetalleMouseClicked
+        verDetalle();
+    }//GEN-LAST:event_btnPanelDetalleMouseClicked
+
+    private void verDetalle(){
         if (tablaInventario.getSelectedRow() >= 0) {
             this.dispose();
             int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
@@ -572,8 +604,8 @@ public class Inventario extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
-    }//GEN-LAST:event_btnPanelDetalleMouseClicked
-
+    }
+    
     private void btnPanelDetalleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelDetalleMouseEntered
         btnPanelDetalle.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelDetalleMouseEntered
@@ -636,6 +668,25 @@ public class Inventario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
+    private void labBtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnAgregarMouseClicked
+        this.dispose();
+        DetalleProducto modificar = new DetalleProducto(1, listaTotalProductos, 0);
+        modificar.setTitle("Agregar Producto");
+        modificar.setVisible(true);
+    }//GEN-LAST:event_labBtnAgregarMouseClicked
+
+    private void labBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnEliminarMouseClicked
+        eliminarProducto();
+    }//GEN-LAST:event_labBtnEliminarMouseClicked
+
+    private void labBtnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnModificarMouseClicked
+        modificarProducto();
+    }//GEN-LAST:event_labBtnModificarMouseClicked
+
+    private void labBtnVerDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnVerDetalleMouseClicked
+        verDetalle();
+    }//GEN-LAST:event_labBtnVerDetalleMouseClicked
+
     private void filtro(String filtro) {
         try {
             TableRowSorter<DefaultTableModel> trsFiltro = new TableRowSorter<>(modelo);
@@ -670,16 +721,12 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JComboBox cbx_Genero;
     private javax.swing.JComboBox<String> cbx_TipoProducto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -690,6 +737,10 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPanel jpanBusquedaAvanzada;
+    private javax.swing.JLabel labBtnAgregar;
+    private javax.swing.JLabel labBtnEliminar;
+    private javax.swing.JLabel labBtnModificar;
+    private javax.swing.JLabel labBtnVerDetalle;
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel labBuscarAvanzada;
     private javax.swing.JLabel labClose;

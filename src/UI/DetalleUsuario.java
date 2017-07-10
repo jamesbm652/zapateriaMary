@@ -68,9 +68,9 @@ public class DetalleUsuario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         checkAdministrador = new javax.swing.JCheckBox();
         btnPanelModificar = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
+        labModificar = new javax.swing.JLabel();
         btnPanelEliminar = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        labEliminar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -164,12 +164,17 @@ public class DetalleUsuario extends javax.swing.JFrame {
         });
         btnPanelModificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/update.png"))); // NOI18N
-        jLabel14.setText("Modificar");
-        jLabel14.setToolTipText("");
-        btnPanelModificar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 30));
+        labModificar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labModificar.setForeground(new java.awt.Color(255, 255, 255));
+        labModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/update.png"))); // NOI18N
+        labModificar.setText("Modificar");
+        labModificar.setToolTipText("");
+        labModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labModificarMouseClicked(evt);
+            }
+        });
+        btnPanelModificar.add(labModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 30));
 
         jPanel1.add(btnPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 150, 50));
 
@@ -185,11 +190,16 @@ public class DetalleUsuario extends javax.swing.JFrame {
         });
         btnPanelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
-        jLabel12.setText("Eliminar");
-        btnPanelEliminar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, 30));
+        labEliminar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        labEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
+        labEliminar.setText("Eliminar");
+        labEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labEliminarMouseClicked(evt);
+            }
+        });
+        btnPanelEliminar.add(labEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, 30));
 
         jPanel1.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 150, 50));
 
@@ -219,6 +229,10 @@ public class DetalleUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_checkAdministradorActionPerformed
 
     private void btnPanelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelModificarMouseClicked
+        modificarUsuario();
+    }//GEN-LAST:event_btnPanelModificarMouseClicked
+
+    private void modificarUsuario(){
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{            
@@ -273,13 +287,17 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnPanelModificarMouseClicked
-
+    }
+    
     private void btnPanelModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelModificarMouseEntered
         btnPanelModificar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelModificarMouseEntered
 
     private void btnPanelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseClicked
+        eliminarUsuario();
+    }//GEN-LAST:event_btnPanelEliminarMouseClicked
+
+    private void eliminarUsuario(){
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Los campos deben estar completos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{            
@@ -320,19 +338,25 @@ public class DetalleUsuario extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnPanelEliminarMouseClicked
-
+    }
+    
     private void btnPanelEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseEntered
         btnPanelModificar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelEliminarMouseEntered
+
+    private void labEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labEliminarMouseClicked
+        eliminarUsuario();
+    }//GEN-LAST:event_labEliminarMouseClicked
+
+    private void labModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labModificarMouseClicked
+        modificarUsuario();
+    }//GEN-LAST:event_labModificarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnPanelEliminar;
     private javax.swing.JPanel btnPanelModificar;
     private javax.swing.JCheckBox checkAdministrador;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -343,6 +367,8 @@ public class DetalleUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel labClose;
+    private javax.swing.JLabel labEliminar;
+    private javax.swing.JLabel labModificar;
     private javax.swing.JLabel labTituloAccion;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtNombreCompleto;

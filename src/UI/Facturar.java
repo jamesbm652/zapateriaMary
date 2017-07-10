@@ -309,9 +309,9 @@ public class Facturar extends javax.swing.JFrame {
         labBtnAgregar = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         btnPanelEliminar = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
+        labBtnEliminar = new javax.swing.JLabel();
         btnPanelFacturar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labBtnFacturar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tipo1 = new javax.swing.JRadioButton();
         tipo4 = new javax.swing.JRadioButton();
@@ -379,12 +379,13 @@ public class Facturar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 30, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("0");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 30, 130, 30));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 30, 90, 30));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
@@ -642,6 +643,11 @@ public class Facturar extends javax.swing.JFrame {
         labBtnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labBtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/plus.png"))); // NOI18N
         labBtnAgregar.setText("Agregar");
+        labBtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnAgregarMouseClicked(evt);
+            }
+        });
         btnPanelAgregar.add(labBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 20));
 
         jPanel2.add(btnPanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 620, 150, 40));
@@ -659,12 +665,17 @@ public class Facturar extends javax.swing.JFrame {
         });
         btnPanelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel22.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
-        jLabel22.setText("Eliminar");
-        btnPanelEliminar.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
+        labBtnEliminar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labBtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
+        labBtnEliminar.setText("Eliminar");
+        labBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnEliminarMouseClicked(evt);
+            }
+        });
+        btnPanelEliminar.add(labBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
 
         jPanel2.add(btnPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 620, 150, 40));
 
@@ -679,12 +690,17 @@ public class Facturar extends javax.swing.JFrame {
         });
         btnPanelFacturar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Facturar");
-        jLabel1.setToolTipText("");
-        btnPanelFacturar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 60, 40));
+        labBtnFacturar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labBtnFacturar.setForeground(new java.awt.Color(255, 255, 255));
+        labBtnFacturar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labBtnFacturar.setText("Facturar");
+        labBtnFacturar.setToolTipText("");
+        labBtnFacturar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labBtnFacturarMouseClicked(evt);
+            }
+        });
+        btnPanelFacturar.add(labBtnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 60, 40));
 
         jPanel2.add(btnPanelFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 620, 150, 40));
 
@@ -1009,6 +1025,10 @@ public class Facturar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPanelAgregarMouseEntered
 
     private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
+        agregarProductosAFactura();
+    }//GEN-LAST:event_btnPanelAgregarMouseClicked
+
+    private void agregarProductosAFactura(){
         if (tablaInventario.getSelectedRow() >= 0) {
             int id = Integer.parseInt(tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 5).toString());
             BL_Producto prod = listaTotalProductos.get(id);
@@ -1049,9 +1069,13 @@ public class Facturar extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
-    }//GEN-LAST:event_btnPanelAgregarMouseClicked
-
+    }
+    
     private void btnPanelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseClicked
+        eliminarProductoFactura();
+    }//GEN-LAST:event_btnPanelEliminarMouseClicked
+
+    private void eliminarProductoFactura(){
         if (tablaDetalles.getSelectedRow() >= 0) {
             int idDetalle = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 3).toString());
             int posOriginal = Integer.parseInt(tablaDetalles.getModel().getValueAt(tablaDetalles.getSelectedRow(), 4).toString());
@@ -1096,14 +1120,17 @@ public class Facturar extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
-    }//GEN-LAST:event_btnPanelEliminarMouseClicked
-
+    }
+    
     private void btnPanelEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelEliminarMouseEntered
         btnPanelEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelEliminarMouseEntered
 
     private void btnPanelFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseClicked
-        // TODO add your handling code here:
+        facturar();
+    }//GEN-LAST:event_btnPanelFacturarMouseClicked
+
+    private void facturar(){
         String cedula = cbx_Cedula.getEditor().getItem().toString();
         String comprador = cbx_Senor.getEditor().getItem().toString();
         String direccion = txt_Direccion.getText();
@@ -1174,8 +1201,8 @@ public class Facturar extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnPanelFacturarMouseClicked
-
+    }
+    
     private void btnPanelFacturarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelFacturarMouseEntered
         btnPanelFacturar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelFacturarMouseEntered
@@ -1189,6 +1216,18 @@ public class Facturar extends javax.swing.JFrame {
         String cadena = cbx_Senor.getEditor().getItem().toString();
         buscarPorNombreCompleto(cadena);
     }//GEN-LAST:event_cbx_SenorActionPerformed
+
+    private void labBtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnAgregarMouseClicked
+        agregarProductosAFactura();
+    }//GEN-LAST:event_labBtnAgregarMouseClicked
+
+    private void labBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnEliminarMouseClicked
+        eliminarProductoFactura();
+    }//GEN-LAST:event_labBtnEliminarMouseClicked
+
+    private void labBtnFacturarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labBtnFacturarMouseClicked
+        facturar();
+    }//GEN-LAST:event_labBtnFacturarMouseClicked
 
     static public class HeaderColor extends DefaultTableCellRenderer{
         public HeaderColor(){
@@ -1217,7 +1256,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JComboBox cbx_Genero;
     private javax.swing.JComboBox<String> cbx_Senor;
     private javax.swing.JComboBox<String> cbx_TipoProducto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1230,7 +1268,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1253,6 +1290,8 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JPanel jpanBusquedaAvanzada;
     private javax.swing.JLabel labBtnAgregar;
+    private javax.swing.JLabel labBtnEliminar;
+    private javax.swing.JLabel labBtnFacturar;
     private javax.swing.JLabel labBuscar1;
     private javax.swing.JLabel labBuscarAvanzada;
     private javax.swing.JLabel labClose;

@@ -192,12 +192,13 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 140, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 40, -1, -1));
 
         txt_Factura.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txt_Factura.setForeground(new java.awt.Color(51, 51, 51));
+        txt_Factura.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txt_Factura.setText("0");
-        jPanel2.add(txt_Factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 150, 80, 20));
+        jPanel2.add(txt_Factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 40, 80, 30));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
@@ -236,7 +237,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Tipo factura:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -379,14 +380,14 @@ public class RevisarFacturas extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Factura seleccionada");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Facturas");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 40));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, 40));
 
         cbx_Cedula.setEditable(true);
         cbx_Cedula.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
@@ -402,14 +403,14 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 cbx_CedulaKeyReleased(evt);
             }
         });
-        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 300, 20));
+        jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 300, 30));
 
         rdbCredito.setBackground(new java.awt.Color(255, 255, 255));
         rdbCredito.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         rdbCredito.setForeground(new java.awt.Color(51, 51, 51));
         rdbCredito.setText("Crédito");
         rdbCredito.setEnabled(false);
-        jPanel2.add(rdbCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 110, -1, -1));
+        jPanel2.add(rdbCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 90, -1, -1));
 
         rdbApartado.setBackground(new java.awt.Color(255, 255, 255));
         rdbApartado.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
@@ -421,21 +422,21 @@ public class RevisarFacturas extends javax.swing.JFrame {
                 rdbApartadoActionPerformed(evt);
             }
         });
-        jPanel2.add(rdbApartado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 110, -1, -1));
+        jPanel2.add(rdbApartado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 90, -1, -1));
 
         rdbTarjeta.setBackground(new java.awt.Color(255, 255, 255));
         rdbTarjeta.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         rdbTarjeta.setForeground(new java.awt.Color(51, 51, 51));
         rdbTarjeta.setText("Tarjeta");
         rdbTarjeta.setEnabled(false);
-        jPanel2.add(rdbTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 110, -1, -1));
+        jPanel2.add(rdbTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 90, -1, -1));
 
         rdbContado.setBackground(new java.awt.Color(255, 255, 255));
         rdbContado.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         rdbContado.setForeground(new java.awt.Color(51, 51, 51));
         rdbContado.setText("Contado");
         rdbContado.setEnabled(false);
-        jPanel2.add(rdbContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 110, -1, -1));
+        jPanel2.add(rdbContado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 90, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
 

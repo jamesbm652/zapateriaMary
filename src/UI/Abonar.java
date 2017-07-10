@@ -247,7 +247,7 @@ public class Abonar extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         panelCamposAbonar = new javax.swing.JPanel();
         btnPanelAbonar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labAbonar = new javax.swing.JLabel();
         txtMontoAbonar = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
         txt_PrecioTotal = new javax.swing.JLabel();
@@ -309,17 +309,18 @@ public class Abonar extends javax.swing.JFrame {
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 240, 490, 310));
 
         jLabel6.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("N° Factura:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 100, -1, 20));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 30, -1, 20));
 
         txtNumFactura.setBackground(new java.awt.Color(255, 255, 255));
         txtNumFactura.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtNumFactura.setForeground(new java.awt.Color(51, 51, 51));
+        txtNumFactura.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtNumFactura.setText("0");
         txtNumFactura.setEnabled(false);
-        jPanel2.add(txtNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 100, 80, 20));
+        jPanel2.add(txtNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 30, 80, 20));
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
@@ -367,7 +368,6 @@ public class Abonar extends javax.swing.JFrame {
         jPanel2.add(cbx_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 310, 30));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setForeground(null);
 
         tablaFacturas.setBackground(new java.awt.Color(232, 232, 232));
         tablaFacturas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
@@ -409,7 +409,7 @@ public class Abonar extends javax.swing.JFrame {
 
         labBuscar1.setBackground(new java.awt.Color(255, 255, 255));
         labBuscar1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
-        labBuscar1.setForeground(null);
+        labBuscar1.setForeground(new java.awt.Color(102, 102, 102));
         labBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
         labBuscar1.setText("Buscar cliente:");
         jPanel2.add(labBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
@@ -475,7 +475,7 @@ public class Abonar extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(null);
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Facturas del cliente");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
@@ -500,15 +500,22 @@ public class Abonar extends javax.swing.JFrame {
         });
         btnPanelAbonar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Abonar");
-        jLabel1.setToolTipText("");
-        btnPanelAbonar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, 30));
+        labAbonar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        labAbonar.setForeground(new java.awt.Color(255, 255, 255));
+        labAbonar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labAbonar.setText("Abonar");
+        labAbonar.setToolTipText("");
+        labAbonar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labAbonarMouseClicked(evt);
+            }
+        });
+        btnPanelAbonar.add(labAbonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, 30));
 
         panelCamposAbonar.add(btnPanelAbonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 150, 50));
 
+        txtMontoAbonar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        txtMontoAbonar.setForeground(new java.awt.Color(51, 51, 51));
         txtMontoAbonar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMontoAbonar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtMontoAbonar.addActionListener(new java.awt.event.ActionListener() {
@@ -524,7 +531,7 @@ public class Abonar extends javax.swing.JFrame {
                 txtMontoAbonarKeyTyped(evt);
             }
         });
-        panelCamposAbonar.add(txtMontoAbonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, -1));
+        panelCamposAbonar.add(txtMontoAbonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, 20));
         panelCamposAbonar.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 10));
 
         txt_PrecioTotal.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
@@ -544,7 +551,7 @@ public class Abonar extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Total:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 550, -1, 30));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 560, -1, 30));
 
         txt_PrecioTotal1.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txt_PrecioTotal1.setForeground(new java.awt.Color(51, 51, 51));
@@ -558,19 +565,19 @@ public class Abonar extends javax.swing.JFrame {
         txtTotalAPagar.setText("0");
         txtTotalAPagar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtTotalAPagar.setEnabled(false);
-        jPanel2.add(txtTotalAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 560, 110, 20));
+        jPanel2.add(txtTotalAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 570, 110, 20));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Restante:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 620, -1, -1));
-        jPanel2.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, 110, 10));
+        jPanel2.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 590, 110, 10));
 
         txt_PrecioTotal2.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txt_PrecioTotal2.setForeground(new java.awt.Color(51, 51, 51));
         txt_PrecioTotal2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txt_PrecioTotal2.setText("₡ ");
-        jPanel2.add(txt_PrecioTotal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, 30, 60));
+        jPanel2.add(txt_PrecioTotal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 550, 30, 60));
 
         txtRestante.setEditable(false);
         txtRestante.setBackground(new java.awt.Color(255, 255, 255));
@@ -582,14 +589,15 @@ public class Abonar extends javax.swing.JFrame {
         jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 640, 110, 10));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
-        jLabel11.setForeground(null);
+        jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Información de la factura");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 20, -1, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 1, 28)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Facturas para abonar");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
@@ -742,6 +750,10 @@ public class Abonar extends javax.swing.JFrame {
     }
     
     private void btnPanelAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseClicked
+        abonar();
+    }//GEN-LAST:event_btnPanelAbonarMouseClicked
+
+    private void abonar(){
         if(tablaFacturas.getSelectedRow() >= 0){
             if(!txtMontoAbonar.getText().equals("")){
             if(Double.parseDouble(txtMontoAbonar.getText()) <= Double.parseDouble(txtRestante.getText())){
@@ -774,8 +786,8 @@ public class Abonar extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar una factura","Error",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
-    }//GEN-LAST:event_btnPanelAbonarMouseClicked
-
+    }
+    
     private void btnPanelAbonarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAbonarMouseEntered
         btnPanelAbonar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnPanelAbonarMouseEntered
@@ -835,13 +847,17 @@ public class Abonar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbx_CedulaKeyReleased
 
+    private void labAbonarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labAbonarMouseClicked
+        abonar();
+    }//GEN-LAST:event_labAbonarMouseClicked
+
 
   
     private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && c != evt.VK_BACK_SPACE) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }
         
     }
@@ -864,7 +880,6 @@ public class Abonar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnPanelAbonar;
     private javax.swing.JComboBox<String> cbx_Cedula;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -892,6 +907,7 @@ public class Abonar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel labAbonar;
     private javax.swing.JLabel labBuscar1;
     private javax.swing.JLabel labClose;
     private javax.swing.JLabel labClose1;
