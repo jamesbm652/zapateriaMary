@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -261,6 +262,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                             listaTotalUsuarios = manejador.ObtenerListaUsuarios();  
 
                             this.dispose();
+                            ventanaAnterior.dispose();
                             ventanaAnterior = new AdministrarUsuarios();
                             ventanaAnterior.setVisible(true);
                         }else{

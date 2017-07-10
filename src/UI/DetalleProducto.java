@@ -45,9 +45,9 @@ public class DetalleProducto extends javax.swing.JFrame {
         double precioCosto = Double.parseDouble(txtPrecioCosto.getValue().toString());
         double impuesto = Double.parseDouble(txtImpuesto.getValue().toString());
         double ganancia = Double.parseDouble(txtGanancia.getValue().toString());
-        double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
+        Double precioVenta = precioCosto + (precioCosto*(impuesto/100)) + (precioCosto*(ganancia/100));
       
-        txtPrecioVenta.setText(precioVenta+"");
+        txtPrecioVenta.setText(precioVenta.intValue()+"");
 
     }
     
@@ -572,7 +572,8 @@ public class DetalleProducto extends javax.swing.JFrame {
                 producto.setPrecioImpuesto(Double.parseDouble(txtImpuesto.getValue().toString()));
                 producto.setPrecioCosto(Double.parseDouble(txtPrecioCosto.getValue().toString()));
                 producto.setPrecioGanancia(Double.parseDouble(txtGanancia.getValue().toString()));
-                producto.setPrecioVenta(Double.parseDouble(txtPrecioVenta.getText()));
+                Double precioVenta = Double.parseDouble(txtPrecioVenta.getText());
+                producto.setPrecioVenta(precioVenta.intValue());
                 producto.setDescripcion(txtDescripcion.getText().trim());
                 producto.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
                 producto.setCodigoUnico(txtColor.getText().charAt(0) + "" + txtMarca.getText().charAt(0) + "" + txtEmpresa.getText().charAt(0) + "-" + new BL_Producto().obtenerSiguienteCodigo());
