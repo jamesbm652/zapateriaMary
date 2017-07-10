@@ -44,8 +44,7 @@ public class BL_ManejadorUsuario {
                 borrable = true;
                 if(contador == 2){
                     borrable = true;
-                }
-                else{
+                }else{
                     if (contador == 1 && listaUsuarios.get(i).isAdministrador() && listaUsuarios.get(i).getIdUsuario() == idUsuario) {
                         borrable = false;
                     }

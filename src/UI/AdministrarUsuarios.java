@@ -275,7 +275,12 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void checkAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAdministradorActionPerformed
-
+        /*
+        if(!manejador.BuscarAdministradores() && usuario.isAdministrador()){
+            JOptionPane.showMessageDialog(null, "Debe existir al menos un Administrador en el Sistema","Error",JOptionPane.ERROR_MESSAGE);
+            checkAdministrador.setSelected(true);
+        }
+        */
     }//GEN-LAST:event_checkAdministradorActionPerformed
 
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
@@ -302,11 +307,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private void btnPanelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPanelAgregarMouseClicked
         int identificador;
         if(txtNombreCompleto.getText().trim().equals("") || txtNombreUsuario.getText().trim().equals("") || txtContrasena.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos.","Datos incompletos",JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }else{
             BL_Usuario usuario = new BL_Usuario(txtNombreCompleto.getText().trim(),txtNombreUsuario.getText().trim(),txtContrasena.getText().trim(),checkAdministrador.isSelected());
                 if(usuario.agregarUsuario()){
-                    JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                    JOptionPane.showMessageDialog(null, "El nuevo usuario se agregó correctamente en el sistema.","Ingreso exitoso",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     manejador.Agregar(usuario);
                     txtNombreCompleto.setText("");
                     txtNombreUsuario.setText("");
@@ -315,7 +320,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                     listaTotalUsuarios = manejador.ObtenerListaUsuarios();
                     cargarUsuariosEnTabla(listaTotalUsuarios);
                 }else{
-                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario","Error al agregar usuario",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre de usuario.","Error al agregar usuario",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
         }
     }//GEN-LAST:event_btnPanelAgregarMouseClicked
@@ -374,7 +379,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
         } catch (PatternSyntaxException e) {
             txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
-            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha digitado un caracter inválido.", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
         }
     }
     

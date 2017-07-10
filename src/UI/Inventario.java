@@ -530,7 +530,7 @@ public class Inventario extends javax.swing.JFrame {
             modificar.setTitle("Modificar Producto");
             modificar.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelModificarMouseClicked
 
@@ -544,16 +544,16 @@ public class Inventario extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/recursos/pregunta.png")) == JOptionPane.YES_OPTION) {
                 if(new BL_Producto().eliminarProducto(listaTotalProductos.get(identificador).getIdProducto())){
                     listaTotalProductos.remove(identificador);
-                    JOptionPane.showMessageDialog(null, "Producto eliminado","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
+                    JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                     int rowModel = tablaInventario.convertRowIndexToModel(tablaInventario.getSelectedRow());
                     DefaultTableModel model = (DefaultTableModel)tablaInventario.getModel();
                     model.removeRow(rowModel);
                 }else {
-                    JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado\nNo se puede eliminar del inventario", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+                    JOptionPane.showMessageDialog(null, "Este producto ya ha sido facturado.\nNo se puede eliminar del inventario.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
                 }
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelEliminarMouseClicked
 
@@ -570,7 +570,7 @@ public class Inventario extends javax.swing.JFrame {
             detalle.setTitle("Mostrar Producto");
             detalle.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_btnPanelDetalleMouseClicked
 
@@ -632,7 +632,7 @@ public class Inventario extends javax.swing.JFrame {
 
             cargarProductosEnTabla(listaProductos.ObtenerListaProductos());
         }else{
-            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto", "Rango incorrecto", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
+            JOptionPane.showMessageDialog(null, "El rango de la talla es incorrecto.", "Rango incorrecto", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
     }//GEN-LAST:event_labBuscarAvanzadaMouseClicked
 
@@ -643,7 +643,7 @@ public class Inventario extends javax.swing.JFrame {
             trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
         } catch (PatternSyntaxException e) {
             txtBuscar.setText(filtro.substring(0, filtro.length() - 1));
-            JOptionPane.showMessageDialog(null, "Has digitado un caracter inválido", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha digitado un caracter inválido.", "Caracter inválido",JOptionPane.ERROR_MESSAGE);
         }
     }
     
