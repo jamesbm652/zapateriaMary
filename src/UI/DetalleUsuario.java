@@ -327,7 +327,7 @@ public class DetalleUsuario extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "El usuario seleccionado se eliminó correctamente del sistema","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/recursos/exito.png"));
                                 
                                 listaTotalUsuarios = manejador.ObtenerListaUsuarios();
-                                        
+                                ventanaAnterior.dispose();
                                 this.dispose();
                                 new Login().setVisible(true);
                             }
