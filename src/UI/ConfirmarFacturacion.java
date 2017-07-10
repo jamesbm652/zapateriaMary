@@ -360,12 +360,10 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
-        // TODO add your handling code here:
-        btnAceptar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+           btnAceptar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnAceptarMouseEntered
 
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        // TODO add your handling code here:
         btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnCancelarMouseEntered
 

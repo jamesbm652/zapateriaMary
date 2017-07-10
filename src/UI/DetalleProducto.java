@@ -483,6 +483,7 @@ public class DetalleProducto extends javax.swing.JFrame {
 
         txtPrecioVenta.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         txtPrecioVenta.setForeground(new java.awt.Color(51, 51, 51));
+        txtPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 450, 150, 20));
 
