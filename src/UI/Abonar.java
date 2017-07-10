@@ -839,7 +839,7 @@ public class Abonar extends javax.swing.JFrame {
   
     private void validarNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && c != '.' && c != evt.VK_BACK_SPACE) {
+        if ((c < '0' || c > '9') && c != evt.VK_BACK_SPACE) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite valores numericos y ' . '", "Tipo de dato incorrecto", JOptionPane.WARNING_MESSAGE,new ImageIcon("src/recursos/warning.png"));
         }

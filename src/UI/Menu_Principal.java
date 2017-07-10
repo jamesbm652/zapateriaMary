@@ -10,10 +10,15 @@ import BL.BL_Logueo;
 import BL.BL_Usuario;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -64,6 +69,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         panelBtnAdministrar = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -95,13 +101,13 @@ public class Menu_Principal extends javax.swing.JFrame {
                 labSalirMouseEntered(evt);
             }
         });
-        jPanel2.add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 30, -1, -1));
+        jPanel2.add(labSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 30, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(196, 196, 196));
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(237, 237, 237));
         jLabel2.setText("Zapatería Mary");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 360, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 360, 90));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 100));
 
@@ -328,12 +334,20 @@ public class Menu_Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBtnAdministrarLayout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addGap(33, 33, 33))
+                .addGap(26, 26, 26))
         );
 
         jPanel1.add(panelBtnAdministrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 390, 280, 160));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/info.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 650, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -452,8 +466,17 @@ public class Menu_Principal extends javax.swing.JFrame {
         new Abonar().setVisible(true);
     }//GEN-LAST:event_panelBtnAbonosMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "src\\recursos\\B32178_Informe Individual_Sprint4_Autoevaluación.pdf");
+            } catch (IOException ex) {
+            Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
