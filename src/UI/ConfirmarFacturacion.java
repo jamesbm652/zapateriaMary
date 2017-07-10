@@ -93,6 +93,8 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         jLabel9.setText("jLabel9");
 
@@ -332,6 +334,15 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
         jPanel6.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 120, 10));
         jPanel6.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, 10));
 
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Descuento:");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+
+        jSpinner1.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        jPanel6.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 50, 30));
+
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 
         pack();
@@ -447,6 +458,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -459,6 +471,7 @@ public class ConfirmarFacturacion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel labCancelar;
     private javax.swing.JLabel labClose;
     private javax.swing.JLabel labConfirmar;
