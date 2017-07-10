@@ -327,8 +327,6 @@ public class Facturar extends javax.swing.JFrame {
         cbx_Senor = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        txtDescuento = new javax.swing.JSpinner();
         jPanel4 = new javax.swing.JPanel();
         labClose = new javax.swing.JLabel();
 
@@ -376,7 +374,7 @@ public class Facturar extends javax.swing.JFrame {
             tablaDetalles.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 550, 310));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 550, 340));
 
         jLabel6.setBackground(new java.awt.Color(51, 51, 51));
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
@@ -782,19 +780,6 @@ public class Facturar extends javax.swing.JFrame {
         jLabel9.setText("Productos del inventario");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        jLabel21.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel21.setText("Descuento:");
-        jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 580, -1, -1));
-
-        txtDescuento.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        txtDescuento.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                txtDescuentoStateChanged(evt);
-            }
-        });
-        jPanel2.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(1099, 580, 70, 30));
-
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1370, 680));
 
         jPanel4.setBackground(new java.awt.Color(0, 57, 66));
@@ -916,8 +901,7 @@ public class Facturar extends javax.swing.JFrame {
             totalPagar += listaParaMostrar.get(i).getPrecioVenta();
             modeloDetalles.addRow(fila);
         }
-        double descuento = Double.parseDouble(txtDescuento.getValue().toString());
-        txt_PrecioTotal.setText("₡ " + (totalPagar - (totalPagar*(descuento/100))) + "");
+        txt_PrecioTotal.setText("₡ " + totalPagar + "");
         ocultarColumnaDetalles();
         manejadorDetalles.setearLista(listaParaMostrar);
     }
@@ -1132,8 +1116,7 @@ public class Facturar extends javax.swing.JFrame {
                     }
                 }
             }
-            double descuento = Double.parseDouble(txtDescuento.getValue().toString());
-            txt_PrecioTotal.setText("₡ " + (totalPagar - (totalPagar*(descuento/100))) + "");
+            txt_PrecioTotal.setText("₡ " + totalPagar + "");
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE,new ImageIcon("src/recursos/error.png"));
         }
@@ -1246,11 +1229,6 @@ public class Facturar extends javax.swing.JFrame {
         facturar();
     }//GEN-LAST:event_labBtnFacturarMouseClicked
 
-    private void txtDescuentoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtDescuentoStateChanged
-        double descuento = Double.parseDouble(txtDescuento.getValue().toString());
-        txt_PrecioTotal.setText("₡ " + (totalPagar - (totalPagar*(descuento/100))) + "");
-    }//GEN-LAST:event_txtDescuentoStateChanged
-
     static public class HeaderColor extends DefaultTableCellRenderer{
         public HeaderColor(){
             setOpaque(true);
@@ -1290,7 +1268,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1331,7 +1308,6 @@ public class Facturar extends javax.swing.JFrame {
     private javax.swing.JRadioButton tipo3;
     private javax.swing.JRadioButton tipo4;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JSpinner txtDescuento;
     private javax.swing.JSpinner txt_Cantidad;
     private javax.swing.JTextField txt_Direccion;
     private javax.swing.JTextField txt_Empresa;
