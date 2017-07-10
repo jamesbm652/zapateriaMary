@@ -391,7 +391,7 @@ public class Facturar extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(51, 51, 51));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Señor:");
+        jLabel8.setText("Señor(a):");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, -1, 30));
 
         jLabel10.setBackground(new java.awt.Color(51, 51, 51));

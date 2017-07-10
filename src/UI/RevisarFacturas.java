@@ -67,7 +67,7 @@ public class RevisarFacturas extends javax.swing.JFrame {
 
         manejadorCliente.cargarClientes();
         Date date = new Date();
-        manejadorFacturas.cargarFacturasPorFecha(dateFormat.format(date), dateFormat.format(date));
+        //manejadorFacturas.cargarFacturasPorFecha(dateFormat.format(date), dateFormat.format(date));
 
         listaFacturas = manejadorFacturas.ObtenerLista();
         cargarProductosEnTabla(listaFacturas);
